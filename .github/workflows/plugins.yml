@@ -66,7 +66,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Artemis.Plugins.DataModelExpansions.OpenWeather
-          path: .\Plugins\src\LayerBrushes\Artemis.Plugins.DataModelExpansions.OpenWeather\bin\x64\Release\net5.0-windows\publish                    
+          path: .\Plugins\src\DataModelExpansions\Artemis.Plugins.DataModelExpansions.OpenWeather\bin\x64\Release\net5.0-windows\publish
 
       - name: Upload Artemis.Plugins.Devices.YeeLight
         uses: actions/upload-artifact@v2
@@ -77,8 +77,8 @@ jobs:
       - name: Upload Artemis.Plugins.LayerBrushes.ConnectingDotss
         uses: actions/upload-artifact@v2
         with:
-          name: Artemis.Plugins.LayerBrushes.ConnectingDotss
-          path: .\Plugins\src\LayerBrushes\Artemis.Plugins.LayerBrushes.ConnectingDotss\bin\x64\Release\net5.0-windows\publish
+          name: Artemis.Plugins.LayerBrushes.ConnectingDots
+          path: .\Plugins\src\LayerBrushes\Artemis.Plugins.LayerBrushes.ConnectingDots\bin\x64\Release\net5.0-windows\publish
           
       - name: Upload Artemis.Plugins.LayerBrushes.SolidPercentage
         uses: actions/upload-artifact@v2

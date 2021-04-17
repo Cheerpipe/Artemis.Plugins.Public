@@ -26,24 +26,24 @@ namespace Artemis.Plugins.LayerBrushes.ConnectingDots
             if (_field == null)
                 return;
 
-            _fieldAdvance = (float)(deltaTime * Properties.DotsMovementSpeed.BaseValue);
+            _fieldAdvance = (float)(deltaTime * Properties.DotsMovementSpeed.CurrentValue);
 
-            if (Math.Abs(_fieldAdvance) <= (Properties.Radius.BaseValue / 2f))
+            if (Math.Abs(_fieldAdvance) <= (Properties.Radius.CurrentValue / 2f))
                 _field.Advance(_fieldAdvance);
 
-            _gradientAdvance = (float)Math.Abs((deltaTime * Properties.ColorChangeSpeed.BaseValue));
+            _gradientAdvance = (float)Math.Abs((deltaTime * Properties.ColorChangeSpeed.CurrentValue));
         }
 
         public override void Render(SKCanvas canvas, SKRect bounds, SKPaint paint)
         {
             if (_field is null)
-                _field = new Field(bounds.Width, bounds.Height, Properties.Dots.BaseValue);
+                _field = new Field(bounds.Width, bounds.Height, Properties.Dots.CurrentValue);
 
             _field.DotCount = Properties.Dots.CurrentValue;
             _field.Width = bounds.Width;
             _field.Height = bounds.Height;
 
-            canvas.Clear(Properties.Background.BaseValue);
+            canvas.Clear(Properties.Background.CurrentValue);
 
             double minConnectDistance = Properties.ConnectDistance.CurrentValue.Start;
             double maxConnectDistance = Properties.ConnectDistance.CurrentValue.End;

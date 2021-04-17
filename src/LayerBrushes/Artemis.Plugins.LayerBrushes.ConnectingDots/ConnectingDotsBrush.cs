@@ -100,6 +100,8 @@ namespace Artemis.Plugins.LayerBrushes.ConnectingDots
                 }
                 canvas.DrawCircle(pt, dotRadius, paint);
             }
+            _fieldAdvance = 0;
+            _gradientAdvance = 0;
 
         }
     }

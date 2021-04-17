@@ -1,0 +1,8 @@
+﻿{
+  "Guid": "8e33bad2-2814-49fc-9944-953c4670a05e",
+  "Name": "Connecting Dots layer brush",
+  "Icon": "ShareVariant",
+  "Description": "Layer brush based on https://github.com/swharden/Csharp-Data-Visualization/tree/master/examples/drawing/constellation/simple.",
+  "Version": "1.0.0.1",
+  "Main": "Artemis.Plugins.LayerBrushes.ConnectingDots.dll"
+}

@@ -1,0 +1,9 @@
+﻿{
+  "Guid": "797f604f-37c8-4eda-86e4-6ccc59b299b8",
+  "Name": "YeeLight Devices",
+  "Icon": "bulb",
+  "Description": "Allows Artemis to control YeeLight lights usin Developer Mode Lan Protocol.",
+  "Version": "1.0.0.0",
+  "Main": "Artemis.Plugins.Devices.YeeLight.dll",
+  "AutoEnableFeatures": true
+}

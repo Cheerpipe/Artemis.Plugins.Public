@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="Artemis.Plugins.DataModelExpansions.OpenWeather.OpenWeatherPluginConfigurationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:Artemis.Plugins.DataModelExpansions.OpenWeather"
+             xmlns:DataModel="clr-namespace:Artemis.Plugins.DataModelExpansions.OpenWeather.DataModels"                 
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns:s="https://github.com/canton7/Stylet"
+             mc:Ignorable="d" 
+             d:DesignHeight="411.66" d:DesignWidth="476.121">
+        <materialDesign:Card Margin="0,0,0,0">
+        <StackPanel Orientation="Vertical" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" Width="436" Height="384">
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 0">
+                <TextBlock Text="API Key" Width="125" Style="{StaticResource MaterialDesignTextBlock}"/>
+                <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                         Text="{Binding ApiKey}" Width="300" materialDesign:HintAssist.IsFloating="false"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 15" Width="183">
+                <TextBlock>
+                <Hyperlink NavigateUri="https://openweathermap.org/api" >
+                    Get your API key here
+                  </Hyperlink>
+                </TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 0">
+                <TextBlock Text="City, Country" Width="125" Style="{StaticResource MaterialDesignTextBlock}"/>
+                <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                         Text="{Binding City}" Width="300" materialDesign:HintAssist.IsFloating="false"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 15" Width="183">
+                <TextBlock>
+                Ex: Santiago, Chile
+                </TextBlock>
+            </StackPanel>            
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 15">
+                <TextBlock Text="Unit of measurement" Width="125" Style="{StaticResource MaterialDesignTextBlock}"/>
+                <ComboBox Style="{StaticResource MaterialDesignFilledComboBox}"
+                          Text="{Binding UnitsOfMeasurement}" Width="300" Name="cbxUnitOfMeasurement"
+                          SelectedItem="{Binding SelectedUnitOfMeasurement}"
+                          ItemsSource="{Binding UnitsOfMeasurements}" 
+                          SelectedValuePath="Item2"
+                          DisplayMemberPath="Item1"
+                          materialDesign:HintAssist.IsFloating="false"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                <Button Margin="10"
+                        Height="35"
+                        Width="100"
+                        Style="{StaticResource MaterialDesignFlatLightBgButton}" 
+                        Command="{s:Action Save}">
+                    SAVE
+                </Button>
+                <Button Margin="10"
+                        Height="35"
+                        Width="100"
+                        Style="{StaticResource MaterialDesignFlatMidBgButton}" 
+                        Command="{s:Action Test}" Click="Button_Click">
+                    TEST
+                </Button>
+                <Button Margin="10"
+                        Height="35"
+                        Width="100"
+                        Style="{StaticResource MaterialDesignOutlinedButton}" 
+                        Command="{s:Action Reset}">
+                    CANCEL
+                </Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 15" Height="100">
+                <TextBlock  Text="{Binding TestResult}" Width="437" Style="{StaticResource MaterialDesignTextBlock}" RenderTransformOrigin="0.495,0.366" Height="177" TextWrapping="Wrap"/>
+            </StackPanel>
+        </StackPanel>
+    </materialDesign:Card>
+</UserControl>

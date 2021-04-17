@@ -1,0 +1,133 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.DataModelExpansions.DisplaySettings", "DataModelExpansions\Artemis.Plugins.DataModelExpansions.DisplaySettings\Artemis.Plugins.DataModelExpansions.DisplaySettings.csproj", "{399E9AA3-12D6-4076-BDBC-07EB40AF234B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.DataModelExpansions.PlaybackVolume", "DataModelExpansions\Artemis.Plugins.DataModelExpansions.PlaybackVolume\Artemis.Plugins.DataModelExpansions.PlaybackVolume.csproj", "{A80AD531-2723-46A3-BB68-ADC116D01781}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.DataModelExpansions.YTMdesktop", "DataModelExpansions\Artemis.Plugins.DataModelExpansions.YTMdesktop\Artemis.Plugins.DataModelExpansions.YTMdesktop.csproj", "{633A9BF3-A918-4FFA-BB1B-EE4E7CE82715}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataModelExpansions", "DataModelExpansions", "{0F036E0A-8F42-4105-BA27-BB2F6EE213A8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Device", "Device", "{FE4ECDD6-6870-4A3E-9D01-F046EDB596F9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "YeeLight", "YeeLight", "{2BF33CD8-076E-495E-A438-EFC2091D43CE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RGB.NET.Devices.YeeLight", "Device\YeeLight\RGB.NET.Devices.YeeLight\RGB.NET.Devices.YeeLight.csproj", "{09B83FAF-FEE2-4A9C-8DD6-43FD1D1125E1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.Devices.YeeLight", "Device\YeeLight\Artemis.Plugins.Devices.YeeLight\Artemis.Plugins.Devices.YeeLight.csproj", "{91063060-E1BD-4C31-9C7B-EE4E66EED7B1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LayerBrushes", "LayerBrushes", "{73E03F27-03B1-4AE6-88A8-1CB889EFC94D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.LayerBrushes.SolidPercentage", "LayerBrushes\Artemis.Plugins.LayerBrushes.SolidPercentage\Artemis.Plugins.LayerBrushes.SolidPercentage.csproj", "{354AEE39-DB7A-495E-8214-CA18B2A7D749}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.DataModelExpansions.OpenWeather", "DataModelExpansions\Artemis.Plugins.DataModelExpansions.OpenWeather\Artemis.Plugins.DataModelExpansions.OpenWeather.csproj", "{3C8C69E6-9F9D-4684-BFED-1F245E1A9287}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.LayerBrushes.ConnectingDots", "LayerBrushes\Artemis.Plugins.LayerBrushes.ConnectingDots\Artemis.Plugins.LayerBrushes.ConnectingDots.csproj", "{EEE5D770-8D00-4D87-B7E6-E545E8896E06}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{F1E2EED2-1578-471B-9393-13E9EFC36D04}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.Modules.Games", "Modules\Artemis.Plugins.Modules.Games\Artemis.Plugins.Modules.Games.csproj", "{9A015F2C-C16D-4DA0-87D0-26518D037779}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{399E9AA3-12D6-4076-BDBC-07EB40AF234B}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{399E9AA3-12D6-4076-BDBC-07EB40AF234B}.Debug|Any CPU.Build.0 = Debug|x64
+		{399E9AA3-12D6-4076-BDBC-07EB40AF234B}.Debug|x64.ActiveCfg = Debug|x64
+		{399E9AA3-12D6-4076-BDBC-07EB40AF234B}.Debug|x64.Build.0 = Debug|x64
+		{399E9AA3-12D6-4076-BDBC-07EB40AF234B}.Release|Any CPU.ActiveCfg = Release|x64
+		{399E9AA3-12D6-4076-BDBC-07EB40AF234B}.Release|Any CPU.Build.0 = Release|x64
+		{399E9AA3-12D6-4076-BDBC-07EB40AF234B}.Release|x64.ActiveCfg = Release|x64
+		{399E9AA3-12D6-4076-BDBC-07EB40AF234B}.Release|x64.Build.0 = Release|x64
+		{A80AD531-2723-46A3-BB68-ADC116D01781}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{A80AD531-2723-46A3-BB68-ADC116D01781}.Debug|Any CPU.Build.0 = Debug|x64
+		{A80AD531-2723-46A3-BB68-ADC116D01781}.Debug|x64.ActiveCfg = Debug|x64
+		{A80AD531-2723-46A3-BB68-ADC116D01781}.Debug|x64.Build.0 = Debug|x64
+		{A80AD531-2723-46A3-BB68-ADC116D01781}.Release|Any CPU.ActiveCfg = Release|x64
+		{A80AD531-2723-46A3-BB68-ADC116D01781}.Release|Any CPU.Build.0 = Release|x64
+		{A80AD531-2723-46A3-BB68-ADC116D01781}.Release|x64.ActiveCfg = Release|x64
+		{A80AD531-2723-46A3-BB68-ADC116D01781}.Release|x64.Build.0 = Release|x64
+		{633A9BF3-A918-4FFA-BB1B-EE4E7CE82715}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{633A9BF3-A918-4FFA-BB1B-EE4E7CE82715}.Debug|Any CPU.Build.0 = Debug|x64
+		{633A9BF3-A918-4FFA-BB1B-EE4E7CE82715}.Debug|x64.ActiveCfg = Debug|x64
+		{633A9BF3-A918-4FFA-BB1B-EE4E7CE82715}.Debug|x64.Build.0 = Debug|x64
+		{633A9BF3-A918-4FFA-BB1B-EE4E7CE82715}.Release|Any CPU.ActiveCfg = Release|x64
+		{633A9BF3-A918-4FFA-BB1B-EE4E7CE82715}.Release|Any CPU.Build.0 = Release|x64
+		{633A9BF3-A918-4FFA-BB1B-EE4E7CE82715}.Release|x64.ActiveCfg = Release|x64
+		{633A9BF3-A918-4FFA-BB1B-EE4E7CE82715}.Release|x64.Build.0 = Release|x64
+		{09B83FAF-FEE2-4A9C-8DD6-43FD1D1125E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09B83FAF-FEE2-4A9C-8DD6-43FD1D1125E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09B83FAF-FEE2-4A9C-8DD6-43FD1D1125E1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{09B83FAF-FEE2-4A9C-8DD6-43FD1D1125E1}.Debug|x64.Build.0 = Debug|Any CPU
+		{09B83FAF-FEE2-4A9C-8DD6-43FD1D1125E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09B83FAF-FEE2-4A9C-8DD6-43FD1D1125E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09B83FAF-FEE2-4A9C-8DD6-43FD1D1125E1}.Release|x64.ActiveCfg = Release|Any CPU
+		{09B83FAF-FEE2-4A9C-8DD6-43FD1D1125E1}.Release|x64.Build.0 = Release|Any CPU
+		{91063060-E1BD-4C31-9C7B-EE4E66EED7B1}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{91063060-E1BD-4C31-9C7B-EE4E66EED7B1}.Debug|Any CPU.Build.0 = Debug|x64
+		{91063060-E1BD-4C31-9C7B-EE4E66EED7B1}.Debug|x64.ActiveCfg = Debug|x64
+		{91063060-E1BD-4C31-9C7B-EE4E66EED7B1}.Debug|x64.Build.0 = Debug|x64
+		{91063060-E1BD-4C31-9C7B-EE4E66EED7B1}.Release|Any CPU.ActiveCfg = Release|x64
+		{91063060-E1BD-4C31-9C7B-EE4E66EED7B1}.Release|Any CPU.Build.0 = Release|x64
+		{91063060-E1BD-4C31-9C7B-EE4E66EED7B1}.Release|x64.ActiveCfg = Release|x64
+		{91063060-E1BD-4C31-9C7B-EE4E66EED7B1}.Release|x64.Build.0 = Release|x64
+		{354AEE39-DB7A-495E-8214-CA18B2A7D749}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{354AEE39-DB7A-495E-8214-CA18B2A7D749}.Debug|Any CPU.Build.0 = Debug|x64
+		{354AEE39-DB7A-495E-8214-CA18B2A7D749}.Debug|x64.ActiveCfg = Debug|x64
+		{354AEE39-DB7A-495E-8214-CA18B2A7D749}.Debug|x64.Build.0 = Debug|x64
+		{354AEE39-DB7A-495E-8214-CA18B2A7D749}.Release|Any CPU.ActiveCfg = Release|x64
+		{354AEE39-DB7A-495E-8214-CA18B2A7D749}.Release|Any CPU.Build.0 = Release|x64
+		{354AEE39-DB7A-495E-8214-CA18B2A7D749}.Release|x64.ActiveCfg = Release|x64
+		{354AEE39-DB7A-495E-8214-CA18B2A7D749}.Release|x64.Build.0 = Release|x64
+		{3C8C69E6-9F9D-4684-BFED-1F245E1A9287}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{3C8C69E6-9F9D-4684-BFED-1F245E1A9287}.Debug|Any CPU.Build.0 = Debug|x64
+		{3C8C69E6-9F9D-4684-BFED-1F245E1A9287}.Debug|x64.ActiveCfg = Debug|x64
+		{3C8C69E6-9F9D-4684-BFED-1F245E1A9287}.Debug|x64.Build.0 = Debug|x64
+		{3C8C69E6-9F9D-4684-BFED-1F245E1A9287}.Release|Any CPU.ActiveCfg = Release|x64
+		{3C8C69E6-9F9D-4684-BFED-1F245E1A9287}.Release|Any CPU.Build.0 = Release|x64
+		{3C8C69E6-9F9D-4684-BFED-1F245E1A9287}.Release|x64.ActiveCfg = Release|x64
+		{3C8C69E6-9F9D-4684-BFED-1F245E1A9287}.Release|x64.Build.0 = Release|x64
+		{EEE5D770-8D00-4D87-B7E6-E545E8896E06}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{EEE5D770-8D00-4D87-B7E6-E545E8896E06}.Debug|Any CPU.Build.0 = Debug|x64
+		{EEE5D770-8D00-4D87-B7E6-E545E8896E06}.Debug|x64.ActiveCfg = Debug|x64
+		{EEE5D770-8D00-4D87-B7E6-E545E8896E06}.Debug|x64.Build.0 = Debug|x64
+		{EEE5D770-8D00-4D87-B7E6-E545E8896E06}.Release|Any CPU.ActiveCfg = Release|x64
+		{EEE5D770-8D00-4D87-B7E6-E545E8896E06}.Release|Any CPU.Build.0 = Release|x64
+		{EEE5D770-8D00-4D87-B7E6-E545E8896E06}.Release|x64.ActiveCfg = Release|x64
+		{EEE5D770-8D00-4D87-B7E6-E545E8896E06}.Release|x64.Build.0 = Release|x64
+		{9A015F2C-C16D-4DA0-87D0-26518D037779}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{9A015F2C-C16D-4DA0-87D0-26518D037779}.Debug|Any CPU.Build.0 = Debug|x64
+		{9A015F2C-C16D-4DA0-87D0-26518D037779}.Debug|x64.ActiveCfg = Debug|x64
+		{9A015F2C-C16D-4DA0-87D0-26518D037779}.Debug|x64.Build.0 = Debug|x64
+		{9A015F2C-C16D-4DA0-87D0-26518D037779}.Release|Any CPU.ActiveCfg = Release|x64
+		{9A015F2C-C16D-4DA0-87D0-26518D037779}.Release|Any CPU.Build.0 = Release|x64
+		{9A015F2C-C16D-4DA0-87D0-26518D037779}.Release|x64.ActiveCfg = Release|x64
+		{9A015F2C-C16D-4DA0-87D0-26518D037779}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{399E9AA3-12D6-4076-BDBC-07EB40AF234B} = {0F036E0A-8F42-4105-BA27-BB2F6EE213A8}
+		{A80AD531-2723-46A3-BB68-ADC116D01781} = {0F036E0A-8F42-4105-BA27-BB2F6EE213A8}
+		{633A9BF3-A918-4FFA-BB1B-EE4E7CE82715} = {0F036E0A-8F42-4105-BA27-BB2F6EE213A8}
+		{2BF33CD8-076E-495E-A438-EFC2091D43CE} = {FE4ECDD6-6870-4A3E-9D01-F046EDB596F9}
+		{09B83FAF-FEE2-4A9C-8DD6-43FD1D1125E1} = {2BF33CD8-076E-495E-A438-EFC2091D43CE}
+		{91063060-E1BD-4C31-9C7B-EE4E66EED7B1} = {2BF33CD8-076E-495E-A438-EFC2091D43CE}
+		{354AEE39-DB7A-495E-8214-CA18B2A7D749} = {73E03F27-03B1-4AE6-88A8-1CB889EFC94D}
+		{3C8C69E6-9F9D-4684-BFED-1F245E1A9287} = {0F036E0A-8F42-4105-BA27-BB2F6EE213A8}
+		{EEE5D770-8D00-4D87-B7E6-E545E8896E06} = {73E03F27-03B1-4AE6-88A8-1CB889EFC94D}
+		{9A015F2C-C16D-4DA0-87D0-26518D037779} = {F1E2EED2-1578-471B-9393-13E9EFC36D04}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {11371D22-FDA3-41EA-8116-69E48DD68579}
+	EndGlobalSection
+EndGlobal

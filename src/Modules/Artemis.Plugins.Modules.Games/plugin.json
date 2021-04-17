@@ -1,0 +1,8 @@
+{
+  "Guid": "8003b4c0-7f18-45d1-9e13-078b85b93039",
+  "Name": "Games module",
+  "Icon": "gamepad",
+  "Description": "A general profile-enabled general module to group games layers",
+  "Version": "1.0.0.0",
+  "Main": "Artemis.Plugins.Modules.Games.dll"
+}

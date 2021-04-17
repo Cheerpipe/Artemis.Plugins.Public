@@ -1,0 +1,8 @@
+{
+  "Guid": "76d139ad-32da-a921-1694-a8759248a53f",
+  "Name": "YTMdesktop",
+  "Icon": "play",
+  "Description": "Provides track and player data about your current YTMdesktop listening session. Based on https://github.com/diogotr7/Artemis.Plugins Spotify Plugin. All credits to him, i just changed de track info source",
+  "Version": "1.0.0.0",
+  "Main": "Artemis.Plugins.DataModelExpansions.YTMdesktop.dll"
+}

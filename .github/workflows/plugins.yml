@@ -1,0 +1,93 @@
+name: Build Plugins
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: [windows-latest]
+
+    steps:
+      - name: Setup .NET 5.0
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '5.0.x'
+
+      - name: Clone RGB.NET
+        uses: actions/checkout@v2
+        with:
+          repository: DarthAffe/RGB.NET
+          path: RGB.NET
+          ref: Development
+
+      - name: Build RGB.NET
+        run: dotnet build .\RGB.NET\RGB.NET.Core\RGB.NET.Core.csproj
+      - run: dotnet build .\RGB.NET\RGB.NET.Layout\RGB.NET.Layout.csproj
+      - run: dotnet build .\RGB.NET\RGB.NET.Presets\RGB.NET.Presets.csproj
+
+      - name: Clone Artemis
+        uses: actions/checkout@v2
+        with:
+          repository: Artemis-RGB/Artemis
+          path: Artemis
+          ref: development
+
+      - name: Build Artemis
+        run: dotnet build .\Artemis\src\Artemis.sln
+
+      - name: Clone Plugins
+        uses: actions/checkout@v2
+        with:
+          path: Plugins
+
+      - name: Build Plugins
+        run: dotnet publish -c Release .\Plugins\src\Artemis.Plugins.Public.sln
+
+        #msbuild is dumb so we have to upload one at a time :)
+        #https://github.com/dotnet/sdk/issues/7238
+      - name: Upload Artemis.Plugins.DataModelExpansions.DisplaySettings
+        uses: actions/upload-artifact@v2
+        with:
+          name: Artemis.Plugins.DataModelExpansions.DisplaySettings
+          path: .\Plugins\src\DataModelExpansions\Artemis.Plugins.DataModelExpansions.DisplaySettings\bin\x64\Release\net5.0-windows\publish
+
+      - name: Upload Artemis.Plugins.DataModelExpansions.PlaybackVolume
+        uses: actions/upload-artifact@v2
+        with:
+          name: Artemis.Plugins.DataModelExpansions.PlaybackVolume
+          path: .\Plugins\src\DataModelExpansions\Artemis.Plugins.DataModelExpansions.PlaybackVolume\bin\x64\Release\net5.0-windows\publish
+          
+      - name: Upload Artemis.Plugins.DataModelExpansions.YTMdesktop
+        uses: actions/upload-artifact@v2
+        with:
+          name: Artemis.Plugins.DataModelExpansions.YTMdesktop
+          path: .\Plugins\src\DataModelExpansions\Artemis.Plugins.DataModelExpansions.YTMdesktop\bin\x64\Release\net5.0-windows\publish
+
+      - name: Upload Artemis.Plugins.DataModelExpansions.OpenWeather
+        uses: actions/upload-artifact@v2
+        with:
+          name: Artemis.Plugins.DataModelExpansions.OpenWeather
+          path: .\Plugins\src\LayerBrushes\Artemis.Plugins.DataModelExpansions.OpenWeather\bin\x64\Release\net5.0-windows\publish                    
+
+      - name: Upload Artemis.Plugins.Devices.YeeLight
+        uses: actions/upload-artifact@v2
+        with:
+          name: Artemis.Plugins.Devices.YeeLight
+          path: .\Plugins\src\Device\YeeLight\Artemis.Plugins.Devices.YeeLight\bin\x64\Release\net5.0-windows\publish
+          
+      - name: Upload Artemis.Plugins.LayerBrushes.ConnectingDotss
+        uses: actions/upload-artifact@v2
+        with:
+          name: Artemis.Plugins.LayerBrushes.ConnectingDotss
+          path: .\Plugins\src\LayerBrushes\Artemis.Plugins.LayerBrushes.ConnectingDotss\bin\x64\Release\net5.0-windows\publish
+          
+      - name: Upload Artemis.Plugins.LayerBrushes.SolidPercentage
+        uses: actions/upload-artifact@v2
+        with:
+          name: Artemis.Plugins.LayerBrushes.SolidPercentage
+          path: .\Plugins\src\LayerBrushes\Artemis.Plugins.LayerBrushes.SolidPercentage\bin\x64\Release\net5.0-windows\publish
+
+      - name: Upload Artemis.Plugins.Modules.Games
+        uses: actions/upload-artifact@v2
+        with:
+          name: Artemis.Plugins.Modules.Games
+          path: .\Plugins\src\Modules\Artemis.Plugins.Modules.Games\bin\x64\Release\net5.0-windows\publish

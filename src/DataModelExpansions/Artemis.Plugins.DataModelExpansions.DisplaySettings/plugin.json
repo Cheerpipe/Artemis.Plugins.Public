@@ -1,0 +1,8 @@
+{
+  "Guid": "4338d732-b46d-4985-ae7b-4d7965a6ffbd",
+  "Name": "Display Settings",
+  "Icon": "monitor",
+  "Description": "Provides information regarding Windows Display Settings.",
+  "Version": "1.0.0.1",
+  "Main": "Artemis.Plugins.DataModelExpansions.DisplaySettings.dll"
+}

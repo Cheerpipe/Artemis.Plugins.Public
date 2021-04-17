@@ -1,0 +1,8 @@
+{
+  "Guid": "c338d73a-b46d-4985-be7b-1d7965a6ffb1",
+  "Name": "OpenWeather Data Model",
+  "Icon": "WeatherPouring",
+  "Description": "Provides information regarding weather using Open Weather free API. Must have a valid API Key in order use this plugin.",
+  "Version": "1.0.0.0",
+  "Main": "Artemis.Plugins.DataModelExpansions.OpenWeather.dll"
+}

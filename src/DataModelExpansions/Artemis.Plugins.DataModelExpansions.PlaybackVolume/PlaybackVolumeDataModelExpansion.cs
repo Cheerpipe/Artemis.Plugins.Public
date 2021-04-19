@@ -54,15 +54,15 @@ namespace Artemis.Plugins.DataModelExpansions.PlaybackVolume
                 {
                     float _peakVolumeNormalized = meter.PeakValue;
                     DataModel.PeakVolumeNormalized = _peakVolumeNormalized * 2f;
-                    DataModel.PeakVolume = _peakVolumeNormalized * 100f*2f;
+                    DataModel.PeakVolume = _peakVolumeNormalized * 100f * 2f;
 
                     //Update Channels Peak
                     var channelsVolumeNormalized = meter.GetChannelsPeakValues();
-                    for (int i = 0; i < DataModel.Channels.DynamicDataModels.Count; i++)
+                    for (int i = 0; i < DataModel.Channels.DynamicChildren.Count; i++)
                     {
-                        var channelDataModel = DataModel.Channels.DynamicChild<ChannelDataModel>(i.ToString());
-                        channelDataModel.PeakVolumeNormalized = channelsVolumeNormalized[i]*2f;
-                        channelDataModel.PeakVolume = channelsVolumeNormalized[i] * 100f*2f;
+                        var channelDataModel = DataModel.Channels.GetDynamicChild<ChannelDataModel>(string.Format("Channel {0}", i));
+                        channelDataModel.Value.PeakVolumeNormalized = channelsVolumeNormalized[i] * 2f;
+                        channelDataModel.Value.PeakVolume = channelsVolumeNormalized[i] * 100f * 2f;
                     }
                 }
             }
@@ -80,10 +80,10 @@ namespace Artemis.Plugins.DataModelExpansions.PlaybackVolume
             {
                 foreach (AudioEndpointVolumeChannel channel in _audioEndpointVolume.Channels)
                 {
-                    var channelDataModel = DataModel.Channels.DynamicChild<ChannelDataModel>(channel.ChannelIndex.ToString());
+                    var channelDataModel = DataModel.Channels.GetDynamicChild<ChannelDataModel>(string.Format("Channel {0}", channel.ChannelIndex));
                     float volumeNormalized = channel.VolumeScalar;
-                    channelDataModel.VolumeNormalized = volumeNormalized;
-                    channelDataModel.Volume = volumeNormalized * 100f;
+                    channelDataModel.Value.VolumeNormalized = volumeNormalized;
+                    channelDataModel.Value.Volume = volumeNormalized * 100f;
                 }
             }
         }
@@ -95,6 +95,15 @@ namespace Artemis.Plugins.DataModelExpansions.PlaybackVolume
             foreach (AudioEndpointVolumeChannel channel in _audioEndpointVolume.Channels)
             {
                 DataModel.Channels.AddDynamicChild(
+                    string.Format("Channel {0}", channel.ChannelIndex),
+                    new ChannelDataModel()
+                    {
+                        ChannelIndex = channel.ChannelIndex
+                    },
+                    string.Format("Channel {0}", channel.ChannelIndex)
+                    );
+                /*
+                DataModel.Channels.AddDynamicChild(
                     new ChannelDataModel()
                     {
                         ChannelIndex = channel.ChannelIndex
@@ -102,6 +111,7 @@ namespace Artemis.Plugins.DataModelExpansions.PlaybackVolume
                     channel.ChannelIndex.ToString(),
                     string.Format("Channel {0}", channel.ChannelIndex)
                     );
+                */
                 _logger.Information(string.Format("Playback device {0} channel {1} populated", _playbackDevice.FriendlyName, channel.ChannelIndex));
             }
         }

@@ -54,7 +54,9 @@ namespace Artemis.Plugins.DataModelExpansions.DisplaySettings
                 DataModel.Displays.ClearDynamicChildren();
                 for (int i = 0; i < displayList.Count; i++)
                 {
+
                     DataModel.Displays.AddDynamicChild(
+                        string.Format("[{0}] - {1}", i, displayList[i].DeviceName),
                         new DisplaySettingDataModel()
                         {
                             IsPrimary = displayList[i].IsGDIPrimary,
@@ -66,10 +68,26 @@ namespace Artemis.Plugins.DataModelExpansions.DisplaySettings
                             Position = displayList[i].CurrentSetting.Position,
                             ColorDepth = displayList[i].CurrentSetting.ColorDepth,
                             DisplayRotation = displayList[i].CurrentSetting.Orientation,
-                        },
-                        string.Format("[{0}] - {1}", i, displayList[i].DeviceName),
-                        string.Format("[{0}] - {1}", i, displayList[i].DeviceName)
+                        }
                     );
+                    /*
+                     DataModel.Displays.AddDynamicChild(
+                         new DisplaySettingDataModel()
+                         {
+                             IsPrimary = displayList[i].IsGDIPrimary,
+                             Name = displayList[i].DeviceName,
+                             Number = i,
+                             Adapter = displayList[i].Adapter.DeviceName,
+                             RefreshRate = displayList[i].CurrentSetting.Frequency,
+                             Resolution = displayList[i].CurrentSetting.Resolution,
+                             Position = displayList[i].CurrentSetting.Position,
+                             ColorDepth = displayList[i].CurrentSetting.ColorDepth,
+                             DisplayRotation = displayList[i].CurrentSetting.Orientation,
+                         },
+                         string.Format("[{0}] - {1}", i, displayList[i].DeviceName),
+                         string.Format("[{0}] - {1}", i, displayList[i].DeviceName)
+                     );
+                    */
                 }
 
             }

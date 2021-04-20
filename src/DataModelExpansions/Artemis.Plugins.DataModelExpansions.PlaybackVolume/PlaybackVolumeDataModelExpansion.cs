@@ -53,16 +53,16 @@ namespace Artemis.Plugins.DataModelExpansions.PlaybackVolume
                 using (var meter = AudioMeterInformation.FromDevice(_playbackDevice))
                 {
                     float _peakVolumeNormalized = meter.PeakValue;
-                    DataModel.PeakVolumeNormalized = _peakVolumeNormalized * 2f;
-                    DataModel.PeakVolume = _peakVolumeNormalized * 100f * 2f;
+                    DataModel.PeakVolumeNormalized = _peakVolumeNormalized;
+                    DataModel.PeakVolume = _peakVolumeNormalized * 100f;
 
                     //Update Channels Peak
                     var channelsVolumeNormalized = meter.GetChannelsPeakValues();
                     for (int i = 0; i < DataModel.Channels.DynamicChildren.Count; i++)
                     {
                         var channelDataModel = DataModel.Channels.GetDynamicChild<ChannelDataModel>(string.Format("Channel {0}", i));
-                        channelDataModel.Value.PeakVolumeNormalized = channelsVolumeNormalized[i] * 2f;
-                        channelDataModel.Value.PeakVolume = channelsVolumeNormalized[i] * 100f * 2f;
+                        channelDataModel.Value.PeakVolumeNormalized = Math.Max(channelsVolumeNormalized[i],0);
+                        channelDataModel.Value.PeakVolume = Math.Max(channelsVolumeNormalized[i] * 100f,0);
                     }
                 }
             }
@@ -102,16 +102,6 @@ namespace Artemis.Plugins.DataModelExpansions.PlaybackVolume
                     },
                     string.Format("Channel {0}", channel.ChannelIndex)
                     );
-                /*
-                DataModel.Channels.AddDynamicChild(
-                    new ChannelDataModel()
-                    {
-                        ChannelIndex = channel.ChannelIndex
-                    },
-                    channel.ChannelIndex.ToString(),
-                    string.Format("Channel {0}", channel.ChannelIndex)
-                    );
-                */
                 _logger.Information(string.Format("Playback device {0} channel {1} populated", _playbackDevice.FriendlyName, channel.ChannelIndex));
             }
         }

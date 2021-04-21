@@ -21,6 +21,7 @@ namespace Artemis.Plugins.DataModelExpansions.DisplaySettings.DataModels
         public int Number { get; set; }
         public string Adapter { get; set; }
         public bool IsPrimary { get; set; }
+        [DataModelProperty(Affix = "Hz")]
         public int RefreshRate { get; set; } = 0;
         public Size Resolution { get; set; }
         public Point Position { get; set; }

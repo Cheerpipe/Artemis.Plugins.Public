@@ -17,7 +17,8 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
 {
     public class YTMdesktopDataModelExpansion : DataModelExpansion<YTMdesktopDataModel>
     {
-        #region Constructor and readonly fields
+        #region Variables declarations
+
         private readonly ILogger _logger;
         private readonly IColorQuantizerService _colorQuantizer;
         private readonly IProcessMonitorService _processMonitorService;
@@ -25,10 +26,18 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
         private readonly ConcurrentDictionary<string, TrackColorsDataModel> albumArtColorCache;
         private TimedUpdateRegistration queryServerUpdateRegistration;
         private bool _youtubeIsRunning = false;
-
         private const string YTMD_PROCESS_NAME = "YouTube Music Desktop App";
+        private YTMDesktopClient _YTMDesktopClient;
+        private YTMDesktopTrackInfo _YTMDesktopTrackInfo;
+        private YTMDesktopPlayerInfo _YTMDesktopPlayerInfo;
+        private string _trackId;
+        private string _albumArtUrl;
 
-        public YTMdesktopDataModelExpansion(PluginSettings settings, ILogger logger, IColorQuantizerService colorQuantizer, IProcessMonitorService processMonitorService)
+        #endregion
+
+        #region Constructor
+
+        public YTMdesktopDataModelExpansion(ILogger logger, IColorQuantizerService colorQuantizer, IProcessMonitorService processMonitorService)
         {
             _processMonitorService = processMonitorService;
             _logger = logger;
@@ -39,13 +48,8 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
             };
             albumArtColorCache = new ConcurrentDictionary<string, TrackColorsDataModel>();
         }
-        #endregion
 
-        private YTMDesktopClient _YTMDesktopClient;
-        private YTMDesktopTrackInfo _YTMDesktopTrackInfo;
-        private YTMDesktopPlayerInfo _YTMDesktopPlayerInfo;
-        private string _trackId;
-        private string _albumArtUrl;
+        #endregion
 
         #region Plugin Methods
         public override void Enable()
@@ -87,7 +91,6 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
             _albumArtUrl = null;
             _processMonitorService.ProcessStarted -= _processMonitorService_ProcessStarted;
             _processMonitorService.ProcessStopped -= _processMonitorService_ProcessStopped;
-            //queryServerUpdateRegistration.Stop();
         }
 
         public override void Update(double deltaTime)
@@ -130,7 +133,6 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
                     return;
                 }
 
-                // We don't need to query 
                 _YTMDesktopClient?.UpdateTrackInfo();
                 _YTMDesktopTrackInfo = _YTMDesktopClient?.TrackInfo;
 
@@ -166,7 +168,6 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
                 _trackId = track.id;
             }
         }
-
 
         private void UpdatePlayerInfo(YTMDesktopPlayerInfo player)
         {

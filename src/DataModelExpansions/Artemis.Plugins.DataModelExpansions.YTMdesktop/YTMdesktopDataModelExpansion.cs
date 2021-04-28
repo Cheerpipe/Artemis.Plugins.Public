@@ -176,11 +176,7 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
             DataModel.Player.isPaused = player.isPaused;
             DataModel.Player.volumePercent = player.volumePercent;
             DataModel.Player.seekbarCurrentPosition = player.seekbarCurrentPosition;
-            DataModel.Player.seekbarCurrentPositionHuman = TimeSpan.ParseExact(
-                player.seekbarCurrentPositionHuman,
-                new string[] { "s", "ss", "m\\:s", "h\\:m\\:s" },
-                CultureInfo.CurrentCulture
-                );
+            DataModel.Player.seekbarCurrentPositionHuman = TimeSpan.FromSeconds(player.seekbarCurrentPosition);
             DataModel.Player.statePercent = player.statePercent;
             DataModel.Player.likeStatus = player.likeStatus;
             DataModel.Player.repeatType = Enum.Parse<RepeatState>(player.repeatType, true);
@@ -225,11 +221,7 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
             DataModel.Track.album = track.album;
             DataModel.Track.cover = track.cover;
             DataModel.Track.duration = track.duration;
-            DataModel.Track.durationHuman = TimeSpan.ParseExact(
-                track.durationHuman,
-                new string[] { "s", "ss", "m\\:s", "h\\:m\\:s" },
-                CultureInfo.CurrentCulture
-                );
+            DataModel.Track.durationHuman = TimeSpan.FromSeconds(track.duration);
             DataModel.Track.url = track.url;
             DataModel.Track.id = track.id;
             DataModel.Track.isVideo = track.isVideo;

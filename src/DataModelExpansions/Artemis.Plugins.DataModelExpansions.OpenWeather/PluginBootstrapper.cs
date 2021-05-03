@@ -3,14 +3,9 @@ using Artemis.UI.Shared;
 
 namespace Artemis.Plugins.DataModelExpansions.OpenWeather
 {
-    public class PluginBootstrapper : IPluginBootstrapper
+    public class Bootstrapper : PluginBootstrapper
     {
-        public void Disable(Plugin plugin)
-        {
-
-        }
-
-        public void Enable(Plugin plugin)
+        public new void OnPluginLoaded(Plugin plugin)
         {
             plugin.ConfigurationDialog = new PluginConfigurationDialog<OpenWeatherPluginConfigurationViewModel>();
         }

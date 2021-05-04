@@ -3,9 +3,9 @@ using Artemis.UI.Shared;
 
 namespace Artemis.Plugins.DataModelExpansions.OpenWeather
 {
-    public class Bootstrapper : PluginBootstrapper
+    public class OpenWeatherBootstrapper : PluginBootstrapper
     {
-        public new void OnPluginLoaded(Plugin plugin)
+        public override void OnPluginLoaded(Plugin plugin)
         {
             plugin.ConfigurationDialog = new PluginConfigurationDialog<OpenWeatherPluginConfigurationViewModel>();
         }

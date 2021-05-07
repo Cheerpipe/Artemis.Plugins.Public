@@ -1,4 +1,7 @@
-﻿using System.Windows.Controls;
+﻿using System.Diagnostics;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
 
 namespace Artemis.Plugins.DataModelExpansions.OpenWeather
 {
@@ -12,9 +15,14 @@ namespace Artemis.Plugins.DataModelExpansions.OpenWeather
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void Hyperlink_OnClick(object sender, RoutedEventArgs e)
         {
-
+            var ps = new ProcessStartInfo(((Hyperlink)sender).NavigateUri.ToString())
+            {
+                UseShellExecute = true,
+                Verb = "open"
+            };
+            Process.Start(ps);
         }
     }
 }

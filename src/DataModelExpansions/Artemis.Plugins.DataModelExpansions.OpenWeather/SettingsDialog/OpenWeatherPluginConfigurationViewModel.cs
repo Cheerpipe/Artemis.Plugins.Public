@@ -99,7 +99,7 @@ namespace Artemis.Plugins.DataModelExpansions.OpenWeather
 
 
                 //TODO: Use settings
-                string accessKey =  ApiKey;
+                string accessKey = ApiKey;
                 WeatherClient client = new WeatherClient(accessKey);
                 CurrrentWeatherModel data = client.GetCurrentWeatherAsync<CurrrentWeatherModel>(City, "en", UnitOfMeasurement).Result;
                 TestResult = string.Format("Connection successful. Getting weather data for {0} - {1}", data.Name, data.Sys.Country);
@@ -125,6 +125,11 @@ namespace Artemis.Plugins.DataModelExpansions.OpenWeather
 
             _unitOfMeasurementSetting.Value = Enum.GetNames(typeof(UnitsOfMeasurement)).FirstOrDefault();
             _citySetting.Save();
+        }
+
+        public void Cancel()
+        {
+            RequestClose();
         }
     }
 }

@@ -10,7 +10,7 @@
              xmlns:s="https://github.com/canton7/Stylet"
              mc:Ignorable="d" 
              d:DesignHeight="411.66" d:DesignWidth="476.121">
-        <materialDesign:Card Margin="0,0,0,0">
+    <materialDesign:Card Margin="0,0,0,0">
         <StackPanel Orientation="Vertical" 
                     HorizontalAlignment="Center" 
                     VerticalAlignment="Center" Width="436" Height="384">
@@ -21,8 +21,8 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0 0 0 15" Width="183">
                 <TextBlock>
-                <Hyperlink NavigateUri="https://openweathermap.org/api" >
-                    Get your API key here
+                <Hyperlink NavigateUri="https://home.openweathermap.org/api_keys" Click="Hyperlink_OnClick">
+                    Get your API key here.
                   </Hyperlink>
                 </TextBlock>
             </StackPanel>
@@ -35,7 +35,7 @@
                 <TextBlock>
                 Ex: Santiago, Chile
                 </TextBlock>
-            </StackPanel>            
+            </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0 0 0 15">
                 <TextBlock Text="Unit of measurement" Width="125" Style="{StaticResource MaterialDesignTextBlock}"/>
                 <ComboBox Style="{StaticResource MaterialDesignFilledComboBox}"
@@ -58,14 +58,14 @@
                         Height="35"
                         Width="100"
                         Style="{StaticResource MaterialDesignFlatMidBgButton}" 
-                        Command="{s:Action Test}" Click="Button_Click">
+                        Command="{s:Action Test}" Cursor="Hand" >
                     TEST
                 </Button>
                 <Button Margin="10"
                         Height="35"
                         Width="100"
                         Style="{StaticResource MaterialDesignOutlinedButton}" 
-                        Command="{s:Action Reset}">
+                        Command="{s:Action Cancel}" Cursor="Hand">
                     CANCEL
                 </Button>
             </StackPanel>

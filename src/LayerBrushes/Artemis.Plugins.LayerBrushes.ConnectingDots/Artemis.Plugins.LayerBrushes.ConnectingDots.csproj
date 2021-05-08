@@ -33,6 +33,12 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="ConnectedLines.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
   <!-- This may trigger another build (something related to the obj folder) so only run it if building inside VS -->
   <Target Name="PostBuildPublish" AfterTargets="PostBuildEvent" Condition="'$(BuildingInsideVisualStudio)' == 'true'">
     <Message Text="------ Artemis plugin publish ------" Importance="High" />

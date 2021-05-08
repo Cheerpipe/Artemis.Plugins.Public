@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
-using System.Threading;
+using Artemis.Core;
 using Artemis.Core.LayerBrushes;
+using Artemis.Plugins.LayerBrushes.ConnectingDots.LayerProperties.Presets;
 using ConnectingDots;
 using SkiaSharp;
 
@@ -9,11 +11,25 @@ namespace Artemis.Plugins.LayerBrushes.ConnectingDots
 {
     public class ConnectingDotsBrush : LayerBrush<ConnectingDotsBrushProperties>
     {
+        private readonly Plugin _plugin;
         private Field _field;
         private float _gradientAdvance;
         private float _fieldAdvance;
         public override void EnableLayerBrush()
         {
+        }
+
+        public override List<ILayerBrushPreset> Presets => new()
+        {
+            new ElectricField(this),
+            new DancingFireLines(this, _plugin),
+            new BigBouncingBubbles(this),
+            new SmallBouncingBubbles(this),
+        };
+
+        public ConnectingDotsBrush(Plugin plugin)
+        {
+            _plugin = plugin;
         }
 
         public override void DisableLayerBrush()

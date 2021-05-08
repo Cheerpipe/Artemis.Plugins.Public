@@ -9,7 +9,6 @@ using System.Collections.Concurrent;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.IO;
-using System.Globalization;
 using System.Linq;
 using System.Diagnostics;
 
@@ -28,8 +27,7 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
         private bool _youtubeIsRunning = false;
         private const string YTMD_PROCESS_NAME = "YouTube Music Desktop App";
         private YTMDesktopClient _YTMDesktopClient;
-        private YTMDesktopTrackInfo _YTMDesktopTrackInfo;
-        private YTMDesktopPlayerInfo _YTMDesktopPlayerInfo;
+        private RootInfo _rootInfo;
         private string _trackId;
         private string _albumArtUrl;
 
@@ -119,30 +117,19 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
 
             try
             {
-                // Update Player Data Model
-                _YTMDesktopClient?.UpdatePlayerInfo();
-                _YTMDesktopPlayerInfo = _YTMDesktopClient?.PlayerInfo;
+                // Update DataModel using /query API
 
-                if (_YTMDesktopPlayerInfo != null)
+                _YTMDesktopClient?.Update();
+                _rootInfo = _YTMDesktopClient?.Data;
+
+                if (_rootInfo != null)
                 {
-                    UpdatePlayerInfo(_YTMDesktopPlayerInfo);
+                    UpdateInfo(_rootInfo);
                 }
                 else
                 {
                     DataModel.Empty();
                     return;
-                }
-
-                _YTMDesktopClient?.UpdateTrackInfo();
-                _YTMDesktopTrackInfo = _YTMDesktopClient?.TrackInfo;
-
-                if (_YTMDesktopTrackInfo != null)
-                {
-                    await UpdateTrackInfo(_YTMDesktopTrackInfo);
-                }
-                else
-                {
-                    DataModel.Track.Empty();
                 }
             }
             catch (Exception e)
@@ -151,7 +138,19 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
             }
         }
 
-        private async Task UpdateTrackInfo(YTMDesktopTrackInfo track)
+        private void UpdateInfo(RootInfo data)
+        {
+            UpdatePlayerInfo(data.player);
+
+            if (data.player.hasSong && data.track != null)
+                UpdateTrackInfo(data.track);
+            else
+            {
+                DataModel.Track.Empty();
+            }
+        }
+
+        private async Task UpdateTrackInfo(TrackInfo track)
         {
             if (track.id != _trackId)
             {
@@ -169,7 +168,7 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
             }
         }
 
-        private void UpdatePlayerInfo(YTMDesktopPlayerInfo player)
+        private void UpdatePlayerInfo(PlayerInfo player)
         {
             DataModel.Player.IsRunning = true;
             DataModel.Player.hasSong = player.hasSong;
@@ -214,7 +213,7 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
                 DataModel.Track.Colors = colorDataModel;
         }
 
-        private void UpdateBasicTrackInfo(YTMDesktopTrackInfo track)
+        private void UpdateBasicTrackInfo(TrackInfo track)
         {
             DataModel.Track.author = track.author;
             DataModel.Track.title = track.title;

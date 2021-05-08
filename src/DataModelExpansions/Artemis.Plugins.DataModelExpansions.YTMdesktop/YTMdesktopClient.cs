@@ -7,62 +7,53 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
     public class YTMDesktopClient
     {
         RestClient _client;
-        RestRequest _queryTrackInfoRequest;
-        RestRequest _queryPlayerInfoRequest;
-        YTMDesktopTrackInfo _trackInfo;
-        YTMDesktopPlayerInfo _playerInfo;
+        RestRequest _queryRootInfoRequest;
+
+        RootInfo _rootInfo;
 
         public YTMDesktopClient()
         {
             _client = new RestClient("http://127.0.0.1:9863");
-            _queryTrackInfoRequest = new RestRequest("query/track", Method.GET);
-            _queryPlayerInfoRequest = new RestRequest("query/player", Method.GET);
+            _queryRootInfoRequest = new RestRequest("query", Method.GET);
         }
 
-        public YTMDesktopTrackInfo TrackInfo
+        public RootInfo Data
         {
             get
             {
-                return _trackInfo;
+                return _rootInfo;
             }
         }
 
-        public YTMDesktopPlayerInfo PlayerInfo
-        {
-            get
-            {
-                return _playerInfo;
-            }
-        }
 
-        public void UpdateTrackInfo()
+        public void Update()
         {
+
             try
             {
-                var response = _client.Execute(_queryTrackInfoRequest);
-                _trackInfo = JsonConvert.DeserializeObject<YTMDesktopTrackInfo>(response.Content);
+                var response = _client.Execute(_queryRootInfoRequest);
+                _rootInfo = JsonConvert.DeserializeObject<RootInfo>(response.Content);
             }
             catch
             {
-                _trackInfo = null;
-            }
-        }
-
-        public void UpdatePlayerInfo()
-        {
-            try
-            {
-                var response = _client.Execute(_queryPlayerInfoRequest);
-                _playerInfo = JsonConvert.DeserializeObject<YTMDesktopPlayerInfo>(response.Content);
-            }
-            catch
-            {
-                _playerInfo = null;
+                _rootInfo = null;
             }
         }
     }
 
-    public class YTMDesktopTrackInfo
+    public class PlayerInfo
+    {
+        public bool hasSong { get; set; }
+        public bool isPaused { get; set; }
+        public int volumePercent { get; set; }
+        public int seekbarCurrentPosition { get; set; }
+        public string seekbarCurrentPositionHuman { get; set; }
+        public double statePercent { get; set; }
+        public string likeStatus { get; set; }
+        public string repeatType { get; set; }
+    }
+
+    public class TrackInfo
     {
         public string author { get; set; }
         public string title { get; set; }
@@ -76,15 +67,10 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
         public bool isAdvertisement { get; set; }
         public bool inLibrary { get; set; }
     }
-    public class YTMDesktopPlayerInfo
+
+    public class RootInfo
     {
-        public bool hasSong { get; set; }
-        public bool isPaused { get; set; }
-        public int volumePercent { get; set; }
-        public int seekbarCurrentPosition { get; set; }
-        public string seekbarCurrentPositionHuman { get; set; }
-        public double statePercent { get; set; }
-        public string likeStatus { get; set; }
-        public string repeatType { get; set; }
+        public PlayerInfo player { get; set; }
+        public TrackInfo track { get; set; }
     }
 }

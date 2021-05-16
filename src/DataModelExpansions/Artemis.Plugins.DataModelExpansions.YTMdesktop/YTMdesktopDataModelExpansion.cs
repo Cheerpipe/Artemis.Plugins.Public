@@ -23,6 +23,7 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
         private readonly IProcessMonitorService _processMonitorService;
         private readonly HttpClient _httpClient;
         private readonly ConcurrentDictionary<string, TrackColorsDataModel> albumArtColorCache;
+        private readonly Profiler _profiler;
         private TimedUpdateRegistration queryServerUpdateRegistration;
         private bool _youtubeIsRunning = false;
         private const string YTMD_PROCESS_NAME = "YouTube Music Desktop App";
@@ -35,11 +36,13 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
 
         #region Constructor
 
-        public YTMdesktopDataModelExpansion(ILogger logger, IColorQuantizerService colorQuantizer, IProcessMonitorService processMonitorService)
+        public YTMdesktopDataModelExpansion(Plugin plugin,ILogger logger, IColorQuantizerService colorQuantizer, IProcessMonitorService processMonitorService)
         {
             _processMonitorService = processMonitorService;
             _logger = logger;
             _colorQuantizer = colorQuantizer;
+            _profiler = plugin.GetProfiler("YTMdesktopDataModelExpansion");
+
             _httpClient = new HttpClient
             {
                 Timeout = TimeSpan.FromSeconds(1)
@@ -52,8 +55,8 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
         #region Plugin Methods
         public override void Enable()
         {
-            if (queryServerUpdateRegistration == null)
-                queryServerUpdateRegistration = AddTimedUpdate(TimeSpan.FromSeconds(1), UpdateData);
+            AddTimedUpdate(TimeSpan.FromSeconds(1), UpdateData);
+
             _YTMDesktopClient = new YTMDesktopClient();
             _youtubeIsRunning = YoutubeIsRunning();
             _processMonitorService.ProcessStarted += _processMonitorService_ProcessStarted;
@@ -108,6 +111,13 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
 
         private async Task UpdateData(double deltaTime)
         {
+            _profiler.StartMeasurement("UpdateYTMDekstopInfo");
+            UpdateYTMDekstopInfo();
+            _profiler.StopMeasurement("UpdateYTMDekstopInfo");
+        }
+
+        private void UpdateYTMDekstopInfo()
+        {
             if (!_youtubeIsRunning)
             {
                 // Don't query server if YTMD proccess is down.
@@ -118,7 +128,6 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
             try
             {
                 // Update DataModel using /query API
-
                 _YTMDesktopClient?.Update();
                 _rootInfo = _YTMDesktopClient?.Data;
 

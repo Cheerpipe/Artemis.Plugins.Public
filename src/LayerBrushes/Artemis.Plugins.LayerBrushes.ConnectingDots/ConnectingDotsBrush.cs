@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using Artemis.Core;
 using Artemis.Core.LayerBrushes;
 using Artemis.Plugins.LayerBrushes.ConnectingDots.LayerProperties.Presets;
@@ -12,6 +11,7 @@ namespace Artemis.Plugins.LayerBrushes.ConnectingDots
     public class ConnectingDotsBrush : LayerBrush<ConnectingDotsBrushProperties>
     {
         private readonly Plugin _plugin;
+        private readonly Profiler _profiler;
         private Field _field;
         private float _gradientAdvance;
         private float _fieldAdvance;
@@ -30,6 +30,7 @@ namespace Artemis.Plugins.LayerBrushes.ConnectingDots
         public ConnectingDotsBrush(Plugin plugin)
         {
             _plugin = plugin;
+            _profiler = plugin.GetProfiler("ConnectingDotsBrush");
         }
 
         public override void DisableLayerBrush()
@@ -41,19 +42,21 @@ namespace Artemis.Plugins.LayerBrushes.ConnectingDots
         {
             if (_field == null)
                 return;
-
+            _profiler.StartMeasurement("Update");
             _fieldAdvance = (float)(deltaTime * Properties.DotsMovementSpeed.CurrentValue);
 
             if (Math.Abs(_fieldAdvance) <= (Properties.Radius.CurrentValue / 2f))
                 _field.Advance(_fieldAdvance);
 
             _gradientAdvance = (float)Math.Abs((deltaTime * Properties.ColorChangeSpeed.CurrentValue));
+            _profiler.StopMeasurement("Update");
         }
 
         public override void Render(SKCanvas canvas, SKRect bounds, SKPaint paint)
         {
-            if (_field is null)
-                _field = new Field(bounds.Width, bounds.Height, Properties.Dots.CurrentValue);
+            _profiler.StartMeasurement("Render");
+
+            _field ??= new Field(bounds.Width, bounds.Height, Properties.Dots.CurrentValue);
 
             _field.DotCount = Properties.Dots.CurrentValue;
             _field.Width = bounds.Width;
@@ -77,19 +80,14 @@ namespace Artemis.Plugins.LayerBrushes.ConnectingDots
                     if (dX < minConnectDistance || dX > maxConnectDistance ||
                         dY < minConnectDistance || dY > maxConnectDistance)
                         continue;
-                    double distance = Math.Sqrt(dX * dX + dY * dY);
-                    int alpha = (int)(255 - distance / maxConnectDistance * 255) * 2;
-                    alpha = Math.Min(alpha, 255);
-                    alpha = Math.Max(alpha, 0);
-                    if (Properties.ConnectionWidth.CurrentValue > 0)
+
+                    if (!(Properties.ConnectionWidth.CurrentValue > 0)) continue;
+                    paint.Color = Properties.Connections.CurrentValue;
+                    paint.StrokeWidth = Properties.ConnectionWidth.CurrentValue;
+                    if (dX > minConnectDistance && dX < maxConnectDistance &
+                        dY > minConnectDistance && dY < maxConnectDistance)
                     {
-                        paint.Color = Properties.Connections.CurrentValue;
-                        paint.StrokeWidth = Properties.ConnectionWidth.CurrentValue;
-                        if (dX > minConnectDistance && dX < maxConnectDistance &
-                            dY > minConnectDistance && dY < maxConnectDistance)
-                        {
-                            canvas.DrawLine(dot1.X, dot1.Y, dot2.X, dot2.Y, paint);
-                        }
+                        canvas.DrawLine(dot1.X, dot1.Y, dot2.X, dot2.Y, paint);
                     }
                 }
             }
@@ -97,13 +95,6 @@ namespace Artemis.Plugins.LayerBrushes.ConnectingDots
             float dotRadius = Properties.Radius.CurrentValue;
             foreach (var dot in _field.Dots)
             {
-                var rect = new RectangleF(
-                        x: dot.X - dotRadius,
-                        y: dot.Y - dotRadius,
-                        width: dotRadius * 2,
-                        height: dotRadius * 2
-                    );
-
                 var pt = new SKPoint(dot.X, dot.Y);
                 if (Properties.DotsColorType.CurrentValue == ConnectingDotsBrushProperties.ColorMappingType.Gradient)
                 {
@@ -119,6 +110,7 @@ namespace Artemis.Plugins.LayerBrushes.ConnectingDots
             _fieldAdvance = 0;
             _gradientAdvance = 0;
 
+            _profiler.StopMeasurement("Render");
         }
     }
 }

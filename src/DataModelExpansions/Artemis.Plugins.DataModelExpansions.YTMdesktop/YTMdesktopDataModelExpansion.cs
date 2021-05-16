@@ -24,7 +24,6 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
         private readonly HttpClient _httpClient;
         private readonly ConcurrentDictionary<string, TrackColorsDataModel> albumArtColorCache;
         private readonly Profiler _profiler;
-        private TimedUpdateRegistration queryServerUpdateRegistration;
         private bool _youtubeIsRunning = false;
         private const string YTMD_PROCESS_NAME = "YouTube Music Desktop App";
         private YTMDesktopClient _YTMDesktopClient;

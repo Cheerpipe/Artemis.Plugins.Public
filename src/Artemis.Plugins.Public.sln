@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.DataModelExpansions.DisplaySettings", "DataModelExpansions\Artemis.Plugins.DataModelExpansions.DisplaySettings\Artemis.Plugins.DataModelExpansions.DisplaySettings.csproj", "{399E9AA3-12D6-4076-BDBC-07EB40AF234B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.DataModelExpansions.PlaybackVolume", "DataModelExpansions\Artemis.Plugins.DataModelExpansions.PlaybackVolume\Artemis.Plugins.DataModelExpansions.PlaybackVolume.csproj", "{A80AD531-2723-46A3-BB68-ADC116D01781}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.DataModelExpansions.YTMdesktop", "DataModelExpansions\Artemis.Plugins.DataModelExpansions.YTMdesktop\Artemis.Plugins.DataModelExpansions.YTMdesktop.csproj", "{633A9BF3-A918-4FFA-BB1B-EE4E7CE82715}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataModelExpansions", "DataModelExpansions", "{0F036E0A-8F42-4105-BA27-BB2F6EE213A8}"
@@ -47,14 +45,6 @@ Global
 		{399E9AA3-12D6-4076-BDBC-07EB40AF234B}.Release|Any CPU.Build.0 = Release|x64
 		{399E9AA3-12D6-4076-BDBC-07EB40AF234B}.Release|x64.ActiveCfg = Release|x64
 		{399E9AA3-12D6-4076-BDBC-07EB40AF234B}.Release|x64.Build.0 = Release|x64
-		{A80AD531-2723-46A3-BB68-ADC116D01781}.Debug|Any CPU.ActiveCfg = Debug|x64
-		{A80AD531-2723-46A3-BB68-ADC116D01781}.Debug|Any CPU.Build.0 = Debug|x64
-		{A80AD531-2723-46A3-BB68-ADC116D01781}.Debug|x64.ActiveCfg = Debug|x64
-		{A80AD531-2723-46A3-BB68-ADC116D01781}.Debug|x64.Build.0 = Debug|x64
-		{A80AD531-2723-46A3-BB68-ADC116D01781}.Release|Any CPU.ActiveCfg = Release|x64
-		{A80AD531-2723-46A3-BB68-ADC116D01781}.Release|Any CPU.Build.0 = Release|x64
-		{A80AD531-2723-46A3-BB68-ADC116D01781}.Release|x64.ActiveCfg = Release|x64
-		{A80AD531-2723-46A3-BB68-ADC116D01781}.Release|x64.Build.0 = Release|x64
 		{633A9BF3-A918-4FFA-BB1B-EE4E7CE82715}.Debug|Any CPU.ActiveCfg = Debug|x64
 		{633A9BF3-A918-4FFA-BB1B-EE4E7CE82715}.Debug|Any CPU.Build.0 = Debug|x64
 		{633A9BF3-A918-4FFA-BB1B-EE4E7CE82715}.Debug|x64.ActiveCfg = Debug|x64
@@ -117,7 +107,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{399E9AA3-12D6-4076-BDBC-07EB40AF234B} = {0F036E0A-8F42-4105-BA27-BB2F6EE213A8}
-		{A80AD531-2723-46A3-BB68-ADC116D01781} = {0F036E0A-8F42-4105-BA27-BB2F6EE213A8}
 		{633A9BF3-A918-4FFA-BB1B-EE4E7CE82715} = {0F036E0A-8F42-4105-BA27-BB2F6EE213A8}
 		{2BF33CD8-076E-495E-A438-EFC2091D43CE} = {FE4ECDD6-6870-4A3E-9D01-F046EDB596F9}
 		{09B83FAF-FEE2-4A9C-8DD6-43FD1D1125E1} = {2BF33CD8-076E-495E-A438-EFC2091D43CE}

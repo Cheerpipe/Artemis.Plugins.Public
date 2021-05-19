@@ -29,6 +29,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{F1E2
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.Modules.Games", "Modules\Artemis.Plugins.Modules.Games\Artemis.Plugins.Modules.Games.csproj", "{9A015F2C-C16D-4DA0-87D0-26518D037779}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.LayerBrushes.Ripples", "LayerBrushes\Artemis.Plugins.LayerBrushes.Ripples\Artemis.Plugins.LayerBrushes.Ripples.csproj", "{73BB348F-A977-4E9E-A069-7B71DA63DCC9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -101,6 +103,12 @@ Global
 		{9A015F2C-C16D-4DA0-87D0-26518D037779}.Release|Any CPU.Build.0 = Release|x64
 		{9A015F2C-C16D-4DA0-87D0-26518D037779}.Release|x64.ActiveCfg = Release|x64
 		{9A015F2C-C16D-4DA0-87D0-26518D037779}.Release|x64.Build.0 = Release|x64
+		{73BB348F-A977-4E9E-A069-7B71DA63DCC9}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{73BB348F-A977-4E9E-A069-7B71DA63DCC9}.Debug|x64.ActiveCfg = Debug|x64
+		{73BB348F-A977-4E9E-A069-7B71DA63DCC9}.Debug|x64.Build.0 = Debug|x64
+		{73BB348F-A977-4E9E-A069-7B71DA63DCC9}.Release|Any CPU.ActiveCfg = Release|x64
+		{73BB348F-A977-4E9E-A069-7B71DA63DCC9}.Release|x64.ActiveCfg = Release|x64
+		{73BB348F-A977-4E9E-A069-7B71DA63DCC9}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -115,6 +123,7 @@ Global
 		{3C8C69E6-9F9D-4684-BFED-1F245E1A9287} = {0F036E0A-8F42-4105-BA27-BB2F6EE213A8}
 		{EEE5D770-8D00-4D87-B7E6-E545E8896E06} = {73E03F27-03B1-4AE6-88A8-1CB889EFC94D}
 		{9A015F2C-C16D-4DA0-87D0-26518D037779} = {F1E2EED2-1578-471B-9393-13E9EFC36D04}
+		{73BB348F-A977-4E9E-A069-7B71DA63DCC9} = {73E03F27-03B1-4AE6-88A8-1CB889EFC94D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {11371D22-FDA3-41EA-8116-69E48DD68579}

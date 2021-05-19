@@ -91,3 +91,9 @@ jobs:
         with:
           name: Artemis.Plugins.Modules.Games
           path: .\Plugins\src\Modules\Artemis.Plugins.Modules.Games\bin\x64\Release\net5.0-windows\publish
+
+      - name: Upload Artemis.Plugins.LayerBrushes.Ripples
+        uses: actions/upload-artifact@v2
+        with:
+          name: Artemis.Plugins.LayerBrushes.Ripples
+          path: .\Plugins\src\Modules\Artemis.Plugins.LayerBrushes.Ripples\bin\x64\Release\net5.0-windows\publish          

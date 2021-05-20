@@ -2,8 +2,10 @@
   "Guid": "53dc7e1c-6dbe-4c5b-934d-00dc33dd883a",
   "Name": "Ripples",
   "Author": "Cheerpipe",
+  "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",
   "Icon": "CircleOutline",
   "Description": "Provides ripple generator layer brush",
   "Version": "1.0.0.0",
-  "Main": "Artemis.Plugins.LayerBrushes.Ripples.dll"
+  "Main": "Artemis.Plugins.LayerBrushes.Ripples.dll",
+  "AutoEnableFeatures": true
 }

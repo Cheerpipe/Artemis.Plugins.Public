@@ -1,8 +1,11 @@
 ﻿{
   "Guid": "b7f01896-5488-4994-a729-d816de7f763c",
   "Name": "Solid Percentage layer brush",
+  "Author": "Cheerpipe",
+  "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",
   "Icon": "percent",
   "Description": "A basic solid layer-brush providing solid colors to be used with a percentage value databinding.",
   "Version": "1.0.0.0",
-  "Main": "Artemis.Plugins.LayerBrushes.SolidPercentage.dll"
+  "Main": "Artemis.Plugins.LayerBrushes.SolidPercentage.dll",
+  "AutoEnableFeatures": true
 }

@@ -1,6 +1,8 @@
 ﻿{
   "Guid": "797f604f-37c8-4eda-86e4-6ccc59b299b8",
   "Name": "YeeLight Devices",
+  "Author": "Cheerpipe",
+  "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",
   "Icon": "bulb",
   "Description": "Allows Artemis to control YeeLight lights usin Developer Mode Lan Protocol.",
   "Version": "1.0.0.0",

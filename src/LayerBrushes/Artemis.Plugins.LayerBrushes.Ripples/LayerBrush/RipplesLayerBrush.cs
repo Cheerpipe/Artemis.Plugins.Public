@@ -27,7 +27,8 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
             new Citrus(this),
             new ColorParty(this),
             new FireExplosions(this),
-            new Rain(this)
+            new Rain(this),
+            new Fall(this)
         };
 
         public override void EnableLayerBrush()

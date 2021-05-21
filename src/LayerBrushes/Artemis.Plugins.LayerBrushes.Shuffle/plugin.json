@@ -1,0 +1,11 @@
+{
+  "Guid": "dd2fa753-6231-4abb-a692-9e4ff5fb9ffa",
+  "Name": "Shuffle",
+  "Author": "Cheerpipe",
+  "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",
+  "Icon": "Palette",
+  "Description": "Per key color shuffle",
+  "Version": "1.0.0.0",
+  "Main": "Artemis.Plugins.LayerBrushes.Shuffle.dll",
+  "AutoEnableFeatures": true
+}

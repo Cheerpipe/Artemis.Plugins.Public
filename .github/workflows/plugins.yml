@@ -96,4 +96,10 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Artemis.Plugins.LayerBrushes.Ripples
-          path: .\Plugins\src\LayerBrushes\Artemis.Plugins.LayerBrushes.Ripples\bin\x64\Release\net5.0-windows\publish          
+          path: .\Plugins\src\LayerBrushes\Artemis.Plugins.LayerBrushes.Ripples\bin\x64\Release\net5.0-windows\publish
+
+      - name: Upload Artemis.Plugins.LayerBrushes.Shuffle
+        uses: actions/upload-artifact@v2
+        with:
+          name: Artemis.Plugins.LayerBrushes.Shuffle
+          path: .\Plugins\src\LayerBrushes\Artemis.Plugins.LayerBrushes.Shuffle\bin\x64\Release\net5.0-windows\publish

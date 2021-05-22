@@ -30,7 +30,7 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerProperties.Presets
             _properties.Color.SetCurrentValue(SKColors.Transparent, null);
             _properties.RippleFadeAway.SetCurrentValue(RippleFadeOutMode.Hard, null);
             _properties.RippleTrail.SetCurrentValue(true, null);
-            _properties.RippleSpawnSpeed.SetCurrentValue(20, null);
+            _properties.RippleSpawnSpeed.SetCurrentValue(200, null);
             _properties.RippleSpawnAmount.SetCurrentValue(2, null);
             _properties.RippleWidth.SetCurrentValue(50, null);
             _properties.RippleSize.SetCurrentValue(100, null);

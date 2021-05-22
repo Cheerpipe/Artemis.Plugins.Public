@@ -51,14 +51,63 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
 
             // Simple linear time spawn
             _lastSpawnTime += (float)deltaTime;
-            if (_lastSpawnTime > 10f / Properties.RippleSpawnSpeed.CurrentValue)
+            if (_lastSpawnTime > 100f / Properties.RippleSpawnSpeed.CurrentValue)
             {
                 for (int i = 0; i < Properties.RippleSpawnAmount.CurrentValue; i++)
                 {
-                    SKPoint spawnPoint = new SKPoint(
-                    Rand.Next(1, Layer.Bounds.Width),
-                   Rand.Next(1, Layer.Bounds.Height)
-                    );
+                    int x = 1;
+                    int y = 1;
+
+                    // Override default spawn location
+                    switch (Properties.RippleSpawnLocation.CurrentValue)
+                    {
+                        case RippleSpawnLocation.Random:
+                            x = Rand.Next(1, Layer.Bounds.Width);
+                            y = Rand.Next(1, Layer.Bounds.Height);
+                            break;
+                        case RippleSpawnLocation.RelativePoint:
+                            x = Math.Clamp((int)(Layer.Bounds.Width * Properties.RippleSpawnPoint.CurrentValue.Start/100), 1, Layer.Bounds.Width);
+                            y = Math.Clamp((int)(Layer.Bounds.Height * Properties.RippleSpawnPoint.CurrentValue.End/100), 1, Layer.Bounds.Height);
+                            break;
+                        case RippleSpawnLocation.BottomLeft:
+                            x = 1;
+                            y = Layer.Bounds.Height;
+                            break;
+                        case RippleSpawnLocation.BottomRight:
+                            x = Layer.Bounds.Width;
+                            y = Layer.Bounds.Height;
+                            break;
+                        case RippleSpawnLocation.Centre:
+                            x = Layer.Bounds.Width / 2;
+                            y = Layer.Bounds.Height / 2;
+                            break;
+                        case RippleSpawnLocation.MiddleLeft:
+                            x = 1;
+                            y = Layer.Bounds.Height / 2;
+                            break;
+                        case RippleSpawnLocation.MiddleRight:
+                            x = Layer.Bounds.Width;
+                            y = Layer.Bounds.Height / 2;
+                            break;
+                        case RippleSpawnLocation.TopCentre:
+                            x = Layer.Bounds.Width / 2;
+                            y = 1;
+                            break;
+                        case RippleSpawnLocation.TopLeft:
+                            x = 1;
+                            y = 1;
+                            break;
+                        case RippleSpawnLocation.TopRight:
+                            x = Layer.Bounds.Width;
+                            y = 1;
+                            break;
+                        case RippleSpawnLocation.BottomCentre:
+                            x = Layer.Bounds.Width / 2;
+                            y = Layer.Bounds.Height;
+                            break;
+                    };
+
+                    SKPoint spawnPoint = new SKPoint(x, y);
                     SpawnEffect(spawnPoint);
                 }
                 _lastSpawnTime = 0;

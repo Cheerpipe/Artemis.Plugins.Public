@@ -4,7 +4,7 @@ using SkiaSharp;
 
 namespace Artemis.Plugins.LayerBrushes.Shuffle.LayerBrush
 {
-    public class ShufledLed
+    public sealed class ShufledLed
     {
         private readonly ShuffleLayerBrush _brush; // Color to be returned
         private float _advance; // How much we move inside the gradient
@@ -32,10 +32,7 @@ namespace Artemis.Plugins.LayerBrushes.Shuffle.LayerBrush
 
         public SKColor GetCurrentColor()
         {
-            if (_brush.Properties.SmoothColorChange)
-                return InterpolateColor(FromColor, ToColor, Math.Clamp(_advance, 0, 1));
-            else
-                return ToColor;
+            return _brush.Properties.SmoothColorChange ? InterpolateColor(FromColor, ToColor, Math.Clamp(_advance, 0, 1)) : ToColor;
         }
 
         private void SetNextValues()

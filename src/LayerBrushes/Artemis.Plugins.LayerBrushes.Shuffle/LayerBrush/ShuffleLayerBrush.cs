@@ -42,7 +42,10 @@ namespace Artemis.Plugins.LayerBrushes.Shuffle.LayerBrush
 
         private void Layer_RenderPropertiesUpdated(object sender, EventArgs e)
         {
-            _layerLeds.Clear();
+            lock (_layerLeds)
+            {
+                _layerLeds.Clear();
+            }
         }
 
         public override List<ILayerBrushPreset> Presets => new()

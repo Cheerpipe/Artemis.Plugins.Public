@@ -103,3 +103,9 @@ jobs:
         with:
           name: Artemis.Plugins.LayerBrushes.Shuffle
           path: .\Plugins\src\LayerBrushes\Artemis.Plugins.LayerBrushes.Shuffle\bin\x64\Release\net5.0-windows\publish
+
+      - name: Upload Artemis.Plugins.LayerBrushes.Nexus
+        uses: actions/upload-artifact@v2
+        with:
+          name: Artemis.Plugins.LayerBrushes.Nexus
+          path: .\Plugins\src\LayerBrushes\Artemis.Plugins.LayerBrushes.Nexus\bin\x64\Release\net5.0-windows\publish          

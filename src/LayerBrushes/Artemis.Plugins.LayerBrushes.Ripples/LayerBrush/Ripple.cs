@@ -130,6 +130,10 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
             if (Size < 0)
                 return;
 
+            // SkiaSharp shapes doesn't support inner stroke so it will cause a weird empty circle if stroke
+            // width is greather than the double of the size of a shape. This operation will produce perfect ripples
+            Paint.StrokeWidth = Math.Min(Paint.StrokeWidth, Size * 2);
+
             if (Size > 0 && Paint != null)
                 canvas.DrawCircle(Position, Size, Paint);
 

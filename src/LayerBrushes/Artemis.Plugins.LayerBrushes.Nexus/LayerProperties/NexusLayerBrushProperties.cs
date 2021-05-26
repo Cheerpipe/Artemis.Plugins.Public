@@ -50,7 +50,7 @@ namespace Artemis.Plugins.LayerBrushes.Nexus.LayerProperties
             Colors.DefaultValue = ColorGradient.GetUnicornBarf();
             Color.DefaultValue = new SKColor(0, 255, 0, 255);
             Width.DefaultValue = 30;
-            Separation.DefaultValue = 5;
+            Separation.DefaultValue = 0;
             SpawnInterval.DefaultValue = 500;
             Speed.DefaultValue = new IntRange(30, 40);
             TrailSize.DefaultValue = 300;

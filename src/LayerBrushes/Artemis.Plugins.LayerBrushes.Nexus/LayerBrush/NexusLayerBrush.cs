@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using Artemis.Core;
 using Artemis.Core.LayerBrushes;
@@ -60,7 +59,6 @@ namespace Artemis.Plugins.LayerBrushes.Nexus.LayerBrush
                             break;
                     }
                 }
-                Debug.WriteLine(_beams.Count);
                 // Spawn a new beams
                 _spawnTime += deltaTime;
                 if (_spawnTime > Properties.SpawnInterval.CurrentValue / 1000f) // Time in MS
@@ -74,33 +72,16 @@ namespace Artemis.Plugins.LayerBrushes.Nexus.LayerBrush
                         Properties.FromTopToBottom.CurrentValue
                         );
 
-                    int horizontalPositionIndex;
-                    int verticalPositionIndex;
-                    if (Properties.AvoidOverlaping.CurrentValue)
-                    {
-                        var hIndexes = _beams.Where(b => b.Direction == Direction.ToUp || b.Direction == Direction.ToDown).Select(b => b.Location).ToArray();
-                        var vIndexes = _beams.Where(b => b.Direction == Direction.ToLeft || b.Direction == Direction.ToRight).Select(b => b.Location).ToArray();
-                        var hMaxIndexes = Layer.Bounds.Width / (Properties.Width + Properties.Separation);
-                        var vMaxIndexes = Layer.Bounds.Height / (Properties.Width + Properties.Separation);
-                        horizontalPositionIndex = GetRandomNonOverlapedPositionIndex(1, Layer.Bounds.Width / (Properties.Width + Properties.Separation), hIndexes, hMaxIndexes) * (Properties.Width + Properties.Separation);
-                        verticalPositionIndex = GetRandomNonOverlapedPositionIndex(1, Layer.Bounds.Height / (Properties.Width + Properties.Separation), vIndexes, vMaxIndexes) * (Properties.Width + Properties.Separation);
-                    }
-                    else
-                    {
-                        horizontalPositionIndex = Rand.Next(1, Layer.Bounds.Width);
-                        verticalPositionIndex = Rand.Next(1, Layer.Bounds.Height);
-                    }
-
                     int location;
                     switch (direction)
                     {
                         case Direction.ToDown:
                         case Direction.ToUp:
-                            location = horizontalPositionIndex;
+                            location = GetHorizontalIndex();
                             break;
                         case Direction.ToRight:
                         case Direction.ToLeft:
-                            location = verticalPositionIndex;
+                            location = GetVerticalIndex();
                             break;
                         default:
                             location = 0;
@@ -114,7 +95,35 @@ namespace Artemis.Plugins.LayerBrushes.Nexus.LayerBrush
             _profiler.StopMeasurement("Update");
         }
 
-        private int GetRandomNonOverlapedPositionIndex(int from, int to, int[] avoid, int retries = 1000)
+        private int GetVerticalIndex()
+        {
+            if (Properties.AvoidOverlaping.CurrentValue)
+            {
+                var vIndexes = _beams.Where(b => b.Direction == Direction.ToLeft || b.Direction == Direction.ToRight).Select(b => b.Location).ToArray();
+                var vMaxIndexes = Layer.Bounds.Height / (Properties.Width + Properties.Separation);
+                return GetRandomNonOverlapedPositionIndex(0, (Layer.Bounds.Height / (Properties.Width + Properties.Separation)), vIndexes, vMaxIndexes) * (Properties.Width + Properties.Separation);
+            }
+            else
+            {
+                return Rand.Next(1, Layer.Bounds.Height);
+            }
+        }
+
+        private int GetHorizontalIndex()
+        {
+            if (Properties.AvoidOverlaping.CurrentValue)
+            {
+                var hIndexes = _beams.Where(b => b.Direction == Direction.ToUp || b.Direction == Direction.ToDown).Select(b => b.Location).ToArray();
+                var hMaxIndexes = Layer.Bounds.Width / (Properties.Width + Properties.Separation);
+                return GetRandomNonOverlapedPositionIndex(0, (Layer.Bounds.Width / (Properties.Width + Properties.Separation)), hIndexes, hMaxIndexes) * (Properties.Width + Properties.Separation);
+            }
+            else
+            {
+                return Rand.Next(1, Layer.Bounds.Width);
+            }
+        }
+
+        private int GetRandomNonOverlapedPositionIndex(int from, int to, int[] avoid, int retries = 10)
         {
             int r;
             for (int i = 0; i < retries * 10; i++)

@@ -35,6 +35,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.LayerBrushe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.LayerBrushes.Nexus", "LayerBrushes\Artemis.Plugins.LayerBrushes.Nexus\Artemis.Plugins.LayerBrushes.Nexus.csproj", "{1B77E7E9-E9C7-4487-9E1F-96B5F7FFAD58}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.LayerBrushes.HotBar", "LayerBrushes\Artemis.Plugins.LayerBrushes.HotBar\Artemis.Plugins.LayerBrushes.HotBar.csproj", "{684AEE26-3174-4332-B58D-D90B03ACECF0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -129,6 +131,13 @@ Global
 		{1B77E7E9-E9C7-4487-9E1F-96B5F7FFAD58}.Release|Any CPU.Build.0 = Release|x64
 		{1B77E7E9-E9C7-4487-9E1F-96B5F7FFAD58}.Release|x64.ActiveCfg = Release|x64
 		{1B77E7E9-E9C7-4487-9E1F-96B5F7FFAD58}.Release|x64.Build.0 = Release|x64
+		{684AEE26-3174-4332-B58D-D90B03ACECF0}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{684AEE26-3174-4332-B58D-D90B03ACECF0}.Debug|x64.ActiveCfg = Debug|x64
+		{684AEE26-3174-4332-B58D-D90B03ACECF0}.Debug|x64.Build.0 = Debug|x64
+		{684AEE26-3174-4332-B58D-D90B03ACECF0}.Release|Any CPU.ActiveCfg = Release|x64
+		{684AEE26-3174-4332-B58D-D90B03ACECF0}.Release|Any CPU.Build.0 = Release|x64
+		{684AEE26-3174-4332-B58D-D90B03ACECF0}.Release|x64.ActiveCfg = Release|x64
+		{684AEE26-3174-4332-B58D-D90B03ACECF0}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -146,6 +155,7 @@ Global
 		{73BB348F-A977-4E9E-A069-7B71DA63DCC9} = {73E03F27-03B1-4AE6-88A8-1CB889EFC94D}
 		{60F45EE3-6A22-4072-9BD7-95A4885C72D0} = {73E03F27-03B1-4AE6-88A8-1CB889EFC94D}
 		{1B77E7E9-E9C7-4487-9E1F-96B5F7FFAD58} = {73E03F27-03B1-4AE6-88A8-1CB889EFC94D}
+		{684AEE26-3174-4332-B58D-D90B03ACECF0} = {73E03F27-03B1-4AE6-88A8-1CB889EFC94D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {11371D22-FDA3-41EA-8116-69E48DD68579}

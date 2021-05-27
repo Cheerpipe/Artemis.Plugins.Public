@@ -40,12 +40,19 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerBrush
 
             _inputService.KeyboardKeyDown += InputServiceOnKeyboardKeyDown;
             _inputService.MouseScroll += _inputService_MouseScroll;
+            Layer.RenderPropertiesUpdated += Layer_RenderPropertiesUpdated;
+        }
+
+        private void Layer_RenderPropertiesUpdated(object sender, EventArgs e)
+        {
+            _activeLed = null;
         }
 
         public override void DisableLayerBrush()
         {
             _inputService.KeyboardKeyDown -= InputServiceOnKeyboardKeyDown;
             _inputService.MouseScroll -= _inputService_MouseScroll;
+            Layer.RenderPropertiesUpdated -= Layer_RenderPropertiesUpdated;
         }
 
         #endregion
@@ -58,6 +65,7 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerBrush
 
         public override SKColor GetColor(ArtemisLed led, SKPoint renderPoint)
         {
+
             if (led == _activeLed)
             {
                 if (Properties.ColorMode == KeyColorType.Solid)
@@ -67,7 +75,6 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerBrush
                     float colorPos = (float)GetOrderedLeds().IndexOf(led) / (float)(Layer.Leds.Count - 1);
                     return Properties.ActiveKeyGradient.CurrentValue.GetColor(colorPos);
                 }
-
             }
             else
             {
@@ -76,7 +83,9 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerBrush
                 else
                     return SKColors.Transparent;
 
+
             }
+
         }
 
         #endregion
@@ -96,6 +105,8 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerBrush
 
         public List<ArtemisLed> GetOrderedLeds()
         {
+            // Order LEDs by their position to create a nice revealing effect from left top right, top to bottom
+            // Copied from LayerRevealEffectLayer
             return Properties.LedOrder.CurrentValue switch
             {
                 LedOrder.LedId => Layer.Leds.OrderBy(l => l.Device.Rectangle.Left).ThenBy(l => l.Device.Rectangle.Top).ThenBy(l => l.RgbLed.Id).ToList(),
@@ -107,16 +118,16 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerBrush
             };
         }
 
-
-
         private void _inputService_MouseScroll(object sender, ArtemisMouseScrollEventArgs e)
         {
-            if (_activeLed == null)
-                return;
-
-            // Order LEDs by their position to create a nice revealing effect from left top right, top to bottom
-            // Copied from LayerRevealEffectLayer
             List<ArtemisLed> leds = GetOrderedLeds();
+
+            if ((_activeLed == null || !leds.Contains(_activeLed)) && Properties.ScrollActivation.CurrentValue)
+            {
+                _activeLed = leds.FirstOrDefault();
+            }
+            else if ((_activeLed == null || !leds.Contains(_activeLed)) && !Properties.ScrollActivation.CurrentValue)
+                return;
 
             int currentLedPos = leds.IndexOf(_activeLed);
             int newLedPos = 0;
@@ -137,6 +148,7 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerBrush
                     newLedPos = (currentLedPos == 0) ? 0 : currentLedPos - 1;
             }
             _activeLed = leds[newLedPos];
+
         }
 
         #endregion

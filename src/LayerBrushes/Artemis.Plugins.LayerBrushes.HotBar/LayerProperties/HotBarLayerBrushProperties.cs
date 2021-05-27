@@ -23,6 +23,8 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerProperties
 
         [PropertyDescription(Description = "Handle scroll overflow as a circular led array")]
         public BoolLayerProperty LoopOnScrollOverflow { get; set; }
+        [PropertyDescription(Description = "Allows the scroll to activate the hotbar even if there is no active key. Usefull if you use hotbar with devices without keys")]
+        public BoolLayerProperty ScrollActivation { get; set; }
 
         protected override void PopulateDefaults()
         {

@@ -6,7 +6,7 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerBrush
     {
         public override void Enable()
         {
-            RegisterLayerBrushDescriptor<HotbarLayerBrush>("Horbar", "Artemis Like hotbar layer", "KeyboardVariant");
+            RegisterLayerBrushDescriptor<HotbarLayerBrush>("Horbar", "Artemis Like hotbar layer", "Hotbar.svg");
         }
 
         public override void Disable()

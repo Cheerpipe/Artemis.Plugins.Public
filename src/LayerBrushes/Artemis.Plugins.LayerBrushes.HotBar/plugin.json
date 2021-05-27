@@ -3,7 +3,7 @@
   "Name": "Hotbar",
   "Author": "Cheerpipe",
   "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",
-  "Icon": "KeyboardVariant",
+  "Icon": "Hotbar",
   "Description": "Aurora like hotbar layer",
   "Version": "1.0.0.0",
   "Main": "Artemis.Plugins.LayerBrushes.Hotbar.dll",

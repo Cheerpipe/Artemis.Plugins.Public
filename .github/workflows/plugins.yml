@@ -108,10 +108,16 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Artemis.Plugins.LayerBrushes.Nexus
-          path: .\Plugins\src\LayerBrushes\Artemis.Plugins.LayerBrushes.Nexus\bin\x64\Release\net5.0-windows\publish          
+          path: .\Plugins\src\LayerBrushes\Artemis.Plugins.LayerBrushes.Nexus\bin\x64\Release\net5.0-windows\publish
 
       - name: Upload Artemis.Plugins.LayerBrushes.Hotbar
         uses: actions/upload-artifact@v2
         with:
           name: Artemis.Plugins.LayerBrushes.Hotbar
-          path: .\Plugins\src\LayerBrushes\Artemis.Plugins.LayerBrushes.Hotbar\bin\x64\Release\net5.0-windows\publish          
+          path: .\Plugins\src\LayerBrushes\Artemis.Plugins.LayerBrushes.Hotbar\bin\x64\Release\net5.0-windows\publish
+
+      - name: Upload Artemis.Plugins.Modules.FallGuys
+        uses: actions/upload-artifact@v2
+        with:
+          name: Artemis.Plugins.Modules.FallGuys
+          path: .\Plugins\src\Modules\Artemis.Plugins.Modules.FallGuys\bin\x64\Release\net5.0-windows\publish

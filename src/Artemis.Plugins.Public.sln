@@ -37,6 +37,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.LayerBrushe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.LayerBrushes.HotBar", "LayerBrushes\Artemis.Plugins.LayerBrushes.HotBar\Artemis.Plugins.LayerBrushes.HotBar.csproj", "{684AEE26-3174-4332-B58D-D90B03ACECF0}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.Modules.FallGuys", "Modules\Artemis.Plugins.Modules.FallGuys\Artemis.Plugins.Modules.FallGuys.csproj", "{C215E7F3-574E-4C79-8A4E-B072D68EC451}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -138,6 +140,13 @@ Global
 		{684AEE26-3174-4332-B58D-D90B03ACECF0}.Release|Any CPU.Build.0 = Release|x64
 		{684AEE26-3174-4332-B58D-D90B03ACECF0}.Release|x64.ActiveCfg = Release|x64
 		{684AEE26-3174-4332-B58D-D90B03ACECF0}.Release|x64.Build.0 = Release|x64
+		{C215E7F3-574E-4C79-8A4E-B072D68EC451}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{C215E7F3-574E-4C79-8A4E-B072D68EC451}.Debug|x64.ActiveCfg = Debug|x64
+		{C215E7F3-574E-4C79-8A4E-B072D68EC451}.Debug|x64.Build.0 = Debug|x64
+		{C215E7F3-574E-4C79-8A4E-B072D68EC451}.Release|Any CPU.ActiveCfg = Release|x64
+		{C215E7F3-574E-4C79-8A4E-B072D68EC451}.Release|Any CPU.Build.0 = Release|x64
+		{C215E7F3-574E-4C79-8A4E-B072D68EC451}.Release|x64.ActiveCfg = Release|x64
+		{C215E7F3-574E-4C79-8A4E-B072D68EC451}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -156,6 +165,7 @@ Global
 		{60F45EE3-6A22-4072-9BD7-95A4885C72D0} = {73E03F27-03B1-4AE6-88A8-1CB889EFC94D}
 		{1B77E7E9-E9C7-4487-9E1F-96B5F7FFAD58} = {73E03F27-03B1-4AE6-88A8-1CB889EFC94D}
 		{684AEE26-3174-4332-B58D-D90B03ACECF0} = {73E03F27-03B1-4AE6-88A8-1CB889EFC94D}
+		{C215E7F3-574E-4C79-8A4E-B072D68EC451} = {F1E2EED2-1578-471B-9393-13E9EFC36D04}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {11371D22-FDA3-41EA-8116-69E48DD68579}

@@ -26,6 +26,7 @@ namespace Artemis.Plugins.DataModelExpansions.DisplaySettings
             _apiKeySetting.PropertyChanged += _OpenWeatherSettingsChanged_PropertyChanged;
             _citySetting.PropertyChanged += _OpenWeatherSettingsChanged_PropertyChanged;
             _unitOfMeasurementSetting.PropertyChanged += _OpenWeatherSettingsChanged_PropertyChanged;
+            IsAlwaysAvailable = true;
         }
 
         private void _OpenWeatherSettingsChanged_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

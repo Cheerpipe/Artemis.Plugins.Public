@@ -19,8 +19,13 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
             _brush = brush;
             Position = position;
             Expand = true;
+
             _paint = new SKPaint();
+            _paint.Style = SKPaintStyle.Stroke;
+
             _trailPaint = new SKPaint();
+            _trailPaint.Style = SKPaintStyle.Fill;
+
             _random = new Random(GetHashCode());
         }
 
@@ -41,6 +46,7 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
             }
             else if (_brush.Properties.ColorMode.CurrentValue == ColorType.Solid && !_colorFixed)
             {
+                _colorFixed = true;
                 _paint.Color = _brush.Properties.Color.CurrentValue;
             }
             else if (_brush.Properties.ColorMode.CurrentValue == ColorType.Gradient)
@@ -63,7 +69,7 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
             byte alpha = 255;
             // Add fade away effect
             if (_brush.Properties.RippleFadeAway != RippleFadeOutMode.None)
-                alpha = (byte)(255d * Easings.Interpolate(1f - _progress, (Easings.Functions)_brush.Properties.RippleFadeAway.CurrentValue));
+                alpha = (byte)(255d * Easings.Interpolate(1d - _progress, (Easings.Functions)_brush.Properties.RippleFadeAway.CurrentValue));
 
 
             SKColor trailColor;
@@ -90,16 +96,14 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
                         new[] { 0f, 1f },
                         SKShaderTileMode.Clamp
                     );
-                _trailPaint.Style = SKPaintStyle.Fill;
             }
 
             // Set ripple size and final color alpha
             _paint.Color = _paint.Color.WithAlpha(alpha);
-            _paint.Style = SKPaintStyle.Stroke;
 
             // SkiaSharp shapes doesn't support inner stroke so it will cause a weird empty circle if stroke
             // width is greater than the double of the size of a shape. This operation will produce perfect ripples
-            _paint.StrokeWidth = Math.Min(_brush.Properties.RippleWidth.CurrentValue, Size * 2);
+            _paint.StrokeWidth = Math.Min(_brush.Properties.RippleWidth.CurrentValue, Size * 2f);
         }
 
         public bool Finished => _progress >= 1;

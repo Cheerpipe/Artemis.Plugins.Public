@@ -131,8 +131,6 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
 
         private void SpawnEffect(SKPoint relativeLedPosition)
         {
-
-            // TODO: Use a ripple pull
             lock (_ripples)
             {
                 _ripples.Add(new Ripple(this, relativeLedPosition));

@@ -11,9 +11,8 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
         private readonly SKPaint _paint;
         private readonly SKPaint _trailPaint;
         private float _progress;
-        private SKColor _trailColor;
         private bool _colorFixed;
-        private Random _rand;
+        private static Random _random;
 
         public Ripple(RipplesLayerBrush brush, SKPoint position)
         {
@@ -22,6 +21,7 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
             Expand = true;
             _paint = new SKPaint();
             _trailPaint = new SKPaint();
+            _random = new Random(GetHashCode());
         }
 
         private float Size { get; set; }
@@ -37,8 +37,7 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
             else if (_brush.Properties.ColorMode.CurrentValue == ColorType.ColorSet && !_colorFixed)
             {
                 _colorFixed = true;
-                _rand ??= new Random(GetHashCode());
-                _paint.Color = _brush.Properties.Colors.CurrentValue.GetColor((float)_rand.NextDouble());
+                _paint.Color = _brush.Properties.Colors.CurrentValue.GetColor((float)_random.NextDouble());
             }
             else if (_brush.Properties.ColorMode.CurrentValue == ColorType.Solid && !_colorFixed)
             {
@@ -65,11 +64,13 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
             if (_brush.Properties.RippleFadeAway != RippleFadeOutMode.None)
                 alpha = (byte)(255d * Easings.Interpolate(1f - _progress, (Easings.Functions)_brush.Properties.RippleFadeAway.CurrentValue));
 
+
+            SKColor trailColor;
             // If we have to paint a trail
             if (_brush.Properties.RippleTrail)
             {
                 // Moved trail color calculation here to avoid extra overhead when trail is not enabled
-                _trailColor = _brush.Properties.ColorMode.CurrentValue switch
+                trailColor = _brush.Properties.ColorMode.CurrentValue switch
                 {
                     // If gradient is used, calculate the inner color to a given position.
                     ColorType.Gradient => _brush.Properties.Colors.CurrentValue.GetColor((Size - _brush.Properties.RippleWidth / 2f) % _brush.Properties.RippleWidth / _brush.Properties.RippleWidth),
@@ -83,7 +84,7 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
                         Position,
                         Size,
                         // Trail is simply a gradient from full inner ripple color to the same color but with alpha 0. Just an illusion :D
-                        new[] { _trailColor.WithAlpha(0), _trailColor.WithAlpha(alpha) },
+                        new[] { trailColor.WithAlpha(0), trailColor.WithAlpha(alpha) },
                         new[] { 0f, 1f },
                         SKShaderTileMode.Clamp
                     );
@@ -96,7 +97,7 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
             _paint.StrokeWidth = _brush.Properties.RippleWidth.CurrentValue;
         }
 
-        public bool Finished => _progress > 1;
+        public bool Finished => _progress >= 1;
         private SKPoint Position { get; }
 
         public void Update(double deltaTime)
@@ -108,9 +109,7 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
 
             if (Size > _brush.Properties.RippleSize) Expand = false;
 
-            _progress = Size / _brush.Properties.RippleSize;
-
-            UpdatePaint();
+            _progress = Math.Min(1,Size / _brush.Properties.RippleSize);
         }
 
         public void Render(SKCanvas canvas)
@@ -118,6 +117,8 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
             // Animation finished. Nothing to see here.
             if (Size < 0)
                 return;
+
+            UpdatePaint();
 
             // SkiaSharp shapes doesn't support inner stroke so it will cause a weird empty circle if stroke
             // width is greater than the double of the size of a shape. This operation will produce perfect ripples
@@ -134,6 +135,7 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
 
         public void Dispose()
         {
+            _paint?.Shader?.Dispose();
             _paint?.Dispose();
             _trailPaint?.Dispose();
         }

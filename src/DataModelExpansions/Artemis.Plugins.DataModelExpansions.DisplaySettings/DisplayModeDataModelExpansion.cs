@@ -1,5 +1,4 @@
 using Artemis.Core;
-using Artemis.Core.DataModelExpansions;
 using Serilog;
 using System;
 using Artemis.Plugins.DataModelExpansions.DisplaySettings.DataModels;
@@ -7,10 +6,11 @@ using Microsoft.Win32;
 using System.Linq;
 using WindowsDisplayAPI;
 using WindowsDisplayAPI.DisplayConfig;
+using Artemis.Core.Modules;
 
 namespace Artemis.Plugins.DataModelExpansions.DisplaySettings
 {
-    public class DisplayModeDataModelExpansion : DataModelExpansion<DisplaySettingsDataModel>
+    public class DisplayModeDataModelExpansion : Module<DisplaySettingsDataModel>
     {
 
         private readonly ILogger _logger;
@@ -18,6 +18,7 @@ namespace Artemis.Plugins.DataModelExpansions.DisplaySettings
         public DisplayModeDataModelExpansion(PluginSettings settings, ILogger logger)
         {
             _logger = logger;
+            IsAlwaysAvailable = true;
         }
 
         private void SystemEvents_DisplaySettingsChanged(object sender, EventArgs e)

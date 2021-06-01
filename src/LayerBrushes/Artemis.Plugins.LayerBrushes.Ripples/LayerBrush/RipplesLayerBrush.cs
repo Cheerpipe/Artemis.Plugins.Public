@@ -133,7 +133,7 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
         {
             lock (_ripples)
             {
-                _ripples.Add(new Ripple(this, relativeLedPosition));
+               _ripples.Add(new Ripple(this, relativeLedPosition));
             }
         }
     }

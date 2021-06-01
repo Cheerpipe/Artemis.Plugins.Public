@@ -45,6 +45,7 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
             }
             else if (_brush.Properties.ColorMode.CurrentValue == ColorType.Gradient)
             {
+                _paint?.Shader?.Dispose();
                 _paint.Shader = SKShader.CreateRadialGradient
                     (
                         Position,
@@ -79,6 +80,7 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
                 };
 
                 // Dispose before to create a new one. Thanks for the lesson.
+                _trailPaint?.Shader?.Dispose();
                 _trailPaint.Shader = SKShader.CreateRadialGradient
                     (
                         Position,
@@ -109,7 +111,7 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
 
             if (Size > _brush.Properties.RippleSize) Expand = false;
 
-            _progress = Math.Min(1,Size / _brush.Properties.RippleSize);
+            _progress = Math.Min(1, Size / _brush.Properties.RippleSize);
         }
 
         public void Render(SKCanvas canvas)
@@ -137,6 +139,7 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
         {
             _paint?.Shader?.Dispose();
             _paint?.Dispose();
+            _trailPaint?.Shader?.Dispose();
             _trailPaint?.Dispose();
         }
     }

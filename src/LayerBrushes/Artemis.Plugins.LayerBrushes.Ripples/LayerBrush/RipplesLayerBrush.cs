@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Runtime.ExceptionServices;
 using Artemis.Core;
 using Artemis.Core.LayerBrushes;
 using Artemis.Plugins.LayerBrushes.Ripples.LayerProperties;
@@ -66,8 +64,8 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
                             y = Rand.Next(1, Layer.Bounds.Height);
                             break;
                         case RippleSpawnLocation.RelativePoint:
-                            x = Math.Clamp((int)(Layer.Bounds.Width * Properties.RippleSpawnPoint.CurrentValue.Start/100), 1, Layer.Bounds.Width);
-                            y = Math.Clamp((int)(Layer.Bounds.Height * Properties.RippleSpawnPoint.CurrentValue.End/100), 1, Layer.Bounds.Height);
+                            x = Math.Clamp((int)(Layer.Bounds.Width * Properties.RippleSpawnPoint.CurrentValue.Start / 100), 1, Layer.Bounds.Width);
+                            y = Math.Clamp((int)(Layer.Bounds.Height * Properties.RippleSpawnPoint.CurrentValue.End / 100), 1, Layer.Bounds.Height);
                             break;
                         case RippleSpawnLocation.BottomLeft:
                             x = 1;
@@ -116,7 +114,9 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
 
             lock (_ripples)
             {
+                _ripples.Where(w => w.Finished).ToList().ForEach(r => r.Dispose());
                 _ripples.RemoveAll(w => w.Finished);
+
                 foreach (Ripple keypressWave in _ripples)
                     keypressWave.Update(deltaTime);
             }

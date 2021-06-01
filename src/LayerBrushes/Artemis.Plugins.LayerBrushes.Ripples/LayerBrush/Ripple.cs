@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Security.Cryptography;
 using Artemis.Core;
 using Artemis.Plugins.LayerBrushes.Ripples.LayerProperties;
 using SkiaSharp;
 
 namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
 {
-    public class Ripple
+    public class Ripple : IDisposable
     {
         private readonly RipplesLayerBrush _brush;
+        private SKPaint _paint;
         private float _progress;
         private SKColor _trailColor;
         private SKPaint _trailPaint;
@@ -21,8 +21,6 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
             Expand = true;
             UpdatePaint();
         }
-
-        public SKPaint Paint { get; set; }
         public float Size { get; set; }
         public bool Expand { get; set; }
 
@@ -40,25 +38,23 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
 
         private void UpdatePaint()
         {
-            if (_brush.Properties.ColorMode.CurrentValue == ColorType.Random && Paint == null)
+            if (_brush.Properties.ColorMode.CurrentValue == ColorType.Random && _paint == null)
             {
-                Paint = new SKPaint { Color = SKColor.FromHsv(_brush.Rand.Next(0, 360), 100, 100) };
+                _paint = new SKPaint { Color = SKColor.FromHsv(_brush.Rand.Next(0, 360), 100, 100) };
             }
-            else if (_brush.Properties.ColorMode.CurrentValue == ColorType.ColorSet && Paint == null)
+            else if (_brush.Properties.ColorMode.CurrentValue == ColorType.ColorSet && _paint == null)
             {
 
                 _rand ??= new Random(GetHashCode());
-                Paint = new SKPaint { Color = _brush.Properties.Colors.CurrentValue.GetColor((float)_rand.NextDouble())};
+                _paint = new SKPaint { Color = _brush.Properties.Colors.CurrentValue.GetColor((float)_rand.NextDouble()) };
             }
             else if (_brush.Properties.ColorMode.CurrentValue == ColorType.Solid)
             {
-                Paint?.Dispose();
-                Paint = new SKPaint { Color = _brush.Properties.Color.CurrentValue };
+                _paint = new SKPaint { Color = _brush.Properties.Color.CurrentValue };
             }
             else if (_brush.Properties.ColorMode.CurrentValue == ColorType.Gradient)
             {
-                Paint?.Dispose();
-                Paint = new SKPaint
+                _paint = new SKPaint
                 {
                     Shader = SKShader.CreateRadialGradient(
                         Position,
@@ -71,8 +67,7 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
             }
             else if (_brush.Properties.ColorMode.CurrentValue == ColorType.ColorPathChange)
             {
-                Paint?.Dispose();
-                Paint = new SKPaint { Color = _brush.Properties.Colors.CurrentValue.GetColor(_progress) };
+                _paint = new SKPaint { Color = _brush.Properties.Colors.CurrentValue.GetColor(_progress) };
             }
 
             byte alpha = 255;
@@ -89,11 +84,10 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
                     // If gradient is used, calculate the inner color to a given position.
                     ColorType.Gradient => _brush.Properties.Colors.CurrentValue.GetColor((Size - _brush.Properties.RippleWidth / 2f) % _brush.Properties.RippleWidth / _brush.Properties.RippleWidth),
                     // If not gradient, we can just copy the color of the ripple Paint.
-                    _ => Paint.Color
+                    _ => _paint.Color
                 };
 
                 // Dispose before to create a new one. Thanks for the lesson.
-                _trailPaint?.Dispose();
                 _trailPaint = new SKPaint
                 {
                     Shader = SKShader.CreateRadialGradient(
@@ -109,12 +103,12 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
             }
 
             // Set ripple size and final color alpha
-            Paint.Color = Paint.Color.WithAlpha(alpha);
-            Paint.Style = SKPaintStyle.Stroke;
-            Paint.StrokeWidth = _brush.Properties.RippleWidth.CurrentValue;
+            _paint.Color = _paint.Color.WithAlpha(alpha);
+            _paint.Style = SKPaintStyle.Stroke;
+            _paint.StrokeWidth = _brush.Properties.RippleWidth.CurrentValue;
         }
 
-        public bool Finished => Size < 0f;
+        public bool Finished => _progress > 1;
         public ArtemisLed Led { get; }
         public SKPoint Position { get; set; }
 
@@ -132,10 +126,10 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
 
             // SkiaSharp shapes doesn't support inner stroke so it will cause a weird empty circle if stroke
             // width is greather than the double of the size of a shape. This operation will produce perfect ripples
-            Paint.StrokeWidth = Math.Min(Paint.StrokeWidth, Size * 2);
+            _paint.StrokeWidth = Math.Min(_paint.StrokeWidth, Size * 2);
 
-            if (Size > 0 && Paint != null)
-                canvas.DrawCircle(Position, Size, Paint);
+            if (Size > 0 && _paint != null)
+                canvas.DrawCircle(Position, Size, _paint);
 
             // Draw the trail
             if (_brush.Properties.RippleTrail)
@@ -143,5 +137,10 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
                 canvas.DrawCircle(Position, Math.Max(0, Size - _brush.Properties.RippleWidth.CurrentValue / 2f), _trailPaint);
         }
 
+        public void Dispose()
+        {
+            _paint.Dispose();
+            _trailPaint.Dispose();
+        }
     }
 }

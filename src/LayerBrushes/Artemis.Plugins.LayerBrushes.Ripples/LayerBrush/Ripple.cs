@@ -96,7 +96,10 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
             // Set ripple size and final color alpha
             _paint.Color = _paint.Color.WithAlpha(alpha);
             _paint.Style = SKPaintStyle.Stroke;
-            _paint.StrokeWidth = _brush.Properties.RippleWidth.CurrentValue;
+
+            // SkiaSharp shapes doesn't support inner stroke so it will cause a weird empty circle if stroke
+            // width is greater than the double of the size of a shape. This operation will produce perfect ripples
+            _paint.StrokeWidth = Math.Min(_brush.Properties.RippleWidth.CurrentValue, Size * 2);
         }
 
         public bool Finished => _progress >= 1;
@@ -117,17 +120,12 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
         public void Render(SKCanvas canvas)
         {
             // Animation finished. Nothing to see here.
-            if (Size < 0)
+            if (Finished)
                 return;
 
             UpdatePaint();
 
-            // SkiaSharp shapes doesn't support inner stroke so it will cause a weird empty circle if stroke
-            // width is greater than the double of the size of a shape. This operation will produce perfect ripples
-            _paint.StrokeWidth = Math.Min(_paint.StrokeWidth, Size * 2);
-
-            if (Size > 0 && _paint != null)
-                canvas.DrawCircle(Position, Size, _paint);
+            canvas.DrawCircle(Position, Size, _paint);
 
             // Draw the trail
             if (_brush.Properties.RippleTrail)

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Artemis.Core.LayerBrushes;
@@ -48,6 +48,7 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
 
             // Simple linear time spawn
             _lastSpawnTime += (float)deltaTime;
+
             if (_lastSpawnTime > 100f / Properties.RippleSpawnSpeed.CurrentValue)
             {
                 for (int i = 0; i < Properties.RippleSpawnAmount.CurrentValue; i++)
@@ -104,8 +105,7 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
                             break;
                     }
 
-                    var spawnPoint = new SKPoint(x, y);
-                    SpawnEffect(spawnPoint);
+                    SpawnEffect(new SKPoint(x, y));
                 }
                 _lastSpawnTime = 0;
             }

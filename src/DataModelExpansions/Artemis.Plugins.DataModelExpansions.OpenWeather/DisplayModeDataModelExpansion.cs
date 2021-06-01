@@ -19,9 +19,9 @@ namespace Artemis.Plugins.DataModelExpansions.DisplaySettings
         public DisplayModeDataModelExpansion(PluginSettings pluginSettings, ILogger logger)
         {
             _logger = logger;
-            _apiKeySetting = pluginSettings.GetSetting<string>("OpenWeatherApiKey", string.Empty);
-            _citySetting = pluginSettings.GetSetting<string>("OpenWeatherCity", string.Empty);
-            _unitOfMeasurementSetting = pluginSettings.GetSetting<string>("OpenWeatherUnitOfMeasurement", Enum.GetNames(typeof(UnitsOfMeasurement)).FirstOrDefault());
+            _apiKeySetting = pluginSettings.GetSetting("OpenWeatherApiKey", string.Empty);
+            _citySetting = pluginSettings.GetSetting("OpenWeatherCity", string.Empty);
+            _unitOfMeasurementSetting = pluginSettings.GetSetting("OpenWeatherUnitOfMeasurement", Enum.GetNames(typeof(UnitsOfMeasurement)).FirstOrDefault());
 
             _apiKeySetting.PropertyChanged += _OpenWeatherSettingsChanged_PropertyChanged;
             _citySetting.PropertyChanged += _OpenWeatherSettingsChanged_PropertyChanged;

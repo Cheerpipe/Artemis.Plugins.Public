@@ -1,7 +1,7 @@
 ﻿using Artemis.Core;
 using SkiaSharp;
 
-namespace Artemis.Plugins.LayerBrushes.ConnectingDots
+namespace Artemis.Plugins.LayerBrushes.ConnectingDots.LayerProperties
 {
 
     public class ConnectingDotsBrushProperties : LayerPropertyGroup

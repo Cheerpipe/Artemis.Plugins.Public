@@ -1,4 +1,4 @@
-﻿namespace ConnectingDots
+﻿namespace Artemis.Plugins.LayerBrushes.ConnectingDots.ConnectingDots
 {
     public class Dot
     {

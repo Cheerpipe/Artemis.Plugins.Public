@@ -22,11 +22,13 @@ namespace Artemis.Plugins.LayerBrushes.ConnectingDots.LayerProperties.Presets
             _properties.Background.SetCurrentValue(SKColors.Black, null);
             _properties.Connections.SetCurrentValue(new SKColor(0, 203, 238), null);
             _properties.DotsColorType.SetCurrentValue(ConnectingDotsBrushProperties.ColorMappingType.Gradient, null);
-            ColorGradient gradient = new ColorGradient();
-            gradient.Add(new ColorGradientStop(new SKColor(0, 0, 255), 0));
-            gradient.Add(new ColorGradientStop(new SKColor(255, 0, 255), 0.33f));
-            gradient.Add(new ColorGradientStop(new SKColor(125, 0, 255), 0.66f));
-            gradient.Add(new ColorGradientStop(new SKColor(0, 0, 255), 1));
+            ColorGradient gradient = new ColorGradient
+            {
+                new (new SKColor(0, 0, 255), 0),
+                new (new SKColor(255, 0, 255), 0.33f),
+                new (new SKColor(125, 0, 255), 0.66f),
+                new (new SKColor(0, 0, 255), 1)
+            };
             _properties.Colors.SetCurrentValue(gradient, null);
             _properties.ColorChangeSpeed.SetCurrentValue(20, null);
             _properties.Radius.SetCurrentValue(20, null);

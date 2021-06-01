@@ -1,29 +1,28 @@
 ﻿using System;
-using Artemis.Core;
 using SkiaSharp;
 
 namespace Artemis.Plugins.LayerBrushes.Shuffle.LayerBrush
 {
-    public sealed class ShufledLed
+    public sealed class ShuffledLed
     {
         private readonly ShuffleLayerBrush _brush; // Color to be returned
         private float _advance; // How much we move inside the gradient
         private float _lastChangeTime; // used to trigger a new ToColor change
-        private Random Rand { get; set; }
-        public SKColor FromColor { get; set; }
-        public SKColor ToColor { get; set; }
-        public float Speed { get; set; }
+        private Random Rand { get; }
+        private SKColor FromColor { get; set; }
+        private SKColor ToColor { get; set; }
+        private float Speed { get; set; }
 
-        private SKColor InterpolateColor(SKColor FromColor, SKColor ToColor, float position)
+        private SKColor InterpolateColor(SKColor fromColor, SKColor toColor, float position)
         {
-            byte a = (byte)((ToColor.Alpha - FromColor.Alpha) * position + FromColor.Alpha);
-            byte r = (byte)((ToColor.Red - FromColor.Red) * position + FromColor.Red);
-            byte g = (byte)((ToColor.Green - FromColor.Green) * position + FromColor.Green);
-            byte b = (byte)((ToColor.Blue - FromColor.Blue) * position + FromColor.Blue);
+            byte a = (byte)((toColor.Alpha - fromColor.Alpha) * position + fromColor.Alpha);
+            byte r = (byte)((toColor.Red - fromColor.Red) * position + fromColor.Red);
+            byte g = (byte)((toColor.Green - fromColor.Green) * position + fromColor.Green);
+            byte b = (byte)((toColor.Blue - fromColor.Blue) * position + fromColor.Blue);
             return new SKColor(r, g, b, a);
         }
 
-        public ShufledLed(ShuffleLayerBrush brush)
+        public ShuffledLed(ShuffleLayerBrush brush)
         {
             Rand = new Random(GetHashCode());
             _brush = brush;
@@ -44,7 +43,7 @@ namespace Artemis.Plugins.LayerBrushes.Shuffle.LayerBrush
 
         public void Advance(float amount)
         {
-            _lastChangeTime += (float)amount;
+            _lastChangeTime += amount;
 
             // Time to change the From and To colors
             if (_lastChangeTime > 100f / Speed) // 100 is one sec
@@ -53,7 +52,7 @@ namespace Artemis.Plugins.LayerBrushes.Shuffle.LayerBrush
                 _lastChangeTime = 0;
                 _advance = 0;
             }
-            _advance += (float)amount / (1 / (Speed / 100f));
+            _advance += amount / (1 / (Speed / 100f));
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using FallGuys.LogParser.Enums.States;
 using FallGuys.LogParser.LogLine.Base;
-using System;
 using System.Text.RegularExpressions;
 
 namespace FallGuys.LogParser.LogLine

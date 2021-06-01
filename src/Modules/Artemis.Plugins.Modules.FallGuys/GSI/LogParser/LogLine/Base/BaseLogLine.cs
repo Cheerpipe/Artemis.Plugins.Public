@@ -69,7 +69,7 @@ namespace FallGuys.LogParser.LogLine.Base
                 Group contextResult = contextRegex.Match(line).Groups[1];
                 string contextString = contextResult.Value;
                 int contextStringOffset = 0;
-                if (Enum.TryParse<LogLineContext>(contextString, out LogLineContext gameContext) && Enum.IsDefined(typeof(LogLineContext), contextString))
+                if (Enum.TryParse(contextString, out LogLineContext gameContext) && Enum.IsDefined(typeof(LogLineContext), contextString))
                 {
                     Context = gameContext;
                     contextStringOffset = contextResult.Length + 1;

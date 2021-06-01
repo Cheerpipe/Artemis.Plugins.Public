@@ -10,11 +10,10 @@ namespace Artemis.Plugins.LayerBrushes.Nexus.LayerBrush
 {
     public class NexusLayerBrush : LayerBrush<NexusLayerBrushProperties>
     {
-        private List<SkBeam> _beams = new List<SkBeam>();
+        private readonly List<SkBeam> _beams = new();
         private readonly Profiler _profiler;
-        private object BeamsLock = new object();
 
-        public Random Rand { get; set; }
+        private Random Rand { get; set; }
 
         public NexusLayerBrush(Plugin plugin)
         {
@@ -97,11 +96,11 @@ namespace Artemis.Plugins.LayerBrushes.Nexus.LayerBrush
 
         private int GetVerticalIndex()
         {
-            if (Properties.AvoidOverlaping.CurrentValue)
+            if (Properties.AvoidOverlapping.CurrentValue)
             {
                 var vIndexes = _beams.Where(b => b.Direction == Direction.ToLeft || b.Direction == Direction.ToRight).Select(b => b.Location).ToArray();
                 var vMaxIndexes = Layer.Bounds.Height / (Properties.Width + Properties.Separation);
-                return GetRandomNonOverlapedPositionIndex(0, (Layer.Bounds.Height / (Properties.Width + Properties.Separation)), vIndexes, vMaxIndexes) * (Properties.Width + Properties.Separation);
+                return GetRandomNonOverlappedPositionIndex(0, (Layer.Bounds.Height / (Properties.Width + Properties.Separation)), vIndexes, vMaxIndexes) * (Properties.Width + Properties.Separation);
             }
             else
             {
@@ -111,11 +110,11 @@ namespace Artemis.Plugins.LayerBrushes.Nexus.LayerBrush
 
         private int GetHorizontalIndex()
         {
-            if (Properties.AvoidOverlaping.CurrentValue)
+            if (Properties.AvoidOverlapping.CurrentValue)
             {
                 var hIndexes = _beams.Where(b => b.Direction == Direction.ToUp || b.Direction == Direction.ToDown).Select(b => b.Location).ToArray();
                 var hMaxIndexes = Layer.Bounds.Width / (Properties.Width + Properties.Separation);
-                return GetRandomNonOverlapedPositionIndex(0, (Layer.Bounds.Width / (Properties.Width + Properties.Separation)), hIndexes, hMaxIndexes) * (Properties.Width + Properties.Separation);
+                return GetRandomNonOverlappedPositionIndex(0, (Layer.Bounds.Width / (Properties.Width + Properties.Separation)), hIndexes, hMaxIndexes) * (Properties.Width + Properties.Separation);
             }
             else
             {
@@ -123,18 +122,17 @@ namespace Artemis.Plugins.LayerBrushes.Nexus.LayerBrush
             }
         }
 
-        private int GetRandomNonOverlapedPositionIndex(int from, int to, int[] avoid, int retries = 10)
+        private int GetRandomNonOverlappedPositionIndex(int from, int to, int[] avoid, int retries = 10)
         {
-            int r;
             for (int i = 0; i < retries * 10; i++)
             {
-                r = Rand.Next(from, to);
+                int r = Rand.Next(@from, to);
                 if (!avoid.Contains(r * (Properties.Width + Properties.Separation)))
                     return r;
             }
 
             // Return just a random to avoid lock
-            return r = Rand.Next(from, to); ;
+            return Rand.Next(from, to);
         }
 
         private ColorGradient GetColorsForNewBeam()
@@ -142,58 +140,52 @@ namespace Artemis.Plugins.LayerBrushes.Nexus.LayerBrush
             if (Properties.ColorMode.CurrentValue == ColorType.Random)
             {
                 SKColor color = SKColor.FromHsv(Rand.Next(0, 360), 100, 100);
-                ColorGradient colors = new ColorGradient();
-                colors.Add(
-                    new ColorGradientStop(
+                ColorGradient colors = new ColorGradient
+                {
+                    new (
                         color.WithAlpha(0),
                         0
-                        )
-                    );
-
-                colors.Add(
-                    new ColorGradientStop(
+                    ),
+                    new (
                         color.WithAlpha(255),
                         1
-                        )
-                    );
+                    )
+                };
+
                 return colors;
             }
             else if (Properties.ColorMode.CurrentValue == ColorType.ColorSet)
             {
                 SKColor color = Properties.Colors.CurrentValue.GetColor((float)Rand.NextDouble());
-                ColorGradient colors = new ColorGradient();
-                colors.Add(
-                    new ColorGradientStop(
+                ColorGradient colors = new ColorGradient
+                {
+                    new (
                         color.WithAlpha(0),
                         0
-                        )
-                    );
-
-                colors.Add(
-                    new ColorGradientStop(
+                    ),
+                    new (
                         color.WithAlpha(255),
                         1
-                        )
-                    );
+                    )
+                };
+
                 return colors;
             }
             else if (Properties.ColorMode.CurrentValue == ColorType.Solid)
             {
-                SKColor color = Properties.Color.CurrentValue; ;
-                ColorGradient colors = new ColorGradient();
-                colors.Add(
-                    new ColorGradientStop(
+                SKColor color = Properties.Color.CurrentValue;
+                ColorGradient colors = new ColorGradient
+                {
+                    new (
                         color.WithAlpha(0),
                         0
-                        )
-                    );
-
-                colors.Add(
-                    new ColorGradientStop(
+                    ),
+                    new (
                         color.WithAlpha(255),
                         1
-                        )
-                    );
+                    )
+                };
+
                 return colors;
             }
             else if (Properties.ColorMode.CurrentValue == ColorType.Gradient)
@@ -313,8 +305,6 @@ namespace Artemis.Plugins.LayerBrushes.Nexus.LayerBrush
                         case Direction.ToRight:
                             beamRect = CreateToRightRect(beam);
                             paint.Shader = CreateHorizontalShader(beamRect, beam.Colors);
-                            break;
-                        default:
                             break;
                     }
 

@@ -1,7 +1,6 @@
 ﻿using Artemis.Core;
 using Artemis.Core.LayerBrushes;
 using Artemis.Plugins.LayerBrushes.Shuffle.LayerBrush;
-using SkiaSharp;
 
 namespace Artemis.Plugins.LayerBrushes.Shuffle.LayerProperties.Presets
 {

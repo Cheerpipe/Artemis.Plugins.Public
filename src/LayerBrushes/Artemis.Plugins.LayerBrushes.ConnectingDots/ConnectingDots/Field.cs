@@ -1,23 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 
-namespace ConnectingDots
+namespace Artemis.Plugins.LayerBrushes.ConnectingDots.ConnectingDots
 {
     public class Field
     {
-        private List<Dot> _dots = new List<Dot>();
-        public List<Dot> Dots { get => _dots; }
-        private float _width { get; set; }
-        public float Width { get => _width; set => SetNewWidth(value); }
+        private readonly List<Dot> _dots = new();
+        public IEnumerable<Dot> Dots => _dots;
+        private float _width;
+        public float Width { set => SetNewWidth(value); }
 
-        private float _height { get; set; }
-        public float Height { get => _height; set => SetNewHeight(value); }
+        private float _height;
+        public float Height { set => SetNewHeight(value); }
 
         private int _dotCount;
-        public int DotCount { get => _dotCount; set => SetDotCount(value); }
+        public int DotCount { set => SetDotCount(value); }
 
-        private static readonly Random rand = new Random();
+        private static readonly Random Rand = new();
 
         public Field(float width, float height, int dotCount)
         {
@@ -29,24 +28,24 @@ namespace ConnectingDots
         void SetNewWidth(float width)
         {
             _width = width;
-            for (int i = 0; i < _dots.Count; i++)
+            foreach (var t in _dots)
             {
-                if (_dots[i].X >= _width)
-                    _dots[i].X = _width;
-                else if (_dots[i].X < 0)
-                    _dots[i].X = 0;
+                if (t.X >= _width)
+                    t.X = _width;
+                else if (t.X < 0)
+                    t.X = 0;
             }
         }
 
         void SetNewHeight(float height)
         {
             _height = height;
-            for (int i = 0; i < _dots.Count; i++)
+            foreach (var t in _dots)
             {
-                if (_dots[i].Y >= _height)
-                    _dots[i].Y = _height;
-                else if (_dots[i].Y < 0)
-                    _dots[i].Y = 0;
+                if (t.Y >= _height)
+                    t.Y = _height;
+                else if (t.Y < 0)
+                    t.Y = 0;
             }
         }
 
@@ -67,31 +66,31 @@ namespace ConnectingDots
                 {
                     _dots.Add(new Dot()
                     {
-                        X = (float)(rand.NextDouble() * (0.7f - 0.3f) + 0.3f) * _width,
-                        Xvel = .1f + (float)rand.NextDouble() * (rand.NextDouble() > .5f ? -1f : 1f),
-                        Y = (float)(rand.NextDouble() * (0.7f - 0.3f) + 0.3f) * _height,
-                        Yvel = .1f + (float)rand.NextDouble() * (rand.NextDouble() > .5f ? -1f : 1f),
-                        ColorPercentage = (float)rand.NextDouble() * 100
-                    }); ;
+                        X = (float)(Rand.NextDouble() * (0.7f - 0.3f) + 0.3f) * _width,
+                        Xvel = .1f + (float)Rand.NextDouble() * (Rand.NextDouble() > .5f ? -1f : 1f),
+                        Y = (float)(Rand.NextDouble() * (0.7f - 0.3f) + 0.3f) * _height,
+                        Yvel = .1f + (float)Rand.NextDouble() * (Rand.NextDouble() > .5f ? -1f : 1f),
+                        ColorPercentage = (float)Rand.NextDouble() * 100
+                    });
                 }
             }
         }
 
         public void Advance(float multiplier = .1f)
         {
-            for (int i = 0; i < _dots.Count; i++)
+            foreach (var t in _dots)
             {
-                var tmp_x = _dots[i].X + _dots[i].Xvel * multiplier;
-                var tmp_y = _dots[i].Y + _dots[i].Yvel * multiplier;
+                var tmpX = t.X + t.Xvel * multiplier;
+                var tmpY = t.Y + t.Yvel * multiplier;
 
-                _dots[i].X = tmp_x;
-                _dots[i].Y = tmp_y;
+                t.X = tmpX;
+                t.Y = tmpY;
 
-                bool outOfBoundsX = (_dots[i].X < 0) || (_dots[i].X >= _width);
-                bool outOfBoundsY = (_dots[i].Y < 0) || (_dots[i].Y >= _height);
+                bool outOfBoundsX = (t.X < 0) || (t.X >= _width);
+                bool outOfBoundsY = (t.Y < 0) || (t.Y >= _height);
 
-                if (outOfBoundsX) _dots[i].Xvel *= -1;
-                if (outOfBoundsY) _dots[i].Yvel *= -1;
+                if (outOfBoundsX) t.Xvel *= -1;
+                if (outOfBoundsY) t.Yvel *= -1;
             }
         }
     }

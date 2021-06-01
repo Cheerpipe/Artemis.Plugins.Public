@@ -12,7 +12,7 @@ namespace Artemis.Plugins.LayerBrushes.Shuffle.LayerBrush
     {
         #region  Variables 
 
-        private readonly Dictionary<ArtemisLed, ShufledLed> _layerLeds;
+        private readonly Dictionary<ArtemisLed, ShuffledLed> _layerLeds;
         private readonly Profiler _profiler;
 
         #endregion
@@ -21,7 +21,7 @@ namespace Artemis.Plugins.LayerBrushes.Shuffle.LayerBrush
 
         public ShuffleLayerBrush(Plugin plugin)
         {
-            _layerLeds = new Dictionary<ArtemisLed, ShufledLed>();
+            _layerLeds = new Dictionary<ArtemisLed, ShuffledLed>();
             _profiler = plugin.GetProfiler("ShuffleLayerBrush");
           
         }
@@ -75,11 +75,11 @@ namespace Artemis.Plugins.LayerBrushes.Shuffle.LayerBrush
             {
                 foreach (ArtemisLed led in Layer.Leds)
                 {
-                    if (_layerLeds.TryGetValue(led, out ShufledLed shuffleLayerBrush))
+                    if (_layerLeds.TryGetValue(led, out ShuffledLed shuffleLayerBrush))
                         //return shuffleLayerBrush.GetCurrentColor();
                         shuffleLayerBrush.Advance((float)deltaTime);
                     else
-                        _layerLeds[led] = new ShufledLed(this);
+                        _layerLeds[led] = new ShuffledLed(this);
                 }
             }
             _profiler.StopMeasurement("Update");
@@ -89,7 +89,7 @@ namespace Artemis.Plugins.LayerBrushes.Shuffle.LayerBrush
         {
             lock (_layerLeds)
             {
-                return _layerLeds.TryGetValue(led, out ShufledLed shuffleLayerBrush) ? shuffleLayerBrush.GetCurrentColor() : SKColors.Transparent;
+                return _layerLeds.TryGetValue(led, out ShuffledLed shuffleLayerBrush) ? shuffleLayerBrush.GetCurrentColor() : SKColors.Transparent;
             }
         }
 

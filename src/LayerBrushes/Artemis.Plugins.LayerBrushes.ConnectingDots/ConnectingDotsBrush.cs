@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using Artemis.Core;
 using Artemis.Core.LayerBrushes;
+using Artemis.Plugins.LayerBrushes.ConnectingDots.ConnectingDots;
+using Artemis.Plugins.LayerBrushes.ConnectingDots.LayerProperties;
 using Artemis.Plugins.LayerBrushes.ConnectingDots.LayerProperties.Presets;
-using ConnectingDots;
 using SkiaSharp;
 
 namespace Artemis.Plugins.LayerBrushes.ConnectingDots

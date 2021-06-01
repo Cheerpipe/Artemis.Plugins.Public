@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:local="clr-namespace:Artemis.Plugins.Modules.Games"
              xmlns:s="https://github.com/canton7/Stylet"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -13,7 +12,7 @@
                     HorizontalAlignment="Center" 
                     VerticalAlignment="Center">
             <TextBlock Text="This module will be activated if the path of a running process contains the Wild Card"  Width="auto" HorizontalAlignment="Center"  Style="{StaticResource MaterialDesignBody1TextBlock }"/>
-            <Separator Grid.Row="1" Style="{StaticResource MaterialDesignLightSeparator}" />
+            <Separator Style="{StaticResource MaterialDesignLightSeparator}" />
             <StackPanel Orientation="Horizontal" Width="500">
                 <TextBlock Text="Games path Wild Card: " Width="143" Style="{StaticResource MaterialDesignTextBlock}"/>
                 <TextBox Text="{Binding WildCard}" Width="352"/>

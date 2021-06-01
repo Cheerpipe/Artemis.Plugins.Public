@@ -27,7 +27,7 @@ namespace FallGuys.Gsi
                 return new LevelStats("Unknown", LevelType.Unknown, false, 0);
         }
 
-        public static Dictionary<string, LevelStats> All = new Dictionary<string, LevelStats>(StringComparer.OrdinalIgnoreCase)
+        public static Dictionary<string, LevelStats> All = new(StringComparer.OrdinalIgnoreCase)
         {
             { "round_biggestfan",                 new LevelStats("Big Fans", LevelType.Race, false, 2) },
             { "round_1v1_button_basher",          new LevelStats("Button Bashers", LevelType.Hunt, false, 4) },

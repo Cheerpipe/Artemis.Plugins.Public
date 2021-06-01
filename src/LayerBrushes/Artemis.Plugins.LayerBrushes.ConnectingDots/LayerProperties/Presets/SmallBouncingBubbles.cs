@@ -14,7 +14,7 @@ namespace Artemis.Plugins.LayerBrushes.ConnectingDots.LayerProperties.Presets
         }
 
         public string Name => "Small Bouncing Bubbles";
-        public string Description => "Colorfull small bouncing bubbles";
+        public string Description => "Colorful small bouncing bubbles";
         public string Icon => "ChartBubble";
 
         public void Apply()

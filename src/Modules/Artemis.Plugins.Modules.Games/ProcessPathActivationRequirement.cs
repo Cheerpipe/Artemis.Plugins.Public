@@ -1,9 +1,5 @@
-﻿using Artemis.Core.DataModelExpansions;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
 
 namespace Artemis.Core.Modules
@@ -34,12 +30,11 @@ namespace Artemis.Core.Modules
             if (LocationWildCard == "*") return true;
 
             IntPtr handle = GetForegroundWindow();
-            uint pID;
 
-            GetWindowThreadProcessId(handle, out pID);
+            GetWindowThreadProcessId(handle, out var pId);
             try
             {
-                return Process.GetProcessById((Int32)pID).MainModule.FileName.ToLower().Contains(LocationWildCard.ToLower());
+                return Process.GetProcessById((Int32)pId).MainModule.FileName.ToLower().Contains(LocationWildCard.ToLower());
             }
             catch
             {
@@ -57,7 +52,7 @@ namespace Artemis.Core.Modules
         /// <inheritdoc />
         public string GetUserFriendlyDescription()
         {
-            string description = string.Format("Requirement met when a proccess is running from a \"{0}\" folder", LocationWildCard);
+            string description = $"Requirement met when a process is running from a \"{LocationWildCard}\" folder";
 
             return description;
         }

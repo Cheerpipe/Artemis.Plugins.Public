@@ -1,6 +1,6 @@
 ﻿using Artemis.Core;
 
-namespace Artemis.Plugins.LayerBrushes.SolidPercentageGradient.PropertyGroups
+namespace Artemis.Plugins.LayerBrushes.SolidPercentage.PropertyGroups
 {
     public class SolidPercentageBrushProperties : LayerPropertyGroup
     {

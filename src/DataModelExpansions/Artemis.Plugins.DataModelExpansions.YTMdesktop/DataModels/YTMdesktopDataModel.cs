@@ -7,8 +7,8 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop.DataModels
 {
     public class YTMdesktopDataModel : DataModel
     {
-        public YTMdesktopPlayerDataModel Player { get; set; } = new YTMdesktopPlayerDataModel();
-        public YTMdesktopTrackDataModel Track { get; set; } = new YTMdesktopTrackDataModel();
+        public YTMdesktopPlayerDataModel Player { get; set; } = new();
+        public YTMdesktopTrackDataModel Track { get; set; } = new();
 
         public void Empty()
         {
@@ -57,7 +57,7 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop.DataModels
         public bool isAdvertisement { get; set; }
         public bool inLibrary { get; set; }
 
-        public TrackColorsDataModel Colors { get; set; } = new TrackColorsDataModel();
+        public TrackColorsDataModel Colors { get; set; } = new();
 
         public void Empty()
         {

@@ -20,11 +20,13 @@ namespace Artemis.Plugins.LayerBrushes.Shuffle.LayerProperties.Presets
 
         public void Apply()
         {
-            ColorGradient gradient = new ColorGradient();
-            gradient.Add(new ColorGradientStop(new SKColor(255, 193, 74), 0));
-            gradient.Add(new ColorGradientStop(new SKColor(255, 220, 72), 0.33f));
-            gradient.Add(new ColorGradientStop(new SKColor(181, 253, 78), 66f));
-            gradient.Add(new ColorGradientStop(new SKColor(146, 242, 86), 1f));
+            ColorGradient gradient = new ColorGradient
+            {
+                new (new SKColor(255, 193, 74), 0),
+                new (new SKColor(255, 220, 72), 0.33f),
+                new (new SKColor(181, 253, 78), 66f),
+                new (new SKColor(146, 242, 86), 1f)
+            };
             _properties.Colors.SetCurrentValue(gradient, null);
             _properties.SmoothColorChange.SetCurrentValue(true, null);
             _properties.ChangeSpeed.SetCurrentValue(new FloatRange(100, 200), null);

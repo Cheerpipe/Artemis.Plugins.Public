@@ -1,21 +1,19 @@
 ﻿using Artemis.Core;
-using SkiaSharp;
 using System;
 using System.Collections.Generic;
 
 namespace Artemis.Plugins.LayerBrushes.Nexus.LayerBrush
 {
-    public class SkBeam
+    public sealed class SkBeam
     {
-        static Random random = new Random();
+        private static readonly Random Random = new();
 
-        public Direction Direction { get; private set; }
-        public float Width { get; private set; }
+        public Direction Direction { get; }
+        public float Width { get; }
         public float Position { get; private set; }
-        public int Location { get; private set; }
-        public float Speed { get; private set; }
-        public ColorGradient Colors { get; set; }
-        public bool HasCustomGradient { get; private set; }
+        public int Location { get; }
+        public float Speed { get; }
+        public ColorGradient Colors { get; }
 
         public SkBeam(Direction direction, int location, float width, ColorGradient colors, float speed)
         {
@@ -47,7 +45,7 @@ namespace Artemis.Plugins.LayerBrushes.Nexus.LayerBrush
             if (toRight) values.Add(Direction.ToRight);
             if (toBottom) values.Add(Direction.ToDown);
 
-            return values[random.Next(values.Count)];
+            return values[Random.Next(values.Count)];
         }
     }
 

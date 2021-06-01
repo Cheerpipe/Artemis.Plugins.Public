@@ -5,13 +5,13 @@ using SkiaSharp;
 
 namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
 {
-    public class Ripple : IDisposable
+    public sealed class Ripple : IDisposable
     {
         private readonly RipplesLayerBrush _brush;
-        private SKPaint _paint;
+        private readonly SKPaint _paint;
+        private readonly SKPaint _trailPaint;
         private float _progress;
         private SKColor _trailColor;
-        private SKPaint _trailPaint;
         private bool _colorFixed;
         private Random _rand;
 
@@ -24,29 +24,8 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
             _trailPaint = new SKPaint();
         }
 
-        public void Reset(SKPoint position)
-        {
-            _colorFixed = false;
-            Size = 0;
-            _progress = 0;
-            Expand = true;
-            Position = position;
-        }
-
-        public float Size { get; set; }
-        public bool Expand { get; set; }
-
-        public void UpdateOne(double deltaTime)
-        {
-            if (Expand)
-                Size += (float)(deltaTime * _brush.Properties.RippleGrowthSpeed.CurrentValue);
-            else
-                Size = -1;
-
-            if (Size > _brush.Properties.RippleSize) Expand = false;
-
-            UpdatePaint();
-        }
+        private float Size { get; set; }
+        private bool Expand { get; set; }
 
         private void UpdatePaint()
         {
@@ -103,7 +82,7 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
                     (
                         Position,
                         Size,
-                        // Trail is simply a gradient from full inner ripple color to the same color but with alpha 0. Just an illution :D
+                        // Trail is simply a gradient from full inner ripple color to the same color but with alpha 0. Just an illusion :D
                         new[] { _trailColor.WithAlpha(0), _trailColor.WithAlpha(alpha) },
                         new[] { 0f, 1f },
                         SKShaderTileMode.Clamp
@@ -118,12 +97,20 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
         }
 
         public bool Finished => _progress > 1;
-        public SKPoint Position { get; set; }
+        private SKPoint Position { get; }
 
         public void Update(double deltaTime)
         {
-            UpdateOne(deltaTime);
+            if (Expand)
+                Size += (float)(deltaTime * _brush.Properties.RippleGrowthSpeed.CurrentValue);
+            else
+                Size = -1;
+
+            if (Size > _brush.Properties.RippleSize) Expand = false;
+
             _progress = Size / _brush.Properties.RippleSize;
+
+            UpdatePaint();
         }
 
         public void Render(SKCanvas canvas)
@@ -133,7 +120,7 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
                 return;
 
             // SkiaSharp shapes doesn't support inner stroke so it will cause a weird empty circle if stroke
-            // width is greather than the double of the size of a shape. This operation will produce perfect ripples
+            // width is greater than the double of the size of a shape. This operation will produce perfect ripples
             _paint.StrokeWidth = Math.Min(_paint.StrokeWidth, Size * 2);
 
             if (Size > 0 && _paint != null)

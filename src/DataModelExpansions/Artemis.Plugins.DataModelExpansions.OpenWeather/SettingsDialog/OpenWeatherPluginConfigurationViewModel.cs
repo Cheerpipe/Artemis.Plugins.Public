@@ -58,9 +58,9 @@ namespace Artemis.Plugins.DataModelExpansions.OpenWeather
 
         public OpenWeatherPluginConfigurationViewModel(Plugin plugin, PluginSettings pluginSettings) : base(plugin)
         {
-            _apiKeySetting = pluginSettings.GetSetting<string>("OpenWeatherApiKey", string.Empty);
-            _citySetting = pluginSettings.GetSetting<string>("OpenWeatherCity", string.Empty);
-            _unitOfMeasurementSetting = pluginSettings.GetSetting<string>("OpenWeatherUnitOfMeasurement", Enum.GetNames(typeof(UnitsOfMeasurement)).FirstOrDefault());
+            _apiKeySetting = pluginSettings.GetSetting("OpenWeatherApiKey", string.Empty);
+            _citySetting = pluginSettings.GetSetting("OpenWeatherCity", string.Empty);
+            _unitOfMeasurementSetting = pluginSettings.GetSetting("OpenWeatherUnitOfMeasurement", Enum.GetNames(typeof(UnitsOfMeasurement)).FirstOrDefault());
 
             _apiKey = _apiKeySetting.Value;
             _city = _citySetting.Value;
@@ -93,7 +93,7 @@ namespace Artemis.Plugins.DataModelExpansions.OpenWeather
                 TestResult = string.Empty;
                 if (string.IsNullOrEmpty(City) || string.IsNullOrEmpty(UnitOfMeasurement))
                 {
-                    _testResult = string.Format("One or more settings are empty. Please fill all settings and try again.");
+                    _testResult = "One or more settings are empty. Please fill all settings and try again.";
                     return false;
                 }
 
@@ -102,12 +102,12 @@ namespace Artemis.Plugins.DataModelExpansions.OpenWeather
                 string accessKey = ApiKey;
                 WeatherClient client = new WeatherClient(accessKey);
                 CurrrentWeatherModel data = client.GetCurrentWeatherAsync<CurrrentWeatherModel>(City, "en", UnitOfMeasurement).Result;
-                TestResult = string.Format("Connection successful. Getting weather data for {0} - {1}", data.Name, data.Sys.Country);
+                TestResult = $"Connection successful. Getting weather data for {data.Name} - {data.Sys.Country}";
                 return true;
             }
             catch (Exception e)
             {
-                TestResult = string.Format("Connection failed with response: {0}", e.ToString());
+                TestResult = $"Connection failed with response: {e}";
                 return false;
             }
         }

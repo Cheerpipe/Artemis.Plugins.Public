@@ -17,14 +17,7 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
             _queryRootInfoRequest = new RestRequest("query", Method.GET);
         }
 
-        public RootInfo Data
-        {
-            get
-            {
-                return _rootInfo;
-            }
-        }
-
+        public RootInfo Data => _rootInfo;
 
         public void Update()
         {

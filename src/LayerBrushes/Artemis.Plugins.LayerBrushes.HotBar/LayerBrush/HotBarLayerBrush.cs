@@ -13,9 +13,8 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerBrush
     {
         #region  Variables 
         private readonly IInputService _inputService;
-        private readonly Profiler _profiler;
+
         private ArtemisLed _activeLed;
-        private SKColor _activeLedColor;
 
         #endregion
 
@@ -24,7 +23,6 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerBrush
         public HotbarLayerBrush(Plugin plugin, IInputService inputService)
         {
             _inputService = inputService;
-            _profiler = plugin.GetProfiler("HotbarLayerBrush");
         }
 
         #endregion
@@ -72,13 +70,13 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerBrush
                     return Properties.ActiveKeyColor.CurrentValue;
                 else
                 {
-                    float colorPos = (float)GetOrderedLeds().IndexOf(led) / (float)(Layer.Leds.Count - 1);
+                    float colorPos = (float)GetOrderedLeds().IndexOf(led) / (Layer.Leds.Count - 1);
                     return Properties.ActiveKeyGradient.CurrentValue.GetColor(colorPos);
                 }
             }
             else
             {
-                if (Properties.PaintBackground.CurrentValue == true)
+                if (Properties.PaintBackground.CurrentValue)
                     return SKColors.Black;
                 else
                     return SKColors.Transparent;
@@ -103,7 +101,7 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerBrush
             _activeLed = e.Led;
         }
 
-        public List<ArtemisLed> GetOrderedLeds()
+        private List<ArtemisLed> GetOrderedLeds()
         {
             // Order LEDs by their position to create a nice revealing effect from left top right, top to bottom
             // Copied from LayerRevealEffectLayer
@@ -130,7 +128,7 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerBrush
                 return;
 
             int currentLedPos = leds.IndexOf(_activeLed);
-            int newLedPos = 0;
+            int newLedPos;
 
             // Get the Key
             if (e.IsScrollingUp)

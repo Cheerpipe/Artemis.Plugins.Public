@@ -23,16 +23,16 @@ namespace Artemis.Plugins.LayerBrushes.Nexus.LayerProperties
         [PropertyDescription(Description = "Time in milliseconds between each beam fired", InputAffix = "ms")]
 
         public BoolLayerProperty FromLeftToRight { get; set; }
-        [PropertyDescription(Description = "Determine if beams will be spawmed from left side of the layer")]
+        [PropertyDescription(Description = "Determine if beams will be spawned from left side of the layer")]
 
         public BoolLayerProperty FromTopToBottom { get; set; }
-        [PropertyDescription(Description = "Determine if beams will be spawmed from top side of the layer")]
+        [PropertyDescription(Description = "Determine if beams will be spawned from top side of the layer")]
 
         public BoolLayerProperty FromRightToLeft { get; set; }
-        [PropertyDescription(Description = "Determine if beams will be spawmed from right side of the layer")]
+        [PropertyDescription(Description = "Determine if beams will be spawned from right side of the layer")]
 
         public BoolLayerProperty FromBottomToUp { get; set; }
-        [PropertyDescription(Description = "Determine if beams will be spawmed from bottom side of the layer")]
+        [PropertyDescription(Description = "Determine if beams will be spawned from bottom side of the layer")]
 
         public IntLayerProperty SpawnInterval { get; set; }
         [PropertyDescription(Description = "This option determine how fast a beams will advance")]
@@ -41,8 +41,8 @@ namespace Artemis.Plugins.LayerBrushes.Nexus.LayerProperties
         [PropertyDescription(Description = "This option determine how long the drop trail will be drawn")]
         public IntLayerProperty TrailSize { get; set; }
 
-        [PropertyDescription(Description = "Enable this option will avoid beam overlaping")]
-        public BoolLayerProperty AvoidOverlaping { get; set; }
+        [PropertyDescription(Description = "Enable this option will avoid beam overlapping")]
+        public BoolLayerProperty AvoidOverlapping { get; set; }
 
         protected override void PopulateDefaults()
         {
@@ -54,7 +54,7 @@ namespace Artemis.Plugins.LayerBrushes.Nexus.LayerProperties
             SpawnInterval.DefaultValue = 500;
             Speed.DefaultValue = new IntRange(30, 40);
             TrailSize.DefaultValue = 300;
-            AvoidOverlaping.DefaultValue = true;
+            AvoidOverlapping.DefaultValue = true;
             FromLeftToRight.DefaultValue = true;
             FromTopToBottom.DefaultValue = true;
             FromRightToLeft.DefaultValue = true;

@@ -1,4 +1,3 @@
-using Artemis.Core;
 using Artemis.Core.DataModelExpansions;
 using Artemis.Core.Services;
 using Artemis.Plugins.DataModelExpansions.YTMdesktop.DataModels;
@@ -133,7 +132,6 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
                 else
                 {
                     DataModel.Empty();
-                    return;
                 }
             }
             catch (Exception e)
@@ -192,7 +190,7 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
                 try
                 {
                     using HttpResponseMessage response = await _httpClient.GetAsync(albumArtUrl);
-                    using Stream stream = await response.Content.ReadAsStreamAsync();
+                    await using Stream stream = await response.Content.ReadAsStreamAsync();
                     using SKBitmap skbm = SKBitmap.Decode(stream);
                     stream.Dispose();
                     SKColor[] skClrs = _colorQuantizer.Quantize(skbm.Pixels, 256);
@@ -208,7 +206,7 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
                 }
                 catch (Exception exception)
                 {
-                    _logger.Error("Failed to get album art colors: " + exception.ToString());
+                    _logger.Error("Failed to get album art colors: " + exception);
                     throw;
                 }
             }

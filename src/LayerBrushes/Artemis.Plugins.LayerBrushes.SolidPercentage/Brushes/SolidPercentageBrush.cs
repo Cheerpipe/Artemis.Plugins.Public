@@ -1,9 +1,9 @@
 ﻿using System;
 using Artemis.Core.LayerBrushes;
-using Artemis.Plugins.LayerBrushes.SolidPercentageGradient.PropertyGroups;
+using Artemis.Plugins.LayerBrushes.SolidPercentage.PropertyGroups;
 using SkiaSharp;
 
-namespace Artemis.Plugins.LayerBrushes.SolidPercentage
+namespace Artemis.Plugins.LayerBrushes.SolidPercentage.Brushes
 {
     public class SolidPercentageBrush : LayerBrush<SolidPercentageBrushProperties>
     {

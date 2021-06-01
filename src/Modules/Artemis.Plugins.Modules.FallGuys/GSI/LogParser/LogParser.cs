@@ -12,7 +12,6 @@ namespace FallGuys.LogParser
     public class LogParser
     {
         private readonly string _logFilePath;
-        private readonly string _logFileName;
         private readonly string _logFullPath;
         private readonly AbstractLogFileWatcher _fileWatcher;
         private readonly Timer _checkNewFileTimer;
@@ -27,7 +26,7 @@ namespace FallGuys.LogParser
         public LogParser(string logFilePath, string logFileName)
         {
             _logFilePath = logFilePath;
-            _logFileName = logFileName;
+            LogFileName = logFileName;
             _logFullPath = Path.Combine(logFilePath, logFileName);
 
             _checkNewFileTimer = new Timer(1000);
@@ -38,7 +37,8 @@ namespace FallGuys.LogParser
         }
 
         public string LogFilePath => _logFilePath;
-        public string LogFileName => _logFileName;
+        public string LogFileName { get; }
+
         public string LogFullPath => _logFullPath;
         public long LogFileSize => _logFileSize;
 

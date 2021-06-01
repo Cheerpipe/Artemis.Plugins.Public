@@ -4,9 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:local="clr-namespace:Artemis.Plugins.DataModelExpansions.OpenWeather"
-             xmlns:DataModel="clr-namespace:Artemis.Plugins.DataModelExpansions.OpenWeather.DataModels"                 
-             xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:s="https://github.com/canton7/Stylet"
              mc:Ignorable="d" 
              d:DesignHeight="411.66" d:DesignWidth="476.121">

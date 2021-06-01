@@ -1,5 +1,4 @@
 ﻿using Artemis.Core;
-using Artemis.UI.Shared;
 using Artemis.UI.Shared.Modules;
 
 namespace Artemis.Plugins.Modules.Games

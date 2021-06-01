@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Artemis.Core;
 using Artemis.Core.LayerBrushes;
 using Artemis.Plugins.LayerBrushes.Ripples.LayerProperties;
 using Artemis.Plugins.LayerBrushes.Ripples.LayerProperties.Presets;
@@ -12,7 +11,7 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
     public class RipplesLayerBrush : LayerBrush<RipplesLayerBrushProperties>
     {
         private readonly List<Ripple> _ripples;
-        public Random Rand { get; set; }
+        public Random Rand { get; private set; }
 
         public RipplesLayerBrush()
         {
@@ -39,7 +38,7 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
 
         }
 
-        private float _lastSpawnTime = 0;
+        private float _lastSpawnTime;
         public override void Update(double deltaTime)
         {
 
@@ -103,9 +102,9 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
                             x = Layer.Bounds.Width / 2;
                             y = Layer.Bounds.Height;
                             break;
-                    };
+                    }
 
-                    SKPoint spawnPoint = new SKPoint(x, y);
+                    var spawnPoint = new SKPoint(x, y);
                     SpawnEffect(spawnPoint);
                 }
                 _lastSpawnTime = 0;

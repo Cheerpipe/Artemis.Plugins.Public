@@ -22,7 +22,7 @@ namespace Artemis.Plugins.DataModelExpansions.OpenWeather.DataModels
         public DateTime Sunset { get; set; } // unix, UTC
 
         // Wind
-        public WeatherWindDataModel Wind { get; set; } = new WeatherWindDataModel();
+        public WeatherWindDataModel Wind { get; set; } = new();
     }
 
     public class WeatherDataModel : DataModel

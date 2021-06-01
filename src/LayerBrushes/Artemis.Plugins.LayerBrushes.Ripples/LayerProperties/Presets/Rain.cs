@@ -21,10 +21,12 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerProperties.Presets
         public void Apply()
         {
             _properties.ColorMode.SetCurrentValue(ColorType.ColorSet, null);
-            ColorGradient gradient = new ColorGradient();
-            gradient.Add(new ColorGradientStop(new SKColor(255, 255, 255), 0));
-            gradient.Add(new ColorGradientStop(new SKColor(54, 156, 255), 0.55f));
-            gradient.Add(new ColorGradientStop(new SKColor(162, 162, 162), 1));
+            ColorGradient gradient = new ColorGradient
+            {
+                new (new SKColor(255, 255, 255), 0),
+                new (new SKColor(54, 156, 255), 0.55f),
+                new (new SKColor(162, 162, 162), 1)
+            };
             _properties.Colors.SetCurrentValue(gradient, null);
             _properties.Color.SetCurrentValue(SKColors.Transparent, null);
             _properties.RippleFadeAway.SetCurrentValue(RippleFadeOutMode.Linear, null);

@@ -34,11 +34,10 @@ namespace FallGuys.Gsi
             _parser.Stop();
         }
 
-        public GameStateMachine GameStateMachine { get => _gameStateMachine; }
-        public RoundStateMachine RoundStateMachine { get => _roundStateMachine; }
-        public LogParser.LogParser LogParser { get => _parser; }
-
-        public bool IsRunning { get => _parser.IsRunning; }
+        public GameStateMachine GameStateMachine => _gameStateMachine;
+        public RoundStateMachine RoundStateMachine => _roundStateMachine;
+        public LogParser.LogParser LogParser => _parser;
+        public bool IsRunning => _parser.IsRunning;
 
 
         private void _parser_LogLineParsed(object sender, LogLineParsedArgs e)

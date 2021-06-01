@@ -10,7 +10,7 @@ namespace Artemis.Plugins.DataModelExpansions.DisplaySettings.DataModels
     {
         public DisplayConfigTopologyId Topology { get; set; }
         public int DisplayCount { get; set; }
-        public DisplaysDataModel Displays { get; set; } = new DisplaysDataModel();
+        public DisplaysDataModel Displays { get; } = new();
     }
 
     public class DisplaysDataModel : DataModel { }
@@ -22,7 +22,7 @@ namespace Artemis.Plugins.DataModelExpansions.DisplaySettings.DataModels
         public string Adapter { get; set; }
         public bool IsPrimary { get; set; }
         [DataModelProperty(Affix = "Hz")]
-        public int RefreshRate { get; set; } = 0;
+        public int RefreshRate { get; set; }
         public Size Resolution { get; set; }
         public Point Position { get; set; }
         public ColorDepth ColorDepth { get; set; }

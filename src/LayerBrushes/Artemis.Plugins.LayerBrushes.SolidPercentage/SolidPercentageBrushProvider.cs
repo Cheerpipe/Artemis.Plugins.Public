@@ -1,4 +1,5 @@
 ﻿using Artemis.Core.LayerBrushes;
+using Artemis.Plugins.LayerBrushes.SolidPercentage.Brushes;
 
 namespace Artemis.Plugins.LayerBrushes.SolidPercentage
 {

@@ -8,11 +8,7 @@ namespace FallGuys.LogFileWatcher
 {
     public class ThreadedLogFileWatcher: AbstractLogFileWatcher
     {
-        private readonly string _logFilePath;
-        private readonly string _logFileName;
-        private readonly string _logFullName;
         private Thread _watchThread;
-        private bool _running;
 
         public override event NewLineEventHandler NewLine;
         public override event EventHandler Started;
@@ -20,22 +16,25 @@ namespace FallGuys.LogFileWatcher
 
         public ThreadedLogFileWatcher(string logFilePath, string logFileName)
         {
-            _logFilePath = logFilePath;
-            _logFileName = logFileName;
-            _logFullName = Path.Combine(logFilePath, logFileName);
+            LogFilePath = logFilePath;
+            LogFileName = logFileName;
+            LogFullName = Path.Combine(logFilePath, logFileName);
         }
 
-        public string LogFilePath => _logFilePath;
-        public string LogFileName => _logFileName;
-        public string LogFullName => _logFullName;
-        public bool Running => _running;
+        public string LogFilePath { get; }
+
+        public string LogFileName { get; }
+
+        public string LogFullName { get; }
+
+        public bool Running { get; private set; }
 
         private void Watch()
         {
-            using FileStream fs = new(_logFullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            using FileStream fs = new(LogFullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             using StreamReader sr = new(fs);
-            string streamLine = "";
-            while (_running)
+            string streamLine;
+            while (Running)
             {
                 streamLine = sr.ReadLine();
                 if (streamLine != null)
@@ -53,13 +52,13 @@ namespace FallGuys.LogFileWatcher
         {
             _watchThread = new Thread(Watch);
             _watchThread.Start();
-            _running = true;
+            Running = true;
             Started?.Invoke(this, new EventArgs());
         }
 
         public override void Stop()
         {
-            _running = false;
+            Running = false;
             Stopped?.Invoke(this, new EventArgs());
         }
     }

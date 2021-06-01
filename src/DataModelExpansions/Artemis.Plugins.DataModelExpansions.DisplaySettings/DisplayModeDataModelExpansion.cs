@@ -1,9 +1,7 @@
 using Artemis.Core;
 using Artemis.Core.DataModelExpansions;
-using Artemis.Core.Services;
 using Serilog;
 using System;
-using System.Threading.Tasks;
 using Artemis.Plugins.DataModelExpansions.DisplaySettings.DataModels;
 using Microsoft.Win32;
 using System.Linq;
@@ -17,7 +15,7 @@ namespace Artemis.Plugins.DataModelExpansions.DisplaySettings
 
         private readonly ILogger _logger;
 
-        public DisplayModeDataModelExpansion(PluginSettings settings, ILogger logger, IColorQuantizerService colorQuantizer)
+        public DisplayModeDataModelExpansion(PluginSettings settings, ILogger logger)
         {
             _logger = logger;
         }
@@ -56,7 +54,7 @@ namespace Artemis.Plugins.DataModelExpansions.DisplaySettings
                 {
 
                     DataModel.Displays.AddDynamicChild(
-                        string.Format("[{0}] - {1}", i, displayList[i].DeviceName),
+                        $"[{i}] - {displayList[i].DeviceName}",
                         new DisplaySettingDataModel()
                         {
                             IsPrimary = displayList[i].IsGDIPrimary,

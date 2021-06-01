@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Artemis.Core;
 using Artemis.Plugins.LayerBrushes.Ripples.LayerProperties;
 using SkiaSharp;
@@ -12,6 +12,7 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
         private float _progress;
         private SKColor _trailColor;
         private SKPaint _trailPaint;
+        private bool _colorFixed;
         private Random _rand;
 
         public Ripple(RipplesLayerBrush brush, SKPoint position)
@@ -19,8 +20,19 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
             _brush = brush;
             Position = position;
             Expand = true;
-            UpdatePaint();
+            _paint = new SKPaint();
+            _trailPaint = new SKPaint();
         }
+
+        public void Reset(SKPoint position)
+        {
+            _colorFixed = false;
+            Size = 0;
+            _progress = 0;
+            Expand = true;
+            Position = position;
+        }
+
         public float Size { get; set; }
         public bool Expand { get; set; }
 
@@ -38,36 +50,35 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
 
         private void UpdatePaint()
         {
-            if (_brush.Properties.ColorMode.CurrentValue == ColorType.Random && _paint == null)
+            if (_brush.Properties.ColorMode.CurrentValue == ColorType.Random && !_colorFixed)
             {
-                _paint = new SKPaint { Color = SKColor.FromHsv(_brush.Rand.Next(0, 360), 100, 100) };
+                _colorFixed = true;
+                _paint.Color = SKColor.FromHsv(_brush.Rand.Next(0, 360), 100, 100);
             }
-            else if (_brush.Properties.ColorMode.CurrentValue == ColorType.ColorSet && _paint == null)
+            else if (_brush.Properties.ColorMode.CurrentValue == ColorType.ColorSet && !_colorFixed)
             {
-
+                _colorFixed = true;
                 _rand ??= new Random(GetHashCode());
-                _paint = new SKPaint { Color = _brush.Properties.Colors.CurrentValue.GetColor((float)_rand.NextDouble()) };
+                _paint.Color = _brush.Properties.Colors.CurrentValue.GetColor((float)_rand.NextDouble());
             }
-            else if (_brush.Properties.ColorMode.CurrentValue == ColorType.Solid)
+            else if (_brush.Properties.ColorMode.CurrentValue == ColorType.Solid && !_colorFixed)
             {
-                _paint = new SKPaint { Color = _brush.Properties.Color.CurrentValue };
+                _paint.Color = _brush.Properties.Color.CurrentValue;
             }
             else if (_brush.Properties.ColorMode.CurrentValue == ColorType.Gradient)
             {
-                _paint = new SKPaint
-                {
-                    Shader = SKShader.CreateRadialGradient(
+                _paint.Shader = SKShader.CreateRadialGradient
+                    (
                         Position,
                         _brush.Properties.RippleWidth,
                         _brush.Properties.Colors.BaseValue.GetColorsArray(),
                         _brush.Properties.Colors.BaseValue.GetPositionsArray(),
                         SKShaderTileMode.Repeat
-                    )
-                };
+                    );
             }
             else if (_brush.Properties.ColorMode.CurrentValue == ColorType.ColorPathChange)
             {
-                _paint = new SKPaint { Color = _brush.Properties.Colors.CurrentValue.GetColor(_progress) };
+                _paint.Color = _brush.Properties.Colors.CurrentValue.GetColor(_progress);
             }
 
             byte alpha = 255;
@@ -88,17 +99,15 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
                 };
 
                 // Dispose before to create a new one. Thanks for the lesson.
-                _trailPaint = new SKPaint
-                {
-                    Shader = SKShader.CreateRadialGradient(
+                _trailPaint.Shader = SKShader.CreateRadialGradient
+                    (
                         Position,
                         Size,
                         // Trail is simply a gradient from full inner ripple color to the same color but with alpha 0. Just an illution :D
                         new[] { _trailColor.WithAlpha(0), _trailColor.WithAlpha(alpha) },
                         new[] { 0f, 1f },
                         SKShaderTileMode.Clamp
-                    )
-                };
+                    );
                 _trailPaint.Style = SKPaintStyle.Fill;
             }
 
@@ -109,7 +118,6 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
         }
 
         public bool Finished => _progress > 1;
-        public ArtemisLed Led { get; }
         public SKPoint Position { get; set; }
 
         public void Update(double deltaTime)
@@ -139,8 +147,8 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
 
         public void Dispose()
         {
-            _paint.Dispose();
-            _trailPaint.Dispose();
+            _paint?.Dispose();
+            _trailPaint?.Dispose();
         }
     }
 }

@@ -111,7 +111,6 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
                 _lastSpawnTime = 0;
             }
 
-
             lock (_ripples)
             {
                 _ripples.Where(w => w.Finished).ToList().ForEach(r => r.Dispose());
@@ -133,6 +132,8 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
 
         private void SpawnEffect(SKPoint relativeLedPosition)
         {
+
+            // TODO: Use a ripple pull
             lock (_ripples)
             {
                 _ripples.Add(new Ripple(this, relativeLedPosition));

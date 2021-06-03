@@ -86,12 +86,6 @@ jobs:
           name: Artemis.Plugins.LayerBrushes.SolidPercentage
           path: .\Plugins\src\LayerBrushes\Artemis.Plugins.LayerBrushes.SolidPercentage\bin\x64\Release\net5.0-windows\publish
 
-      - name: Upload Artemis.Plugins.Modules.Games
-        uses: actions/upload-artifact@v2
-        with:
-          name: Artemis.Plugins.Modules.Games
-          path: .\Plugins\src\Modules\Artemis.Plugins.Modules.Games\bin\x64\Release\net5.0-windows\publish
-
       - name: Upload Artemis.Plugins.LayerBrushes.Ripples
         uses: actions/upload-artifact@v2
         with:

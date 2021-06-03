@@ -44,7 +44,6 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
                 Timeout = TimeSpan.FromSeconds(1)
             };
             albumArtColorCache = new ConcurrentDictionary<string, TrackColorsDataModel>();
-            IsAlwaysAvailable = true;
         }
 
         #endregion

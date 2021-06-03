@@ -18,7 +18,6 @@ namespace Artemis.Plugins.DataModelExpansions.DisplaySettings
         public DisplayModeDataModelExpansion(PluginSettings settings, ILogger logger)
         {
             _logger = logger;
-            IsAlwaysAvailable = true;
         }
 
         private void SystemEvents_DisplaySettingsChanged(object sender, EventArgs e)

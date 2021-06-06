@@ -1,4 +1,3 @@
-using Artemis.Core.DataModelExpansions;
 using Artemis.Core.Services;
 using Artemis.Plugins.DataModelExpansions.YTMdesktop.DataModels;
 using Serilog;
@@ -10,10 +9,11 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Linq;
 using System.Diagnostics;
+using Artemis.Core.Modules;
 
 namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
 {
-    public class YTMdesktopDataModelExpansion : DataModelExpansion<YTMdesktopDataModel>
+    public class YTMdesktopDataModelExpansion : Module<YTMdesktopDataModel>
     {
         #region Variables declarations
 

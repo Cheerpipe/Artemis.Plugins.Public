@@ -2,19 +2,17 @@
 using Artemis.Core.Modules;
 using Artemis.Plugins.Modules.FallGuys.DataModels;
 using FallGuys.Gsi;
-using SkiaSharp;
 
 namespace Artemis.Plugins.Modules.Games
 {
     [PluginFeature(AlwaysEnabled = true)]
-    public class FallGuysModule : ProfileModule<FallGuysDataModel>
+    public class FallGuysModule : Module<FallGuysDataModel>
     {
         private Gsi _gsi;
         public override void Enable()
         {
             DisplayName = "Fall Guys";
             DisplayIcon = "FallGuys.svg";
-            DefaultPriorityCategory = ModulePriorityCategory.Application;
             ActivationRequirements.Add(new ProcessActivationRequirement("FallGuys_client_game"));
         }
 
@@ -101,10 +99,6 @@ namespace Artemis.Plugins.Modules.Games
         }
 
         public override void Update(double deltaTime)
-        {
-        }
-
-        public override void Render(double deltaTime, SKCanvas canvas, SKImageInfo canvasInfo)
         {
         }
     }

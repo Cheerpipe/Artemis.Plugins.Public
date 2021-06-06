@@ -1,15 +1,15 @@
 using Artemis.Core;
-using Artemis.Core.DataModelExpansions;
 using Serilog;
 using System;
 using Artemis.Plugins.DataModelExpansions.OpenWeather.DataModels;
 using Awesomio.Weather.NET;
 using Awesomio.NET.Models.CurrentWeather;
 using System.Linq;
+using Artemis.Core.Modules;
 
 namespace Artemis.Plugins.DataModelExpansions.DisplaySettings
 {
-    public class DisplayModeDataModelExpansion : DataModelExpansion<OpenWeatherDataModel>
+    public class DisplayModeDataModelExpansion : Module<OpenWeatherDataModel>
     {
         private readonly PluginSetting<string> _apiKeySetting;
         private readonly PluginSetting<string> _citySetting;

@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using Artemis.Core;
 using Artemis.Plugins.LayerBrushes.Ripples.LayerProperties;
 using SkiaSharp;
@@ -10,6 +11,7 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
         private readonly RipplesLayerBrush _brush;
         private readonly SKPaint _paint;
         private readonly SKPaint _trailPaint;
+        private SKColor _rippleColor;
         private float _progress;
         private bool _colorFixed;
         private static Random _random;
@@ -37,17 +39,17 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
             if (_brush.Properties.ColorMode.CurrentValue == ColorType.Random && !_colorFixed)
             {
                 _colorFixed = true;
-                _paint.Color = SKColor.FromHsv(_brush.Rand.Next(0, 360), 100, 100);
+                _rippleColor = SKColor.FromHsv(_brush.Rand.Next(0, 360), 100, 100);
             }
             else if (_brush.Properties.ColorMode.CurrentValue == ColorType.ColorSet && !_colorFixed)
             {
                 _colorFixed = true;
-                _paint.Color = _brush.Properties.Colors.CurrentValue.GetColor((float)_random.NextDouble());
+                _rippleColor = _brush.Properties.Colors.CurrentValue.GetColor((float)_random.NextDouble());
             }
             else if (_brush.Properties.ColorMode.CurrentValue == ColorType.Solid && !_colorFixed)
             {
                 _colorFixed = true;
-                _paint.Color = _brush.Properties.Color.CurrentValue;
+                _rippleColor = _brush.Properties.Color.CurrentValue;
             }
             else if (_brush.Properties.ColorMode.CurrentValue == ColorType.Gradient)
             {
@@ -63,16 +65,19 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
             }
             else if (_brush.Properties.ColorMode.CurrentValue == ColorType.ColorPathChange)
             {
-                _paint.Color = _brush.Properties.Colors.CurrentValue.GetColor(_progress);
+                _rippleColor = _brush.Properties.Colors.CurrentValue.GetColor(_progress);
             }
 
             byte alpha = 255;
+            _paint.Color = _rippleColor;
+
             // Add fade away effect
             if (_brush.Properties.RippleFadeAway != RippleFadeOutMode.None)
                 alpha = (byte)(255d * Easings.Interpolate(1d - _progress, (Easings.Functions)_brush.Properties.RippleFadeAway.CurrentValue));
 
-
+            alpha = (byte)((_rippleColor.Alpha / 255f) * alpha);
             SKColor trailColor;
+
             // If we have to paint a trail
             if (_brush.Properties.RippleTrail)
             {

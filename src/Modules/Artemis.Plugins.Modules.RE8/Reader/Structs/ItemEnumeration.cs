@@ -1,0 +1,38 @@
+﻿namespace SRTPluginProviderRE8.Structs
+{
+    public enum ItemEnumeration : uint
+    {
+        FirstAidMed = 0x553456B2,
+        MedInjector = 0x3819A7D0,
+        Lockpick = 0x97EF67DC,
+        HandgunAmmo = 0x4654F1A0,
+        ShotgunAmmo = 0x673956B8,
+        SniperRifleAmmo = 0xE9A05039,
+        MagnumAmmo = 0x8218A3CB,
+        RifleAmmo = 0xBE12452C,
+        RocketAmmo = 0x879C8F0B,
+        Flashbang = 0x5E5AEAEA,
+        ExplosiveRounds = 0x72E468A8,
+        Knife = 0x88A42278,
+        KarambitKnife = 0x1D285C38,
+        KarambitKnifeChris = 0x35F20348,
+        PipeBomb = 0x3E2472F8,
+        Mine = 0xBF8C9893,
+        GrenadeChris = 0x60631FA4,
+        FlashGrenadeChris = 0x436EB0DD,
+        LEMIRecoilCompensator = 0x866AF853,
+        M1911HighCapacityMag = 0x367676E9,
+        V61CustomDrumMagazine = 0xEA718813,
+        SYG12LongBarrel = 0x0E8CA5DB,
+        SYG12DrumMagazine = 0x9E650FE4,
+        Fish = 0x1C1F4F1F,
+        Meat = 0xB6F6B3EF,
+        Poultry = 0xD3FD3220,
+        JuicyGame = 0x9BE4A9D3,
+        QualityMeat = 0xD5388626,
+        FinestFish = 0xD2173F9A,
+        AntiqueCoin = 0xE4F5A3EF,
+        F2RifleHighCapacityMag = 0x055B6BFC,
+        W870TACForegrip = 0x7FCFE664,
+    }
+}

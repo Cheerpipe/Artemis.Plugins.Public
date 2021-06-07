@@ -153,48 +153,56 @@ namespace SRTPluginProviderRE8
                     IntPtr.Add(BaseAddress, pointerRankManager)
                 );
 
-                PointerInventory = new MultilevelPointer(
-                    memoryAccess,
-                    IntPtr.Add(BaseAddress, pointerInventory),
-                    0x60L,
-                    0x18L,
-                    0x10L
-                );
+                try
+                {
+                    PointerInventory = new MultilevelPointer(
+                        memoryAccess,
+                        IntPtr.Add(BaseAddress, pointerInventory),
+                        0x60L,
+                        0x18L,
+                        0x10L
+                    );
 
-                //Enemies
-                PointerEnemyEntryList = new MultilevelPointer(
-                    memoryAccess,
-                    IntPtr.Add(BaseAddress, pointerAddressEnemies),
-                    0x58L,
-                    0x10L
-                );
+                    //Enemies
+                    PointerEnemyEntryList = new MultilevelPointer(
+                        memoryAccess,
+                        IntPtr.Add(BaseAddress, pointerAddressEnemies),
+                        0x58L,
+                        0x10L
+                    );
 
-                PointerEnemyCount = new MultilevelPointer(
-                    memoryAccess,
-                    IntPtr.Add(BaseAddress, pointerAddressEnemies),
-                    0x58L,
-                    0x10L
-                );
+                    PointerEnemyCount = new MultilevelPointer(
+                        memoryAccess,
+                        IntPtr.Add(BaseAddress, pointerAddressEnemies),
+                        0x58L,
+                        0x10L
+                    );
 
-                GenerateEnemyEntries();
+                    GenerateEnemyEntries();
 
-                //Items
-                PointerInventoryCount = new MultilevelPointer(
-                    memoryAccess,
-                    IntPtr.Add(BaseAddress, pointerInventory),
-                    0x60L,
-                    0x18L,
-                    0x10L
-                );
+                    //Items
+                    PointerInventoryCount = new MultilevelPointer(
+                        memoryAccess,
+                        IntPtr.Add(BaseAddress, pointerInventory),
+                        0x60L,
+                        0x18L,
+                        0x10L
+                    );
 
-                PointerInventoryEntryList = new MultilevelPointer(
-                    memoryAccess,
-                    IntPtr.Add(BaseAddress, pointerAddressItems),
-                    0x78L,
-                    0x70L
-                );
+                    PointerInventoryEntryList = new MultilevelPointer(
+                        memoryAccess,
+                        IntPtr.Add(BaseAddress, pointerAddressItems),
+                        0x78L,
+                        0x70L
+                    );
 
-                GenerateItemEntries();
+                    GenerateItemEntries();
+                }
+                catch
+
+                {
+                    // May fail in main menu
+                }
             }
         }
 
@@ -313,14 +321,22 @@ namespace SRTPluginProviderRE8
             PointerRankManager.UpdatePointers();
             PointerInventory.UpdatePointers();
 
-            PointerEnemyCount.UpdatePointers();
-            PointerEnemyEntryList.UpdatePointers();
+            try
+            {
+                PointerEnemyCount.UpdatePointers();
+                PointerEnemyEntryList.UpdatePointers();
 
-            GenerateEnemyEntries();
+                GenerateEnemyEntries();
 
-            PointerInventoryCount.UpdatePointers();
-            PointerInventoryEntryList.UpdatePointers();
-            GenerateItemEntries();
+                PointerInventoryCount.UpdatePointers();
+                PointerInventoryEntryList.UpdatePointers();
+                GenerateItemEntries();
+            }
+            catch
+            {
+                // May fail in main menu
+            }
+
         }
 
         private void GetCurrentEvent(int? length)
@@ -370,6 +386,11 @@ namespace SRTPluginProviderRE8
             {
                 var playerStatus = GamePlayerStatus.AsStruct(gamePlayerStatus);
                 gameMemoryValues._playerstatus.Update(playerStatus);
+            }
+            else
+            {
+                gameMemoryValues._playerstatus.IsChris = false;
+                gameMemoryValues._playerstatus.IsEthan = false;
             }
 
             //Player HP

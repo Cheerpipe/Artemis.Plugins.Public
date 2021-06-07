@@ -61,22 +61,44 @@ namespace SRTPluginProviderRE8
             {
                 // if ((ProcessMemory.Win32Error)ex.NativeErrorCode != ProcessMemory.Win32Error.ERROR_PARTIAL_COPY)
                 // TODO
+                exCount++;
+            }
+            catch (NullReferenceException ex)
+            {
+                exCount++;
+                if (exCount > 10)
+                {
+                    exCount = 0;
+                    Dispose();
+                    Init();
+                    logger.Verbose("Memory reader estarted because pointers were created while the game was not ready.");
+                }
+
             }
             catch (Exception ex)
             {
-               //TODO Log
+                logger.Error(ex.ToString());
+                exCount++;
             }
             return null;
         }
 
+        int exCount;
         private Process GetProcess() => Process.GetProcessesByName("re8")?.FirstOrDefault();
 
-        public void Dispose()
+        public void Stop()
         {
             stopwatch?.Stop();
             stopwatch = null;
             gameMemoryScanner?.Dispose();
             gameMemoryScanner = null;
+            process.Dispose();
+            process = null;
+        }
+
+        public void Dispose()
+        {
+            Stop();
         }
     }
 }

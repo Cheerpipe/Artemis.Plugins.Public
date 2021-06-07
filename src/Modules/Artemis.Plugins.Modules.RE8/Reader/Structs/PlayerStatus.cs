@@ -7,8 +7,8 @@ namespace SRTPluginProviderRE8.Structs.GameStructs
 {
     public class PlayerStatus
     {
-        public bool IsEthan { get; private set; }
-        public bool IsChris { get; private set; }
+        public bool IsEthan { get; internal set; }
+        public bool IsChris { get; internal set; }
         public bool IsEnableUpdate { get; private set; }
         public bool IsIdleUpperBody { get; private set; }
         public bool IsGameOver { get; private set; }

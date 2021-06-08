@@ -1,0 +1,12 @@
+{
+  "Guid": "13f9a19b-b6e2-40fe-b91d-5186a06f72fd",
+  "Name": "Resident Evil Village",
+  "Author": "Cheerpipe",
+  "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",
+  "Icon": "RE8V.svg",
+  "RequiresAdmin": "true",
+  "Description": "Game module that provides in game data for Resident Evil Village",
+  "Version": "1.0.0.0",
+  "Main": "Artemis.Plugins.Modules.RE8.dll",
+  "AutoEnableFeatures": true
+}

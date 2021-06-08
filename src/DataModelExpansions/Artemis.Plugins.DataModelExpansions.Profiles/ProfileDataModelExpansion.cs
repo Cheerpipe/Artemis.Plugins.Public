@@ -93,7 +93,7 @@ namespace Artemis.Plugins.DataModelExpansions.Profiles
                             }
                         );
                     }
-                    hasActiveProfiles = (!profileConfiguration.IsSuspended && profileConfiguration.ActivationConditionMet);
+                    hasActiveProfiles = hasActiveProfiles || (!profileConfiguration.IsSuspended && profileConfiguration.ActivationConditionMet);
                 }
                 basicCategoryInformation.Value.HasActiveProfiles = hasActiveProfiles;
             }

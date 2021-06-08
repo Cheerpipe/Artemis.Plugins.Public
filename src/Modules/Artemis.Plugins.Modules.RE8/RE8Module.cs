@@ -51,8 +51,8 @@ namespace Artemis.Plugins.Modules.Games
             float previousHealth = DataModel.PlayerCurrentHealth;
             DataModel.PlayerStatus = _gameMemoryRE8.PlayerStatus;
             DataModel.PlayerCurrentHealth = _gameMemoryRE8.PlayerCurrentHealth;
-            DataModel.PlayerMaxHealth = (_gameMemoryRE8.PlayerCurrentHealth / _gameMemoryRE8.PlayerMaxHealth) * 100;
-            DataModel.PlayerHealthPercentage = _gameMemoryRE8.PlayerMaxHealth;
+            DataModel.PlayerMaxHealth = _gameMemoryRE8.PlayerMaxHealth;
+            DataModel.PlayerHealthPercentage = (_gameMemoryRE8.PlayerCurrentHealth / _gameMemoryRE8.PlayerMaxHealth) * 100;
             DataModel.PlayerPositionX = _gameMemoryRE8.PlayerPositionX;
             DataModel.PlayerPositionY = _gameMemoryRE8.PlayerPositionY;
             DataModel.PlayerPositionZ = _gameMemoryRE8.PlayerPositionZ;
@@ -62,9 +62,9 @@ namespace Artemis.Plugins.Modules.Games
             DataModel.EventType = _gameMemoryRE8.EventType;
             DataModel.IsMotionPlay = _gameMemoryRE8.IsMotionPlay;
             DataModel.CurrentEvent = _gameMemoryRE8.CurrentEvent;
-            //DataModel.PlayerInventory = _gameMemoryRE8.PlayerInventory.ToList();
+            DataModel.PlayerInventory = _gameMemoryRE8.PlayerInventory.ToList();
            // DataModel.EnemyHealth = _gameMemoryRE8.EnemyHealth.ToList();
-            //DataModel.LastKeyItem = _gameMemoryRE8.LastKeyItem;
+            DataModel.LastKeyItem = _gameMemoryRE8.LastKeyItem;
 
             if (DataModel.PlayerCurrentHealth > previousHealth + 10)
                 DataModel.HealingReceived.Trigger();

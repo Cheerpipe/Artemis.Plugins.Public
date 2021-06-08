@@ -25,8 +25,8 @@ namespace Artemis.Plugins.Modules.FallGuys.DataModels
 
         public DataModelEvent HealingReceived { get; set; } = new();
 
-     //   public List<InventoryEntry> PlayerInventory { get; set; }
+        public List<InventoryEntry> PlayerInventory { get; set; }
        // public List<EnemyHP> EnemyHealth { get; set; }
-       // public InventoryEntry LastKeyItem { get; set; }
+        public InventoryEntry LastKeyItem { get; set; }
     }
 }

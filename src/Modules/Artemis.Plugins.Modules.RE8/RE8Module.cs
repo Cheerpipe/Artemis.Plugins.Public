@@ -17,11 +17,10 @@ namespace Artemis.Plugins.Modules.Games
         public override void Enable()
         {
             DisplayName = "Resident Evil 8 Village";
-            DisplayIcon = "RE8V.svg";
+            DisplayIcon = "Umbrella.svg";
             ActivationRequirements.Add(new ProcessActivationRequirement("re8"));
             UpdateDuringActivationOverride = false;
         }
-
 
         public RE8Module(ILogger logger)
         {

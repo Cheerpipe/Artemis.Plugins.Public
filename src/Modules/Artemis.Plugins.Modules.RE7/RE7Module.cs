@@ -18,8 +18,8 @@ namespace Artemis.Plugins.Modules.Games
         private IGameMemoryRE7 _gameMemoryRE7;
         public override void Enable()
         {
-            DisplayName = "Resident Evil 7";
-            DisplayIcon = "RE7BH.svg";
+            DisplayName = "Resident Evil 7 Biohazard";
+            DisplayIcon = "Umbrella.svg";
             ActivationRequirements.Add(new ProcessActivationRequirement("re7"));
             UpdateDuringActivationOverride = false;
         }
@@ -72,7 +72,7 @@ namespace Artemis.Plugins.Modules.Games
 
         public override void ModuleDeactivated(bool isOverride)
         {
-            _readerRE7.Dispose();
+            _readerRE7?.Dispose();
             _readerRE7 = null;
         }
 

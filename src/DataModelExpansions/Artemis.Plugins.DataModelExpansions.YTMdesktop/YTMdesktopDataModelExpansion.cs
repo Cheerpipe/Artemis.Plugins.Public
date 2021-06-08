@@ -35,7 +35,7 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
 
         public YTMdesktopDataModelExpansion(ILogger logger, IColorQuantizerService colorQuantizer, IProcessMonitorService processMonitorService)
         {
-            _processMonitorService = processMonitorService;
+            //_processMonitorService = processMonitorService;
             _logger = logger;
             _colorQuantizer = colorQuantizer;
 
@@ -44,6 +44,10 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
                 Timeout = TimeSpan.FromSeconds(1)
             };
             albumArtColorCache = new ConcurrentDictionary<string, TrackColorsDataModel>();
+            DisplayIcon = "Play";
+            DisplayName = "Youbube Music Desktop Player";
+            ActivationRequirements.Add(new ProcessActivationRequirement("YouTube Music Desktop App"));
+            UpdateDuringActivationOverride = false;
         }
 
         #endregion

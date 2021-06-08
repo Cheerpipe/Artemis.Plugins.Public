@@ -78,9 +78,18 @@ namespace SRTPluginProviderRE7
             {
                 // Log ostDelegates.OutputMessage("[{0}] {1} {2}", ex.GetType().Name, ex.Message, ex.StackTrace);
                 return null;
+                exCount++;
+                if (exCount > 10)
+                {
+                    exCount = 0;
+                    Dispose();
+                    Init();
+                    logger.Verbose("Memory reader estarted because pointers were created while the game was not ready.");
+                }
             }
         }
 
+        int exCount;
         private int? GetProcessId() => Process.GetProcessesByName("re7")?.FirstOrDefault()?.Id;
 
         public void Dispose()

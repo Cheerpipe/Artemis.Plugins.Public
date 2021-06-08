@@ -3,7 +3,7 @@
   "Name": "Resident Evil 7 Biohazard",
   "Author": "Cheerpipe",
   "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",
-  "Icon": "RE7BH.svg",
+  "Icon": "Umbrella.svg",
   "RequiresAdmin": "true",
   "Description": "Game module that provides in game data for Resident Evil Biohazard",
   "Version": "1.0.0.0",

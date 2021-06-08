@@ -115,3 +115,15 @@ jobs:
         with:
           name: Artemis.Plugins.Modules.FallGuys
           path: .\Plugins\src\Modules\Artemis.Plugins.Modules.FallGuys\bin\x64\Release\net5.0-windows\publish
+
+      - name: Upload Artemis.Plugins.Modules.RE8
+        uses: actions/upload-artifact@v2
+        with:
+          name: Artemis.Plugins.Modules.RE8
+          path: .\Plugins\src\Modules\Artemis.Plugins.Modules.RE8\bin\x64\Release\net5.0-windows\publish
+
+      - name: Upload Artemis.Plugins.DataModelExpansions.Profiles
+        uses: actions/upload-artifact@v2
+        with:
+          name: Artemis.Plugins.DataModelExpansions.Profiles
+          path: .\Plugins\src\DataModelExpansions\Artemis.Plugins.DataModelExpansions.Profiles\bin\x64\Release\net5.0-windows\publish

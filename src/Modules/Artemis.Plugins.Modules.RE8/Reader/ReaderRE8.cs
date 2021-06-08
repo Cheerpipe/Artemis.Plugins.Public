@@ -90,9 +90,11 @@ namespace SRTPluginProviderRE8
         {
             stopwatch?.Stop();
             stopwatch = null;
+
             gameMemoryScanner?.Dispose();
             gameMemoryScanner = null;
-            process.Dispose();
+
+            process?.Dispose();
             process = null;
         }
 

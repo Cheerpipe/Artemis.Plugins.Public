@@ -75,7 +75,7 @@ namespace Artemis.Plugins.Modules.Games
 
         public override void ModuleDeactivated(bool isOverride)
         {
-            _readerRE8.Dispose();
+            _readerRE8?.Dispose();
             _readerRE8 = null;
         }
 

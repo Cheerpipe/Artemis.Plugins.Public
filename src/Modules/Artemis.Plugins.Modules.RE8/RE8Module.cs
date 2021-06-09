@@ -4,11 +4,12 @@ using Artemis.Plugins.Modules.FallGuys.DataModels;
 using Serilog;
 using SRTPluginProviderRE8;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Artemis.Plugins.Modules.Games
 {
-    [PluginFeature(AlwaysEnabled = true)]
+    [PluginFeature(Name = "Resident Evil 8 Village", Icon = "Umbrella.svg", AlwaysEnabled = true)]
     public class RE8Module : Module<RE8DataModel>
     {
         private readonly ILogger _logger;
@@ -16,11 +17,13 @@ namespace Artemis.Plugins.Modules.Games
         private IGameMemoryRE8 _gameMemoryRE8;
         public override void Enable()
         {
-            DisplayName = "Resident Evil 8 Village";
-            DisplayIcon = "Umbrella.svg";
-            ActivationRequirements.Add(new ProcessActivationRequirement("re8"));
             UpdateDuringActivationOverride = false;
         }
+
+        public override List<IModuleActivationRequirement> ActivationRequirements { get; } = new()
+        {
+            new ProcessActivationRequirement("re8")
+        };
 
         public RE8Module(ILogger logger)
         {

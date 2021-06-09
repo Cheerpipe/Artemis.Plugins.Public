@@ -6,6 +6,7 @@ using Artemis.Core.Services;
 using Artemis.Plugins.DataModelExpansions.Profiles.DataModels;
 using Artemis.Core.DataModelExpansions;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Artemis.Plugins.DataModelExpansions.Profiles
 {
@@ -17,6 +18,8 @@ namespace Artemis.Plugins.DataModelExpansions.Profiles
         {
             _profileService = profileService;
         }
+
+        public override List<IModuleActivationRequirement> ActivationRequirements => null;
 
         public override void Enable()
         {

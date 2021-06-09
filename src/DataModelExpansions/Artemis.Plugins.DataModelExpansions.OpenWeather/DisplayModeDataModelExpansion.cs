@@ -6,6 +6,7 @@ using Awesomio.Weather.NET;
 using Awesomio.NET.Models.CurrentWeather;
 using System.Linq;
 using Artemis.Core.Modules;
+using System.Collections.Generic;
 
 namespace Artemis.Plugins.DataModelExpansions.DisplaySettings
 {
@@ -27,6 +28,8 @@ namespace Artemis.Plugins.DataModelExpansions.DisplaySettings
             _citySetting.PropertyChanged += _OpenWeatherSettingsChanged_PropertyChanged;
             _unitOfMeasurementSetting.PropertyChanged += _OpenWeatherSettingsChanged_PropertyChanged;
         }
+
+        public override List<IModuleActivationRequirement> ActivationRequirements => null;
 
         private void _OpenWeatherSettingsChanged_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {

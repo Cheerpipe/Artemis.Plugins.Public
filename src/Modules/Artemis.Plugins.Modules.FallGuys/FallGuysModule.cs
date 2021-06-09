@@ -2,18 +2,22 @@
 using Artemis.Core.Modules;
 using Artemis.Plugins.Modules.FallGuys.DataModels;
 using FallGuys.Gsi;
+using System.Collections.Generic;
 
 namespace Artemis.Plugins.Modules.Games
 {
-    [PluginFeature(AlwaysEnabled = true)]
+    [PluginFeature(Name = "Fall Guys", Icon = "FallGuys.svg", AlwaysEnabled = true)]
     public class FallGuysModule : Module<FallGuysDataModel>
     {
         private Gsi _gsi;
+
+        public override List<IModuleActivationRequirement> ActivationRequirements { get; } = new()
+        {
+            new ProcessActivationRequirement("FallGuys_client_game")
+        };
+
         public override void Enable()
         {
-            DisplayName = "Fall Guys";
-            DisplayIcon = "FallGuys.svg";
-            ActivationRequirements.Add(new ProcessActivationRequirement("FallGuys_client_game"));
         }
 
         public FallGuysModule(PluginSettings settings)

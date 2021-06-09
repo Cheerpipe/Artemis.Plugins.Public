@@ -7,6 +7,7 @@ using System.Linq;
 using WindowsDisplayAPI;
 using WindowsDisplayAPI.DisplayConfig;
 using Artemis.Core.Modules;
+using System.Collections.Generic;
 
 namespace Artemis.Plugins.DataModelExpansions.DisplaySettings
 {
@@ -22,9 +23,10 @@ namespace Artemis.Plugins.DataModelExpansions.DisplaySettings
 
         private void SystemEvents_DisplaySettingsChanged(object sender, EventArgs e)
         {
-            //Task task = Task.Run(async () => await UpdateDataDataModel());
             UpdateDataDataModel();
         }
+
+        public override List<IModuleActivationRequirement> ActivationRequirements => null;
 
         public override void Enable()
         {

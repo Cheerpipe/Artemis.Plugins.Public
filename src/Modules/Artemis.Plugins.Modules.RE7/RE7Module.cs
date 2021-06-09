@@ -1,26 +1,29 @@
 ﻿using Artemis.Core;
 using Artemis.Core.Modules;
 using Artemis.Plugins.Modules.FallGuys.DataModels;
-using ProcessMemory;
 using Serilog;
 using SRTPluginProviderRE7;
 using System;
-using System.Diagnostics;
-using System.Linq;
+using System.Collections.Generic;
 
 namespace Artemis.Plugins.Modules.Games
 {
-    [PluginFeature(AlwaysEnabled = true)]
+    [PluginFeature(Name = "Resident Evil 7 Biohazard", Icon = "Umbrella.svg", AlwaysEnabled = true)]
     public class RE7Module : Module<RE7DataModel>
     {
         private readonly ILogger _logger;
         private ReaderRE7 _readerRE7;
         private IGameMemoryRE7 _gameMemoryRE7;
+
+        public override List<IModuleActivationRequirement> ActivationRequirements { get; } = new()
+        {
+            new ProcessActivationRequirement("re7")
+        };
+
+
+
         public override void Enable()
         {
-            DisplayName = "Resident Evil 7 Biohazard";
-            DisplayIcon = "Umbrella.svg";
-            ActivationRequirements.Add(new ProcessActivationRequirement("re7"));
             UpdateDuringActivationOverride = false;
         }
 

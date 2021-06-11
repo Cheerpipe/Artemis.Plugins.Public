@@ -25,6 +25,13 @@ namespace RGB.NET.Devices.YeeLight
             return _registeredDevices;
         }
 
+        private async Task GetDevicesAsync()
+        {
+            var progressReporter = new Progress<Device>(OnDeviceFound);
+            DeviceLocator.UseAllAvailableMulticastAddresses = true;
+            await DeviceLocator.DiscoverAsync(progressReporter);
+        }
+
         private void OnDeviceFound(Device device)
         {
             try
@@ -38,12 +45,7 @@ namespace RGB.NET.Devices.YeeLight
             }
         }
 
-        private async Task GetDevicesAsync()
-        {
-            var progressReporter = new Progress<Device>(OnDeviceFound);
-            //DeviceLocator.UseAllAvailableMulticastAddresses = true;
-            await DeviceLocator.DiscoverAsync(progressReporter);
-        }
+        protected override void InitializeSDK() { }
 
         public override void Dispose()
         {
@@ -56,11 +58,6 @@ namespace RGB.NET.Devices.YeeLight
                 }
             _yeeLightDevices = null;
             _registeredDevices.Clear();
-        }
-
-        protected override void InitializeSDK()
-        {
-
         }
     }
 }

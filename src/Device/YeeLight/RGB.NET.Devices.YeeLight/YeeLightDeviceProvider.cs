@@ -86,9 +86,8 @@ namespace RGB.NET.Devices.YeeLight
                     device?.Dispose();
                 }
             _yeeLightDevices = null;
-            YeeLightDeviceDefinitions.Clear();
-            _registeredDevices.Clear();
-            _instance = null;
+            YeeLightDeviceDefinitions?.Clear();
+            _registeredDevices?.Clear();
         }
     }
 }

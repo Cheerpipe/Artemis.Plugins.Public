@@ -12,7 +12,6 @@ namespace Artemis.Plugins.Devices.YeeLight
     public class YeeLightDeviceProvider : DeviceProvider
     {
         private readonly IRgbService _rgbService;
-        private readonly PluginSettings _pluginSettings;
 
         private PluginSetting<bool> _useAllAvailableMulticastAddresses;
         private PluginSetting<List<YeeLightDeviceDefinition>> _yeeLightDeviceDefinitions;
@@ -21,8 +20,6 @@ namespace Artemis.Plugins.Devices.YeeLight
         public YeeLightDeviceProvider(IRgbService rgbService, PluginSettings pluginSettings) : base(RGB.NET.Devices.YeeLight.YeeLightDeviceProvider.Instance)
         {
             _rgbService = rgbService;
-            _pluginSettings = pluginSettings;
-
             _useAllAvailableMulticastAddresses = pluginSettings.GetSetting("UseAllAvailableMulticastAddresses", false);
             _yeeLightDeviceDefinitions = pluginSettings.GetSetting("YeeLightDeviceDefinitionsSetting", new List<YeeLightDeviceDefinition>());
             _scanMode = pluginSettings.GetSetting("ScanMode", ScanMode.Automatic);
@@ -30,9 +27,9 @@ namespace Artemis.Plugins.Devices.YeeLight
 
         public override void Enable()
         {
+            RGB.NET.Devices.YeeLight.YeeLightDeviceProvider.Instance.YeeLightDeviceDefinitions = _yeeLightDeviceDefinitions.Value.ToList();
             RGB.NET.Devices.YeeLight.YeeLightDeviceProvider.Instance.UseAllAvailableMulticastAddresses = _useAllAvailableMulticastAddresses.Value;
             RGB.NET.Devices.YeeLight.YeeLightDeviceProvider.Instance.ScanMode = _scanMode.Value;
-            RGB.NET.Devices.YeeLight.YeeLightDeviceProvider.Instance.YeeLightDeviceDefinitions = _yeeLightDeviceDefinitions.Value.ToList();
             _rgbService.AddDeviceProvider(RgbDeviceProvider);
         }
 

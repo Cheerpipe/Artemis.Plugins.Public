@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using RGB.NET.Core;
+using RGB.NET.Devices.YeeLight.Enums;
 using YeelightAPI;
 
 namespace RGB.NET.Devices.YeeLight
@@ -11,6 +11,9 @@ namespace RGB.NET.Devices.YeeLight
         private static YeeLightDeviceProvider? _instance;
         private List<IRGBDevice> _registeredDevices = new List<IRGBDevice>();
         private IEnumerable<Device>? _yeeLightDevices;
+        public bool UseAllAvailableMulticastAddresses { get; set; }
+        public ScanMode ScanMode { get; set; }
+        public List<YeeLightDeviceDefinition> YeeLightDeviceDefinitions { get; set; }
 
         public static YeeLightDeviceProvider Instance => _instance ?? new YeeLightDeviceProvider();
 
@@ -21,27 +24,53 @@ namespace RGB.NET.Devices.YeeLight
         }
         protected override IEnumerable<IRGBDevice> LoadDevices()
         {
-            GetDevicesAsync().Wait();
-            return _registeredDevices;
-        }
+            DeviceLocator.UseAllAvailableMulticastAddresses = UseAllAvailableMulticastAddresses;
 
-        private async Task GetDevicesAsync()
-        {
-            var progressReporter = new Progress<Device>(OnDeviceFound);
-            DeviceLocator.UseAllAvailableMulticastAddresses = true;
-            await DeviceLocator.DiscoverAsync(progressReporter);
-        }
-
-        private void OnDeviceFound(Device device)
-        {
-            try
+            if (ScanMode == ScanMode.Automatic)
             {
-                device.Connect().Wait();
-                _registeredDevices.Add(new YeeLightRGBRGBDevice(new YeeLightRGBDeviceInfo(RGBDeviceType.LedStripe, string.Format("YeeLight {0} ({1})", device.Model, device.Hostname), device.Hostname), new YeeLightUpdateQueue(GetUpdateTrigger(), device)));
+
+                _yeeLightDevices = DeviceLocator.DiscoverAsync().GetAwaiter().GetResult();
+
+                foreach (var device in _yeeLightDevices)
+                {
+                    bool add = false;
+                    try
+                    {
+                        device.Connect().Wait();
+                        add = device.IsConnected;
+                    }
+                    catch
+                    {
+                        // LOG
+                        add = false;
+                    }
+
+                    if (add)
+                        yield return new YeeLightRGBRGBDevice(new YeeLightRGBDeviceInfo(RGBDeviceType.LedStripe, string.Format("YeeLight {0} ({1})", device.Model, device.Hostname), device.Hostname), new YeeLightUpdateQueue(GetUpdateTrigger(), device, device.Model));
+                }
             }
-            catch
+            else if (YeeLightDeviceDefinitions != null)
             {
-                //TODO: Log
+                foreach (YeeLightDeviceDefinition def in YeeLightDeviceDefinitions)
+                {
+                    Device device = new Device(def.HostName);
+                    device.Name = def.DeviceName;
+                    bool add = false;
+                    try
+                    {
+                        device.Connect().Wait();
+                        add = device.IsConnected;
+                    }
+                    catch
+                    {
+                        // LOG
+                        add = false;
+                    }
+
+                    if (add)
+                        yield return new YeeLightRGBRGBDevice(new YeeLightRGBDeviceInfo(RGBDeviceType.LedStripe, string.Format("YeeLight {0} ({1})", def.Model, device.Hostname), device.Hostname), new YeeLightUpdateQueue(GetUpdateTrigger(), device, def.Model));
+
+                }
             }
         }
 
@@ -57,7 +86,9 @@ namespace RGB.NET.Devices.YeeLight
                     device?.Dispose();
                 }
             _yeeLightDevices = null;
+            YeeLightDeviceDefinitions.Clear();
             _registeredDevices.Clear();
+            _instance = null;
         }
     }
 }

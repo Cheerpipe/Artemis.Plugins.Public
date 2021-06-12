@@ -30,7 +30,6 @@
     <FileVersion>0.0.1</FileVersion>
 
     <OutputPath>..\bin\</OutputPath>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <IncludeSource>True</IncludeSource>
     <IncludeSymbols>True</IncludeSymbols>
     <Product />

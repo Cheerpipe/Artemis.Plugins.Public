@@ -1,17 +1,19 @@
 ﻿using System;
-using System.Threading.Tasks;
 using RGB.NET.Core;
 using YeelightAPI;
+using YeelightAPI.Models;
 
 namespace RGB.NET.Devices.YeeLight
 {
     public class YeeLightUpdateQueue : UpdateQueue
     {
         private Device _light;
-        public YeeLightUpdateQueue(IDeviceUpdateTrigger updateTrigger, Device light)
+        private MODEL _model;
+        public YeeLightUpdateQueue(IDeviceUpdateTrigger updateTrigger, Device light, MODEL model)
             : base(updateTrigger)
         {
-            this._light = light;
+            _light = light;
+            _model = model;
         }
         protected override void Update(in ReadOnlySpan<(object key, Color color)> dataSet)
         {
@@ -27,17 +29,17 @@ namespace RGB.NET.Devices.YeeLight
             var B = color.GetB();
             var L = (int)color.GetLabL();
 
-            if (_light.Model == YeelightAPI.Models.MODEL.Color) // Color bulb cant be turned off just by setting colors.
+            if (_model == MODEL.Color) // Color bulb cant be turned off just by setting colors.
             {
                 if (L == 0)
                 {
-                    _light.SetPower(false).Wait();
+                    _light.SetPower(false).Wait(500);
                     return;
                 }
                 else
                 {
                     if (_light.Properties["power"].ToString() == "off")
-                        _light.SetPower(true).Wait();
+                        _light.SetPower(true).Wait(500);
                 }
             }
             else
@@ -45,8 +47,8 @@ namespace RGB.NET.Devices.YeeLight
                 // Maybe other bulbs needs other protocol or command order.
             }
 
-            _light.SetBrightness(L).Wait();
-            _light.SetRGBColor(R, G, B).Wait();
+            _light.SetBrightness(L).Wait(500);
+            var result = _light.SetRGBColor(R, G, B).GetAwaiter().GetResult();
         }
     }
 }

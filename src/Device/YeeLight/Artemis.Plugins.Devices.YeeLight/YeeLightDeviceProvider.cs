@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Artemis.Plugins.Devices.YeeLight
 {
-    [PluginFeature(AlwaysEnabled = true, Name ="Yeelight Device Provider")]
+    [PluginFeature(Name ="Yeelight Device Provider")]
     public class YeeLightDeviceProvider : DeviceProvider
     {
         private readonly IRgbService _rgbService;

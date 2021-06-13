@@ -1,13 +1,13 @@
 ﻿using Artemis.Core;
 using Artemis.Core.Modules;
 using Artemis.Core.Services;
-using Artemis.Plugins.Module.DynamicExternalDataModule.DataModels;
+using Artemis.Plugins.DataModelExpansions.DynamicExternalDataModelExpansions.DataModels;
 using Artemis.UI.Services;
 using Serilog;
 using System;
 using System.Collections.Generic;
 
-namespace Artemis.Plugins.Module.DynamicExternalDataModule
+namespace Artemis.Plugins.DataModelExpansions.DynamicExternalDataModelExpansions
 {
     public class DesktopVariablesDataModelExpansion : Module<DynamicExternalDataModuleDataModel>
     {

@@ -2,8 +2,8 @@
   <PropertyGroup>
     <TargetFramework>net5.0-windows</TargetFramework>
     <ShouldIncludeNativeSkiaSharp>false</ShouldIncludeNativeSkiaSharp>
-    <AssemblyName>Artemis.Plugins.Module.DynamicExternalDataModule</AssemblyName>
-    <RootNamespace>Artemis.Plugins.Module.DynamicExternalDataModule</RootNamespace>
+    <AssemblyName>Artemis.Plugins.DataModelExpansions.DynamicExternalData</AssemblyName>
+    <RootNamespace>Artemis.Plugins.DataModelExpansions.DynamicExternalData</RootNamespace>
     <UseWPF>true</UseWPF>
     <Platforms>x64</Platforms>
     <GenerateDependencyFile>False</GenerateDependencyFile>

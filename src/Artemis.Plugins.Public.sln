@@ -43,13 +43,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.DataModelEx
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.Modules.RE8", "Modules\Artemis.Plugins.Modules.RE8\Artemis.Plugins.Modules.RE8.csproj", "{CD245032-F7AB-41BD-8BD5-B86E68DBF4DD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.Module.DynamicExternalDataModule", "DataModelExpansions\Artemis.Plugins.DataModelExpansions.DynamicExternalDataModule\Artemis.Plugins.Module.DynamicExternalDataModule.csproj", "{6E88A9E7-22B3-4C00-A04C-75A1DD2303AE}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ledenet", "Ledenet", "{99B7F497-F1D9-4F71-9133-B10E2D00A25C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.Devices.Ledenet", "Device\Ledenet\Artemis.Plugins.Devices.Ledenet\Artemis.Plugins.Devices.Ledenet.csproj", "{5F15DBD1-C895-4965-B238-CA69F0706F40}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RGB.NET.Devices.Ledenet", "Device\Ledenet\RGB.NET.Devices.Ledenet\RGB.NET.Devices.Ledenet.csproj", "{41FCAA62-F0F9-470A-9B73-122D2C0B9EF2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.DataModelExpansions.DynamicExternalData", "DataModelExpansions\Artemis.Plugins.DataModelExpansions.DynamicExternalData\Artemis.Plugins.DataModelExpansions.DynamicExternalData.csproj", "{9F5BBB63-E5F3-48C9-BD8C-7D01E2057490}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -179,19 +179,12 @@ Global
 		{CD245032-F7AB-41BD-8BD5-B86E68DBF4DD}.Release|Any CPU.Build.0 = Release|x64
 		{CD245032-F7AB-41BD-8BD5-B86E68DBF4DD}.Release|x64.ActiveCfg = Release|x64
 		{CD245032-F7AB-41BD-8BD5-B86E68DBF4DD}.Release|x64.Build.0 = Release|x64
-		{6E88A9E7-22B3-4C00-A04C-75A1DD2303AE}.Debug|Any CPU.ActiveCfg = Debug|x64
-		{6E88A9E7-22B3-4C00-A04C-75A1DD2303AE}.Debug|Any CPU.Build.0 = Debug|x64
-		{6E88A9E7-22B3-4C00-A04C-75A1DD2303AE}.Debug|x64.ActiveCfg = Debug|x64
-		{6E88A9E7-22B3-4C00-A04C-75A1DD2303AE}.Debug|x64.Build.0 = Debug|x64
-		{6E88A9E7-22B3-4C00-A04C-75A1DD2303AE}.Release|Any CPU.ActiveCfg = Release|x64
-		{6E88A9E7-22B3-4C00-A04C-75A1DD2303AE}.Release|Any CPU.Build.0 = Release|x64
-		{6E88A9E7-22B3-4C00-A04C-75A1DD2303AE}.Release|x64.ActiveCfg = Release|x64
-		{6E88A9E7-22B3-4C00-A04C-75A1DD2303AE}.Release|x64.Build.0 = Release|x64
 		{5F15DBD1-C895-4965-B238-CA69F0706F40}.Debug|Any CPU.ActiveCfg = Debug|x64
 		{5F15DBD1-C895-4965-B238-CA69F0706F40}.Debug|Any CPU.Build.0 = Debug|x64
 		{5F15DBD1-C895-4965-B238-CA69F0706F40}.Debug|x64.ActiveCfg = Debug|x64
 		{5F15DBD1-C895-4965-B238-CA69F0706F40}.Debug|x64.Build.0 = Debug|x64
 		{5F15DBD1-C895-4965-B238-CA69F0706F40}.Release|Any CPU.ActiveCfg = Release|x64
+		{5F15DBD1-C895-4965-B238-CA69F0706F40}.Release|Any CPU.Build.0 = Release|x64
 		{5F15DBD1-C895-4965-B238-CA69F0706F40}.Release|x64.ActiveCfg = Release|x64
 		{5F15DBD1-C895-4965-B238-CA69F0706F40}.Release|x64.Build.0 = Release|x64
 		{41FCAA62-F0F9-470A-9B73-122D2C0B9EF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -202,6 +195,14 @@ Global
 		{41FCAA62-F0F9-470A-9B73-122D2C0B9EF2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{41FCAA62-F0F9-470A-9B73-122D2C0B9EF2}.Release|x64.ActiveCfg = Release|Any CPU
 		{41FCAA62-F0F9-470A-9B73-122D2C0B9EF2}.Release|x64.Build.0 = Release|Any CPU
+		{9F5BBB63-E5F3-48C9-BD8C-7D01E2057490}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{9F5BBB63-E5F3-48C9-BD8C-7D01E2057490}.Debug|Any CPU.Build.0 = Debug|x64
+		{9F5BBB63-E5F3-48C9-BD8C-7D01E2057490}.Debug|x64.ActiveCfg = Debug|x64
+		{9F5BBB63-E5F3-48C9-BD8C-7D01E2057490}.Debug|x64.Build.0 = Debug|x64
+		{9F5BBB63-E5F3-48C9-BD8C-7D01E2057490}.Release|Any CPU.ActiveCfg = Release|x64
+		{9F5BBB63-E5F3-48C9-BD8C-7D01E2057490}.Release|Any CPU.Build.0 = Release|x64
+		{9F5BBB63-E5F3-48C9-BD8C-7D01E2057490}.Release|x64.ActiveCfg = Release|x64
+		{9F5BBB63-E5F3-48C9-BD8C-7D01E2057490}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -223,10 +224,10 @@ Global
 		{8C7056CC-EE44-4A08-A4FE-26D822699F93} = {F1E2EED2-1578-471B-9393-13E9EFC36D04}
 		{7405F97D-BF9B-4D36-8925-BA7BE5FA9CD7} = {0F036E0A-8F42-4105-BA27-BB2F6EE213A8}
 		{CD245032-F7AB-41BD-8BD5-B86E68DBF4DD} = {F1E2EED2-1578-471B-9393-13E9EFC36D04}
-		{6E88A9E7-22B3-4C00-A04C-75A1DD2303AE} = {0F036E0A-8F42-4105-BA27-BB2F6EE213A8}
 		{99B7F497-F1D9-4F71-9133-B10E2D00A25C} = {FE4ECDD6-6870-4A3E-9D01-F046EDB596F9}
 		{5F15DBD1-C895-4965-B238-CA69F0706F40} = {99B7F497-F1D9-4F71-9133-B10E2D00A25C}
 		{41FCAA62-F0F9-470A-9B73-122D2C0B9EF2} = {99B7F497-F1D9-4F71-9133-B10E2D00A25C}
+		{9F5BBB63-E5F3-48C9-BD8C-7D01E2057490} = {0F036E0A-8F42-4105-BA27-BB2F6EE213A8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {11371D22-FDA3-41EA-8116-69E48DD68579}

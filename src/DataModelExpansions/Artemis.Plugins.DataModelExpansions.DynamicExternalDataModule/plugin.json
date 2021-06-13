@@ -1,8 +1,0 @@
-{
-  "Guid": "69ada390-8ab4-11eb-8dcd-0242ac410001",
-  "Name": "Dynamic External Data",
-  "Icon": "WallSconceRound",
-  "Description": "A simple dynamic module to get data from outside Artemis",
-  "Version": "1.0.0.0",
-  "Main": "Artemis.Plugins.Module.DynamicExternalDataModule.dll"
-}

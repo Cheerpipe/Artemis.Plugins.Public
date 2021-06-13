@@ -18,11 +18,11 @@ namespace RGB.NET.Devices.Ledenet.Generic
 
         internal LedenetRGBDeviceInfo(RGBDeviceType deviceType, string model, string ipAddress)
         {
-            this.DeviceType = deviceType;
-            this.Model = model;
-            this.IpAddress = IpAddress;
+            DeviceType = deviceType;
+            Model = model;
+            IpAddress = ipAddress;
 
-            DeviceName = $"Ledenet light {IpAddress}";
+            DeviceName = $"Ledenet light ({IpAddress})";
         }
     }
 }

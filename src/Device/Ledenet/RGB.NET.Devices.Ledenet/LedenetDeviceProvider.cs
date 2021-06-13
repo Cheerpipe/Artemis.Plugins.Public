@@ -50,7 +50,7 @@ namespace RGB.NET.Devices.Ledenet
 
                     if (add)
                     {
-                        _IRGBDevices.Add(new LedenetRGBDevice(new LedenetRGBDeviceInfo(RGBDeviceType.LedStripe, "Ledenet light", device.HostName), new LedenetUpdateQueue(GetUpdateTrigger(), light)));
+                        _IRGBDevices.Add(new LedenetRGBDevice(new LedenetRGBDeviceInfo(RGBDeviceType.LedStripe, $"Ledenet light ({device.HostName})", device.HostName), new LedenetUpdateQueue(GetUpdateTrigger(), light)));
                         _initializedDevices.Add(light);
 
                     }

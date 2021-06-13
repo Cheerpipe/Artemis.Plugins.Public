@@ -18,9 +18,9 @@ namespace RGB.NET.Devices.YeeLight
 
         internal YeeLightRGBDeviceInfo(RGBDeviceType deviceType, string model, string ipAddress)
         {
-            this.DeviceType = deviceType;
-            this.Model = model;
-            this.IpAddress = ipAddress;
+            DeviceType = deviceType;
+            Model = model;
+            IpAddress = ipAddress;
 
             DeviceName = "YeeLight Light";
         }

@@ -47,9 +47,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.Module.Dyna
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ledenet", "Ledenet", "{99B7F497-F1D9-4F71-9133-B10E2D00A25C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.Devices.Ledenet", "Device\Ledenet\Artemis.Plugins.Devices.MagicHome\Artemis.Plugins.Devices.Ledenet.csproj", "{5F15DBD1-C895-4965-B238-CA69F0706F40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.Devices.Ledenet", "Device\Ledenet\Artemis.Plugins.Devices.Ledenet\Artemis.Plugins.Devices.Ledenet.csproj", "{5F15DBD1-C895-4965-B238-CA69F0706F40}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RGB.NET.Devices.Ledenet", "Device\Ledenet\RGB.NET.Devices.MagicHome\RGB.NET.Devices.Ledenet.csproj", "{41FCAA62-F0F9-470A-9B73-122D2C0B9EF2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RGB.NET.Devices.Ledenet", "Device\Ledenet\RGB.NET.Devices.Ledenet\RGB.NET.Devices.Ledenet.csproj", "{41FCAA62-F0F9-470A-9B73-122D2C0B9EF2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -188,6 +188,7 @@ Global
 		{6E88A9E7-22B3-4C00-A04C-75A1DD2303AE}.Release|x64.ActiveCfg = Release|x64
 		{6E88A9E7-22B3-4C00-A04C-75A1DD2303AE}.Release|x64.Build.0 = Release|x64
 		{5F15DBD1-C895-4965-B238-CA69F0706F40}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{5F15DBD1-C895-4965-B238-CA69F0706F40}.Debug|Any CPU.Build.0 = Debug|x64
 		{5F15DBD1-C895-4965-B238-CA69F0706F40}.Debug|x64.ActiveCfg = Debug|x64
 		{5F15DBD1-C895-4965-B238-CA69F0706F40}.Debug|x64.Build.0 = Debug|x64
 		{5F15DBD1-C895-4965-B238-CA69F0706F40}.Release|Any CPU.ActiveCfg = Release|x64

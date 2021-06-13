@@ -73,6 +73,12 @@ jobs:
         with:
           name: Artemis.Plugins.Devices.YeeLight
           path: .\Plugins\src\Device\YeeLight\Artemis.Plugins.Devices.YeeLight\bin\x64\Release\net5.0-windows\publish
+
+      - name: Upload Artemis.Plugins.Devices.Ledenet
+        uses: actions/upload-artifact@v2
+        with:
+          name: Artemis.Plugins.Devices.Ledenet
+          path: .\Plugins\src\Device\Ledenet\Artemis.Plugins.Devices.Ledenet\bin\x64\Release\net5.0-windows\publish          
           
       - name: Upload Artemis.Plugins.LayerBrushes.ConnectingDotss
         uses: actions/upload-artifact@v2
@@ -127,3 +133,9 @@ jobs:
         with:
           name: Artemis.Plugins.DataModelExpansions.Profiles
           path: .\Plugins\src\DataModelExpansions\Artemis.Plugins.DataModelExpansions.Profiles\bin\x64\Release\net5.0-windows\publish
+
+      - name: Upload Artemis.Plugins.DataModelExpansions.DynamicExternalDataModule
+        uses: actions/upload-artifact@v2
+        with:
+          name: Artemis.Plugins.DataModelExpansions.DynamicExternalDataModule
+          path: .\Plugins\src\DataModelExpansionsArtemis.Plugins.Module.DynamicExternalDataModule\bin\x64\Release\net5.0-windows\publish          

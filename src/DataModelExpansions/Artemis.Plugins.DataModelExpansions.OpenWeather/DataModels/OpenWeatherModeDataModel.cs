@@ -1,4 +1,4 @@
-﻿using Artemis.Core.DataModelExpansions;
+﻿using Artemis.Core.Modules;
 using System;
 
 namespace Artemis.Plugins.DataModelExpansions.OpenWeather.DataModels

@@ -1,5 +1,5 @@
 ﻿using Artemis.Core;
-using Artemis.Core.DataModelExpansions;
+using Artemis.Core.Modules;
 using FallGuys.Gsi;
 using FallGuys.Gsi.StateMachines.Enums;
 

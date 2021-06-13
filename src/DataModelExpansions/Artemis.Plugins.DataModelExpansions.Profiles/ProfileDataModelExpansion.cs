@@ -4,7 +4,6 @@ using System;
 using Artemis.Core.Modules;
 using Artemis.Core.Services;
 using Artemis.Plugins.DataModelExpansions.Profiles.DataModels;
-using Artemis.Core.DataModelExpansions;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -23,6 +22,7 @@ namespace Artemis.Plugins.DataModelExpansions.Profiles
 
         public override void Enable()
         {
+            UpdateProfilesDataDataModel();
             AddTimedUpdate(TimeSpan.FromSeconds(1), _ => UpdateProfilesDataDataModel(), "UpdateProfilesDataDataModel");
         }
 

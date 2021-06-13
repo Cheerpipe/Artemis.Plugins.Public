@@ -1,5 +1,5 @@
 ﻿using Artemis.Core;
-using Artemis.Core.DataModelExpansions;
+using Artemis.Core.Modules;
 using SRTPluginProviderRE8.Structs;
 using SRTPluginProviderRE8.Structs.GameStructs;
 using System.Collections.Generic;

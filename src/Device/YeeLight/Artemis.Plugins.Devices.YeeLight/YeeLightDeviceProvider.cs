@@ -36,7 +36,7 @@ namespace Artemis.Plugins.Devices.YeeLight
         public override void Disable()
         {
             _rgbService.RemoveDeviceProvider(RgbDeviceProvider);
-            RGB.NET.Devices.YeeLight.YeeLightDeviceProvider.Instance.Dispose();
+            RgbDeviceProvider.Dispose();
         }
     }
 }

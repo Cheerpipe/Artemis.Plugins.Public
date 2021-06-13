@@ -1,4 +1,4 @@
-﻿using Artemis.Core.DataModelExpansions;
+﻿using Artemis.Core.Modules;
 using System.Drawing;
 using WindowsDisplayAPI;
 using WindowsDisplayAPI.Native.DeviceContext;

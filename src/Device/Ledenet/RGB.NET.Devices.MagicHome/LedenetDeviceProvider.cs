@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Threading.Tasks;
 using MagicHome;
 using RGB.NET.Core;
 using RGB.NET.Devices.Ledenet.Generic;
@@ -10,6 +11,7 @@ namespace RGB.NET.Devices.Ledenet
 {
     public class LedenetDeviceProvider : AbstractRGBDeviceProvider
     {
+        private const int LEDENET_CONNECTION_TIMEOUT = 3000;
         private static LedenetDeviceProvider? _instance;
         private readonly List<Light> _initializedDevices = new();
 
@@ -27,29 +29,33 @@ namespace RGB.NET.Devices.Ledenet
         }
         protected override IEnumerable<IRGBDevice> LoadDevices()
         {
-            // TODO Connect async
+            List<IRGBDevice> _IRGBDevices = new List<IRGBDevice>();
             if (LedenetDeviceDefinitions != null)
-                foreach (LedenetDeviceDefinition device in LedenetDeviceDefinitions)
+                Parallel.ForEach(LedenetDeviceDefinitions, device =>
                 {
                     Light light = new();
                     bool add = false;
                     try
                     {
-                        light.ConnectAsync(IPAddress.Parse(device.HostName)).Wait();
-                        light.TurnOnAsync().Wait();
-                        light.AutoRefreshEnabled = true;
+                        if (light.ConnectAsync(IPAddress.Parse(device.HostName)).Wait(TimeSpan.FromMilliseconds(LEDENET_CONNECTION_TIMEOUT)))
+                        {
+                            light.TurnOnAsync().Wait();
+                            light.AutoRefreshEnabled = true;
+                        }
                     }
                     catch
                     {
-                        add = false;
+                        // Log
                     }
+
                     if (add)
                     {
-                        yield return new LedenetRGBDevice(new LedenetRGBDeviceInfo(RGBDeviceType.LedStripe, "Ledenet light", device.HostName), new LedenetUpdateQueue(GetUpdateTrigger(), light));
+                        _IRGBDevices.Add(new LedenetRGBDevice(new LedenetRGBDeviceInfo(RGBDeviceType.LedStripe, "Ledenet light", device.HostName), new LedenetUpdateQueue(GetUpdateTrigger(), light)));
                         _initializedDevices.Add(light);
 
                     }
-                }
+                });
+            return _IRGBDevices;
         }
 
         public override void Dispose()

@@ -38,8 +38,11 @@ namespace RGB.NET.Devices.YeeLight
                 }
                 else
                 {
-                    if (_light.Properties["power"].ToString() == "off")
-                        _light.SetPower(true).Wait(500);
+                    if (_light.Properties.TryGetValue("power", out object value))
+                    {
+                        if ((string)value == "off")
+                            _light.SetPower(true).Wait(500);
+                    }
                 }
             }
             else

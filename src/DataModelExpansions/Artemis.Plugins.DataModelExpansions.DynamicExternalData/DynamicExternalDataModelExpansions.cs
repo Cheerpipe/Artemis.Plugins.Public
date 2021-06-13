@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace Artemis.Plugins.DataModelExpansions.DynamicExternalDataModelExpansions
 {
-    public class DesktopVariablesDataModelExpansion : Module<DynamicExternalDataModuleDataModel>
+    public class DesktopVariablesDataModelExpansion : Module<DynamicExternalDataDataModel>
     {
         private readonly IWebServerService _webServerService;
         private readonly ILogger _logger;

@@ -26,6 +26,7 @@ namespace Artemis.Plugins.Module.DynamicExternalDataModule
         {
             _savedDynamicDataSetting = _pluginSettings.GetSetting("SavedDynamicDataSetting", new Dictionary<string, KeyValuePair<object, Type>>());
             _webServerService.AddStringEndPoint(this, "SetBoolValue", payload => ProcessValue<bool>(payload));
+            _webServerService.AddStringEndPoint(this, "ToggleBoolValue", payload => ToggleBoolValue(payload, true));
             _webServerService.AddStringEndPoint(this, "SetIntValue", payload => ProcessValue<int>(payload));
             _webServerService.AddStringEndPoint(this, "SetFloatValue", payload => ProcessValue<float>(payload));
             _webServerService.AddStringEndPoint(this, "SetStringValue", payload => ProcessValue<string>(payload));
@@ -43,6 +44,18 @@ namespace Artemis.Plugins.Module.DynamicExternalDataModule
             bool setValueResult = SetValue<T>(key, value);
             bool saveValueResult = SaveValue<T>(key, value);
             return setValueResult;
+        }
+
+        private bool ToggleBoolValue(string key, bool defaultValue)
+        {
+            if (DataModel.TryGetDynamicChild<bool>(key, out DynamicChild<bool> child))
+            {
+                child.Value = !child.Value;
+            }
+            {
+                DataModel.AddDynamicChild<bool>(key, defaultValue);
+            }
+            return SaveValue<bool>(key, child.Value);
         }
 
         private bool SetValue<T>(string key, object value)

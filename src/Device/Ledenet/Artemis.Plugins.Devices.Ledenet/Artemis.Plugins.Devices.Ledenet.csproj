@@ -29,7 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RGB.NET.Devices.MagicHome\RGB.NET.Devices.Ledenet.csproj" />
+    <ProjectReference Include="..\RGB.NET.Devices.Ledenet\RGB.NET.Devices.Ledenet.csproj" />
   </ItemGroup>
 
   <ItemGroup>

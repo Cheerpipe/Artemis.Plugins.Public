@@ -40,7 +40,7 @@ namespace RGB.NET.Devices.Ledenet
                         if (light.ConnectAsync(IPAddress.Parse(device.HostName)).Wait(TimeSpan.FromMilliseconds(LEDENET_CONNECTION_TIMEOUT)))
                         {
                             light.TurnOnAsync().Wait();
-                            light.AutoRefreshEnabled = true;
+                            add = light.Connected;
                         }
                     }
                     catch

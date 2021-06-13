@@ -13,9 +13,9 @@ namespace Artemis.Plugins.Devices.YeeLight
     {
         private readonly IRgbService _rgbService;
 
-        private PluginSetting<bool> _useAllAvailableMulticastAddresses;
-        private PluginSetting<List<YeeLightDeviceDefinition>> _yeeLightDeviceDefinitions;
-        private PluginSetting<ScanMode> _scanMode;
+        private readonly PluginSetting<bool> _useAllAvailableMulticastAddresses;
+        private readonly PluginSetting<List<YeeLightDeviceDefinition>> _yeeLightDeviceDefinitions;
+        private readonly PluginSetting<ScanMode> _scanMode;
 
         public YeeLightDeviceProvider(IRgbService rgbService, PluginSettings pluginSettings) : base(RGB.NET.Devices.YeeLight.YeeLightDeviceProvider.Instance)
         {

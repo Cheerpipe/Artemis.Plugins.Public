@@ -13,19 +13,24 @@ namespace RGB.NET.Devices.YeeLight
         private List<Device>? _discoveredYeeLightDevices;
         public bool UseAllAvailableMulticastAddresses { get; set; }
         public ScanMode ScanMode { get; set; }
-        public List<YeeLightDeviceDefinition> YeeLightDeviceDefinitions { get; set; }
+        public List<YeeLightDeviceDefinition>? YeeLightDeviceDefinitions { get; set; }
 
         public static YeeLightDeviceProvider Instance => _instance ?? new YeeLightDeviceProvider();
-        private List<Device> _initializedDevices = new();
+        private readonly List<Device> _initializedDevices = new();
 
         public YeeLightDeviceProvider()
         {
-            if (_instance != null) throw new InvalidOperationException($"There can be only one instance of type {nameof(YeeLightDeviceProvider)}");
+            if (_instance != null)
+            {
+                throw new InvalidOperationException($"There can be only one instance of type {nameof(YeeLightDeviceProvider)}");
+            }
+
             _instance = this;
         }
         protected override IEnumerable<IRGBDevice> LoadDevices()
         {
             DeviceLocator.UseAllAvailableMulticastAddresses = UseAllAvailableMulticastAddresses;
+            // TODO Connect async
             if (ScanMode == ScanMode.Automatic)
             {
 
@@ -33,7 +38,7 @@ namespace RGB.NET.Devices.YeeLight
 
                 foreach (var device in _discoveredYeeLightDevices)
                 {
-                    bool add = false;
+                    bool add;
                     try
                     {
                         device.Connect().Wait();
@@ -65,7 +70,7 @@ namespace RGB.NET.Devices.YeeLight
                         device.Name = def.DeviceName;
                         add = device.IsConnected;
                     }
-                    catch (Exception E)
+                    catch
                     {
                         // LOG
                         add = false;
@@ -92,7 +97,7 @@ namespace RGB.NET.Devices.YeeLight
                 device?.Disconnect();
                 device?.Dispose();
             }
-            _initializedDevices.Clear();
+            _initializedDevices?.Clear();
             YeeLightDeviceDefinitions?.Clear();
             _discoveredYeeLightDevices?.Clear();
         }

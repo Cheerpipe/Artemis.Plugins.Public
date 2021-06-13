@@ -3,6 +3,7 @@ using Artemis.Core.Modules;
 using Artemis.Core.Services;
 using Artemis.Plugins.Module.DynamicExternalDataModule.DataModels;
 using Artemis.UI.Services;
+using Serilog;
 using System;
 using System.Collections.Generic;
 
@@ -11,43 +12,46 @@ namespace Artemis.Plugins.Module.DynamicExternalDataModule
     public class DesktopVariablesDataModelExpansion : Module<DynamicExternalDataModuleDataModel>
     {
         private readonly IWebServerService _webServerService;
+        private readonly ILogger _logger;
         private readonly PluginSettings _pluginSettings;
         private Dictionary<string, KeyValuePair<object, Type>> _savedDynamicData;
         private PluginSetting<Dictionary<string, KeyValuePair<object, Type>>> _savedDynamicDataSetting;
-        public DesktopVariablesDataModelExpansion(IWebServerService webServerService, IDebugService _debugService, PluginSettings pluginSettings)
+        public DesktopVariablesDataModelExpansion(IWebServerService webServerService, IDebugService _debugService, PluginSettings pluginSettings, ILogger logger)
         {
             _webServerService = webServerService;
             _pluginSettings = pluginSettings;
+            _logger = logger;
         }
 
         public override List<IModuleActivationRequirement> ActivationRequirements => null;
 
         public override void Enable()
         {
+            // Enhancements: assign default startup value
             _savedDynamicDataSetting = _pluginSettings.GetSetting("SavedDynamicDataSetting", new Dictionary<string, KeyValuePair<object, Type>>());
-            _webServerService.AddStringEndPoint(this, "SetBoolValue", payload => ProcessValue<bool>(payload));
+            _webServerService.AddStringEndPoint(this, "SetBoolValue", payload => ProcessGenericValue<bool>(payload));
             _webServerService.AddStringEndPoint(this, "ToggleBoolValue", payload => ToggleBoolValue(payload, true));
 
-            _webServerService.AddStringEndPoint(this, "SetIntValue", payload => ProcessValue<Int64>(payload));
+            _webServerService.AddStringEndPoint(this, "SetIntValue", payload => ProcessGenericValue<Int64>(payload));
             _webServerService.AddStringEndPoint(this, "AddIntOffset", payload => ProcessIntOffset(payload, 0, new Int64Range(Int64.MinValue, Int64.MaxValue)));
             _webServerService.AddStringEndPoint(this, "AddIntOffsetAsPercentage", payload => ProcessIntOffset(payload, 0, new Int64Range(0, 100)));
 
-            _webServerService.AddStringEndPoint(this, "SetFloatValue", payload => ProcessValue<float>(payload));
-            _webServerService.AddStringEndPoint(this, "SetStringValue", payload => ProcessValue<string>(payload));
+            _webServerService.AddStringEndPoint(this, "SetFloatValue", payload => ProcessGenericValue<float>(payload));
+            _webServerService.AddStringEndPoint(this, "SetStringValue", payload => ProcessGenericValue<string>(payload));
             _webServerService.AddStringEndPoint(this, "RemoveAll", payload => RemoveAll());
             _webServerService.AddStringEndPoint(this, "Remove", payload => Remove(payload));
             LoadSavedValues();
         }
 
         // TODO: More param checks and log
-        private bool ProcessValue<T>(string payload)
+        private bool ProcessGenericValue<T>(string payload)
         {
             if (!ParsePayload<T>(payload, out string key, out object value))
             {
-                // Log
+                _logger.Warning($"Paylod {payload} is not valid to set a data key-value of type {typeof(T).Name}");
                 return false;
             }
-            bool setValueResult = SetValue<T>(key, value);
+            bool setValueResult = SetGenericValue<T>(key, value);
             bool saveValueResult = SaveValue<T>(key, value);
             return setValueResult;
         }
@@ -73,7 +77,7 @@ namespace Artemis.Plugins.Module.DynamicExternalDataModule
         {
             if (!ParsePayload<Int64>(payload, out string key, out object value))
             {
-                // Log
+                _logger.Warning($"Paylod {payload} is not valid to add an integer value offset");
                 return false;
             }
 
@@ -89,11 +93,11 @@ namespace Artemis.Plugins.Module.DynamicExternalDataModule
             return true;
         }
 
-        private bool SetValue<T>(string key, object value)
+        private bool SetGenericValue<T>(string key, object value)
         {
             if (value is not T)
             {
-                //Log
+                _logger.Warning($"Value {value} from key {key} can't be casted into {typeof(T).Name}");
                 return false;
             }
 
@@ -128,23 +132,23 @@ namespace Artemis.Plugins.Module.DynamicExternalDataModule
                     switch (Type.GetTypeCode(savedData.Value.Value))
                     {
                         case (TypeCode.Boolean):
-                            SetValue<bool>(savedData.Key, (bool)savedData.Value.Key);
+                            SetGenericValue<bool>(savedData.Key, (bool)savedData.Value.Key);
                             break;
                         case (TypeCode.Int32):
                         case (TypeCode.Int64):
-                            SetValue<Int64>(savedData.Key, (Int64)savedData.Value.Key);
+                            SetGenericValue<Int64>(savedData.Key, (Int64)savedData.Value.Key);
                             break;
                         case (TypeCode.Single):
-                            SetValue<float>(savedData.Key, (float)savedData.Value.Key);
+                            SetGenericValue<float>(savedData.Key, (float)savedData.Value.Key);
                             break;
                         case (TypeCode.String):
-                            SetValue<string>(savedData.Key, (string)savedData.Value.Key);
+                            SetGenericValue<string>(savedData.Key, (string)savedData.Value.Key);
                             break;
                     }
                 }
                 catch (Exception ex)
                 {
-                    //Log
+                    _logger.Warning($"Data member {savedData.Key} with value {savedData.Value.Key} was not loaded. Exception: /r/b {ex}");
                 }
             }
         }
@@ -163,7 +167,6 @@ namespace Artemis.Plugins.Module.DynamicExternalDataModule
             _savedDynamicDataSetting.Value.Remove(key);
             _savedDynamicData = _savedDynamicDataSetting.Value;
             _savedDynamicDataSetting.Save();
-            DataModel.ClearDynamicChildren();
         }
 
         public bool ParsePayload<T>(string payload, out string key, out object value)

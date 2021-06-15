@@ -26,7 +26,6 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
         private readonly IProcessMonitorService _processMonitorService;
         private readonly HttpClient _httpClient;
         private readonly ConcurrentDictionary<string, TrackColorsDataModel> albumArtColorCache;
-        private bool _youtubeIsRunning = false;
         private const string YTMD_PROCESS_NAME = "YouTube Music Desktop App";
         private YTMDesktopClient _YTMDesktopClient;
         private RootInfo _rootInfo;
@@ -64,28 +63,9 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
             AddTimedUpdate(TimeSpan.FromSeconds(1), UpdateData);
 
             _YTMDesktopClient = new YTMDesktopClient();
-            _youtubeIsRunning = YoutubeIsRunning();
-            _processMonitorService.ProcessStarted += _processMonitorService_ProcessStarted;
-            _processMonitorService.ProcessStopped += _processMonitorService_ProcessStopped;
-        }
 
-        private void _processMonitorService_ProcessStopped(object sender, ProcessEventArgs e)
-        {
-            if (e.Process.ProcessName == YTMD_PROCESS_NAME)
-            {
-                _youtubeIsRunning = YoutubeIsRunning();
-            }
         }
-
-        private void _processMonitorService_ProcessStarted(object sender, ProcessEventArgs e)
-        {
-            Debug.WriteLine(e.Process.ProcessName);
-            if (e.Process.ProcessName == YTMD_PROCESS_NAME)
-            {
-                _youtubeIsRunning = YoutubeIsRunning();
-            }
-        }
-
+     
         private bool YoutubeIsRunning()
         {
             return _processMonitorService.GetRunningProcesses().Any(p => p.ProcessName == YTMD_PROCESS_NAME);
@@ -96,14 +76,13 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
             _YTMDesktopClient = null;
             _trackId = null;
             _albumArtUrl = null;
-            _processMonitorService.ProcessStarted -= _processMonitorService_ProcessStarted;
-            _processMonitorService.ProcessStopped -= _processMonitorService_ProcessStopped;
         }
 
         public override void Update(double deltaTime)
         {
             if (DataModel.Player.isPaused)
                 return;
+
             if (DataModel.Track.duration == 0)
                 return;
 
@@ -122,7 +101,7 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
 
         private void UpdateYTMDekstopInfo()
         {
-            if (!_youtubeIsRunning)
+            if (!YoutubeIsRunning())
             {
                 // Don't query server if YTMD proccess is down.
                 DataModel.Empty();

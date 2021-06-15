@@ -59,6 +59,7 @@ namespace Artemis.Plugins.DataModelExpansions.DynamicExternalDataModelExpansions
         private bool ToggleBoolValue(string key, bool defaultValue)
         {
             DynamicChild<bool> child;
+            key = key.Trim();
             if (DataModel.TryGetDynamicChild<bool>(key, out child))
             {
                 child.Value = !child.Value;
@@ -163,6 +164,7 @@ namespace Artemis.Plugins.DataModelExpansions.DynamicExternalDataModelExpansions
 
         private void Remove(string key)
         {
+            key = key.Trim();
             DataModel.RemoveDynamicChildByKey(key);
             _savedDynamicDataSetting.Value.Remove(key);
             _savedDynamicData = _savedDynamicDataSetting.Value;
@@ -178,10 +180,11 @@ namespace Artemis.Plugins.DataModelExpansions.DynamicExternalDataModelExpansions
             {
                 return false;
             }
-            key = data[0];
-            value = (T)Convert.ChangeType(data[1], typeof(T));
+            key = data[0].Trim();
+            value = (T)Convert.ChangeType(data[1].Trim(), typeof(T));
             return true;
         }
+
         public override void Disable() { }
         public override void Update(double deltaTime) { }
     }

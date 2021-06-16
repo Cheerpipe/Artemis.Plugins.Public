@@ -6,7 +6,7 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
     {
         public override void Enable()
         {
-            RegisterLayerBrushDescriptor<RipplesLayerBrush>("Ripples", "Provides ripples effects", "CircleOutline");
+            RegisterLayerBrushDescriptor<RipplesLayerBrush>("Ripples", "Provides a highly configurable ripple effect", "Ripples.svg");
         }
 
         public override void Disable()

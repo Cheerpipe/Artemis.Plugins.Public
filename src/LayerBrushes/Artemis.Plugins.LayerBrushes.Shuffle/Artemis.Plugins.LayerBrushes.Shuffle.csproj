@@ -33,6 +33,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Artemis.Plugins.LayerBrushes.SolidPercentage\Artemis.Plugins.LayerBrushes.SolidPercentage.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="Artemis.Core">
       <HintPath>..\..\..\..\Artemis\src\Artemis.UI\bin\net5.0-windows\Artemis.Core.dll</HintPath>
       <Private>false</Private>

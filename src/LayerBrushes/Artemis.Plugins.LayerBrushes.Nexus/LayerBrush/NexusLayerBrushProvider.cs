@@ -6,7 +6,7 @@ namespace Artemis.Plugins.LayerBrushes.Nexus.LayerBrush
     {
         public override void Enable()
         {
-            RegisterLayerBrushDescriptor<NexusLayerBrush>("Nexus", "Provides a Nexus layer effect", "DragHorizontalVariant");
+            RegisterLayerBrushDescriptor<NexusLayerBrush>("Nexus", "Provides a Nexus layer effect", "Nexus.svg");
         }
 
         public override void Disable()

@@ -3,7 +3,7 @@
   "Name": "Connecting Dots layer brush",
   "Author": "Cheerpipe",
   "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",
-  "Icon": "ShareVariant",
+  "Icon": "ConnectingDots.svg",
   "Description": "Layer brush based on https://github.com/swharden/Csharp-Data-Visualization/tree/master/examples/drawing/constellation/simple.",
   "Version": "1.0.0.1",
   "Main": "Artemis.Plugins.LayerBrushes.ConnectingDots.dll",

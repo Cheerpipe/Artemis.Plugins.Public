@@ -6,7 +6,7 @@ namespace Artemis.Plugins.LayerBrushes.Shuffle.LayerBrush
     {
         public override void Enable()
         {
-            RegisterLayerBrushDescriptor<ShuffleLayerBrush>("Shuffle", "Per key color shuffle", "Palette");
+            RegisterLayerBrushDescriptor<ShuffleLayerBrush>("Shuffle", "Per key color shuffle", "Shuffle.svg");
         }
 
         public override void Disable()

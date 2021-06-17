@@ -9,6 +9,20 @@ using System.Collections.Generic;
 
 namespace Artemis.Plugins.DataModelExpansions.Profiles
 {
+    public class DynamicChildComparer : IEqualityComparer<DynamicChild>
+    {
+        public bool Equals(DynamicChild x, DynamicChild y)
+        {
+            if (x.Key == y.Key)
+                return true;
+            return false;
+        }
+
+        public int GetHashCode(DynamicChild obj)
+        {
+            return obj.GetHashCode();
+        }
+    }
     public class ProfilesDataModelExpansion : Module<ProfilesDataModel>
     {
         private readonly IProfileService _profileService;
@@ -32,73 +46,57 @@ namespace Artemis.Plugins.DataModelExpansions.Profiles
 
         public override void Update(double deltaTime) { }
 
+
         private void UpdateProfilesDataDataModel()
         {
             // Cleaning categories
-            DataModel.DynamicChildren.Select(c => c.Key).Except(_profileService.ProfileCategories.Select(c => c.Name)).ToList().ForEach(k => DataModel.RemoveDynamicChildByKey(k));
+
+            DataModel.DynamicChildren.Where(child => !_profileService.ProfileCategories.Any(cat => cat.Name == child.Key)).ToList().ForEach(k => DataModel.RemoveDynamicChild(k.Value));
 
             foreach (ProfileCategory profileCategory in _profileService.ProfileCategories)
             {
                 // Set Category values
                 string profileCategoryKey = profileCategory.Name;
 
-                if (DataModel.TryGetDynamicChild(profileCategoryKey, out DynamicChild<BasicCategoryInformation> basicCategoryInformation))
+                if (DataModel.TryGetDynamicChild(profileCategoryKey, out DynamicChild<ProfileCategoryDataModel> profileCategoryDataModelchild))
                 {
                     // Update
-                    basicCategoryInformation.Value.Name = profileCategory.Name;
-                    basicCategoryInformation.Value.Order = profileCategory.Order;
-                    basicCategoryInformation.Value.IsSuspended = profileCategory.IsSuspended;
+                    profileCategoryDataModelchild.Value = new ProfileCategoryDataModel(profileCategory);
                 }
                 else
                 {
                     // Create
-                    basicCategoryInformation = DataModel.AddDynamicChild
+                    profileCategoryDataModelchild = DataModel.AddDynamicChild
                     (
                         profileCategoryKey,
-                        new BasicCategoryInformation()
-                        {
-                            Name = profileCategory.Name,
-                            Order = profileCategory.Order,
-                            IsSuspended = profileCategory.IsSuspended,
-                        }
+                        new ProfileCategoryDataModel(profileCategory)
                     );
                 }
 
                 // Cleaning categories profiles
-                basicCategoryInformation.Value.Profiles.DynamicChildren.Select(c => c.Key).Except(profileCategory.ProfileConfigurations.Select(c => $"{c.Name} ({c.Entity.ProfileId})")).ToList().ForEach(k => basicCategoryInformation.Value.Profiles.RemoveDynamicChildByKey(k));
+                profileCategoryDataModelchild.Value.Profiles.DynamicChildren.Where(child => !profileCategory.ProfileConfigurations.Any(prof => prof.ProfileId.ToString() == child.Key)).ToList().ForEach(k => profileCategoryDataModelchild.Value.Profiles.RemoveDynamicChild(k.Value));
 
                 // Set Profiles values
-                bool hasActiveProfiles = false;
                 foreach (ProfileConfiguration profileConfiguration in profileCategory.ProfileConfigurations)
                 {
-                    string profileConfigurationKey = $"{profileConfiguration.Name} ({profileConfiguration.Entity.ProfileId})";
+                    string profileConfigurationKey = profileConfiguration.ProfileId.ToString();
 
-                    if (basicCategoryInformation.Value.Profiles.TryGetDynamicChild(profileConfigurationKey, out DynamicChild<BasicProfileInformation> basicProfileInformation))
+                    if (profileCategoryDataModelchild.Value.Profiles.TryGetDynamicChild(profileConfigurationKey, out DynamicChild<ProfileInformationDataModel> profileInformationDataModelChild))
                     {
                         // Update
-                        basicProfileInformation.Value.Name = profileConfiguration.Name;
-                        basicProfileInformation.Value.Order = profileConfiguration.Order;
-                        basicProfileInformation.Value.IsSuspended = profileConfiguration.IsSuspended;
-                        basicProfileInformation.Value.ActivationConditionMet = profileConfiguration.ActivationConditionMet;
+                        profileInformationDataModelChild.Value = new ProfileInformationDataModel(profileConfiguration);
                     }
                     else
                     {
                         // Create
-                        basicCategoryInformation.Value.Profiles.AddDynamicChild
+                        profileCategoryDataModelchild.Value.Profiles.AddDynamicChild
                         (
                             profileConfigurationKey,
-                            new BasicProfileInformation()
-                            {
-                                Name = profileConfiguration.Name,
-                                Order = profileConfiguration.Order,
-                                IsSuspended = profileConfiguration.IsSuspended,
-                                ActivationConditionMet = profileConfiguration.ActivationConditionMet,
-                            }
+                            new ProfileInformationDataModel(profileConfiguration),
+                           profileConfiguration.Name
                         );
                     }
-                    hasActiveProfiles = hasActiveProfiles || (!profileConfiguration.IsSuspended && profileConfiguration.ActivationConditionMet);
                 }
-                basicCategoryInformation.Value.HasActiveProfiles = hasActiveProfiles;
             }
         }
     }

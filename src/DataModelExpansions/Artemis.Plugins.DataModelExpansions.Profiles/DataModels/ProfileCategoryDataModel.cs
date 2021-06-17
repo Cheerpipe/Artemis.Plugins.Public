@@ -23,5 +23,4 @@ namespace Artemis.Plugins.DataModelExpansions.Profiles.DataModels
             HasActiveProfiles = category.ProfileConfigurations.Any(p => !p.IsSuspended && p.ActivationConditionMet);
         }
     }
- 
-}
+ }

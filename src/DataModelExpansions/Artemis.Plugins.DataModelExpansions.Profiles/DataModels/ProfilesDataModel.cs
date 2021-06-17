@@ -1,7 +1,4 @@
-﻿using Artemis.Core;
-using Artemis.Core.Modules;
-using System;
-using System.Linq;
+﻿using Artemis.Core.Modules;
 
 namespace Artemis.Plugins.DataModelExpansions.Profiles.DataModels
 {

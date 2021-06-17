@@ -1,5 +1,4 @@
 using Artemis.Core;
-using Serilog;
 using System;
 using Artemis.Core.Modules;
 using Artemis.Core.Services;
@@ -9,30 +8,25 @@ using System.Collections.Generic;
 
 namespace Artemis.Plugins.DataModelExpansions.Profiles
 {
-    public class DynamicChildComparer : IEqualityComparer<DynamicChild>
-    {
-        public bool Equals(DynamicChild x, DynamicChild y)
-        {
-            if (x.Key == y.Key)
-                return true;
-            return false;
-        }
-
-        public int GetHashCode(DynamicChild obj)
-        {
-            return obj.GetHashCode();
-        }
-    }
     public class ProfilesDataModelExpansion : Module<ProfilesDataModel>
     {
+        #region Properties
+
         private readonly IProfileService _profileService;
+        public override List<IModuleActivationRequirement> ActivationRequirements => null;
+
+        #endregion
+
+        #region Constructor
 
         public ProfilesDataModelExpansion(IProfileService profileService)
         {
             _profileService = profileService;
         }
 
-        public override List<IModuleActivationRequirement> ActivationRequirements => null;
+        #endregion
+
+        #region Plugin lifecycle methods
 
         public override void Enable()
         {
@@ -44,15 +38,18 @@ namespace Artemis.Plugins.DataModelExpansions.Profiles
         {
         }
 
-        public override void Update(double deltaTime) { }
+        #endregion
 
+        #region Update Datamodel methods
+
+        public override void Update(double deltaTime) { }
 
         private void UpdateProfilesDataDataModel()
         {
             // Cleaning categories
 
             DataModel.DynamicChildren.Where(child => !_profileService.ProfileCategories.Any(cat => cat.Name == child.Key)).ToList().ForEach(k => DataModel.RemoveDynamicChild(k.Value));
-
+  
             foreach (ProfileCategory profileCategory in _profileService.ProfileCategories)
             {
                 // Set Category values
@@ -99,5 +96,7 @@ namespace Artemis.Plugins.DataModelExpansions.Profiles
                 }
             }
         }
+
+        #endregion
     }
 }

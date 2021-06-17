@@ -3,7 +3,7 @@
   "Name": "Profiles",
   "Author": "Cheerpipe",
   "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",
-  "Icon": "folder",
+  "Icon": "Profiles.svg",
   "Description": "Provides information regarding existing Artemis Profiles.",
   "Version": "1.0.0.0",
   "Main": "Artemis.Plugins.DataModelExpansions.Profiles.dll",

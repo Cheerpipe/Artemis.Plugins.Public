@@ -33,10 +33,17 @@ namespace Artemis.Plugins.DataModelExpansions.DynamicExternalDataModelExpansions
         {
             _savedJsonDynamicDataSetting = _pluginSettings.GetSetting("SavedJsonDynamicDataSetting", new Dictionary<string, string>());
             LoadFromRepository();
-
-            _webServerService.AddStringEndPoint(this, "AddOrReplace", payload => AddOrReplace(payload, true));
-            _webServerService.AddStringEndPoint(this, "AddOrMerge", payload => AddOrCombine(payload, true));
+            _webServerService.AddStringEndPoint(this, "AddOrReplace", json => AddOrReplace(json, true));
+            _webServerService.AddStringEndPoint(this, "AddOrMerge", json => AddOrCombine(json, true));
             _webServerService.AddStringEndPoint(this, "RemoveByKey", key => Remove(key));
+            _webServerService.AddResponsiveStringEndPoint(this, "GetByKey", key =>
+            {
+                if (_savedJsonDynamicData.TryGetValue(key, out string json))
+                {
+                    return json;
+                }
+                return string.Empty;
+            });
         }
 
         private void Remove(string key)

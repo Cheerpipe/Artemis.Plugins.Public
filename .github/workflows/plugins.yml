@@ -134,8 +134,8 @@ jobs:
           name: Artemis.Plugins.DataModelExpansions.Profiles
           path: .\Plugins\src\DataModelExpansions\Artemis.Plugins.DataModelExpansions.Profiles\bin\x64\Release\net5.0-windows\publish
 
-      - name: Upload Artemis.Plugins.DataModelExpansions.DynamicExternalData
+      - name: Upload Artemis.Plugins.Module.DynamicJsonModule
         uses: actions/upload-artifact@v2
         with:
-          name: Artemis.Plugins.DataModelExpansions.DynamicExternalData
-          path: .\Plugins\src\DataModelExpansions\Artemis.Plugins.DataModelExpansions.DynamicExternalData\bin\x64\Release\net5.0-windows\publish          
+          name: Artemis.Plugins.Module.DynamicJsonModule
+          path: .\Plugins\src\DataModelExpansions\Artemis.Plugins.Module.DynamicJsonModule\bin\x64\Release\net5.0-windows\publish          

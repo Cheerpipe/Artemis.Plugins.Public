@@ -49,7 +49,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.Devices.Led
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RGB.NET.Devices.Ledenet", "Device\Ledenet\RGB.NET.Devices.Ledenet\RGB.NET.Devices.Ledenet.csproj", "{41FCAA62-F0F9-470A-9B73-122D2C0B9EF2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.DataModelExpansions.DynamicExternalData", "DataModelExpansions\Artemis.Plugins.DataModelExpansions.DynamicExternalData\Artemis.Plugins.DataModelExpansions.DynamicExternalData.csproj", "{9F5BBB63-E5F3-48C9-BD8C-7D01E2057490}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.Module.DynamicJsonModule", "DataModelExpansions\Artemis.Plugins.DataModelExpansions.DynamicExternalData\Artemis.Plugins.Module.DynamicJsonModule.csproj", "{9F5BBB63-E5F3-48C9-BD8C-7D01E2057490}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

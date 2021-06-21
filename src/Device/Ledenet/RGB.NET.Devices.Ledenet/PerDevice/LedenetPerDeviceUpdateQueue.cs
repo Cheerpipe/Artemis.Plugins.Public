@@ -8,13 +8,18 @@ namespace RGB.NET.Devices.Ledenet.PerDevice
     public class LedenetUpdateQueue : UpdateQueue
     {
         private Light _light;
-        public LedenetUpdateQueue(IDeviceUpdateTrigger updateTrigger, Light light)
+        private bool _placeHolder;
+        public LedenetUpdateQueue(IDeviceUpdateTrigger updateTrigger, Light light, bool placeHolder = false)
             : base(updateTrigger)
         {
-            this._light = light;
+            _light = light;
+            placeHolder = placeHolder;
         }
         protected override void Update(in ReadOnlySpan<(object key, Color color)> dataSet)
         {
+            if (_placeHolder)
+                return;
+
             Color color = dataSet[0].color;
             SetColor(color);
         }

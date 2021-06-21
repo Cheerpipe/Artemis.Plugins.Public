@@ -57,7 +57,7 @@ namespace RGB.NET.Devices.YeeLight
                     if (add)
                     {
                         _initializedDevices.Add(device);
-                        _IRGBDevices.Add(new YeeLightRGBRGBDevice(new YeeLightRGBDeviceInfo(RGBDeviceType.LedStripe, string.Format("YeeLight {0} ({1})", device.Model, device.Hostname), device.Hostname), new YeeLightUpdateQueue(GetUpdateTrigger(), device, device.Model)));
+                        _IRGBDevices.Add(new YeeLightRGBRGBDevice(new YeeLightRGBDeviceInfo(RGBDeviceType.LedStripe, string.Format("YeeLight {0} ({1})", device.Model, device.Hostname), device.Hostname, false), new YeeLightUpdateQueue(GetUpdateTrigger(), device, device.Model)));
                     }
 
                 });
@@ -85,7 +85,11 @@ namespace RGB.NET.Devices.YeeLight
                     if (add)
                     {
                         _initializedDevices.Add(device);
-                        _IRGBDevices.Add(new YeeLightRGBRGBDevice(new YeeLightRGBDeviceInfo(RGBDeviceType.LedStripe, string.Format("YeeLight {0} ({1})", def.Model, device.Hostname), device.Hostname), new YeeLightUpdateQueue(GetUpdateTrigger(), device, def.Model)));
+                        _IRGBDevices.Add(new YeeLightRGBRGBDevice(new YeeLightRGBDeviceInfo(RGBDeviceType.LedStripe, string.Format("YeeLight {0} ({1})", def.Model, device.Hostname), device.Hostname, false), new YeeLightUpdateQueue(GetUpdateTrigger(), device, def.Model)));
+                    }
+                    else
+                    {
+                        _IRGBDevices.Add(new YeeLightRGBRGBDevice(new YeeLightRGBDeviceInfo(RGBDeviceType.LedStripe, string.Format("YeeLight {0} ({1})", def.Model, device.Hostname), device.Hostname, true), new YeeLightUpdateQueue(GetUpdateTrigger(), device, def.Model, true)));
                     }
                 });
             }

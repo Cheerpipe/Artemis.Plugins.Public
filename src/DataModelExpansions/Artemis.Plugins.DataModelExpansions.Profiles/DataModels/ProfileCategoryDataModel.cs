@@ -20,7 +20,7 @@ namespace Artemis.Plugins.DataModelExpansions.Profiles.DataModels
             Name = category.Name;
             Order = category.Order;
             IsSuspended = category.IsSuspended;
-            HasActiveProfiles = category.ProfileConfigurations.Any(p => !p.IsSuspended && p.ActivationConditionMet);
+            HasActiveProfiles = category.ProfileConfigurations.Any(p => /*!p.IsSuspended && p.ActivationConditionMet*/ p.Profile != null);
         }
     }
  }

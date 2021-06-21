@@ -9,14 +9,18 @@ namespace RGB.NET.Devices.YeeLight
     {
         private Device _light;
         private MODEL _model;
-        public YeeLightUpdateQueue(IDeviceUpdateTrigger updateTrigger, Device light, MODEL model)
+        private bool _placeHolder;
+        public YeeLightUpdateQueue(IDeviceUpdateTrigger updateTrigger, Device light, MODEL model, bool placeHolder = false)
             : base(updateTrigger)
         {
             _light = light;
             _model = model;
+            _placeHolder = _placeHolder;
         }
         protected override void Update(in ReadOnlySpan<(object key, Color color)> dataSet)
         {
+            if (_placeHolder)
+                return;
             Color color = dataSet[0].color;
             SetColor(color);
         }

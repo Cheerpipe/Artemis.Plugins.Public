@@ -52,7 +52,11 @@ namespace RGB.NET.Devices.Ledenet
                     {
                         _IRGBDevices.Add(new LedenetRGBDevice(new LedenetRGBDeviceInfo(RGBDeviceType.LedStripe, $"Ledenet light ({device.HostName})", device.HostName), new LedenetUpdateQueue(GetUpdateTrigger(), light)));
                         _initializedDevices.Add(light);
-
+                    }
+                    else
+                    {
+                        _IRGBDevices.Add(new LedenetRGBDevice(new LedenetRGBDeviceInfo(RGBDeviceType.LedStripe, $"Ledenet light ({device.HostName})", device.HostName), new LedenetUpdateQueue(GetUpdateTrigger(), light, true)));
+                        _initializedDevices.Add(light);
                     }
                 });
             return _IRGBDevices;

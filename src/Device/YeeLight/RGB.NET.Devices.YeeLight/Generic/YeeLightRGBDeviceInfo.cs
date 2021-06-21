@@ -15,12 +15,14 @@ namespace RGB.NET.Devices.YeeLight
         public string Model { get; }
 
         public object? LayoutMetadata { get; set; }
+        public bool PlaceHolder { get; set; }
 
-        internal YeeLightRGBDeviceInfo(RGBDeviceType deviceType, string model, string ipAddress)
+        internal YeeLightRGBDeviceInfo(RGBDeviceType deviceType, string model, string ipAddress, bool placeHolder)
         {
             DeviceType = deviceType;
             Model = model;
             IpAddress = ipAddress;
+            PlaceHolder = placeHolder;
 
             DeviceName = "YeeLight Light";
         }

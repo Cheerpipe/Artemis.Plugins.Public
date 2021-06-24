@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace RGB.NET.Devices.Ledenet.PerDevice
 {
-    public class LedenetRGBDevice : LedenetRGBDevice<LedenetRGBDeviceInfo>, IUnknownDevice //TODO DarthAffe 18.04.2020: It's know which kind of device this is, but they would need to be separated
+    public class LedenetRGBDevice : LedenetRGBDevice<LedenetRGBDeviceInfo>, IUnknownDevice
     {
         internal LedenetRGBDevice(LedenetRGBDeviceInfo info, IUpdateQueue updateQueue)
             : base(info, updateQueue)

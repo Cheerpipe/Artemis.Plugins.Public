@@ -1,0 +1,67 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net5.0-windows</TargetFramework>
+		<LangVersion>latest</LangVersion>
+		<Nullable>enable</Nullable>
+		<Authors></Authors>
+		<Company></Company>
+		<Language>en-US</Language>
+		<NeutralLanguage>en-US</NeutralLanguage>
+		<Title>RGB.NET.Devices.Adalight</Title>
+		<AssemblyName>RGB.NET.Devices.Adalight</AssemblyName>
+		<AssemblyTitle>RGB.NET.Devices.Adalight</AssemblyTitle>
+		<PackageId></PackageId>
+		<RootNamespace>RGB.NET.Devices.Adalight</RootNamespace>
+		<Description></Description>
+		<Summary></Summary>
+		<Copyright></Copyright>
+		<PackageCopyright></PackageCopyright>
+		<PackageIconUrl></PackageIconUrl>
+		<PackageProjectUrl></PackageProjectUrl>
+		<PackageLicenseUrl></PackageLicenseUrl>
+		<RepositoryType></RepositoryType>
+		<RepositoryUrl></RepositoryUrl>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+
+		<PackageReleaseNotes></PackageReleaseNotes>
+
+		<Version>0</Version>
+		<AssemblyVersion>0.0.1</AssemblyVersion>
+		<FileVersion>0.0.1</FileVersion>
+
+		<OutputPath>..\bin\</OutputPath>
+		<IncludeSource>True</IncludeSource>
+		<IncludeSymbols>True</IncludeSymbols>
+		<Product />
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
+		<DefineConstants>$(DefineConstants);TRACE;DEBUG</DefineConstants>
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>full</DebugType>
+		<Optimize>false</Optimize>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
+		<DebugType>pdbonly</DebugType>
+		<Optimize>true</Optimize>
+		<NoWarn>$(NoWarn);CS1591;CS1572;CS1573</NoWarn>
+		<DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net5.0|AnyCPU'">
+	</PropertyGroup>
+	<ItemGroup>
+		<Reference Include="RGB.NET.Core">
+			<HintPath>..\..\..\..\..\RGB.NET\bin\net5.0\RGB.NET.Core.dll</HintPath>
+		</Reference>
+		<Reference Include="System.IO.Ports">
+		  <HintPath>System.IO.Ports.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+	<ItemGroup>
+	  <None Update="System.IO.Ports.dll">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+</Project>

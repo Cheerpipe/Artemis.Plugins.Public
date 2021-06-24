@@ -51,6 +51,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RGB.NET.Devices.Ledenet", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.Module.DynamicJsonModule", "DataModelExpansions\Artemis.Plugins.DataModelExpansions.DynamicExternalData\Artemis.Plugins.Module.DynamicJsonModule.csproj", "{9F5BBB63-E5F3-48C9-BD8C-7D01E2057490}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Adalight", "Adalight", "{AF71DEFC-C646-4C3C-B06C-405E469F805C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RGB.NET.Devices.Adalight", "Device\Adalight\RGB.NET.Devices.Adalight\RGB.NET.Devices.Adalight.csproj", "{A7D5106E-9516-44DF-87A8-318A835B1EE9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.Devices.Adalight", "Device\Adalight\Artemis.Plugins.Devices.Adalight\Artemis.Plugins.Devices.Adalight.csproj", "{6478A397-DEE4-416B-9C0F-E59A4194B946}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -203,6 +209,20 @@ Global
 		{9F5BBB63-E5F3-48C9-BD8C-7D01E2057490}.Release|Any CPU.Build.0 = Release|x64
 		{9F5BBB63-E5F3-48C9-BD8C-7D01E2057490}.Release|x64.ActiveCfg = Release|x64
 		{9F5BBB63-E5F3-48C9-BD8C-7D01E2057490}.Release|x64.Build.0 = Release|x64
+		{A7D5106E-9516-44DF-87A8-318A835B1EE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7D5106E-9516-44DF-87A8-318A835B1EE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7D5106E-9516-44DF-87A8-318A835B1EE9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A7D5106E-9516-44DF-87A8-318A835B1EE9}.Debug|x64.Build.0 = Debug|Any CPU
+		{A7D5106E-9516-44DF-87A8-318A835B1EE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7D5106E-9516-44DF-87A8-318A835B1EE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7D5106E-9516-44DF-87A8-318A835B1EE9}.Release|x64.ActiveCfg = Release|Any CPU
+		{A7D5106E-9516-44DF-87A8-318A835B1EE9}.Release|x64.Build.0 = Release|Any CPU
+		{6478A397-DEE4-416B-9C0F-E59A4194B946}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{6478A397-DEE4-416B-9C0F-E59A4194B946}.Debug|x64.ActiveCfg = Debug|x64
+		{6478A397-DEE4-416B-9C0F-E59A4194B946}.Debug|x64.Build.0 = Debug|x64
+		{6478A397-DEE4-416B-9C0F-E59A4194B946}.Release|Any CPU.ActiveCfg = Release|x64
+		{6478A397-DEE4-416B-9C0F-E59A4194B946}.Release|x64.ActiveCfg = Release|x64
+		{6478A397-DEE4-416B-9C0F-E59A4194B946}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -228,6 +248,9 @@ Global
 		{5F15DBD1-C895-4965-B238-CA69F0706F40} = {99B7F497-F1D9-4F71-9133-B10E2D00A25C}
 		{41FCAA62-F0F9-470A-9B73-122D2C0B9EF2} = {99B7F497-F1D9-4F71-9133-B10E2D00A25C}
 		{9F5BBB63-E5F3-48C9-BD8C-7D01E2057490} = {0F036E0A-8F42-4105-BA27-BB2F6EE213A8}
+		{AF71DEFC-C646-4C3C-B06C-405E469F805C} = {FE4ECDD6-6870-4A3E-9D01-F046EDB596F9}
+		{A7D5106E-9516-44DF-87A8-318A835B1EE9} = {AF71DEFC-C646-4C3C-B06C-405E469F805C}
+		{6478A397-DEE4-416B-9C0F-E59A4194B946} = {AF71DEFC-C646-4C3C-B06C-405E469F805C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {11371D22-FDA3-41EA-8116-69E48DD68579}

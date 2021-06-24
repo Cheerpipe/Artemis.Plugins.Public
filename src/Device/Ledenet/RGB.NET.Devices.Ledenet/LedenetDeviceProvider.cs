@@ -34,12 +34,15 @@ namespace RGB.NET.Devices.Ledenet
                 Parallel.ForEach(LedenetDeviceDefinitions, device =>
                 {
                     Light light = new();
+                    light.AutoRefreshEnabled = true;
+                    light.InitialPowerState = true;
                     bool add = false;
                     try
                     {
                         if (light.ConnectAsync(IPAddress.Parse(device.HostName)).Wait(TimeSpan.FromMilliseconds(LEDENET_CONNECTION_TIMEOUT)))
                         {
-                            light.TurnOnAsync().Wait();
+                            if (!light.IsOn)
+                                light.TurnOnAsync().Wait();
                             add = light.Connected;
                         }
                     }

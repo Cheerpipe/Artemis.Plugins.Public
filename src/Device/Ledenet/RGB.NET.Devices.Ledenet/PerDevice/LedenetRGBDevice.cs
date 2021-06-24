@@ -1,4 +1,4 @@
-﻿using RGB.NET.Core;
+using RGB.NET.Core;
 using RGB.NET.Devices.Ledenet.Generic;
 using System.Collections.Generic;
 using System.Linq;

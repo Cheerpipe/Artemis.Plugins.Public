@@ -16,10 +16,10 @@
     <Description></Description>
     <Summary>Ledenet Device Implementations of RGB.NET, a C# (.NET) library for accessing various RGB-peripherals</Summary>
     <Copyright></Copyright>
-    <PackageCopyright>Copyright © Darth Affe 2020</PackageCopyright>
-    <PackageIconUrl>http://lib.arge.be/icon.png</PackageIconUrl>
+    <PackageCopyright></PackageCopyright>
+    <PackageIconUrl></PackageIconUrl>
     <PackageProjectUrl></PackageProjectUrl>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/DarthAffe/RGB.NET/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseUrl></PackageLicenseUrl>
     <RepositoryType></RepositoryType>
     <RepositoryUrl></RepositoryUrl>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>

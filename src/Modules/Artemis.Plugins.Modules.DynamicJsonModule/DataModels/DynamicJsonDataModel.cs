@@ -1,7 +1,7 @@
 ﻿
 using Artemis.Core.Modules;
 
-namespace Artemis.Plugins.DataModelExpansions.DynamicExternalDataModelExpansions.DataModels
+namespace Artemis.Plugins.Modules.Json.DataModels
 {
-    public class DynamicJsonDataModel : DataModel { }
+    public class JsonDataModel : DataModel { }
 }

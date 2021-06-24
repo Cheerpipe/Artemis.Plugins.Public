@@ -1,10 +1,10 @@
 ﻿using Artemis.Core.Modules;
-using Artemis.Plugins.DataModelExpansions.DynamicExternalDataModelExpansions.DataModels;
+using Artemis.Plugins.Modules.Json.DataModels;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Linq;
 
-namespace Artemis.Plugins.DataModelExpansions.DynamicExternalData
+namespace Artemis.Plugins.Modules.Json
 {
     public class JsonDataModelBridge
     {
@@ -38,13 +38,13 @@ namespace Artemis.Plugins.DataModelExpansions.DynamicExternalData
 
         private DataModel GetJsonDataModel(JObject json)
         {
-            DataModel dynamicDataModel = new DynamicJsonDataModel();
+            DataModel dynamicDataModel = new JsonDataModel();
             return JObjectToDataModel(json.Children<JProperty>().FirstOrDefault().Value, dynamicDataModel);
         }
 
         private string GetJsonKey(JObject json)
         {
-            DataModel dynamicDataModel = new DynamicJsonDataModel();
+            DataModel dynamicDataModel = new JsonDataModel();
             JToken root = json.Children<JProperty>().FirstOrDefault();
             var x = json.Root;
             // We need to be sure that we can use the root as the datamodel key validating that the root is not a property and has just one child
@@ -60,7 +60,7 @@ namespace Artemis.Plugins.DataModelExpansions.DynamicExternalData
             var x = node.FirstOrDefault();
             if (node.Type == JTokenType.Object)
             {
-                DynamicJsonDataModel dynamicDataModel = new DynamicJsonDataModel();
+                JsonDataModel dynamicDataModel = new JsonDataModel();
                 dataModel.AddDynamicChild(node.Path.Split('.').LastOrDefault(), dynamicDataModel);
                 foreach (JProperty child in node.Children<JProperty>())
                 {
@@ -70,7 +70,7 @@ namespace Artemis.Plugins.DataModelExpansions.DynamicExternalData
             }
             else if (node.Type == JTokenType.Array)
             {
-                DynamicJsonDataModel dynamicDataModel = new DynamicJsonDataModel();
+                JsonDataModel dynamicDataModel = new JsonDataModel();
                 dataModel.AddDynamicChild(node.Path.Split('.').LastOrDefault(), dynamicDataModel);
                 foreach (JToken child in node.Children())
                 {

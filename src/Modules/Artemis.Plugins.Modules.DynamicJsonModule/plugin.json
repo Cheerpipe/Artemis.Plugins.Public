@@ -1,8 +1,8 @@
 {
     "Guid": "19ada390-8abc-11ea-8dc5-0242ac411001",
-    "Name": "Dynamic Json Module",
+    "Name": "Json module",
     "Icon": "WallSconceRound",
     "Description": "A Endpoint module capable of create DataModel members from Json string using a REST API",
     "Version": "1.0.0.0",
-    "Main": "Artemis.Plugins.Module.DynamicJsonModule.dll"
+    "Main": "Artemis.Plugins.Modules.Json.dll"
 }            

@@ -1,18 +1,15 @@
 ﻿using Artemis.Core;
 using Artemis.Core.Modules;
 using Artemis.Core.Services;
-using Artemis.Plugins.DataModelExpansions.DynamicExternalData;
-using Artemis.Plugins.DataModelExpansions.DynamicExternalDataModelExpansions.DataModels;
+using Artemis.Plugins.Modules.Json.DataModels;
 using Artemis.UI.Services;
-using Newtonsoft.Json.Linq;
 using Serilog;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
-namespace Artemis.Plugins.DataModelExpansions.DynamicExternalDataModelExpansions
+namespace Artemis.Plugins.Modules.Json
 {
-    public class DynamicJsonModule : Module<DynamicJsonDataModel>
+    public class DynamicJson : Module<JsonDataModel>
     {
         private readonly IWebServerService _webServerService;
         private readonly ILogger _logger;
@@ -20,7 +17,7 @@ namespace Artemis.Plugins.DataModelExpansions.DynamicExternalDataModelExpansions
         private Dictionary<string, string> _savedJsonDynamicData;
         private PluginSetting<Dictionary<string, string>> _savedJsonDynamicDataSetting;
 
-        public DynamicJsonModule(IWebServerService webServerService, IDebugService _debugService, PluginSettings pluginSettings, ILogger logger)
+        public DynamicJson(IWebServerService webServerService, IDebugService _debugService, PluginSettings pluginSettings, ILogger logger)
         {
             _webServerService = webServerService;
             _pluginSettings = pluginSettings;

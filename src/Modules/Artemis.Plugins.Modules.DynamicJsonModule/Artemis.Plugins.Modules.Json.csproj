@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net5.0-windows7.0</TargetFramework>
     <ShouldIncludeNativeSkiaSharp>false</ShouldIncludeNativeSkiaSharp>
-    <AssemblyName>Artemis.Plugins.Module.DynamicJsonModule</AssemblyName>
-    <RootNamespace>Artemis.Plugins.Module.DynamicJsonModule</RootNamespace>
+    <AssemblyName>Artemis.Plugins.Modules.Json</AssemblyName>
+    <RootNamespace>Artemis.Plugins.Modules.Json</RootNamespace>
     <Platforms>x64</Platforms>
     <GenerateDependencyFile>False</GenerateDependencyFile>
     <ProduceReferenceAssembly>False</ProduceReferenceAssembly>

@@ -55,7 +55,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RGB.NET.Devices.Adalight", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.Devices.Adalight", "Device\Adalight\Artemis.Plugins.Devices.Adalight\Artemis.Plugins.Devices.Adalight.csproj", "{6478A397-DEE4-416B-9C0F-E59A4194B946}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.Module.DynamicJsonModule", "Modules\Artemis.Plugins.Modules.DynamicJsonModule\Artemis.Plugins.Module.DynamicJsonModule.csproj", "{EC5B4D60-F20A-4B41-B03D-D099BBCC9233}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.Modules.Json", "Modules\Artemis.Plugins.Modules.DynamicJsonModule\Artemis.Plugins.Modules.Json.csproj", "{EC5B4D60-F20A-4B41-B03D-D099BBCC9233}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

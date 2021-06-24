@@ -40,12 +40,12 @@
                             <DataGrid.Columns>
                                 <materialDesign:DataGridTextColumn Width="*"
                                                                    Binding="{Binding Port}"
-                                                                   Header="Host name"
+                                                                   Header="Port number"
                                                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
                                                                    ElementStyle="{StaticResource CenteredTextColumn}" />
                                 <materialDesign:DataGridTextColumn Width="*"
                                                                    Binding="{Binding LedCount}"
-                                                                   Header="Host name"
+                                                                   Header="Led count"
                                                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
                                                                    ElementStyle="{StaticResource CenteredTextColumn}" />                                
                                 <materialDesign:DataGridTextColumn Width="*"

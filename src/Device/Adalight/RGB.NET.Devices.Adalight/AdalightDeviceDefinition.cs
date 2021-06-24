@@ -21,7 +21,8 @@ namespace RGB.NET.Devices.Adalight
         public IEnumerable<IRGBDevice> CreateDevices(IDeviceUpdateTrigger updateTrigger)
         {
             AdalightUpdateQueue queue = new AdalightUpdateQueue(updateTrigger, Port, LedCount);
-            string name = string.Format(Name ?? $"Adalight ledstripe [{{0}}]");
+
+            string name = DeviceHelper.CreateDeviceName("Adalight", Name ?? "light");
             yield return new AdalightRGBDevice(new AdalightRGBDeviceInfo(name), queue, LedCount);
 
         }

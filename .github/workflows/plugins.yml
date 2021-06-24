@@ -138,4 +138,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Artemis.Plugins.Module.DynamicJsonModule
-          path: .\Plugins\src\DataModelExpansions\Artemis.Plugins.Module.DynamicJsonModule\bin\x64\Release\net5.0-windows\publish          
+          path: .\Plugins\src\Modules\Artemis.Plugins.Modules.DynamicJsonModule\bin\x64\Release\net5.0-windows\publish          

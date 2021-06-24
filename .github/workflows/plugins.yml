@@ -80,6 +80,12 @@ jobs:
           name: Artemis.Plugins.Devices.Ledenet
           path: .\Plugins\src\Device\Ledenet\Artemis.Plugins.Devices.Ledenet\bin\x64\Release\net5.0-windows\publish          
           
+      - name: Upload Artemis.Plugins.Devices.Adalight
+        uses: actions/upload-artifact@v2
+        with:
+          name: Artemis.Plugins.Devices.Adalight
+          path: .\Plugins\src\Device\Adalight\Artemis.Plugins.Devices.Adalight\bin\x64\Release\net5.0-windows\publish                 
+          
       - name: Upload Artemis.Plugins.LayerBrushes.ConnectingDotss
         uses: actions/upload-artifact@v2
         with:

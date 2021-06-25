@@ -1,4 +1,5 @@
-﻿using EmbedIO;
+﻿using System.Collections.Generic;
+using EmbedIO;
 using EmbedIO.Routing;
 using EmbedIO.WebApi;
 using System.Threading.Tasks;
@@ -45,7 +46,7 @@ namespace Artemis.Plugins.Modules.Json.Controllers
         [Route(HttpVerbs.Post, "/json-datamodel/{key}")]
         public async Task AddOrReplaceJson(string key)
         {
-            string json = await HttpContext.GetRequestBodyAsStringAsync();
+            var json = await HttpContext.GetRequestBodyAsStringAsync();
             _jsonDataModelServices.AddOrReplaceJson(key, json, true);
             using var writer = HttpContext.OpenResponseText();
             await writer.WriteAsync(json);
@@ -54,10 +55,16 @@ namespace Artemis.Plugins.Modules.Json.Controllers
         [Route(HttpVerbs.Put, "/json-datamodel/{key}")]
         public async Task AddOrMergeJson(string key)
         {
-            string json = await HttpContext.GetRequestBodyAsStringAsync();
+            var json = await HttpContext.GetRequestBodyAsStringAsync();
             _jsonDataModelServices.AddOrMergeJson(key, json, true);
             using var writer = HttpContext.OpenResponseText();
             await writer.WriteAsync(json);
+        }
+
+        [Route(HttpVerbs.Get, "/json-datamodel")]
+        public IEnumerable<string> GetDataModels()
+        {
+            return _jsonDataModelServices.GetDataModelsKeys();
         }
     }
 }

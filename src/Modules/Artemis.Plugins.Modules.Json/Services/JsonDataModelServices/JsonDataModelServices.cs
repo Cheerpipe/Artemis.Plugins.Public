@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Artemis.Core;
 using Artemis.Core.Modules;
 using Artemis.Core.Services;
@@ -30,14 +31,7 @@ namespace Artemis.Plugins.Modules.Json.Services.JsonDataModelServices
 
         public bool TryGetJsonByKey(string key, out string json)
         {
-            if (_savedJsonDynamicDataSetting.Value.TryGetValue(key, out json))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return _savedJsonDynamicDataSetting.Value.TryGetValue(key, out json);
         }
 
         public bool AddOrMergeJson(string key, string payload, bool saveToRepository = false)
@@ -96,9 +90,14 @@ namespace Artemis.Plugins.Modules.Json.Services.JsonDataModelServices
         public bool RemoveByKey(string key)
         {
             _jsonDataModel.RemoveDynamicChildByKey(key);
-            bool result = _savedJsonDynamicDataSetting.Value.Remove(key);
+            var result = _savedJsonDynamicDataSetting.Value.Remove(key);
             _savedJsonDynamicDataSetting.Save();
             return result;
+        }
+
+        public IEnumerable<string> GetDataModelsKeys()
+        {
+            return _savedJsonDynamicDataSetting.Value.Select(dm => dm.Key);
         }
 
         public static JsonDataModelBridge CreateJsonDataModelBridge(string payload)

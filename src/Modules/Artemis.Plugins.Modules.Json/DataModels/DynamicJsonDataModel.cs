@@ -1,5 +1,4 @@
-﻿
-using Artemis.Core.Modules;
+﻿using Artemis.Core.Modules;
 
 namespace Artemis.Plugins.Modules.Json.DataModels
 {

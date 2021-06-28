@@ -1,11 +1,11 @@
 ﻿{
-    "Guid": "1d0c8bbe-85c7-4992-a93e-bef587863afc",
-    "Name": "Adalight Device Provider",
-    "Icon": "strip",
-    "Author": "Cheerpipe",
-    "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",
-    "Description": "Allows Artemis to control ARGB Led Strips using an Adalight compatible controller",
-    "Version": "1.0.0.0",
-    "Main": "Artemis.Plugins.Devices.Adalight.dll",
-    "AutoEnableFeatures": false
+  "Guid": "1d0c8bbe-85c7-4992-a93e-bef587863afc",
+  "Name": "Adalight Device Provider",
+  "Icon": "adafruit.svg",
+  "Author": "Cheerpipe",
+  "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",
+  "Description": "Allows Artemis to control ARGB Led Strips using an Adalight compatible controller",
+  "Version": "1.0.0.0",
+  "Main": "Artemis.Plugins.Devices.Adalight.dll",
+  "AutoEnableFeatures": false
 }

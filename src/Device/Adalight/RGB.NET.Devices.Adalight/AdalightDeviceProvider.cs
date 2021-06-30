@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using RGB.NET.Core;
 
-namespace RGB.NET.Devices.PowerPlay
+namespace RGB.NET.Devices.Adalight
 {
-    public class PowerPlayDeviceProvider : AbstractRGBDeviceProvider
+    public class AdalightDeviceProvider : AbstractRGBDeviceProvider
     {
         private static AdalightDeviceProvider? _instance;
 

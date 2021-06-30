@@ -1,0 +1,11 @@
+﻿{
+  "Guid": "9b68c4aa-8c2f-4cfb-90d3-2883ab439610",
+  "Name": "Standalone Logitech PowerPlay Device Provider",
+  "Icon": "Logitech.svg",
+  "Author": "Cheerpipe",
+  "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",
+  "Description": "Stand alone Logitech PowerPlay device provider to use without third party software like LGS or GHUB",
+  "Version": "1.0.0.0",
+  "Main": "Artemis.Plugins.Devices.PowerPlay.dll",
+  "AutoEnableFeatures": false
+}

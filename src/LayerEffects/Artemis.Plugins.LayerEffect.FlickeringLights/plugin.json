@@ -1,0 +1,10 @@
+{
+  "Guid": "3ca79ef0-fd40-4090-b12e-8167d9438795",
+  "Name": "Flickering Lights",
+  "Icon": "LightbulbGroup",
+  "Description": "Provides a game Doom/Half life like light flickering based on common lighting patterns",
+  "Author": "Cheerpipe",
+  "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",
+  "Version": "1.0.0.0",
+  "Main": "Artemis.Plugins.LayerEffect.FlickeringLights.dll"
+}

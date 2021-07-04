@@ -144,4 +144,10 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Artemis.Plugins.Modules.Json
-          path: .\Plugins\src\Modules\Artemis.Plugins.Modules.Json\bin\x64\Release\net5.0-windows\publish          
+          path: .\Plugins\src\Modules\Artemis.Plugins.Modules.Json\bin\x64\Release\net5.0-windows\publish
+
+      - name: Upload Artemis.Plugins.LayerEffect.FlickeringLights
+        uses: actions/upload-artifact@v2
+        with:
+          name: Artemis.Plugins.LayerEffect.FlickeringLights
+          path: .\Plugins\src\LayerEffects\Artemis.Plugins.LayerEffect.FlickeringLights\bin\x64\Release\net5.0-windows\publish     

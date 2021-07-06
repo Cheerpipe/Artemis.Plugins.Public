@@ -1,61 +1,48 @@
 ﻿using System;
+using System.Timers;
 using RGB.NET.Core;
 using YeelightAPI;
-using YeelightAPI.Models;
+// ReSharper disable AsyncConverter.AsyncWait
 
-namespace RGB.NET.Devices.YeeLight
+namespace RGB.NET.Devices.YeeLight.PerDevice
 {
     public class YeeLightUpdateQueue : UpdateQueue
     {
-        private Device _light;
-        private MODEL _model;
-        private bool _placeHolder;
-        public YeeLightUpdateQueue(IDeviceUpdateTrigger updateTrigger, Device light, MODEL model, bool placeHolder = false)
+        private readonly Device _light;
+        private readonly bool _placeHolder;
+
+        public YeeLightUpdateQueue(IDeviceUpdateTrigger updateTrigger, Device light, bool placeHolder = false)
             : base(updateTrigger)
         {
             _light = light;
-            _model = model;
-            _placeHolder = _placeHolder;
+            _placeHolder = placeHolder;
         }
+
+
         protected override void Update(in ReadOnlySpan<(object key, Color color)> dataSet)
         {
             if (_placeHolder)
                 return;
-            Color color = dataSet[0].color;
+            var color = dataSet[0].color;
             SetColor(color);
         }
 
         public void SetColor(Color color)
         {
+            var r = color.GetR();
+            var g = color.GetG();
+            var b = color.GetB();
+            var l = (int)color.GetLabL();
 
-            var R = color.GetR();
-            var G = color.GetG();
-            var B = color.GetB();
-            var L = (int)color.GetLabL();
-
-            if (_model == MODEL.Color) // Color bulb cant be turned off just by setting colors.
+            if (l == 0)
             {
-                if (L == 0)
-                {
-                    _light.SetPower(false).Wait(500);
-                    return;
-                }
-                else
-                {
-                    if (_light.Properties.TryGetValue("power", out object value))
-                    {
-                        if ((string)value == "off")
-                            _light.SetPower(true).Wait(500);
-                    }
-                }
-            }
-            else
-            {
-                // Maybe other bulbs needs other protocol or command order.
+                _ = _light.SetPower(false);
+                return;
             }
 
-            _light.SetBrightness(L).Wait(500);
-            var result = _light.SetRGBColor(R, G, B).GetAwaiter().GetResult();
+            _ = _light.SetPower();
+            _ = _light.SetRGBColor(r, g, b);
+            _ = _light.SetBrightness(l);
         }
     }
 }

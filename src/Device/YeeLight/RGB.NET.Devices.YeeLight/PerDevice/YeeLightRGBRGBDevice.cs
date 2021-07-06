@@ -1,8 +1,12 @@
-﻿using RGB.NET.Core;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using RGB.NET.Core;
+using RGB.NET.Devices.YeeLight.Generic;
 
-namespace RGB.NET.Devices.YeeLight
+// ReSharper disable IdentifierTypo
+// ReSharper disable InconsistentNaming
+
+namespace RGB.NET.Devices.YeeLight.PerDevice
 {
     public class YeeLightRGBRGBDevice : YeeLightRGBDevice<YeeLightRGBDeviceInfo>, IUnknownDevice
     {

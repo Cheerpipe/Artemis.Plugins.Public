@@ -1,14 +1,14 @@
-﻿using Artemis.Core;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Artemis.Core;
 using Artemis.Core.Services;
 using Artemis.UI.Shared;
 using RGB.NET.Devices.YeeLight;
 using RGB.NET.Devices.YeeLight.Enums;
 using Stylet;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Artemis.Plugins.Devices.YeeLight
+namespace Artemis.Plugins.Devices.YeeLight.ViewModels
 {
 
     public class YeeLightConfigurationDialogViewModel : PluginConfigurationViewModel
@@ -25,7 +25,6 @@ namespace Artemis.Plugins.Devices.YeeLight
         }
 
         private readonly PluginSetting<List<YeeLightDeviceDefinition>> _yeeLightDeviceDefinitionsSetting;
-        private List<YeeLightDeviceDefinition> _yeeLightDeviceDefinitions;
 
         public BindableCollection<YeeLightDeviceDefinition> Definitions { get; }
 
@@ -51,12 +50,11 @@ namespace Artemis.Plugins.Devices.YeeLight
             _useAllAvailableMulticastAddresses = _useAllAvailableMulticastAddressesSetting.Value;
 
             _yeeLightDeviceDefinitionsSetting = settings.GetSetting("YeeLightDeviceDefinitionsSetting", new List<YeeLightDeviceDefinition>());
-            _yeeLightDeviceDefinitions = _yeeLightDeviceDefinitionsSetting.Value;
 
             _scanModeSetting = settings.GetSetting("ScanMode", ScanMode.Automatic);
             _scanMode = _scanModeSetting.Value;
 
-            Definitions = new BindableCollection<YeeLightDeviceDefinition>(_yeeLightDeviceDefinitions);
+            Definitions = new BindableCollection<YeeLightDeviceDefinition>(_yeeLightDeviceDefinitionsSetting.Value);
             ScanModes = new BindableCollection<ValueDescription>(EnumUtilities.GetAllValuesAndDescriptions(typeof(ScanMode)));
 
             _enableAutomaticInput = _scanMode == ScanMode.Automatic;

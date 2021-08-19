@@ -1,4 +1,5 @@
 ﻿using Artemis.Core.Modules;
+using Artemis.Core.Services;
 using SkiaSharp;
 using System;
 using System.ComponentModel;
@@ -57,7 +58,7 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop.DataModels
         public bool isAdvertisement { get; set; }
         public bool inLibrary { get; set; }
 
-        public TrackColorsDataModel Colors { get; set; } = new();
+        public ColorSwatch Colors { get; set; } = new();
 
         public void Empty()
         {
@@ -72,54 +73,10 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop.DataModels
             isVideo = false;
             isAdvertisement = false;
             inLibrary = false;
-            Colors?.Empty();
         }
     }
 
-    public class TrackColorsDataModel : DataModel
-    {
-        public SKColor Vibrant { get; set; }
-        public SKColor LightVibrant { get; set; }
-        public SKColor DarkVibrant { get; set; }
-        public SKColor Muted { get; set; }
-        public SKColor LightMuted { get; set; }
-        public SKColor DarkMuted { get; set; }
-
-        public void Empty()
-        {
-            Vibrant = SKColors.Transparent;
-            LightVibrant = SKColors.Transparent;
-            DarkVibrant = SKColors.Transparent;
-            Muted = SKColors.Transparent;
-            LightMuted = SKColors.Transparent;
-            DarkMuted = SKColors.Transparent;
-        }
-
-    }
-
-    public enum Key
-    {
-        None = -1,
-        C = 0,
-        [Description("C#")]
-        Cs = 1,
-        D = 2,
-        [Description("D#")]
-        Ds = 3,
-        E = 4,
-        F = 5,
-        [Description("F#")]
-        Fs = 6,
-        G = 7,
-        [Description("G#")]
-        Gs = 8,
-        A = 9,
-        [Description("A#")]
-        As = 10,
-        B = 11,
-    }
-
-    public enum Mode
+       public enum Mode
     {
         Minor = 0,
         Major = 1

@@ -25,7 +25,7 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
         private readonly IColorQuantizerService _colorQuantizer;
         private readonly IProcessMonitorService _processMonitorService;
         private readonly HttpClient _httpClient;
-        private readonly ConcurrentDictionary<string, TrackColorsDataModel> albumArtColorCache;
+        private readonly ConcurrentDictionary<string, ColorSwatch> albumArtColorCache;
         private const string YTMD_PROCESS_NAME = "YouTube Music Desktop App";
         private YTMDesktopClient _YTMDesktopClient;
         private RootInfo _rootInfo;
@@ -46,7 +46,7 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
             {
                 Timeout = TimeSpan.FromSeconds(1)
             };
-            albumArtColorCache = new ConcurrentDictionary<string, TrackColorsDataModel>();
+            albumArtColorCache = new ConcurrentDictionary<string, ColorSwatch>();
             UpdateDuringActivationOverride = false;
         }
 
@@ -141,6 +141,8 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
             }
         }
 
+        // Thanks again to diogotr7 for the original code
+        // https://github.com/diogotr7/Artemis.Plugins/blob/a1846bb3b2e0cb426ecd2b9ae787bade8212f446/src/Artemis.Plugins.Modules.Spotify/SpotifyModule.cs#L209
         private async Task UpdateTrackInfo(TrackInfo track)
         {
             if (track.id != _trackId)
@@ -178,25 +180,14 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
             {
                 try
                 {
-                    using HttpResponseMessage response = await _httpClient.GetAsync(albumArtUrl);
-                    await using Stream stream = await response.Content.ReadAsStreamAsync();
+                    using Stream stream = await _httpClient.GetStreamAsync(albumArtUrl);
                     using SKBitmap skbm = SKBitmap.Decode(stream);
-                    stream.Dispose();
                     SKColor[] skClrs = _colorQuantizer.Quantize(skbm.Pixels, 256);
-                    albumArtColorCache[albumArtUrl] = new TrackColorsDataModel
-                    {
-                        Vibrant = _colorQuantizer.FindColorVariation(skClrs, ColorType.Vibrant, true),
-                        LightVibrant = _colorQuantizer.FindColorVariation(skClrs, ColorType.LightVibrant, true),
-                        DarkVibrant = _colorQuantizer.FindColorVariation(skClrs, ColorType.DarkVibrant, true),
-                        Muted = _colorQuantizer.FindColorVariation(skClrs, ColorType.Muted, true),
-                        LightMuted = _colorQuantizer.FindColorVariation(skClrs, ColorType.LightMuted, true),
-                        DarkMuted = _colorQuantizer.FindColorVariation(skClrs, ColorType.DarkMuted, true),
-                    };
+                    albumArtColorCache[albumArtUrl] = _colorQuantizer.FindAllColorVariations(skClrs, true);
                 }
-                catch (Exception exception)
+                catch (Exception e)
                 {
-                    _logger.Error("Failed to get album art colors: " + exception);
-                    throw;
+                    _logger.Error("Failed to get album art colors", e);
                 }
             }
 

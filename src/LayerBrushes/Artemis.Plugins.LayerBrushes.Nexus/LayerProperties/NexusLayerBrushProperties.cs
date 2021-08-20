@@ -37,6 +37,8 @@ namespace Artemis.Plugins.LayerBrushes.Nexus.LayerProperties
         public IntLayerProperty SpawnInterval { get; set; }
         [PropertyDescription(Description = "This option determine how fast a beams will advance")]
         public IntRangeLayerProperty Speed { get; set; }
+        [PropertyDescription(Description = "This option works as a speed modifier. Usefull to use with databindings", InputAffix = "%", MinInputValue = 0, MaxInputValue = 100)]
+        public FloatLayerProperty SpeedModifier { get; set; }
 
         [PropertyDescription(Description = "This option determine how long the drop trail will be drawn")]
         public IntLayerProperty TrailSize { get; set; }
@@ -53,6 +55,7 @@ namespace Artemis.Plugins.LayerBrushes.Nexus.LayerProperties
             Separation.DefaultValue = 0;
             SpawnInterval.DefaultValue = 500;
             Speed.DefaultValue = new IntRange(30, 40);
+            SpeedModifier.DefaultValue = 100;
             TrailSize.DefaultValue = 300;
             AvoidOverlapping.DefaultValue = true;
             FromLeftToRight.DefaultValue = true;

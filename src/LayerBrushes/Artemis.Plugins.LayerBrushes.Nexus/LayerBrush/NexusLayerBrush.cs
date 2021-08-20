@@ -42,7 +42,7 @@ namespace Artemis.Plugins.LayerBrushes.Nexus.LayerBrush
             {
                 for (int i = _beams.Count - 1; i >= 0; i--)
                 {
-                    _beams[i].Move((float)deltaTime * _beams[i].Speed * 10);
+                    _beams[i].Move((float)deltaTime * _beams[i].Speed * 10 * Math.Clamp((Properties.SpeedModifier / 100), 0, 1));
 
                     switch (_beams[i].Direction)
                     {

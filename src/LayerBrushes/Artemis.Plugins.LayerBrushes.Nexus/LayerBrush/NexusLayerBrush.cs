@@ -137,6 +137,28 @@ namespace Artemis.Plugins.LayerBrushes.Nexus.LayerBrush
 
         private ColorGradient GetColorsForNewBeam()
         {
+            byte alpha = 0;
+            float position = 0f;
+
+            switch (Properties.TrailFadeOutMode.CurrentValue)
+            {
+                //TODO: Tune, add more steps, or add an option to add custom hardness value.
+                case BeamTrailFadeOutMode.Soft:
+                    alpha = 128;
+                    position = 0.75f;
+                    break;
+                case BeamTrailFadeOutMode.Medium:
+                    break;
+                case BeamTrailFadeOutMode.Hard:
+                    alpha = 255;
+                    position = 0.25f;
+                    break;
+                case BeamTrailFadeOutMode.Solid:
+                    alpha = 255;
+                    position = 0f;
+                    break;
+            }
+
             if (Properties.ColorMode.CurrentValue == ColorType.Random)
             {
                 SKColor color = SKColor.FromHsv(Rand.Next(0, 360), 100, 100);
@@ -144,11 +166,15 @@ namespace Artemis.Plugins.LayerBrushes.Nexus.LayerBrush
                 {
                     new (
                         color.WithAlpha(0),
-                        0
+                        0f
+                    ),
+                    new (
+                        color.WithAlpha(alpha),
+                        position
                     ),
                     new (
                         color.WithAlpha(255),
-                        1
+                        1f
                     )
                 };
 
@@ -159,13 +185,17 @@ namespace Artemis.Plugins.LayerBrushes.Nexus.LayerBrush
                 SKColor color = Properties.Colors.CurrentValue.GetColor((float)Rand.NextDouble());
                 ColorGradient colors = new ColorGradient
                 {
-                    new (
+                    new (//End
                         color.WithAlpha(0),
-                        0
+                        0f
                     ),
                     new (
+                        color.WithAlpha(alpha),
+                        position
+                    ),
+                    new (//Start
                         color.WithAlpha(255),
-                        1
+                        1f
                     )
                 };
 
@@ -178,11 +208,15 @@ namespace Artemis.Plugins.LayerBrushes.Nexus.LayerBrush
                 {
                     new (
                         color.WithAlpha(0),
-                        0
+                        0f
+                    ),
+                    new (
+                        color.WithAlpha(alpha),
+                        position
                     ),
                     new (
                         color.WithAlpha(255),
-                        1
+                        1f
                     )
                 };
 

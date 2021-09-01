@@ -40,9 +40,9 @@ namespace RGB.NET.Devices.Adalight
         /// </summary>
         /// <param name="port">Port number to connect to</param>
         /// <param name="ledCount">Number of LEDs to control</param>
-        /// <param name="speed">Optional baud rate, default is 115200</param>
+        /// <param name="baudRate">Optional baud rate, default is 115200</param>
         /// <param name="brightness">Because sometimes, we can set the brightness.</param>
-        public Adalight(int port, int ledCount, int speed = 115200, int brightness = 255)
+        public Adalight(int port, int ledCount, int baudRate = 115200, int brightness = 255)
         {
             // Set Properties
             LedCount = ledCount;
@@ -55,7 +55,7 @@ namespace RGB.NET.Devices.Adalight
                 _comPort = new SerialPort
                 {
                     PortName = "COM" + PortNumber,
-                    BaudRate = speed,
+                    BaudRate = baudRate,
                     Parity = Parity.None,
                     DataBits = 8,
                     StopBits = StopBits.One

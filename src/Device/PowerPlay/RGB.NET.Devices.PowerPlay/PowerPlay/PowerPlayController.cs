@@ -34,10 +34,11 @@ namespace RGB.NET.Devices.PowerPlay.PowerPlay
             _usbBuf[0x00] = 0x11;
             _usbBuf[0x01] = _deviceIndex;
             _usbBuf[0x02] = _featureIndex;
-            _usbBuf[0x03] = 0x3E; //Could ba A B C D E. All works
+            _usbBuf[0x03] = 0x3E; //Could ba A B C D E. All works at least with G502
             _usbBuf[0x04] = 0x00; //Zone
             _usbBuf[0x05] = 0x01; //Mode
             _usbBuf[0x09] = 0x02; //Static. Not saved into Flash and fast enough for direct mode
+            _usbBuf[0x10] = 0x01; // I don't know what is it
         }
 
         public void SetColor(Color color, byte zone)

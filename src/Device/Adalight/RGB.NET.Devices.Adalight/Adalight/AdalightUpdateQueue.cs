@@ -11,10 +11,10 @@ namespace RGB.NET.Devices.Adalight
         private readonly Timer _fixLastFrameTimer; // To reapply last frame because. Need when using cheaper controllers.
         private Adalight _strip;
 
-        public AdalightUpdateQueue(IDeviceUpdateTrigger updateTrigger, int port, int ledCount)
+        public AdalightUpdateQueue(IDeviceUpdateTrigger updateTrigger, int port, int baudRate, int ledCount)
             : base(updateTrigger)
         {
-            _strip = new Adalight(port, ledCount);
+            _strip = new Adalight(port, baudRate, ledCount);
 
             _refreshTimer = new Timer(5000);
             _refreshTimer.Elapsed += _refreshTimer_Elapsed;

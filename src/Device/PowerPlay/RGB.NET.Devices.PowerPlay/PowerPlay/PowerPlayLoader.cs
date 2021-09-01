@@ -44,8 +44,8 @@ namespace RGB.NET.Devices.PowerPlay.PowerPlay
 
             powerPlayDevice.InitializeAsync().Wait();
 
-            MouseController = new PowerPlayController(powerPlayDevice, 0x01, 0x07);
-            MatController = new PowerPlayController(powerPlayDevice, 0x07, 0x0B); // We assume the mouse exists because there is no way of know if there is a paired device.
+            MouseController = new PowerPlayController(powerPlayDevice, 0x01, 0x07); // We assume the mouse exists because there is no way of know if there is a paired device.
+            MatController = new PowerPlayController(powerPlayDevice, 0x07, 0x0B); 
             IsInitialized = true;
         }
 

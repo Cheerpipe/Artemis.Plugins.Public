@@ -90,7 +90,6 @@ namespace Artemis.Plugins.Devices.YeeLight.ViewModels
 
         public BindableCollection<ValueDescription> ScanModes { get; }
 
-
         protected override void OnClose()
         {
             _useAllAvailableMulticastAddressesSetting.Value = UseAllAvailableMulticastAddresses;

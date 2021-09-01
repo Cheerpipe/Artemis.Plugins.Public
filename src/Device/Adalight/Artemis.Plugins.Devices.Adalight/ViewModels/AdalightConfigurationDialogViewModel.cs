@@ -3,13 +3,15 @@ using Artemis.Core.Services;
 using Artemis.UI.Shared;
 using RGB.NET.Devices.Adalight;
 using Stylet;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Markup;
 
 namespace Artemis.Plugins.Devices.Adalight
 {
-
     public class AdalightConfigurationDialogViewModel : PluginConfigurationViewModel
     {
         private readonly IPluginManagementService _pluginManagementService;
@@ -59,6 +61,26 @@ namespace Artemis.Plugins.Devices.Adalight
                 _pluginManagementService.EnablePluginFeature(deviceProvider, false);
             });
             base.OnClose();
+        }
+
+        public class EnumToCollectionExtension : MarkupExtension
+        {
+            public Type EnumType { get; set; }
+
+            public override object ProvideValue(IServiceProvider serviceProvider)
+            {
+                if (EnumType == null) throw new ArgumentNullException(nameof(EnumType));
+
+                return Enum.GetValues(EnumType).Cast<Enum>().Select(EnumToDescriptionOrString);
+            }
+
+            private string EnumToDescriptionOrString(Enum value)
+            {
+                return value.GetType().GetField(value.ToString())
+                           .GetCustomAttributes(typeof(DescriptionAttribute), false)
+                           .Cast<DescriptionAttribute>()
+                           .FirstOrDefault()?.Description ?? value.ToString();
+            }
         }
     }
 }

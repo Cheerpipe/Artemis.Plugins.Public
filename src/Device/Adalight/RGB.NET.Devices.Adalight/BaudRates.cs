@@ -30,6 +30,10 @@ namespace RGB.NET.Devices.Adalight
         BaudRate115200 = 115200,
         [Description("128000")]
         BaudRate128000 = 128000,
+        [Description("230400")]
+        BaudRate230400 = 230400,
+        [Description("250000")]
+        BaudRate250000 = 250000,
         [Description("256000")]
         BaudRate256000 = 256000
 

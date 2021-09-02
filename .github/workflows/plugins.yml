@@ -91,6 +91,12 @@ jobs:
         with:
           name: Artemis.Plugins.LayerBrushes.ConnectingDots
           path: .\Plugins\src\LayerBrushes\Artemis.Plugins.LayerBrushes.ConnectingDots\bin\x64\Release\net5.0-windows\publish
+
+      - name: Upload Artemis.Plugins.LayerBrushes.DrippingPaint
+        uses: actions/upload-artifact@v2
+        with:
+          name: Artemis.Plugins.LayerBrushes.DrippingPaint
+          path: .\Plugins\src\LayerBrushes\Artemis.Plugins.LayerBrushes.DrippingPaint\bin\x64\Release\net5.0-windows\publish
           
       - name: Upload Artemis.Plugins.LayerBrushes.SolidPercentage
         uses: actions/upload-artifact@v2

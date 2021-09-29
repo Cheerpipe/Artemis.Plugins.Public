@@ -71,7 +71,7 @@ namespace SRTPluginProviderRE8
                     exCount = 0;
                     Dispose();
                     Init();
-                    logger.Verbose("Memory reader estarted because pointers were created while the game was not ready.");
+                    logger.Verbose("Memory reader started because pointers were created while the game was not ready.");
                 }
 
             }

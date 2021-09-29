@@ -85,6 +85,8 @@ namespace Artemis.Plugins.Modules.Games
 
         private void GameStateMachine_ScreenChanged(object sender, global::FallGuys.Gsi.StateMachines.Events.ScreenChangedArgs e)
         {
+
+
             DataModel.Screen = e.NewScreen;
         }
 

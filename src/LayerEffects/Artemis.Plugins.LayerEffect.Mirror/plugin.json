@@ -1,0 +1,10 @@
+{
+  "Guid": "379e94ad-7243-44f3-9165-d63e10e6ff69",
+  "Name": "Mirror",
+  "Icon": "Mirror",
+  "Description": "Provides a horizontal and vertical mirrored layer effect",
+  "Author": "Cheerpipe",
+  "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",
+  "Version": "1.0.0.0",
+  "Main": "Artemis.Plugins.LayerEffect.Mirror.dll"
+}

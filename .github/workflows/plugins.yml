@@ -42,8 +42,6 @@ jobs:
       - name: Build Plugins
         run: dotnet publish -c Release .\Plugins\src\Artemis.Plugins.Public.sln
 
-        #msbuild is dumb so we have to upload one at a time :)
-        #https://github.com/dotnet/sdk/issues/7238
       - name: Upload Artemis.Plugins.DataModelExpansions.DisplaySettings
         uses: actions/upload-artifact@v2
         with:
@@ -55,6 +53,12 @@ jobs:
         with:
           name: Artemis.Plugins.DataModelExpansions.PlaybackVolume
           path: .\Plugins\src\DataModelExpansions\Artemis.Plugins.DataModelExpansions.PlaybackVolume\bin\x64\Release\net5.0-windows\publish
+
+      - name: Upload Artemis.Plugins.DataModelExpansions.PowerState
+        uses: actions/upload-artifact@v2
+        with:
+          name: Artemis.Plugins.DataModelExpansions.PowerState
+          path: .\Plugins\src\DataModelExpansions\Artemis.Plugins.DataModelExpansions.PowerState\bin\x64\Release\net5.0-windows\publish
           
       - name: Upload Artemis.Plugins.DataModelExpansions.YTMdesktop
         uses: actions/upload-artifact@v2

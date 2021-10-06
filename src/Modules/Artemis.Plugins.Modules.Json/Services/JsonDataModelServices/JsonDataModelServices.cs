@@ -37,7 +37,6 @@ namespace Artemis.Plugins.Modules.Json.Services.JsonDataModelServices
         public bool AddOrMergeJson(string key, string payload, bool saveToRepository = false)
         {
             var newJsonDataModel = CreateJsonDataModelBridge(payload);
-
             if (newJsonDataModel == null)
                 return false;
 

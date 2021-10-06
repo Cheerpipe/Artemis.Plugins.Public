@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Text;
 using EmbedIO;
 using EmbedIO.Routing;
 using EmbedIO.WebApi;
@@ -23,7 +24,7 @@ namespace Artemis.Plugins.Modules.Json.Controllers
             if (_jsonDataModelServices.TryGetJsonByKey(key, out string json))
             {
                 HttpContext.Response.ContentType = "application/json";
-                using var writer = HttpContext.OpenResponseText();
+                using var writer = HttpContext.OpenResponseText(new UTF8Encoding(false));
                 await writer.WriteAsync(json);
             }
             else
@@ -51,7 +52,7 @@ namespace Artemis.Plugins.Modules.Json.Controllers
             var json = await HttpContext.GetRequestBodyAsStringAsync();
             HttpContext.Response.ContentType = "application/json";
             _jsonDataModelServices.AddOrReplaceJson(key, json, true);
-            using var writer = HttpContext.OpenResponseText();
+            using var writer = HttpContext.OpenResponseText(new UTF8Encoding(false));
             await writer.WriteAsync(json);
         }
 
@@ -61,7 +62,7 @@ namespace Artemis.Plugins.Modules.Json.Controllers
             var json = await HttpContext.GetRequestBodyAsStringAsync();
             HttpContext.Response.ContentType = "application/json";
             _jsonDataModelServices.AddOrMergeJson(key, json, true);
-            using var writer = HttpContext.OpenResponseText();
+            using var writer = HttpContext.OpenResponseText(new UTF8Encoding(false));
             await writer.WriteAsync(json);
         }
 

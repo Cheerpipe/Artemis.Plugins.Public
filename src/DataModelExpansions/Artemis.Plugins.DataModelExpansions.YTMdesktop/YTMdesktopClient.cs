@@ -4,6 +4,7 @@ using RestSharp;
 namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
 {
 
+    // ReSharper disable once InconsistentNaming
     public class YTMDesktopClient
     {
         RestClient _client;
@@ -36,34 +37,34 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
 
     public class PlayerInfo
     {
-        public bool hasSong { get; set; }
-        public bool isPaused { get; set; }
-        public int volumePercent { get; set; }
-        public int seekbarCurrentPosition { get; set; }
-        public string seekbarCurrentPositionHuman { get; set; }
-        public double statePercent { get; set; }
-        public string likeStatus { get; set; }
-        public string repeatType { get; set; }
+        public bool HasSong { get; set; }
+        public bool IsPaused { get; set; }
+        public int VolumePercent { get; set; }
+        public int SeekbarCurrentPosition { get; set; }
+        public string SeekbarCurrentPositionHuman { get; set; }
+        public double StatePercent { get; set; }
+        public string LikeStatus { get; set; }
+        public string RepeatType { get; set; }
     }
 
     public class TrackInfo
     {
-        public string author { get; set; }
-        public string title { get; set; }
-        public string album { get; set; }
-        public string cover { get; set; }
-        public int duration { get; set; }
-        public string durationHuman { get; set; }
-        public string url { get; set; }
-        public string id { get; set; }
-        public bool isVideo { get; set; }
-        public bool isAdvertisement { get; set; }
-        public bool inLibrary { get; set; }
+        public string Author { get; set; }
+        public string Title { get; set; }
+        public string Album { get; set; }
+        public string Cover { get; set; }
+        public int Duration { get; set; }
+        public string DurationHuman { get; set; }
+        public string Url { get; set; }
+        public string Id { get; set; }
+        public bool IsVideo { get; set; }
+        public bool IsAdvertisement { get; set; }
+        public bool InLibrary { get; set; }
     }
 
     public class RootInfo
     {
-        public PlayerInfo player { get; set; }
-        public TrackInfo track { get; set; }
+        public PlayerInfo Player { get; set; }
+        public TrackInfo Track { get; set; }
     }
 }

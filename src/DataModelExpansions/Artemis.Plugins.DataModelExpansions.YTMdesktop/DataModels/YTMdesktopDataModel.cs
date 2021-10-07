@@ -1,8 +1,7 @@
 ﻿using Artemis.Core.Modules;
 using Artemis.Core.Services;
-using SkiaSharp;
 using System;
-using System.ComponentModel;
+// ReSharper disable InconsistentNaming
 
 namespace Artemis.Plugins.DataModelExpansions.YTMdesktop.DataModels
 {
@@ -21,58 +20,58 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop.DataModels
     public class YTMdesktopPlayerDataModel : DataModel
     {
         public bool IsRunning { get; set; }
-        public bool hasSong { get; set; }
-        public bool isPaused { get; set; }
-        public int volumePercent { get; set; }
-        public double seekbarCurrentPosition { get; set; }
-        public TimeSpan seekbarCurrentPositionHuman { get; set; }
-        public double statePercent { get; set; }
-        public string likeStatus { get; set; }
-        public RepeatState repeatType { get; set; }
+        public bool HasSong { get; set; }
+        public bool IsPaused { get; set; }
+        public int VolumePercent { get; set; }
+        public double SeekbarCurrentPosition { get; set; }
+        public TimeSpan SeekbarCurrentPositionHuman { get; set; }
+        public double StatePercent { get; set; }
+        public string LikeStatus { get; set; }
+        public RepeatState RepeatType { get; set; }
 
         public void Empty()
         {
             IsRunning = false;
-            hasSong = false;
-            isPaused = true;
-            volumePercent = 0;
-            seekbarCurrentPosition = 0;
-            seekbarCurrentPositionHuman = TimeSpan.Zero;
-            statePercent = 0;
-            likeStatus = string.Empty;
-            repeatType = RepeatState.None;
+            HasSong = false;
+            IsPaused = true;
+            VolumePercent = 0;
+            SeekbarCurrentPosition = 0;
+            SeekbarCurrentPositionHuman = TimeSpan.Zero;
+            StatePercent = 0;
+            LikeStatus = string.Empty;
+            RepeatType = RepeatState.None;
         }
     }
 
     public class YTMdesktopTrackDataModel : DataModel
     {
-        public string author { get; set; }
-        public string title { get; set; }
-        public string album { get; set; }
-        public string cover { get; set; }
-        public double duration { get; set; }
-        public TimeSpan durationHuman { get; set; }
-        public string url { get; set; }
-        public string id { get; set; }
-        public bool isVideo { get; set; }
-        public bool isAdvertisement { get; set; }
-        public bool inLibrary { get; set; }
+        public string Author { get; set; }
+        public string Title { get; set; }
+        public string Album { get; set; }
+        public string Cover { get; set; }
+        public double Duration { get; set; }
+        public TimeSpan DurationHuman { get; set; }
+        public string Url { get; set; }
+        public string Id { get; set; }
+        public bool IsVideo { get; set; }
+        public bool IsAdvertisement { get; set; }
+        public bool InLibrary { get; set; }
 
         public ColorSwatch Colors { get; set; } = new();
 
         public void Empty()
         {
-            author = string.Empty;
-            title = string.Empty;
-            album = string.Empty;
-            cover = string.Empty;
-            duration = 0;
-            durationHuman = TimeSpan.Zero;
-            url = string.Empty;
-            id = string.Empty;
-            isVideo = false;
-            isAdvertisement = false;
-            inLibrary = false;
+            Author = string.Empty;
+            Title = string.Empty;
+            Album = string.Empty;
+            Cover = string.Empty;
+            Duration = 0;
+            DurationHuman = TimeSpan.Zero;
+            Url = string.Empty;
+            Id = string.Empty;
+            IsVideo = false;
+            IsAdvertisement = false;
+            InLibrary = false;
         }
     }
 

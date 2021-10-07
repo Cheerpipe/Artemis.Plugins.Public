@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Artemis.Plugins.DataModelExpansions.PowerState.Utils
+﻿namespace Artemis.Plugins.DataModelExpansions.PowerState.Utils
 {
     public class BatteryUtiles
     {

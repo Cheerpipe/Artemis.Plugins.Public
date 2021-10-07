@@ -1,7 +1,5 @@
 ﻿using System;
 using Artemis.Core.Modules;
-using System.Windows;
-using System.Windows.Input;
 using Artemis.Core;
 
 namespace Artemis.Plugins.DataModelExpansions.PowerState.DataModels

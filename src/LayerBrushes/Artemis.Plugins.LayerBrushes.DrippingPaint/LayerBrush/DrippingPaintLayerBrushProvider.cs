@@ -6,7 +6,7 @@ namespace Artemis.Plugins.LayerBrushes.DrippingPaint.LayerBrush
     {
         public override void Enable()
         {
-            RegisterLayerBrushDescriptor<DrippingPaintLayerBrush>("Dripping Paint", "Wall paint dripping layyer effect", "DrippingPaint.svg");
+            RegisterLayerBrushDescriptor<DrippingPaintLayerBrush>("Dripping Paint", "Wall paint dripping layer effect", "DrippingPaint.svg");
         }
 
         public override void Disable()

@@ -56,7 +56,7 @@ namespace Artemis.Plugins.DataModelExpansions.PowerState
         {
             try
             {
-                DataModel.UsingBattery = System.Windows.SystemParameters.PowerLineStatus == PowerLineStatus.Offline;
+                DataModel.UsingBattery = SystemParameters.PowerLineStatus == PowerLineStatus.Offline;
             }
             catch (Exception e)
             {

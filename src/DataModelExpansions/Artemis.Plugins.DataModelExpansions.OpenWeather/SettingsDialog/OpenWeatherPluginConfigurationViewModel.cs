@@ -1,13 +1,13 @@
-﻿using Artemis.Core;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Artemis.Core;
 using Artemis.Plugins.DataModelExpansions.OpenWeather.DataModels;
 using Artemis.UI.Shared;
 using Awesomio.NET.Models.CurrentWeather;
 using Awesomio.Weather.NET;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace Artemis.Plugins.DataModelExpansions.OpenWeather
+namespace Artemis.Plugins.DataModelExpansions.OpenWeather.SettingsDialog
 {
     public class OpenWeatherPluginConfigurationViewModel : PluginConfigurationViewModel
     {
@@ -97,8 +97,6 @@ namespace Artemis.Plugins.DataModelExpansions.OpenWeather
                     return false;
                 }
 
-
-                //TODO: Use settings
                 string accessKey = ApiKey;
                 WeatherClient client = new WeatherClient(accessKey);
                 CurrrentWeatherModel data = client.GetCurrentWeatherAsync<CurrrentWeatherModel>(City, "en", UnitOfMeasurement).Result;

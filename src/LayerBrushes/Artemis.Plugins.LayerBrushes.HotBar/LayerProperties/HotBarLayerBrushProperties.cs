@@ -1,4 +1,7 @@
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Artemis.Core;
+using Artemis.Plugins.LayerBrushes.Hotbar.Services;
 using SkiaSharp;
 
 namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerProperties
@@ -39,6 +42,8 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerProperties
             ActiveKeyColor.IsVisibleWhen(ColorMode, c => c.CurrentValue == KeyColorType.Solid);
         }
 
+        public SortedLedsProperties SortedLeds { get; set; }
+
         protected override void DisableProperties()
         {
         }
@@ -50,13 +55,31 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerProperties
         Vertical,
         Horizontal,
         VerticalReversed,
-        HorizontalReversed
+        HorizontalReversed,
+        Custom
     }
 
     public enum KeyColorType
     {
         Solid,
         Gradient
+    }
+
+    public class SortedLedsProperties : LayerPropertyGroup
+    {
+        public LayerProperty<List<PersistentLed>> LedSortMap { get; set; }
+
+        protected override void PopulateDefaults()
+        {
+        }
+
+        protected override void EnableProperties()
+        {
+        }
+
+        protected override void DisableProperties()
+        {
+        }
     }
 
 }

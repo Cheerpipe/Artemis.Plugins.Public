@@ -42,7 +42,7 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerProperties
             ActiveKeyColor.IsVisibleWhen(ColorMode, c => c.CurrentValue == KeyColorType.Solid);
         }
 
-        public SortedLedsProperties SortedLeds { get; set; }
+        public LayerProperty<List<PersistentLed>> LedSortMap { get; set; }
 
         protected override void DisableProperties()
         {
@@ -64,22 +64,4 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerProperties
         Solid,
         Gradient
     }
-
-    public class SortedLedsProperties : LayerPropertyGroup
-    {
-        public LayerProperty<List<PersistentLed>> LedSortMap { get; set; }
-
-        protected override void PopulateDefaults()
-        {
-        }
-
-        protected override void EnableProperties()
-        {
-        }
-
-        protected override void DisableProperties()
-        {
-        }
-    }
-
 }

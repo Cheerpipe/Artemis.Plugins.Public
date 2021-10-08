@@ -18,7 +18,7 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.ViewModels
 
         public PathSetupViewModel(HotbarLayerBrush layerBrush) : base(layerBrush)
         {
-            Properties = layerBrush.Properties.SortedLeds;
+            Properties = layerBrush.Properties;
             if (Properties.LedSortMap?.CurrentValue == null)
             {
                 _orderedLeds = new ObservableCollection<PersistentLed>(GetNewLayerLedCollection(layerBrush));
@@ -52,7 +52,7 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.ViewModels
             Properties.LedSortMap.BaseValue = _orderedLeds.ToList();
         }
 
-        public SortedLedsProperties Properties { get; }
+        public HotbarLayerBrushProperties Properties { get; }
 
         #region IDropTarget Interface Methods
         public void DragOver(IDropInfo dropInfo) { }

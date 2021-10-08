@@ -53,7 +53,7 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerBrush
         private void Layer_RenderPropertiesUpdated(object sender, EventArgs e)
         {
             _activeLed = null;
-            Properties.SortedLeds.LedSortMap.BaseValue = null;
+            Properties.LedSortMap.BaseValue = null;
         }
 
         public override void DisableLayerBrush()
@@ -130,7 +130,7 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerBrush
         private List<ArtemisLed> GetCustomSortedLeds()
         {
             // Todo: Use a cached sorted array to avoid sort on every frame
-            var sortedLeds = _persistentLedService.GetSortedLedsFromMap(Layer.Leds, Properties.SortedLeds.LedSortMap?.BaseValue);
+            var sortedLeds = _persistentLedService.GetSortedLedsFromMap(Layer.Leds, Properties.LedSortMap?.BaseValue);
             return sortedLeds ?? Layer.Leds.OrderBy(l => l.Device.Rectangle.Left).ThenBy(l => l.Device.Rectangle.Top).ThenBy(l => l.RgbLed.Id).ToList();
         }
 

@@ -53,7 +53,7 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerBrush
         private void Layer_RenderPropertiesUpdated(object sender, EventArgs e)
         {
             _activeLed = null;
-            Properties.SortedLeds.LedSortMap.CurrentValue = null;
+            Properties.SortedLeds.LedSortMap.BaseValue = null;
         }
 
         public override void DisableLayerBrush()
@@ -163,8 +163,7 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerBrush
                 else
                     newLedPos = (currentLedPos == 0) ? 0 : currentLedPos - 1;
             }
-            _activeLed = leds[newLedPos];
-
+            _activeLed = leds.Count > 0 ? leds[newLedPos] : null;
         }
 
         #endregion

@@ -3,22 +3,46 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:s="https://github.com/canton7/Stylet"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:dd="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
              xmlns:viewModels="clr-namespace:Artemis.Plugins.LayerBrushes.Hotbar.ViewModels"
              mc:Ignorable="d"
-             d:DesignHeight="600" d:DesignWidth="800"
+             d:DesignHeight="700" d:DesignWidth="900"
              d:DataContext="{d:DesignInstance viewModels:PathSetupViewModel}">
-    <StackPanel Margin="15">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
 
-            <ListBox Grid.Column="0" ItemsSource="{Binding OrderedLeds}" DisplayMemberPath="Id" 
-                     dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" Height="400"/>
-        </Grid>
-    </StackPanel>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Margin="15" Grid.Row="0" Grid.Column="0">
+            <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}"  Margin="0 15 0 15">Custom led map</TextBlock>
+            <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" Margin="0 0 0 0">This feature allows you to sort layer leds as you want to create a custom path</TextBlock>
+        </StackPanel>
+        <DockPanel Margin="15 15 15 15" Grid.Row="1" Grid.Column="0" >
+            <StackPanel>
+
+            </StackPanel>
+                <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth1" VerticalAlignment="Stretch" >
+                   <DockPanel  Margin="15 15 15 15"  >
+                    <ListView   
+                                ItemsSource="{Binding OrderedLeds}" 
+                                dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" ScrollViewer.VerticalScrollBarVisibility="Visible"  DisplayMemberPath="Id" >
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn  Header="Key Id" DisplayMemberBinding="{Binding Id}"/>
+                                <GridViewColumn  Header="Device" DisplayMemberBinding="{Binding DeviceName}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </DockPanel>
+            </materialDesign:Card>
+        </DockPanel>
+        <StackPanel Margin="15" Grid.Row="2" Grid.Column="0">
+        </StackPanel>
+    </Grid>
 </UserControl>

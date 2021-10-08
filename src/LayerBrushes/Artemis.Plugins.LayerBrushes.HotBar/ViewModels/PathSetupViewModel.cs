@@ -39,7 +39,7 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.ViewModels
 
             foreach (ArtemisLed led in leds)
             {
-                ledsPath.Add(new PersistentLed(led.RgbLed.Id, led.Device.Identifier));
+                ledsPath.Add(new PersistentLed(led.RgbLed.Id, led.Device.Identifier,led.RgbLed.Device.DeviceInfo.DeviceName));
                 pos++;
             }
             return ledsPath;

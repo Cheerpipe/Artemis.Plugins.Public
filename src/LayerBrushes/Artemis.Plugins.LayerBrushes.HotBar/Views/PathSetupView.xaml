@@ -25,13 +25,11 @@
             <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" Margin="0 0 0 0">This feature allows you to sort layer leds as you want to create a custom path</TextBlock>
         </StackPanel>
         <DockPanel Margin="15 15 15 15" Grid.Row="1" Grid.Column="0" >
-            <StackPanel>
-
-            </StackPanel>
+            <StackPanel/>
             <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth1" VerticalAlignment="Stretch" >
                 <DockPanel  Margin="15 15 15 15"  >
                     <ListView ItemsSource="{Binding OrderedLedsCollectionView}" 
-                              dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" ScrollViewer.VerticalScrollBarVisibility="Auto" AutomationProperties.IsColumnHeader="True" AutomationProperties.IsRowHeader="True" >
+                              dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" AutomationProperties.IsColumnHeader="True" AutomationProperties.IsRowHeader="True" >
                         <ListView.View>
                             <GridView>
                                 <GridView.ColumnHeaderContainerStyle>

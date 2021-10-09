@@ -18,6 +18,7 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerBrush
 
         private readonly IInputService _inputService;
         private readonly PersistentLedService _persistentLedService;
+        private List<ArtemisLed> _sortedLeds;
 
         private ArtemisLed _activeLed;
 
@@ -40,20 +41,47 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerBrush
             // EnableLayerBrush is running twice O.O. Have to check with Spoinky. In the meanwhile...
             _inputService.KeyboardKeyDown -= InputServiceOnKeyboardKeyDown;
             _inputService.MouseScroll -= _inputService_MouseScroll;
+            Layer.RenderPropertiesUpdated -= Layer_RenderPropertiesUpdated;
+            Properties.LedSortMap.PropertyChanged -= LedSortMap_PropertyChanged;
 
 
             _inputService.KeyboardKeyDown += InputServiceOnKeyboardKeyDown;
             _inputService.MouseScroll += _inputService_MouseScroll;
             Layer.RenderPropertiesUpdated += Layer_RenderPropertiesUpdated;
+            Properties.LedSortMap.PropertyChanged += LedSortMap_PropertyChanged;
+        }
 
-
-            ConfigurationDialog = new LayerBrushConfigurationDialog<PathSetupViewModel>();
+        private void LedSortMap_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            SetCustomSortedLeds();
         }
 
         private void Layer_RenderPropertiesUpdated(object sender, EventArgs e)
         {
             _activeLed = null;
-            Properties.LedSortMap.BaseValue = null;
+
+            if (_sortedLeds == null)
+            {
+                //Properties.LedSortMap.BaseValue GetNewLayerLedCollection(Layer.Leds);
+                SetCustomSortedLeds();
+            }
+            else
+            {
+                Properties.LedSortMap.BaseValue = GetNewLayerLedCollection(Layer.Leds);
+            }
+        }
+
+        private List<PersistentLed> GetNewLayerLedCollection(IReadOnlyCollection<ArtemisLed> layerLeds)
+        {
+            List<PersistentLed> ledsPath = new List<PersistentLed>();
+            int pos = 0;
+
+            foreach (ArtemisLed led in layerLeds)
+            {
+                ledsPath.Add(new PersistentLed(led.RgbLed.Id, led.Device.Identifier, led.RgbLed.Device.DeviceInfo.DeviceName));
+                pos++;
+            }
+            return ledsPath;
         }
 
         public override void DisableLayerBrush()
@@ -61,6 +89,7 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerBrush
             _inputService.KeyboardKeyDown -= InputServiceOnKeyboardKeyDown;
             _inputService.MouseScroll -= _inputService_MouseScroll;
             Layer.RenderPropertiesUpdated -= Layer_RenderPropertiesUpdated;
+            Properties.LedSortMap.PropertyChanged -= LedSortMap_PropertyChanged;
         }
 
         #endregion
@@ -90,10 +119,7 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerBrush
                     return SKColors.Black;
                 else
                     return SKColors.Transparent;
-
-
             }
-
         }
 
         #endregion
@@ -129,9 +155,13 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerBrush
 
         private List<ArtemisLed> GetCustomSortedLeds()
         {
-            // Todo: Use a cached sorted array to avoid sort on every frame
+            return _sortedLeds;
+        }
+
+        private void SetCustomSortedLeds()
+        {
             var sortedLeds = _persistentLedService.GetSortedLedsFromMap(Layer.Leds, Properties.LedSortMap?.BaseValue);
-            return sortedLeds ?? Layer.Leds.OrderBy(l => l.Device.Rectangle.Left).ThenBy(l => l.Device.Rectangle.Top).ThenBy(l => l.RgbLed.Id).ToList();
+            _sortedLeds = sortedLeds ?? Layer.Leds.OrderBy(l => l.Device.Rectangle.Left).ThenBy(l => l.Device.Rectangle.Top).ThenBy(l => l.RgbLed.Id).ToList();
         }
 
         private void _inputService_MouseScroll(object sender, ArtemisMouseScrollEventArgs e)

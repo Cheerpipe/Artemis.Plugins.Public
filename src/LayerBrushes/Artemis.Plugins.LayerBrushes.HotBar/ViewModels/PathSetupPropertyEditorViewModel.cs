@@ -16,13 +16,14 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.ViewModels
 
         public async void Browse()
         {
-            /*
-            if (await _dialogService.ShowDialog<FilePickerDialogViewModel>() is string fileName)
+            Dictionary<string, object> viewModelVars = new Dictionary<string, object>();
+            viewModelVars.Add("sortedLeds", LayerProperty.BaseValue);
+
+            if (await _dialogService.ShowDialog<PathSetupViewModel>(viewModelVars) is List<PersistentLed> sortedLeds)
             {
-                LayerProperty.BaseValue = fileName;
+                LayerProperty.BaseValue = sortedLeds;
                 NotifyOfPropertyChange(nameof(LayerProperty));
             }
-            */
         }
     }
 }

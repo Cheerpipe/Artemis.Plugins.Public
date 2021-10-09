@@ -23,6 +23,9 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerProperties
         [PropertyDescription(Name = "LED order", Description = "The order in which to reveal LEDs")]
         public EnumLayerProperty<LedOrder> LedOrder { get; set; }
 
+        [PropertyDescription(Description = "This feature allows you to sort layer leds as you want to create a custom path", DisableKeyframes = true)]
+        public LayerProperty<List<PersistentLed>> LedSortMap { get; set; }
+
         [PropertyDescription(Description = "Handle scroll overflow as a circular led array")]
         public BoolLayerProperty LoopOnScrollOverflow { get; set; }
         [PropertyDescription(Description = "Allows the scroll to activate the hotbar even if there is no active key. Useful if you use hotbar with devices without keys")]
@@ -40,9 +43,10 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerProperties
         {
             ActiveKeyGradient.IsVisibleWhen(ColorMode, c => c.CurrentValue == KeyColorType.Gradient);
             ActiveKeyColor.IsVisibleWhen(ColorMode, c => c.CurrentValue == KeyColorType.Solid);
+            LedSortMap.IsVisibleWhen(LedOrder, c => c.CurrentValue == Hotbar.LayerProperties.LedOrder.Custom);
         }
 
-        public LayerProperty<List<PersistentLed>> LedSortMap { get; set; }
+
 
         protected override void DisableProperties()
         {

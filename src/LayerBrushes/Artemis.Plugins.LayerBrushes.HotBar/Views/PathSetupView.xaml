@@ -6,6 +6,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:dd="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
              xmlns:viewModels="clr-namespace:Artemis.Plugins.LayerBrushes.Hotbar.ViewModels"
+             xmlns:s="https://github.com/canton7/Stylet"
              mc:Ignorable="d"
              d:DesignHeight="700" d:DesignWidth="900"
              d:DataContext="{d:DesignInstance viewModels:PathSetupViewModel}">
@@ -42,7 +43,27 @@
                 </DockPanel>
             </materialDesign:Card>
         </DockPanel>
-        <StackPanel Margin="15" Grid.Row="2" Grid.Column="0">
+        <StackPanel Margin="15" Grid.Row="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                
+                <Button Margin="10"
+                        Height="35"
+                        Width="100"
+                        IsDefault="True"
+                        Style="{StaticResource MaterialDesignFlatMidBgButton}" 
+                        Command="{s:Action Save}" 
+                        Cursor="Hand" >
+                    SAVE
+                </Button>
+                <Button Margin="10"
+                        Height="35"
+                        Width="100"
+                        IsCancel="True"
+                        Style="{StaticResource MaterialDesignFlatMidBgButton}" 
+                        Cursor="Hand" 
+                        Command="{s:Action Close}" >
+                    CANCEL
+                </Button>
+            
         </StackPanel>
     </Grid>
 </UserControl>

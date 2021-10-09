@@ -11,25 +11,25 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.ViewModels
 {
     public class PathSetupViewModel : DialogViewModelBase, IDropTarget
     {
-        private ObservableCollection<PersistentLed> _orderedLeds;
+        private ObservableCollection<PersistentLed> _orderedLedsObservableCollection;
 
         public PathSetupViewModel(List<PersistentLed> sortedLeds)
         {
-            _orderedLeds = new ObservableCollection<PersistentLed>(sortedLeds);
-            OrderedLeds = CollectionViewSource.GetDefaultView(_orderedLeds);
+            _orderedLedsObservableCollection = new ObservableCollection<PersistentLed>(sortedLeds);
+            OrderedLedsCollectionView = CollectionViewSource.GetDefaultView(_orderedLedsObservableCollection);
         }
 
-        public ICollectionView OrderedLeds { get; private set; }
+        public ICollectionView OrderedLedsCollectionView { get; private set; }
 
         public void Save()
         {
             if (Session != null && !Session.IsEnded)
-                Session.Close(_orderedLeds.ToList());
+                Session.Close(_orderedLedsObservableCollection.ToList());
         }
 
         public void Close()
         {
-            this.Cancel();
+            Cancel();
         }
 
         #region IDropTarget Interface Methods

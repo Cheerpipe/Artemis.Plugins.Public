@@ -31,12 +31,12 @@
                 <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth1" VerticalAlignment="Stretch" >
                    <DockPanel  Margin="15 15 15 15"  >
                     <ListView   
-                                ItemsSource="{Binding OrderedLeds}" 
+                                ItemsSource="{Binding OrderedLedsCollectionView}" 
                                 dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" ScrollViewer.VerticalScrollBarVisibility="Visible"  DisplayMemberPath="Id" >
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn  Header="Key Id" DisplayMemberBinding="{Binding Id}"/>
-                                <GridViewColumn  Header="Device" DisplayMemberBinding="{Binding DeviceName}"/>
+                                <GridViewColumn Header="Key Id" DisplayMemberBinding="{Binding Id}"/>
+                                <GridViewColumn Header="Device" DisplayMemberBinding="{Binding DeviceName}"/>
                             </GridView>
                         </ListView.View>
                     </ListView>
@@ -58,7 +58,7 @@
                         Height="35"
                         Width="100"
                         IsCancel="True"
-                        Style="{StaticResource MaterialDesignFlatMidBgButton}" 
+                        Style="{StaticResource MaterialDesignOutlinedButton}" 
                         Cursor="Hand" 
                         Command="{s:Action Close}" >
                     CANCEL

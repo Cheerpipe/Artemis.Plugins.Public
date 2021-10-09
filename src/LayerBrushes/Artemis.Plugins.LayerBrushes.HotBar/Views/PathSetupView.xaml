@@ -28,15 +28,20 @@
             <StackPanel>
 
             </StackPanel>
-                <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth1" VerticalAlignment="Stretch" >
-                   <DockPanel  Margin="15 15 15 15"  >
-                    <ListView   
-                                ItemsSource="{Binding OrderedLedsCollectionView}" 
-                                dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" ScrollViewer.VerticalScrollBarVisibility="Visible"  DisplayMemberPath="Id" >
+            <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth1" VerticalAlignment="Stretch" >
+                <DockPanel  Margin="15 15 15 15"  >
+                    <ListView ItemsSource="{Binding OrderedLedsCollectionView}" 
+                              dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" ScrollViewer.VerticalScrollBarVisibility="Auto" AutomationProperties.IsColumnHeader="True" AutomationProperties.IsRowHeader="True" >
                         <ListView.View>
                             <GridView>
+                                <GridView.ColumnHeaderContainerStyle>
+                                    <Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+                                        <Setter Property="Padding" Value="5 0 5 5"/>
+                                    </Style>
+                                </GridView.ColumnHeaderContainerStyle>
                                 <GridViewColumn Header="Key Id" DisplayMemberBinding="{Binding Id}"/>
                                 <GridViewColumn Header="Device" DisplayMemberBinding="{Binding DeviceName}"/>
+
                             </GridView>
                         </ListView.View>
                     </ListView>
@@ -44,26 +49,26 @@
             </materialDesign:Card>
         </DockPanel>
         <StackPanel Margin="15" Grid.Row="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                
-                <Button Margin="10"
+
+            <Button Margin="10"
                         Height="35"
                         Width="100"
                         IsDefault="True"
                         Style="{StaticResource MaterialDesignFlatMidBgButton}" 
                         Command="{s:Action Save}" 
                         Cursor="Hand" >
-                    SAVE
-                </Button>
-                <Button Margin="10"
+                SAVE
+            </Button>
+            <Button Margin="10"
                         Height="35"
                         Width="100"
                         IsCancel="True"
                         Style="{StaticResource MaterialDesignOutlinedButton}" 
                         Cursor="Hand" 
                         Command="{s:Action Close}" >
-                    CANCEL
-                </Button>
-            
+                CANCEL
+            </Button>
+
         </StackPanel>
     </Grid>
 </UserControl>

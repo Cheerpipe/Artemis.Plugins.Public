@@ -22,6 +22,7 @@ namespace Artemis.Plugins.DataModelExpansions.DisplaySettings
         private void SystemEvents_DisplaySettingsChanged(object sender, EventArgs e)
         {
             UpdateDataDataModel();
+            DataModel.DisplayModeChanged.Trigger(new DisplayModeEventArgs(DataModel.Topology, DataModel.DisplayCount));
         }
 
         public override List<IModuleActivationRequirement> ActivationRequirements => null;
@@ -29,7 +30,7 @@ namespace Artemis.Plugins.DataModelExpansions.DisplaySettings
         public override void Enable()
         {
             SystemEvents.DisplaySettingsChanged += SystemEvents_DisplaySettingsChanged;
-            SystemEvents_DisplaySettingsChanged(null, null);
+            UpdateDataDataModel();
         }
 
         public override void Disable()
@@ -68,7 +69,6 @@ namespace Artemis.Plugins.DataModelExpansions.DisplaySettings
                         }
                     );
                 }
-
             }
             catch (Exception e)
             {

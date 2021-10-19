@@ -1,5 +1,6 @@
 ﻿using Artemis.Core.Modules;
 using System.Drawing;
+using Artemis.Core;
 using WindowsDisplayAPI;
 using WindowsDisplayAPI.Native.DeviceContext;
 using WindowsDisplayAPI.Native.DisplayConfig;
@@ -11,6 +12,19 @@ namespace Artemis.Plugins.DataModelExpansions.DisplaySettings.DataModels
         public DisplayConfigTopologyId Topology { get; set; }
         public int DisplayCount { get; set; }
         public DisplaysDataModel Displays { get; } = new();
+        public DataModelEvent<DisplayModeEventArgs> DisplayModeChanged { get; set; } = new();
+    }
+
+    public class DisplayModeEventArgs : DataModelEventArgs
+    {
+        public DisplayModeEventArgs(DisplayConfigTopologyId topology, int displayCount)
+        {
+            Topology = topology;
+            DisplayCount = displayCount;
+        }
+
+        public DisplayConfigTopologyId Topology { get; set; }
+        public int DisplayCount { get; set; }
     }
 
     public class DisplaysDataModel : DataModel { }

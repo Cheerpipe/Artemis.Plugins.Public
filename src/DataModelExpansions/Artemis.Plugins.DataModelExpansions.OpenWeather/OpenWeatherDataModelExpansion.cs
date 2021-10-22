@@ -38,6 +38,7 @@ namespace Artemis.Plugins.DataModelExpansions.OpenWeather
 
         public override void Enable()
         {
+            //TODO: Make frequency configurable 
             AddTimedUpdate(TimeSpan.FromMinutes(10), _ => UpdateWeatherData());
             UpdateWeatherData();
         }

@@ -1,5 +1,6 @@
 ﻿using Artemis.Core.Modules;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Artemis.Plugins.DataModelExpansions.OpenWeather.DataModels
 {
@@ -40,6 +41,7 @@ namespace Artemis.Plugins.DataModelExpansions.OpenWeather.DataModels
         public WindDirectionCodes WindDirection { get; set; }
     }
 
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public enum WindDirectionCodes
     {
         Unknown,

@@ -1,0 +1,11 @@
+﻿{
+  "Guid": "9b68c4aa-8c2f-4cfb-90d3-2883ab439610",
+  "Name": "Standalone Logitech custom Device Provider",
+  "Icon": "Logitech.svg",
+  "Author": "martinklaus",
+  "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",
+  "Description": "Stand alone Logitech custom device provider to use without third party software like LGS or GHUB",
+  "Version": "1.0.0.0",
+  "Main": "Artemis.Plugins.Devices.LogitechCustom.dll",
+  "AutoEnableFeatures": false
+}

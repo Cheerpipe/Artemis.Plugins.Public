@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Device xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Name>Logitech G733</Name>
+  <Description>Layout of the G733 Headset</Description>
+  <Author>martinklaus</Author>
+  <Type>Headset</Type>
+  <Vendor>Logitech</Vendor>
+  <Model>G733</Model>
+  <Width>166</Width>
+  <Height>200</Height>
+  <Leds>
+    <Led Id="Headset1" />
+    <Led Id="Headset2" />
+  </Leds>
+  <CustomData>
+    <DeviceImage>G733.png</DeviceImage>
+  </CustomData>
+</Device>

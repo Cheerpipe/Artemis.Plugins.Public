@@ -1,0 +1,12 @@
+{
+  "Guid": "d960af67-a808-4aa3-ab67-3147e7afdd9d",
+  "Name": "Extended Artemis Web API",
+  "Author": "Cheerpipe",
+  "Website": "https://artemis-rgb.com/",
+  "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",
+  "Icon": "Api",
+  "Description": "Providers an extended RESTful web API with new methods",
+  "Version": "1.0.0.0",
+  "Main": "Artemis.Plugins.ExtendedWebAPI.dll",
+  "AutoEnableFeatures": true
+}

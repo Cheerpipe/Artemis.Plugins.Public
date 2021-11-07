@@ -57,7 +57,7 @@ namespace Artemis.Plugins.Modules.Json.Services.JsonDataModelServices
                 default:
                     // Special Types
                     object nodeValue;
-                    if (SKColor.TryParse(((JValue)node).ToString(), out SKColor colorNodeValue))
+                    if (SKColor.TryParse(((JValue)node).ToString(), out SKColor colorNodeValue) && ((JValue)node).ToString().StartsWith('#'))
                     {
                         nodeValue = colorNodeValue;
                     }

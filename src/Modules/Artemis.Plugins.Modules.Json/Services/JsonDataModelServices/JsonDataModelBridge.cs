@@ -2,6 +2,7 @@
 using Artemis.Core.Modules;
 using Artemis.Plugins.Modules.Json.DataModels;
 using Newtonsoft.Json.Linq;
+using SkiaSharp;
 
 namespace Artemis.Plugins.Modules.Json.Services.JsonDataModelServices
 {
@@ -54,7 +55,17 @@ namespace Artemis.Plugins.Modules.Json.Services.JsonDataModelServices
                         return dynamicDataModel;
                     }
                 default:
-                    dataModel.AddDynamicChild(node.Path.Split('.').LastOrDefault() ?? string.Empty, ((JValue)node).Value);
+                    // Special Types
+                    object nodeValue;
+                    if (SKColor.TryParse(((JValue)node).ToString(), out SKColor colorNodeValue))
+                    {
+                        nodeValue = colorNodeValue;
+                    }
+                    else
+                    {
+                        nodeValue = ((JValue)node).Value;
+                    }
+                    dataModel.AddDynamicChild(node.Path.Split('.').LastOrDefault() ?? string.Empty, nodeValue);
                     return dataModel;
             }
         }

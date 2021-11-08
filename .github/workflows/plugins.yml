@@ -161,3 +161,9 @@ jobs:
         with:
           name: Artemis.Plugins.LayerEffect.FlickeringLights
           path: .\Plugins\src\LayerEffects\Artemis.Plugins.LayerEffect.FlickeringLights\bin\x64\Release\net5.0-windows\publish     
+
+      - name: Upload Artemis.Plugins.ExtendedWebAPI
+        uses: actions/upload-artifact@v2
+        with:
+          name: Artemis.Plugins.ExtendedWebAPI
+          path: .\Plugins\src\Collections\Artemis.Plugins.ExtendedWebAPI\bin\x64\Release\net5.0-windows\publish     

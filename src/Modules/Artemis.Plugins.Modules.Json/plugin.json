@@ -3,6 +3,6 @@
     "Name": "Json",
     "Icon": "WallSconceRound",
     "Description": "A RESTful API for store JSON objects as a data model",
-    "Version": "1.0.0.0",
+    "Version": "1.0.0.2",
     "Main": "Artemis.Plugins.Modules.Json.dll"
 }            

@@ -5,16 +5,27 @@ using EmbedIO.Routing;
 using EmbedIO.WebApi;
 using System.Threading.Tasks;
 using Artemis.Plugins.Modules.Json.Services.JsonDataModelServices;
+using Artemis.Core.Services;
 
 namespace Artemis.Plugins.Modules.Json.Controllers
 {
     public class JsonController : WebApiController
     {
         private readonly JsonDataModelServices _jsonDataModelServices;
+        private readonly IPluginManagementService _pluginManagementService;
 
-        public JsonController(JsonDataModelServices jsonDataModelServices)
+        public JsonController(JsonDataModelServices jsonDataModelServices, IPluginManagementService pluginManagementService)
         {
+            _pluginManagementService = pluginManagementService;
             _jsonDataModelServices = jsonDataModelServices;
+        }
+
+        [Route(HttpVerbs.Get, "/json-datamodel/version")]
+        public string GetVersion()
+        {
+            HttpContext.Response.ContentType = " text/plain";
+            string version = _pluginManagementService.GetCallingPlugin().Info.Version.ToString();
+            return version;
         }
 
         [Route(HttpVerbs.Get, "/json-datamodel/{key}")]

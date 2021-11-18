@@ -7,41 +7,57 @@ using EmbedIO;
 using EmbedIO.Routing;
 using EmbedIO.WebApi;
 using RGB.NET.Core;
+using Serilog;
 
 namespace Artemis.Plugins.ExtendedWebAPI.Controllers
 {
     internal class ColorController : WebApiController
     {
         private IRgbService _rgbService;
-        public ColorController(IRgbService rgbService)
+        private ILogger _logger;
+        public ColorController(IRgbService rgbService, ILogger logger)
         {
             _rgbService = rgbService;
+            _logger = logger;
         }
 
         [Route(HttpVerbs.Get, "/extended-rest-api/get-led-color/{deviceType}/{ledId}")]
         public async Task GetCurrentVibrantColor(string deviceType, string ledId)
         {
             if (!(Enum.TryParse(typeof(RGBDeviceType), deviceType, true, out object parsedType)))
-                throw HttpException.NotFound($"Device type {deviceType} don't exists");
-
+            {
+                string message = $"Device type {deviceType} don't exists";
+                _logger.Information(message);
+                throw HttpException.NotFound(message);
+            }
+                
             if (!(Enum.TryParse(typeof(LedId), ledId, true, out object parsedLedId)))
-                throw HttpException.NotFound($"Led Id {ledId} don't exists");
-
-            //RGBDeviceType.Keyboard
-            //LedId.Keyboard_Space;
-            //LedId.Keyboard_G;
+            {
+                string message = $"Led Id {ledId} don't exists";
+                _logger.Information(message);
+                throw HttpException.NotFound(message);
+            }
 
             var device = _rgbService.Devices.FirstOrDefault(d => d.DeviceType == (RGBDeviceType)parsedType!);
             if (device == null)
-                throw HttpException.NotFound($"Device type {ledId} not found");
+            {
+                string message = $"Device type {ledId} not found";
+                _logger.Information(message);
+                throw HttpException.NotFound(message);
+            }
 
             var led = device.RgbDevice.Surface!.Leds.FirstOrDefault(l => l.Id == (LedId)parsedLedId!);
             if (led == null)
-                throw HttpException.NotFound($"Led Id {ledId} not found");
+                if (device == null)
+                {
+                    string message = $"Led Id {ledId} not found";
+                    _logger.Information(message);
+                    throw HttpException.NotFound(message);
+                }
 
             HttpContext.Response.ContentType = "text/plain";
             await using var writer = HttpContext.OpenResponseText(new UTF8Encoding(false));
-            await writer.WriteAsync(led.Color.AsRGBHexString());
+            await writer.WriteAsync(led!.Color.AsRGBHexString());
         }
     }
 }

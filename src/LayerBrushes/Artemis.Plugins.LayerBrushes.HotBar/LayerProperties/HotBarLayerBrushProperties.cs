@@ -27,6 +27,10 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerProperties
 
         [PropertyDescription(Description = "Handle scroll overflow as a circular led array")]
         public BoolLayerProperty LoopOnScrollOverflow { get; set; }
+
+        [PropertyDescription(Description = "Allows the scroll to change active key light")]
+        public BoolLayerProperty UseScroll { get; set; }
+
         [PropertyDescription(Description = "Allows the scroll to activate the hotbar even if there is no active key. Useful if you use hotbar with devices without keys")]
         public BoolLayerProperty ScrollActivation { get; set; }
 
@@ -36,6 +40,8 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerProperties
             ActiveKeyGradient.DefaultValue = ColorGradient.GetUnicornBarf();
             PaintBackground.DefaultValue = true;
             BackgroundColor.DefaultValue = SKColors.Black;
+            UseScroll.DefaultValue = false;
+            ScrollActivation.DefaultValue = false;
         }
 
         protected override void EnableProperties()
@@ -43,8 +49,8 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerProperties
             ActiveKeyGradient.IsVisibleWhen(ColorMode, c => c.CurrentValue == KeyColorType.Gradient);
             ActiveKeyColor.IsVisibleWhen(ColorMode, c => c.CurrentValue == KeyColorType.Solid);
             LedSortMap.IsVisibleWhen(LedOrder, c => c.CurrentValue == Hotbar.LayerProperties.LedOrder.Custom);
+            ScrollActivation.IsVisibleWhen(UseScroll, c => c.CurrentValue == true);
         }
-
 
 
         protected override void DisableProperties()

@@ -166,6 +166,9 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerBrush
 
         private void _inputService_MouseScroll(object sender, ArtemisMouseScrollEventArgs e)
         {
+            if (!Properties.UseScroll.CurrentValue)
+                return;
+
             List<ArtemisLed> leds = GetOrderedLeds();
 
             if ((_activeLed == null || !leds.Contains(_activeLed)) && Properties.ScrollActivation.CurrentValue)

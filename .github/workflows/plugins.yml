@@ -17,7 +17,7 @@ jobs:
         with:
           repository: DarthAffe/RGB.NET
           path: RGB.NET
-          ref: 07fde6e31bd56b77e87440d4dcb607c19a4bc636
+          ref: 11c31d07df154fea0ac6022b3ef530e9712fdd70
 
       - name: Build RGB.NET
         run: dotnet build .\RGB.NET\RGB.NET.Core\RGB.NET.Core.csproj

@@ -7,8 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Artemis.Plugins.LayerBrushes.Hotbar.Services;
-using Artemis.Plugins.LayerBrushes.Hotbar.ViewModels;
-using Artemis.UI.Shared.LayerBrushes;
 
 namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerBrush
 {
@@ -73,15 +71,7 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerBrush
 
         private List<PersistentLed> GetNewLayerLedCollection(IReadOnlyCollection<ArtemisLed> layerLeds)
         {
-            List<PersistentLed> ledsPath = new List<PersistentLed>();
-            int pos = 0;
-
-            foreach (ArtemisLed led in layerLeds)
-            {
-                ledsPath.Add(new PersistentLed(led.RgbLed.Id, led.Device.Identifier, led.RgbLed.Device.DeviceInfo.DeviceName));
-                pos++;
-            }
-            return ledsPath;
+            return layerLeds.Select(led => new PersistentLed(led.RgbLed.Id, led.Device.Identifier, led.RgbLed.Device.DeviceInfo.DeviceName)).ToList();
         }
 
         public override void DisableLayerBrush()
@@ -134,7 +124,10 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerBrush
             if (!Layer.Leds.Contains(e.Led))
                 return;
 
-            _activeLed = e.Led;
+            if (_activeLed == e.Led && Properties.KeyToggle.CurrentValue)
+                _activeLed = null;
+            else
+                _activeLed = e.Led;
         }
 
         private List<ArtemisLed> GetOrderedLeds()

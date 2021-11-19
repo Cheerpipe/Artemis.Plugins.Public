@@ -25,6 +25,9 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerProperties
         [PropertyDescription(Description = "This feature allows you to sort layer leds as you want to create a custom path", DisableKeyframes = true)]
         public LayerProperty<List<PersistentLed>> LedSortMap { get; set; }
 
+        [PropertyDescription(Description = "Keys will act as a self on/off toggle")]
+        public BoolLayerProperty KeyToggle { get; set; }
+
         [PropertyDescription(Description = "Handle scroll overflow as a circular led array")]
         public BoolLayerProperty LoopOnScrollOverflow { get; set; }
 
@@ -42,6 +45,7 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerProperties
             BackgroundColor.DefaultValue = SKColors.Black;
             UseScroll.DefaultValue = false;
             ScrollActivation.DefaultValue = false;
+            KeyToggle.DefaultValue = false;
         }
 
         protected override void EnableProperties()

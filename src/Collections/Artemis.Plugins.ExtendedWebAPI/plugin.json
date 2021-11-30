@@ -5,8 +5,8 @@
   "Website": "https://artemis-rgb.com/",
   "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",
   "Icon": "Api",
-  "Description": "Providers an extended RESTful web API with new methods",
-  "Version": "1.0.0.2",
+  "Description": "Providers an extended REST web API with new methods",
+  "Version": "1.0.0.3",
   "Main": "Artemis.Plugins.ExtendedWebAPI.dll",
   "AutoEnableFeatures": true
 }

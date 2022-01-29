@@ -8,10 +8,10 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.IO;
 using System.Linq;
-using System.Diagnostics;
 using Artemis.Core.Modules;
 using Artemis.Core;
 using System.Collections.Generic;
+// ReSharper disable InconsistentNaming
 
 namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
 {
@@ -25,7 +25,7 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
         private readonly IColorQuantizerService _colorQuantizer;
         private readonly IProcessMonitorService _processMonitorService;
         private readonly HttpClient _httpClient;
-        private readonly ConcurrentDictionary<string, ColorSwatch> albumArtColorCache;
+        private readonly ConcurrentDictionary<string, ColorSwatch> _albumArtColorCache;
         private const string YTMD_PROCESS_NAME = "YouTube Music Desktop App";
         private YTMDesktopClient _YTMDesktopClient;
         private RootInfo _rootInfo;
@@ -46,7 +46,7 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
             {
                 Timeout = TimeSpan.FromSeconds(1)
             };
-            albumArtColorCache = new ConcurrentDictionary<string, ColorSwatch>();
+            _albumArtColorCache = new ConcurrentDictionary<string, ColorSwatch>();
             UpdateDuringActivationOverride = false;
         }
 
@@ -80,15 +80,15 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
 
         public override void Update(double deltaTime)
         {
-            if (DataModel.Player.isPaused)
+            if (DataModel.Player.IsPaused)
                 return;
 
-            if (DataModel.Track.duration == 0)
+            if (DataModel.Track.Duration == 0)
                 return;
 
-            DataModel.Player.seekbarCurrentPositionHuman = DataModel.Player.seekbarCurrentPositionHuman.Add(TimeSpan.FromMilliseconds(deltaTime * 1000));
-            DataModel.Player.seekbarCurrentPosition = DataModel.Player.seekbarCurrentPositionHuman.TotalSeconds;
-            DataModel.Player.statePercent = DataModel.Player.seekbarCurrentPosition / DataModel.Track.duration;
+            DataModel.Player.SeekbarCurrentPositionHuman = DataModel.Player.SeekbarCurrentPositionHuman.Add(TimeSpan.FromMilliseconds(deltaTime * 1000));
+            DataModel.Player.SeekbarCurrentPosition = DataModel.Player.SeekbarCurrentPositionHuman.TotalSeconds;
+            DataModel.Player.StatePercent = DataModel.Player.SeekbarCurrentPosition / DataModel.Track.Duration;
         }
         #endregion
 
@@ -96,10 +96,10 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
 
         private async Task UpdateData(double deltaTime)
         {
-            UpdateYTMDekstopInfo();
+            await UpdateYTMDekstopInfo();
         }
 
-        private void UpdateYTMDekstopInfo()
+        private async Task UpdateYTMDekstopInfo()
         {
             if (!YoutubeIsRunning())
             {
@@ -107,7 +107,6 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
                 DataModel.Empty();
                 return;
             }
-
             try
             {
                 // Update DataModel using /query API
@@ -116,7 +115,7 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
 
                 if (_rootInfo != null)
                 {
-                    UpdateInfo(_rootInfo);
+                   await UpdateInfo(_rootInfo);
                 }
                 else
                 {
@@ -129,12 +128,12 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
             }
         }
 
-        private void UpdateInfo(RootInfo data)
+        private async Task UpdateInfo(RootInfo data)
         {
-            UpdatePlayerInfo(data.player);
+            UpdatePlayerInfo(data.Player);
 
-            if (data.player.hasSong && data.track != null)
-                UpdateTrackInfo(data.track);
+            if (data.Player.HasSong && data.Track != null)
+                await UpdateTrackInfo(data.Track);
             else
             {
                 DataModel.Track.Empty();
@@ -145,69 +144,69 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
         // https://github.com/diogotr7/Artemis.Plugins/blob/a1846bb3b2e0cb426ecd2b9ae787bade8212f446/src/Artemis.Plugins.Modules.Spotify/SpotifyModule.cs#L209
         private async Task UpdateTrackInfo(TrackInfo track)
         {
-            if (track.id != _trackId)
+            if (track.Id != _trackId)
             {
                 UpdateBasicTrackInfo(track);
 
-                if (track.cover != _albumArtUrl)
+                if (track.Cover != _albumArtUrl)
                 {
-                    if (string.IsNullOrEmpty(track.cover))
+                    if (string.IsNullOrEmpty(track.Cover))
                         return;
-                    await UpdateAlbumArtColors(track.cover);
-                    _albumArtUrl = track.cover;
+                    await UpdateAlbumArtColors(track.Cover);
+                    _albumArtUrl = track.Cover;
                 }
 
-                _trackId = track.id;
+                _trackId = track.Id;
             }
         }
 
         private void UpdatePlayerInfo(PlayerInfo player)
         {
             DataModel.Player.IsRunning = true;
-            DataModel.Player.hasSong = player.hasSong;
-            DataModel.Player.isPaused = player.isPaused;
-            DataModel.Player.volumePercent = player.volumePercent;
-            DataModel.Player.seekbarCurrentPosition = player.seekbarCurrentPosition;
-            DataModel.Player.seekbarCurrentPositionHuman = TimeSpan.FromSeconds(player.seekbarCurrentPosition);
-            DataModel.Player.statePercent = player.statePercent;
-            DataModel.Player.likeStatus = player.likeStatus;
-            DataModel.Player.repeatType = Enum.Parse<RepeatState>(player.repeatType, true);
+            DataModel.Player.HasSong = player.HasSong;
+            DataModel.Player.IsPaused = player.IsPaused;
+            DataModel.Player.VolumePercent = player.VolumePercent;
+            DataModel.Player.SeekbarCurrentPosition = player.SeekbarCurrentPosition;
+            DataModel.Player.SeekbarCurrentPositionHuman = TimeSpan.FromSeconds(player.SeekbarCurrentPosition);
+            DataModel.Player.StatePercent = player.StatePercent;
+            DataModel.Player.LikeStatus = player.LikeStatus;
+            DataModel.Player.RepeatType = Enum.Parse<RepeatState>(player.RepeatType, true);
         }
 
         private async Task UpdateAlbumArtColors(string albumArtUrl)
         {
-            if (!albumArtColorCache.ContainsKey(albumArtUrl))
+            if (!_albumArtColorCache.ContainsKey(albumArtUrl))
             {
                 try
                 {
                     using Stream stream = await _httpClient.GetStreamAsync(albumArtUrl);
                     using SKBitmap skbm = SKBitmap.Decode(stream);
                     SKColor[] skClrs = _colorQuantizer.Quantize(skbm.Pixels, 256);
-                    albumArtColorCache[albumArtUrl] = _colorQuantizer.FindAllColorVariations(skClrs, true);
+                    _albumArtColorCache[albumArtUrl] = _colorQuantizer.FindAllColorVariations(skClrs, true);
                 }
                 catch (Exception e)
                 {
-                    _logger.Error("Failed to get album art colors", e);
+                    _logger.Error($"Failed to get album art colors. Exception: {e}");
                 }
             }
 
-            if (albumArtColorCache.TryGetValue(albumArtUrl, out var colorDataModel))
+            if (_albumArtColorCache.TryGetValue(albumArtUrl, out var colorDataModel))
                 DataModel.Track.Colors = colorDataModel;
         }
 
         private void UpdateBasicTrackInfo(TrackInfo track)
         {
-            DataModel.Track.author = track.author;
-            DataModel.Track.title = track.title;
-            DataModel.Track.album = track.album;
-            DataModel.Track.cover = track.cover;
-            DataModel.Track.duration = track.duration;
-            DataModel.Track.durationHuman = TimeSpan.FromSeconds(track.duration);
-            DataModel.Track.url = track.url;
-            DataModel.Track.id = track.id;
-            DataModel.Track.isVideo = track.isVideo;
-            DataModel.Track.isAdvertisement = track.isAdvertisement;
-            DataModel.Track.inLibrary = track.inLibrary;
+            DataModel.Track.Author = track.Author;
+            DataModel.Track.Title = track.Title;
+            DataModel.Track.Album = track.Album;
+            DataModel.Track.Cover = track.Cover;
+            DataModel.Track.Duration = track.Duration;
+            DataModel.Track.DurationHuman = TimeSpan.FromSeconds(track.Duration);
+            DataModel.Track.Url = track.Url;
+            DataModel.Track.Id = track.Id;
+            DataModel.Track.IsVideo = track.IsVideo;
+            DataModel.Track.IsAdvertisement = track.IsAdvertisement;
+            DataModel.Track.InLibrary = track.InLibrary;
         }
 
         #endregion

@@ -1,4 +1,3 @@
-using Artemis.Core;
 using Serilog;
 using System;
 using Artemis.Plugins.DataModelExpansions.DisplaySettings.DataModels;
@@ -13,10 +12,9 @@ namespace Artemis.Plugins.DataModelExpansions.DisplaySettings
 {
     public class DisplayModeDataModelExpansion : Module<DisplaySettingsDataModel>
     {
-
         private readonly ILogger _logger;
 
-        public DisplayModeDataModelExpansion(PluginSettings settings, ILogger logger)
+        public DisplayModeDataModelExpansion(ILogger logger)
         {
             _logger = logger;
         }
@@ -24,6 +22,7 @@ namespace Artemis.Plugins.DataModelExpansions.DisplaySettings
         private void SystemEvents_DisplaySettingsChanged(object sender, EventArgs e)
         {
             UpdateDataDataModel();
+            DataModel.DisplayModeChanged.Trigger(new DisplayModeEventArgs(DataModel.Topology, DataModel.DisplayCount));
         }
 
         public override List<IModuleActivationRequirement> ActivationRequirements => null;
@@ -31,7 +30,7 @@ namespace Artemis.Plugins.DataModelExpansions.DisplaySettings
         public override void Enable()
         {
             SystemEvents.DisplaySettingsChanged += SystemEvents_DisplaySettingsChanged;
-            SystemEvents_DisplaySettingsChanged(null, null);
+            UpdateDataDataModel();
         }
 
         public override void Disable()
@@ -42,7 +41,6 @@ namespace Artemis.Plugins.DataModelExpansions.DisplaySettings
         public override void Update(double deltaTime) { }
 
         private void UpdateDataDataModel()
-        //private async Task UpdateDataDataModel()
         {
             try
             {
@@ -70,26 +68,7 @@ namespace Artemis.Plugins.DataModelExpansions.DisplaySettings
                             DisplayRotation = displayList[i].CurrentSetting.Orientation,
                         }
                     );
-                    /*
-                     DataModel.Displays.AddDynamicChild(
-                         new DisplaySettingDataModel()
-                         {
-                             IsPrimary = displayList[i].IsGDIPrimary,
-                             Name = displayList[i].DeviceName,
-                             Number = i,
-                             Adapter = displayList[i].Adapter.DeviceName,
-                             RefreshRate = displayList[i].CurrentSetting.Frequency,
-                             Resolution = displayList[i].CurrentSetting.Resolution,
-                             Position = displayList[i].CurrentSetting.Position,
-                             ColorDepth = displayList[i].CurrentSetting.ColorDepth,
-                             DisplayRotation = displayList[i].CurrentSetting.Orientation,
-                         },
-                         string.Format("[{0}] - {1}", i, displayList[i].DeviceName),
-                         string.Format("[{0}] - {1}", i, displayList[i].DeviceName)
-                     );
-                    */
                 }
-
             }
             catch (Exception e)
             {

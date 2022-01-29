@@ -6,13 +6,17 @@ using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Artemis.Plugins.LayerBrushes.Hotbar.Services;
 
 namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerBrush
 {
     public class HotbarLayerBrush : PerLedLayerBrush<HotbarLayerBrushProperties>
     {
-        #region  Variables 
+        #region  Variables
+
         private readonly IInputService _inputService;
+        private readonly PersistentLedService _persistentLedService;
+        private List<ArtemisLed> _sortedLeds;
 
         private ArtemisLed _activeLed;
 
@@ -20,9 +24,10 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerBrush
 
         #region Constructor
 
-        public HotbarLayerBrush(Plugin plugin, IInputService inputService)
+        public HotbarLayerBrush(IInputService inputService, PersistentLedService persistentLedService)
         {
             _inputService = inputService;
+            _persistentLedService = persistentLedService;
         }
 
         #endregion
@@ -34,16 +39,39 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerBrush
             // EnableLayerBrush is running twice O.O. Have to check with Spoinky. In the meanwhile...
             _inputService.KeyboardKeyDown -= InputServiceOnKeyboardKeyDown;
             _inputService.MouseScroll -= _inputService_MouseScroll;
+            Layer.RenderPropertiesUpdated -= Layer_RenderPropertiesUpdated;
+            Properties.LedSortMap.PropertyChanged -= LedSortMap_PropertyChanged;
 
 
             _inputService.KeyboardKeyDown += InputServiceOnKeyboardKeyDown;
             _inputService.MouseScroll += _inputService_MouseScroll;
             Layer.RenderPropertiesUpdated += Layer_RenderPropertiesUpdated;
+            Properties.LedSortMap.PropertyChanged += LedSortMap_PropertyChanged;
+        }
+
+        private void LedSortMap_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            SetCustomSortedLeds();
         }
 
         private void Layer_RenderPropertiesUpdated(object sender, EventArgs e)
         {
             _activeLed = null;
+
+            if (_sortedLeds == null)
+            {
+                //Properties.LedSortMap.BaseValue GetNewLayerLedCollection(Layer.Leds);
+                SetCustomSortedLeds();
+            }
+            else
+            {
+                Properties.LedSortMap.BaseValue = GetNewLayerLedCollection(Layer.Leds);
+            }
+        }
+
+        private List<PersistentLed> GetNewLayerLedCollection(IReadOnlyCollection<ArtemisLed> layerLeds)
+        {
+            return layerLeds.Select(led => new PersistentLed(led.RgbLed.Id, led.Device.Identifier, led.RgbLed.Device.DeviceInfo.DeviceName)).ToList();
         }
 
         public override void DisableLayerBrush()
@@ -51,6 +79,7 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerBrush
             _inputService.KeyboardKeyDown -= InputServiceOnKeyboardKeyDown;
             _inputService.MouseScroll -= _inputService_MouseScroll;
             Layer.RenderPropertiesUpdated -= Layer_RenderPropertiesUpdated;
+            Properties.LedSortMap.PropertyChanged -= LedSortMap_PropertyChanged;
         }
 
         #endregion
@@ -80,10 +109,7 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerBrush
                     return SKColors.Black;
                 else
                     return SKColors.Transparent;
-
-
             }
-
         }
 
         #endregion
@@ -98,7 +124,10 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerBrush
             if (!Layer.Leds.Contains(e.Led))
                 return;
 
-            _activeLed = e.Led;
+            if (_activeLed == e.Led && Properties.KeyToggle.CurrentValue)
+                _activeLed = null;
+            else
+                _activeLed = e.Led;
         }
 
         private List<ArtemisLed> GetOrderedLeds()
@@ -112,12 +141,27 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerBrush
                 LedOrder.Horizontal => Layer.Leds.OrderBy(l => l.AbsoluteRectangle.Top).ThenBy(l => l.AbsoluteRectangle.Left).ToList(),
                 LedOrder.VerticalReversed => Layer.Leds.OrderByDescending(l => l.AbsoluteRectangle.Left).ThenByDescending(l => l.AbsoluteRectangle.Top).ToList(),
                 LedOrder.HorizontalReversed => Layer.Leds.OrderByDescending(l => l.AbsoluteRectangle.Top).ThenByDescending(l => l.AbsoluteRectangle.Left).ToList(),
+                LedOrder.Custom => GetCustomSortedLeds(),
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
 
+        private List<ArtemisLed> GetCustomSortedLeds()
+        {
+            return _sortedLeds;
+        }
+
+        private void SetCustomSortedLeds()
+        {
+            var sortedLeds = _persistentLedService.GetSortedLedsFromMap(Layer.Leds, Properties.LedSortMap?.BaseValue);
+            _sortedLeds = sortedLeds ?? Layer.Leds.OrderBy(l => l.Device.Rectangle.Left).ThenBy(l => l.Device.Rectangle.Top).ThenBy(l => l.RgbLed.Id).ToList();
+        }
+
         private void _inputService_MouseScroll(object sender, ArtemisMouseScrollEventArgs e)
         {
+            if (!Properties.UseScroll.CurrentValue)
+                return;
+
             List<ArtemisLed> leds = GetOrderedLeds();
 
             if ((_activeLed == null || !leds.Contains(_activeLed)) && Properties.ScrollActivation.CurrentValue)
@@ -145,8 +189,7 @@ namespace Artemis.Plugins.LayerBrushes.Hotbar.LayerBrush
                 else
                     newLedPos = (currentLedPos == 0) ? 0 : currentLedPos - 1;
             }
-            _activeLed = leds[newLedPos];
-
+            _activeLed = leds.Count > 0 ? leds[newLedPos] : null;
         }
 
         #endregion

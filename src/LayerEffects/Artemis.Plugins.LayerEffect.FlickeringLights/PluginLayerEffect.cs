@@ -37,10 +37,5 @@ namespace Artemis.Plugins.LayerEffect.FlickeringLights
         }
 
         public override void PostProcess(SKCanvas canvas, SKRect renderBounds, SKPaint paint) { }
-
-        private static float Mod(float x, float m)
-        {
-            return (x % m + m) % m;
-        }
     }
 }

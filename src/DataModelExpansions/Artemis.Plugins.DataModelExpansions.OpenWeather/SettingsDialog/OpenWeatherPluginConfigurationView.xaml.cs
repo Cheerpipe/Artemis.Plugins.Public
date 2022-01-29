@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 
-namespace Artemis.Plugins.DataModelExpansions.OpenWeather
+namespace Artemis.Plugins.DataModelExpansions.OpenWeather.SettingsDialog
 {
     /// <summary>
     /// Interaction logic for OpenWeatherPluginConfigurationView.xaml

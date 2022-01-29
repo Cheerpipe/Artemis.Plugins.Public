@@ -74,6 +74,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.LayerBrushes.DrippingPaint", "LayerBrushes\Artemis.Plugins.LayerBrushes.DrippingPaint\Artemis.Plugins.LayerBrushes.DrippingPaint.csproj", "{EA37D333-7E78-4B61-B9CC-232AC9D34A03}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.DataModelExpansions.PowerState", "DataModelExpansions\Artemis.Plugins.DataModelExpansions.PowerState\Artemis.Plugins.DataModelExpansions.PowerState.csproj", "{209EC808-1791-4DD5-B869-496B156DDF47}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Collections", "Collections", "{494FD6B9-10FE-41F9-B349-E7CC44C0078D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.ExtendedWebAPI", "Collections\Artemis.Plugins.ExtendedWebAPI\Artemis.Plugins.ExtendedWebAPI.csproj", "{727EB962-73FB-4F05-AA68-35A13077C6D3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -274,6 +280,22 @@ Global
 		{EA37D333-7E78-4B61-B9CC-232AC9D34A03}.Release|Any CPU.Build.0 = Release|x64
 		{EA37D333-7E78-4B61-B9CC-232AC9D34A03}.Release|x64.ActiveCfg = Release|x64
 		{EA37D333-7E78-4B61-B9CC-232AC9D34A03}.Release|x64.Build.0 = Release|x64
+		{209EC808-1791-4DD5-B869-496B156DDF47}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{209EC808-1791-4DD5-B869-496B156DDF47}.Debug|Any CPU.Build.0 = Debug|x64
+		{209EC808-1791-4DD5-B869-496B156DDF47}.Debug|x64.ActiveCfg = Debug|x64
+		{209EC808-1791-4DD5-B869-496B156DDF47}.Debug|x64.Build.0 = Debug|x64
+		{209EC808-1791-4DD5-B869-496B156DDF47}.Release|Any CPU.ActiveCfg = Release|x64
+		{209EC808-1791-4DD5-B869-496B156DDF47}.Release|Any CPU.Build.0 = Release|x64
+		{209EC808-1791-4DD5-B869-496B156DDF47}.Release|x64.ActiveCfg = Release|x64
+		{209EC808-1791-4DD5-B869-496B156DDF47}.Release|x64.Build.0 = Release|x64
+		{727EB962-73FB-4F05-AA68-35A13077C6D3}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{727EB962-73FB-4F05-AA68-35A13077C6D3}.Debug|Any CPU.Build.0 = Debug|x64
+		{727EB962-73FB-4F05-AA68-35A13077C6D3}.Debug|x64.ActiveCfg = Debug|x64
+		{727EB962-73FB-4F05-AA68-35A13077C6D3}.Debug|x64.Build.0 = Debug|x64
+		{727EB962-73FB-4F05-AA68-35A13077C6D3}.Release|Any CPU.ActiveCfg = Release|x64
+		{727EB962-73FB-4F05-AA68-35A13077C6D3}.Release|Any CPU.Build.0 = Release|x64
+		{727EB962-73FB-4F05-AA68-35A13077C6D3}.Release|x64.ActiveCfg = Release|x64
+		{727EB962-73FB-4F05-AA68-35A13077C6D3}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -307,6 +329,8 @@ Global
 		{82DB8316-2CAC-4729-B1E1-30761EDCD58E} = {D2D51041-2DB5-4934-892E-77A838135EAD}
 		{F8DE6CE1-95A7-4D81-AFF2-DDF8151248CC} = {E536F709-FD02-4AE6-A590-3BBF8F4931CC}
 		{EA37D333-7E78-4B61-B9CC-232AC9D34A03} = {73E03F27-03B1-4AE6-88A8-1CB889EFC94D}
+		{209EC808-1791-4DD5-B869-496B156DDF47} = {0F036E0A-8F42-4105-BA27-BB2F6EE213A8}
+		{727EB962-73FB-4F05-AA68-35A13077C6D3} = {494FD6B9-10FE-41F9-B349-E7CC44C0078D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {11371D22-FDA3-41EA-8116-69E48DD68579}

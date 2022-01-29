@@ -17,7 +17,7 @@ jobs:
         with:
           repository: DarthAffe/RGB.NET
           path: RGB.NET
-          ref: Development
+          ref: 11c31d07df154fea0ac6022b3ef530e9712fdd70
 
       - name: Build RGB.NET
         run: dotnet build .\RGB.NET\RGB.NET.Core\RGB.NET.Core.csproj
@@ -42,8 +42,6 @@ jobs:
       - name: Build Plugins
         run: dotnet publish -c Release .\Plugins\src\Artemis.Plugins.Public.sln
 
-        #msbuild is dumb so we have to upload one at a time :)
-        #https://github.com/dotnet/sdk/issues/7238
       - name: Upload Artemis.Plugins.DataModelExpansions.DisplaySettings
         uses: actions/upload-artifact@v2
         with:
@@ -55,6 +53,12 @@ jobs:
         with:
           name: Artemis.Plugins.DataModelExpansions.PlaybackVolume
           path: .\Plugins\src\DataModelExpansions\Artemis.Plugins.DataModelExpansions.PlaybackVolume\bin\x64\Release\net5.0-windows\publish
+
+      - name: Upload Artemis.Plugins.DataModelExpansions.PowerState
+        uses: actions/upload-artifact@v2
+        with:
+          name: Artemis.Plugins.DataModelExpansions.PowerState
+          path: .\Plugins\src\DataModelExpansions\Artemis.Plugins.DataModelExpansions.PowerState\bin\x64\Release\net5.0-windows\publish
           
       - name: Upload Artemis.Plugins.DataModelExpansions.YTMdesktop
         uses: actions/upload-artifact@v2
@@ -157,3 +161,9 @@ jobs:
         with:
           name: Artemis.Plugins.LayerEffect.FlickeringLights
           path: .\Plugins\src\LayerEffects\Artemis.Plugins.LayerEffect.FlickeringLights\bin\x64\Release\net5.0-windows\publish     
+
+      - name: Upload Artemis.Plugins.ExtendedWebAPI
+        uses: actions/upload-artifact@v2
+        with:
+          name: Artemis.Plugins.ExtendedWebAPI
+          path: .\Plugins\src\Collections\Artemis.Plugins.ExtendedWebAPI\bin\x64\Release\net5.0-windows\publish     

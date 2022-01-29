@@ -1,4 +1,5 @@
 ﻿using Artemis.Core;
+using Artemis.Plugins.DataModelExpansions.OpenWeather.SettingsDialog;
 using Artemis.UI.Shared;
 
 namespace Artemis.Plugins.DataModelExpansions.OpenWeather

@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using Artemis.Core;
 using Artemis.Plugins.LayerBrushes.Ripples.LayerProperties;
 using SkiaSharp;
@@ -53,7 +52,7 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
             }
             else if (_brush.Properties.ColorMode.CurrentValue == ColorType.Gradient)
             {
-                _paint?.Shader?.Dispose();
+                _paint.Shader?.Dispose();
                 _paint.Shader = SKShader.CreateRadialGradient
                     (
                         Position,
@@ -91,7 +90,7 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
                 };
 
                 // Dispose before to create a new one. Thanks for the lesson.
-                _trailPaint?.Shader?.Dispose();
+                _trailPaint.Shader?.Dispose();
                 _trailPaint.Shader = SKShader.CreateRadialGradient
                     (
                         Position,

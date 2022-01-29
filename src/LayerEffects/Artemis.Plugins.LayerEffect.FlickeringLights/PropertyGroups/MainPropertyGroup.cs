@@ -1,4 +1,5 @@
-﻿using Artemis.Core;
+﻿using System.Diagnostics.CodeAnalysis;
+using Artemis.Core;
 
 namespace Artemis.Plugins.LayerEffect.FlickeringLights.PropertyGroups
 {
@@ -21,6 +22,7 @@ namespace Artemis.Plugins.LayerEffect.FlickeringLights.PropertyGroups
         protected override void DisableProperties() { }
     }
 
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public enum FlickeringPatterns
     {
         mmnmmommommnonmmonqnmmo,

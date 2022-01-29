@@ -1,5 +1,4 @@
-﻿
-using FallGuys.Gsi.StateMachines.Enums;
+﻿using FallGuys.Gsi.StateMachines.Enums;
 using FallGuys.Gsi.StateMachines.Events;
 
 namespace FallGuys.Gsi.StateMachines

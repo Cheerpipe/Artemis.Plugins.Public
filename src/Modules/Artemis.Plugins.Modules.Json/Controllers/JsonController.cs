@@ -1,19 +1,31 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using EmbedIO;
 using EmbedIO.Routing;
 using EmbedIO.WebApi;
 using System.Threading.Tasks;
 using Artemis.Plugins.Modules.Json.Services.JsonDataModelServices;
+using Artemis.Core.Services;
 
 namespace Artemis.Plugins.Modules.Json.Controllers
 {
     public class JsonController : WebApiController
     {
         private readonly JsonDataModelServices _jsonDataModelServices;
+        private readonly IPluginManagementService _pluginManagementService;
 
-        public JsonController(JsonDataModelServices jsonDataModelServices)
+        public JsonController(JsonDataModelServices jsonDataModelServices, IPluginManagementService pluginManagementService)
         {
+            _pluginManagementService = pluginManagementService;
             _jsonDataModelServices = jsonDataModelServices;
+        }
+
+        [Route(HttpVerbs.Get, "/json-datamodel/version")]
+        public string GetVersion()
+        {
+            HttpContext.Response.ContentType = " text/plain";
+            string version = _pluginManagementService.GetCallingPlugin().Info.Version.ToString();
+            return version;
         }
 
         [Route(HttpVerbs.Get, "/json-datamodel/{key}")]
@@ -21,7 +33,8 @@ namespace Artemis.Plugins.Modules.Json.Controllers
         {
             if (_jsonDataModelServices.TryGetJsonByKey(key, out string json))
             {
-                using var writer = HttpContext.OpenResponseText();
+                HttpContext.Response.ContentType = "application/json";
+                await using var writer = HttpContext.OpenResponseText(new UTF8Encoding(false));
                 await writer.WriteAsync(json);
             }
             else
@@ -47,8 +60,9 @@ namespace Artemis.Plugins.Modules.Json.Controllers
         public async Task AddOrReplaceJson(string key)
         {
             var json = await HttpContext.GetRequestBodyAsStringAsync();
+            HttpContext.Response.ContentType = "application/json";
             _jsonDataModelServices.AddOrReplaceJson(key, json, true);
-            using var writer = HttpContext.OpenResponseText();
+            await using var writer = HttpContext.OpenResponseText(new UTF8Encoding(false));
             await writer.WriteAsync(json);
         }
 
@@ -56,14 +70,16 @@ namespace Artemis.Plugins.Modules.Json.Controllers
         public async Task AddOrMergeJson(string key)
         {
             var json = await HttpContext.GetRequestBodyAsStringAsync();
+            HttpContext.Response.ContentType = "application/json";
             _jsonDataModelServices.AddOrMergeJson(key, json, true);
-            using var writer = HttpContext.OpenResponseText();
+            await using var writer = HttpContext.OpenResponseText(new UTF8Encoding(false));
             await writer.WriteAsync(json);
         }
 
         [Route(HttpVerbs.Get, "/json-datamodel")]
         public IEnumerable<string> GetDataModels()
         {
+            HttpContext.Response.ContentType = "application/json";
             return _jsonDataModelServices.GetDataModelsKeys();
         }
     }

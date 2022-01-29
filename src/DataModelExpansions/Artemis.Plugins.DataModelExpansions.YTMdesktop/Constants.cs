@@ -1,4 +1,5 @@
-﻿namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
+﻿// ReSharper disable InconsistentNaming
+namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
 {
     internal static class Constants
     {

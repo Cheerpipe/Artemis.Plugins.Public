@@ -1,23 +1,23 @@
-using Artemis.Core;
-using Serilog;
 using System;
-using Artemis.Plugins.DataModelExpansions.OpenWeather.DataModels;
-using Awesomio.Weather.NET;
-using Awesomio.NET.Models.CurrentWeather;
-using System.Linq;
-using Artemis.Core.Modules;
 using System.Collections.Generic;
+using System.Linq;
+using Artemis.Core;
+using Artemis.Core.Modules;
+using Artemis.Plugins.DataModelExpansions.OpenWeather.DataModels;
+using Awesomio.NET.Models.CurrentWeather;
+using Awesomio.Weather.NET;
+using Serilog;
 
-namespace Artemis.Plugins.DataModelExpansions.DisplaySettings
+namespace Artemis.Plugins.DataModelExpansions.OpenWeather
 {
-    public class DisplayModeDataModelExpansion : Module<OpenWeatherDataModel>
+    public class OpenWeatherDataModelExpansion : Module<OpenWeatherDataModel>
     {
         private readonly PluginSetting<string> _apiKeySetting;
         private readonly PluginSetting<string> _citySetting;
         private readonly PluginSetting<string> _unitOfMeasurementSetting;
         private readonly ILogger _logger;
 
-        public DisplayModeDataModelExpansion(PluginSettings pluginSettings, ILogger logger)
+        public OpenWeatherDataModelExpansion(PluginSettings pluginSettings, ILogger logger)
         {
             _logger = logger;
             _apiKeySetting = pluginSettings.GetSetting("OpenWeatherApiKey", string.Empty);
@@ -38,6 +38,7 @@ namespace Artemis.Plugins.DataModelExpansions.DisplaySettings
 
         public override void Enable()
         {
+            //TODO: Make frequency configurable 
             AddTimedUpdate(TimeSpan.FromMinutes(10), _ => UpdateWeatherData());
             UpdateWeatherData();
         }
@@ -60,7 +61,7 @@ namespace Artemis.Plugins.DataModelExpansions.DisplaySettings
                 CurrrentWeatherModel data = client.GetCurrentWeatherAsync<CurrrentWeatherModel>(_citySetting.Value, "en", _unitOfMeasurementSetting.Value).Result;
 
                 // Weather Measurements
-                DataModel.Weather = (WeatherConditions)Enum.Parse(typeof(WeatherConditions), data.Weather.FirstOrDefault().Main);
+                DataModel.Weather = (WeatherConditions)Enum.Parse(typeof(WeatherConditions), data.Weather.FirstOrDefault()?.Main ?? "Unknown");
                 DataModel.Temp = data.Main.Temp;
                 DataModel.FeelsLike = data.Main.FeelsLike;
                 DataModel.TempMin = data.Main.TempMin;
@@ -73,11 +74,8 @@ namespace Artemis.Plugins.DataModelExpansions.DisplaySettings
                 DataModel.Visibility = data.Visibility; // Meters
 
                 // Sunrise Sunset
-
-
                 DataModel.Sunrise = DateTimeOffset.FromUnixTimeSeconds(data.Sys.Sunrise).DateTime.ToLocalTime(); // unix, UTC
                 DataModel.Sunset = DateTimeOffset.FromUnixTimeSeconds(data.Sys.Sunset).DateTime.ToLocalTime(); // unix, UTC
-                // unix, UTC
 
                 // Wind
                 DataModel.Wind.Speed = data.Wind.Speed;
@@ -90,4 +88,4 @@ namespace Artemis.Plugins.DataModelExpansions.DisplaySettings
             }
         }
     }
-}//Enum.Parse(typeof(Colors), colorName));
+}

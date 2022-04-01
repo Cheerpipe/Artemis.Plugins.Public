@@ -23,7 +23,7 @@ namespace Artemis.Plugins.ExtendedWebAPI.Controllers
         }
 
         [Route(HttpVerbs.Get, "/extended-rest-api/get-led-color/{deviceName}/{ledId}")]
-        public async Task GetCurrentVibrantColor(string deviceName, string ledId)
+        public async Task GetLedColor(string deviceName, string ledId)
         {
             ArtemisDevice device = _rgbService.Devices.FirstOrDefault(d => d.RgbDevice.DeviceInfo.DeviceName == deviceName);
 
@@ -41,7 +41,8 @@ namespace Artemis.Plugins.ExtendedWebAPI.Controllers
                 throw HttpException.NotFound(message);
             }
 
-            var led = device.RgbDevice.Surface!.Leds.FirstOrDefault(l => l.Id == (LedId)parsedLedId!);
+            //var led = device.RgbDevice.Surface!.Leds.FirstOrDefault(l => l.Id == (LedId)parsedLedId!);
+            var led = device.LedIds[(LedId)parsedLedId].RgbLed;
 
             if (led == null)
             {

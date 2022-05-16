@@ -41,7 +41,6 @@ namespace Artemis.Plugins.ExtendedWebAPI.Controllers
                 throw HttpException.NotFound(message);
             }
 
-            //var led = device.RgbDevice.Surface!.Leds.FirstOrDefault(l => l.Id == (LedId)parsedLedId!);
             var led = device.LedIds[(LedId)parsedLedId].RgbLed;
 
             if (led == null)

@@ -23,8 +23,7 @@ namespace RGB.NET.Devices.YeeLight.Generic
             DeviceType = deviceType;
             Model = model;
             IpAddress = ipAddress;
-
             DeviceName = "YeeLight Light";
-        }
+         }
     }
 }

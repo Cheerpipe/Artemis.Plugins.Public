@@ -7,6 +7,7 @@
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:s="https://github.com/canton7/Stylet"
              xmlns:cc="clr-namespace:YeelightAPI.Models;assembly=YeelightAPI"
+             xmlns:lc="clr-namespace:RGB.NET.Devices.YeeLight.Enums;assembly=RGB.NET.Devices.YeeLight"
              d:DesignHeight="450" d:DesignWidth="800"
              mc:Ignorable="d">
     <UserControl.Resources>
@@ -19,6 +20,13 @@
                         ObjectType="{x:Type System:Enum}">
                 <ObjectDataProvider.MethodParameters>
                     <x:Type TypeName="cc:MODEL"/>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+            <ObjectDataProvider x:Key="ModesProvider" 
+                        MethodName="GetValues" 
+                        ObjectType="{x:Type System:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="lc:OperationModes"/>
                 </ObjectDataProvider.MethodParameters>
             </ObjectDataProvider>
         </ResourceDictionary>
@@ -112,6 +120,12 @@
                                                                    Header="Friendly name"
                                                                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
                                                                    ElementStyle="{StaticResource CenteredTextColumn}" />
+                                <materialDesign:DataGridComboBoxColumn Width="*"
+                                                                   Header="Mode"
+                                                                   ItemsSource="{Binding Source={StaticResource ModesProvider}}"
+                                                                   SelectedValueBinding="{Binding Mode}"
+                                                                   DisplayMemberPath=""
+                                                                   EditingElementStyle="{StaticResource MaterialDesignDataGridComboBox}"/>
                                 <DataGridTemplateColumn Width="45" IsReadOnly="True">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>

@@ -86,11 +86,11 @@ namespace RGB.NET.Devices.YeeLight
                     {
                         // LOG
                     }
-
-
                     _initializedDevices.Add(device);
                     _IRGBDevices.Add(new YeeLightRGBRGBDevice(new YeeLightRGBDeviceInfo(RGBDeviceType.LedStripe,
-                        $"YeeLight {def.Model} ({device.Hostname})", device.Hostname), new YeeLightUpdateQueue(GetUpdateTrigger(), device)));
+                        $"YeeLight {def.Model} ({device.Hostname})", device.Hostname),
+                        def.Mode == OperationModes.Music ? new YeeLightMusicModeUpdateQueue(GetUpdateTrigger(), device) : new YeeLightUpdateQueue(GetUpdateTrigger(), device)
+                        ));
                 });
             }
 

@@ -1,4 +1,4 @@
-﻿namespace RGB.NET.Devices.YeeLight.Enums
+﻿namespace RGB.NET.Devices.YeeLight
 {
     public enum ScanMode
     {

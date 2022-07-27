@@ -22,7 +22,7 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop.DataModels
         public bool IsRunning { get; set; }
         public bool HasSong { get; set; }
         public bool IsPaused { get; set; }
-        public int VolumePercent { get; set; }
+        public float VolumePercent { get; set; }
         public double SeekbarCurrentPosition { get; set; }
         public TimeSpan SeekbarCurrentPositionHuman { get; set; }
         public double StatePercent { get; set; }

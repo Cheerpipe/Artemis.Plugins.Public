@@ -13,7 +13,7 @@ namespace Artemis.Plugins.DataModelExpansions.PowerState.Utils
 
         public event EventHandler PowerPlanChanged;
 
-        public Guid GetCurrentPowerPlanGuid()
+        public static Guid GetCurrentPowerPlanGuid()
         {
             // ReSharper disable once InconsistentNaming
             using var HKLM = Microsoft.Win32.Registry.LocalMachine;
@@ -21,7 +21,7 @@ namespace Artemis.Plugins.DataModelExpansions.PowerState.Utils
             return sGuid != null ? Guid.Parse(sGuid) : Guid.Empty;
         }
 
-        public string GetCurrentPowerPlanFriendlyName()
+        public static string GetCurrentPowerPlanFriendlyName()
         {
             // ReSharper disable once InconsistentNaming
             using var HKLM = Microsoft.Win32.Registry.LocalMachine;

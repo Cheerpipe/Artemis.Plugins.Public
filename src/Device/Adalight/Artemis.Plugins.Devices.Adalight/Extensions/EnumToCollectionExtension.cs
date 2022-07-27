@@ -5,6 +5,7 @@ using System.Windows.Markup;
 
 namespace Artemis.Plugins.Devices.Adalight.Extensions
 {
+    /*
     public class EnumToCollectionExtension : MarkupExtension
     {
         public Type EnumType { get; set; }
@@ -23,6 +24,7 @@ namespace Artemis.Plugins.Devices.Adalight.Extensions
                        .Cast<DescriptionAttribute>()
                        .FirstOrDefault()?.Description ?? value.ToString());
         }
-
+        
     }
+*/
 }

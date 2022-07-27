@@ -31,8 +31,6 @@ namespace RGB.NET.Devices.Adalight
         /// </summary>
         public int LedCount { get; }
 
-        private int _brightness;
-
         private bool _sending;
 
         /// <summary>
@@ -49,22 +47,16 @@ namespace RGB.NET.Devices.Adalight
             PortNumber = port;
             _brightness = brightness;
 
-            try
+            // Create connection object
+            _comPort = new SerialPort
             {
-                // Create connection object
-                _comPort = new SerialPort
-                {
-                    PortName = "COM" + PortNumber,
-                    BaudRate = baudRate,
-                    Parity = Parity.None,
-                    DataBits = 8,
-                    StopBits = StopBits.One
-                };
-            }
-            catch (Exception ex)
-            {
-                // Ignored
-            }
+                PortName = "COM" + PortNumber,
+                BaudRate = baudRate,
+                Parity = Parity.None,
+                DataBits = 8,
+                StopBits = StopBits.One
+            };
+
 
             // Create Matrix Array
             _ledMatrix = new Color[ledCount];
@@ -242,7 +234,7 @@ namespace RGB.NET.Devices.Adalight
                     };
                     i.Open();
                     var line = i.ReadLine();
-                    if (line.Substring(0, 3) == "Ada")
+                    if (line[..3] == "Ada")
                     {
                         var port = int.Parse(dev.Replace("COM", ""));
                         line = i.ReadLine();
@@ -250,12 +242,12 @@ namespace RGB.NET.Devices.Adalight
                         var ledCount = 0;
                         if (line.Contains("COUNT"))
                         {
-                            int.TryParse(line.Replace("COUNT=", ""), out ledCount);
+                            _ = int.TryParse(line.Replace("COUNT=", ""), out ledCount);
                         }
                         line = i.ReadLine();
                         if (line.Contains("BRI"))
                         {
-                            int.TryParse(line.Replace("BRI=", ""), out brightness);
+                            _ = int.TryParse(line.Replace("BRI=", ""), out brightness);
                         }
                         output[port] = new KeyValuePair<int, int>(ledCount, brightness);
                     }

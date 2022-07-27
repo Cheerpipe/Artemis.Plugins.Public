@@ -2,53 +2,43 @@
 using Artemis.Core.Services;
 using Artemis.UI.Shared;
 using RGB.NET.Devices.Adalight;
-using Stylet;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Markup;
+using System.Collections.ObjectModel;
 
-namespace Artemis.Plugins.Devices.Adalight
+namespace Artemis.Plugins.Devices.Adalight.ViewModels
 {
-    public class AdalightConfigurationDialogViewModel : PluginConfigurationViewModel
+    public class AdalightConfigurationViewModel : PluginConfigurationViewModel
     {
-        private readonly IPluginManagementService _pluginManagementService;
-
+        //private readonly IPluginManagementService _pluginManagementService;
         private readonly PluginSetting<List<AdalightDeviceDefinition>> _adalightDeviceDefinitionsSetting;
-        private List<AdalightDeviceDefinition> _adalightDeviceDefinitions;
+        public PluginSetting<bool> TurnOffLedsOnShutdown { get; }
+        private readonly List<AdalightDeviceDefinition> _adalightDeviceDefinitions;
+        public ObservableCollection<AdalightDeviceDefinition> Definitions { get; }
 
-        public BindableCollection<AdalightDeviceDefinition> Definitions { get; }
-
-        public AdalightConfigurationDialogViewModel(Plugin plugin, PluginSettings settings, IPluginManagementService pluginManagementService) : base(plugin)
+        public AdalightConfigurationViewModel(Plugin plugin, PluginSettings settings, IPluginManagementService pluginManagementService) : base(plugin)
         {
             _pluginManagementService = pluginManagementService;
-
             _adalightDeviceDefinitionsSetting = settings.GetSetting("AdalightDeviceDefinitionsSetting", new List<AdalightDeviceDefinition>());
             _adalightDeviceDefinitions = _adalightDeviceDefinitionsSetting.Value;
-
-            Definitions = new BindableCollection<AdalightDeviceDefinition>(_adalightDeviceDefinitions);
         }
 
         public void AddDefinition()
         {
-            Definitions.Add(new AdalightDeviceDefinition());
+            _adalightDeviceDefinitions.Add(new AdalightDeviceDefinition());
         }
 
         public void DeleteRow(object def)
         {
             if (def is AdalightDeviceDefinition deviceDefinition)
             {
-                Definitions.Remove(deviceDefinition);
+                _adalightDeviceDefinitions.Remove(deviceDefinition);
             }
         }
 
-        public BindableCollection<ValueDescription> ScanModes { get; }
-
+        /*
         protected override void OnClose()
         {
-
+            
             _adalightDeviceDefinitionsSetting.Value.Clear();
             _adalightDeviceDefinitionsSetting.Value.AddRange(Definitions.Where(d => !string.IsNullOrWhiteSpace(d.Name)));
             _adalightDeviceDefinitionsSetting.Save();
@@ -61,8 +51,12 @@ namespace Artemis.Plugins.Devices.Adalight
                 _pluginManagementService.EnablePluginFeature(deviceProvider, false);
             });
             base.OnClose();
+            
         }
 
+        */
+
+        /*
         public class EnumToCollectionExtension : MarkupExtension
         {
             public Type EnumType { get; set; }
@@ -81,6 +75,7 @@ namespace Artemis.Plugins.Devices.Adalight
                            .Cast<DescriptionAttribute>()
                            .FirstOrDefault()?.Description ?? value.ToString();
             }
-        }
+
+    }*/
     }
 }

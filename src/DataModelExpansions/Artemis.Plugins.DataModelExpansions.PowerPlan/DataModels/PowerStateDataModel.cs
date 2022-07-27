@@ -6,8 +6,6 @@ namespace Artemis.Plugins.DataModelExpansions.PowerState.DataModels
 {
     public class PowerStateDataModel : DataModel
     {
-        // Power Status
-        public bool UsingBattery { get; set; }
 
         // Power Plan
         public Guid CurrentPowerPlanGuid { get; set; }

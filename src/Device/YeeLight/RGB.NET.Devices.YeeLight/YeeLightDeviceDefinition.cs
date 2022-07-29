@@ -8,6 +8,6 @@ namespace RGB.NET.Devices.YeeLight
         public string HostName { get; set; }
         public MODEL Model { get; set; }
         public string DeviceName { get; set; }
-        public OperationModes Mode { get; set; }
+        public bool UseMusicMode { get; set; }
     }
 }

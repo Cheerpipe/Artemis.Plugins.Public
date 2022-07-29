@@ -20,9 +20,9 @@ namespace Artemis.Plugins.DataModelExpansions.OpenWeather
         public OpenWeatherDataModelExpansion(PluginSettings pluginSettings, ILogger logger)
         {
             _logger = logger;
-            _apiKeySetting = pluginSettings.GetSetting("OpenWeatherApiKey", string.Empty);
-            _citySetting = pluginSettings.GetSetting("OpenWeatherCity", string.Empty);
-            _unitOfMeasurementSetting = pluginSettings.GetSetting("OpenWeatherUnitOfMeasurement", Enum.GetNames(typeof(UnitsOfMeasurement)).FirstOrDefault());
+            _apiKeySetting = pluginSettings.GetSetting("ApiKey", string.Empty);
+            _citySetting = pluginSettings.GetSetting("City", string.Empty);
+            _unitOfMeasurementSetting = pluginSettings.GetSetting("Unit", Enum.GetNames(typeof(UnitsOfMeasurement)).FirstOrDefault());
 
             _apiKeySetting.PropertyChanged += _OpenWeatherSettingsChanged_PropertyChanged;
             _citySetting.PropertyChanged += _OpenWeatherSettingsChanged_PropertyChanged;

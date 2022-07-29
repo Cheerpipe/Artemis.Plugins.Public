@@ -1,0 +1,69 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
+             xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             xmlns:viewModels="clr-namespace:Artemis.Plugins.DataModelExpansions.OpenWeather.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             x:Class="Artemis.Plugins.DataModelExpansions.OpenWeather.Views.OpenWeatherPluginConfigurationView"
+             x:DataType="viewModels:OpenWeatherPluginConfigurationViewModel">
+	<Grid Margin="15" ColumnDefinitions="*" RowDefinitions="*,Auto">
+		<StackPanel>
+			<Border Classes="card" Margin="0 0 8 0" Grid.Row="0" Grid.Column="0" VerticalAlignment="Top">
+				<StackPanel>
+					<StackPanel Orientation="Vertical"
+								   HorizontalAlignment="Center"
+								   VerticalAlignment="Center" Width="436" Height="384">
+						<StackPanel Orientation="Horizontal" Margin="0 0 0 0">
+							<TextBlock Text="API Key" Width="125"/>
+							<TextBox
+									 Text="{Binding ApiKey.Value}" Width="300" />
+						</StackPanel>
+						<StackPanel Orientation="Horizontal" Margin="0 0 0 15" Width="183">
+							<TextBlock>
+								Get your API key here.
+							</TextBlock>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal" Margin="0 0 0 0">
+							<TextBlock Text="City, Country" Width="125"/>
+							<TextBox
+									 Text="{Binding City.Value}" Width="300" />
+						</StackPanel>
+						<StackPanel Orientation="Horizontal" Margin="0 0 0 15" Width="183">
+							<TextBlock>
+								Ex: Santiago, Chile
+							</TextBlock>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal" Margin="0 0 0 15">
+							<TextBlock Text="Unit of measurement" Width="125"/>
+							<ComboBox
+								HorizontalAlignment="Stretch"
+								Items="{Binding Units}"
+								SelectedItem="{Binding Unit.Value}">
+								<ComboBox.ItemTemplate>
+									<DataTemplate DataType="system:String">
+										<TextBlock Text="{Binding}" />
+									</DataTemplate>
+								</ComboBox.ItemTemplate>
+							</ComboBox>
+						</StackPanel>
+					</StackPanel>
+				</StackPanel>
+			</Border>
+		</StackPanel>
+
+		<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Spacing="5" HorizontalAlignment="Right" Margin="0 15 0 0">
+			<Button Classes="outline" Command="{CompiledBinding Test}">
+				Test
+			</Button>
+			<Button Classes="accent" Command="{CompiledBinding Save}">
+				Save changes
+			</Button>
+			<Button Command="{CompiledBinding Cancel}">
+				Cancel
+			</Button>
+		</StackPanel>
+	</Grid>
+</UserControl>

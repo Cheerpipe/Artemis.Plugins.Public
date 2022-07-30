@@ -93,6 +93,8 @@ namespace Artemis.Plugins.Devices.YeeLight.ViewModels
         {
             _definitions.Save();
             TurnOffLedsOnShutdown.Save();
+            UseAutomaticScan.Save();
+            UseAllAvailableMulticastAddresses.Save();
 
             // Fire & forget re-enabling the plugin
             Task.Run(() =>

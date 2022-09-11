@@ -1,15 +1,20 @@
 ﻿using Artemis.Core;
 using Artemis.Core.Services;
 using Artemis.UI.Shared;
+using Avalonia.Markup.Xaml;
 using RGB.NET.Devices.Adalight;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Artemis.Plugins.Devices.Adalight.ViewModels
 {
     public class AdalightConfigurationViewModel : PluginConfigurationViewModel
     {
-        //private readonly IPluginManagementService _pluginManagementService;
+        private readonly IPluginManagementService _pluginManagementService;
         private readonly PluginSetting<List<AdalightDeviceDefinition>> _adalightDeviceDefinitionsSetting;
         public PluginSetting<bool> TurnOffLedsOnShutdown { get; }
         private readonly List<AdalightDeviceDefinition> _adalightDeviceDefinitions;
@@ -35,10 +40,8 @@ namespace Artemis.Plugins.Devices.Adalight.ViewModels
             }
         }
 
-        /*
-        protected override void OnClose()
+        public override void OnCloseRequested()
         {
-            
             _adalightDeviceDefinitionsSetting.Value.Clear();
             _adalightDeviceDefinitionsSetting.Value.AddRange(Definitions.Where(d => !string.IsNullOrWhiteSpace(d.Name)));
             _adalightDeviceDefinitionsSetting.Save();
@@ -50,13 +53,9 @@ namespace Artemis.Plugins.Devices.Adalight.ViewModels
                 _pluginManagementService.DisablePluginFeature(deviceProvider, false);
                 _pluginManagementService.EnablePluginFeature(deviceProvider, false);
             });
-            base.OnClose();
-            
+            base.OnCloseRequested();
         }
 
-        */
-
-        /*
         public class EnumToCollectionExtension : MarkupExtension
         {
             public Type EnumType { get; set; }
@@ -76,6 +75,6 @@ namespace Artemis.Plugins.Devices.Adalight.ViewModels
                            .FirstOrDefault()?.Description ?? value.ToString();
             }
 
-    }*/
+        }
     }
 }

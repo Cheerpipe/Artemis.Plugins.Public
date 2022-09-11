@@ -1,5 +1,6 @@
 {
   "Guid": "c338d73a-b46d-4985-be7b-1d7965a6ffb1",
+  "Api": "1.0",
   "Name": "OpenWeather Data Model",
   "Author": "Cheerpipe",
   "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",

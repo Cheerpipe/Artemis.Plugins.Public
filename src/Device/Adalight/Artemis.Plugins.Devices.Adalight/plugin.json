@@ -1,5 +1,6 @@
 ﻿{
   "Guid": "1d0c8bbe-85c7-4992-a93e-bef587863afc",
+  "Api": "1.0",
   "Name": "Adalight Device Provider",
   "Icon": "adafruit.svg",
   "Author": "Cheerpipe",

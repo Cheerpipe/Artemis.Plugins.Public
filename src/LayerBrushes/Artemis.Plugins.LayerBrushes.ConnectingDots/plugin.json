@@ -1,5 +1,6 @@
 ﻿{
   "Guid": "8e33bad2-2814-49fc-9944-953c4670a05e",
+  "Api": "1.0",
   "Name": "Connecting Dots layer brush",
   "Author": "Cheerpipe",
   "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",

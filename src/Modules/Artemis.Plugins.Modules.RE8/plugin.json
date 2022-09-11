@@ -1,5 +1,6 @@
 {
   "Guid": "13f9a19b-b6e2-40fe-b91d-5186a06f72fd",
+  "Api": "1.0",
   "Name": "Resident Evil 8 Village",
   "Author": "Cheerpipe",
   "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",

@@ -1,5 +1,6 @@
 {
   "Guid": "379e94ad-7243-44f3-9165-d63e10e6ff69",
+  "Api": "1.0",
   "Name": "Mirror",
   "Icon": "Mirror",
   "Description": "Provides a horizontal and vertical mirrored layer effect",

@@ -1,5 +1,6 @@
 {
   "Guid": "64e1351f-ddd1-4222-a79a-55f0ba47d0ea",
+  "Api": "1.0",
   "Name": "Hotbar",
   "Author": "Cheerpipe",
   "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",

@@ -1,5 +1,6 @@
 ﻿{
   "Guid": "797f604f-37c8-4eda-86e4-6ccc59b299b8",
+  "Api": "1.0",
   "Name": "YeeLight Devices",
   "Author": "Cheerpipe",
   "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",

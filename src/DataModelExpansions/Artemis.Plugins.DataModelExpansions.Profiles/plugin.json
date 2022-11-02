@@ -1,5 +1,6 @@
 {
   "Guid": "9aaf99f7-a915-49b9-909d-92caa4aafad7",
+  "Api": "1.0",
   "Name": "Profiles",
   "Author": "Cheerpipe",
   "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",

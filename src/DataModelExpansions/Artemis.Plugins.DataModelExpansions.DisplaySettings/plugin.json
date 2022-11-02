@@ -1,5 +1,6 @@
 {
   "Guid": "4338d732-b46d-4985-ae7b-4d7965a6ffbd",
+  "Api": "1.0",
   "Name": "Display Settings",
   "Author": "Cheerpipe",
   "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",

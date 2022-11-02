@@ -7,7 +7,6 @@ using Avalonia.Threading;
 using EmbedIO;
 using EmbedIO.Routing;
 using EmbedIO.WebApi;
-using Ninject;
 using System;
 using System.Reflection;
 
@@ -49,18 +48,18 @@ namespace Artemis.Plugins.ExtendedWebAPI.Controllers
         public void PostShowWorkshop()
         {
 
-            _mainWindowService.OpenMainWindow();
+            //_mainWindowService.OpenMainWindow();
             // RootViewModel rootViewModel = _kernel.Get<RootViewModel>();
             // rootViewModel.OpenScreen("Workshop");
             //_windowService.OpenMainWindow();
-            Dispatcher.UIThread.InvokeAsync(() =>
-            {
-                Type type = typeof(ArtemisBootstrapper);
-                FieldInfo info = type.GetField("_kernel", BindingFlags.NonPublic | BindingFlags.Static);
-                StandardKernel standardKernel = (StandardKernel)info.GetValue(null);
-                var rm = standardKernel.Get<RootViewModel>();
-                rm.OpenScreen("Workshop");
-            });
+            //Dispatcher.UIThread.InvokeAsync(() =>
+            //{
+            //    Type type = typeof(ArtemisBootstrapper);
+             //   FieldInfo info = type.GetField("_kernel", BindingFlags.NonPublic | BindingFlags.Static);
+            //    StandardKernel standardKernel = (StandardKernel)info.GetValue(null);
+            //    var rm = standardKernel.Get<RootViewModel>();
+            //    rm.OpenScreen("Workshop");
+            //});
         }
 
         [Route(HttpVerbs.Any, "/windows/show-surface-editor")]

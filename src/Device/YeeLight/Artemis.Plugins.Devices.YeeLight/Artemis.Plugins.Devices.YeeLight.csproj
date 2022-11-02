@@ -19,6 +19,10 @@
 
 		<!--All packages Artemis already references are compile-only dependencies-->
 		<PackageReference Update="@(PackageReference)" IncludeAssets="compile;build" />
+		<PackageReference Update="Avalonia" Version="0.10.18" />
+		<PackageReference Update="Avalonia.ReactiveUI" Version="0.10.18" />
+		<PackageReference Update="Serilog" Version="2.12.0" />
+		<PackageReference Update="SkiaSharp" Version="2.88.3" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -1,5 +1,6 @@
 {
   "Guid": "6c648735-e349-42bc-beaa-7305ad70ce3f",
+  "Api": "1.0",
   "Name": "Power plan",
   "Author": "Cheerpipe",
   "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",

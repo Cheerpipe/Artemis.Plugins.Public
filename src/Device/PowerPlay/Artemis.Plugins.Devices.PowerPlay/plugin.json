@@ -1,5 +1,6 @@
 ﻿{
   "Guid": "9b68c4aa-8c2f-4cfb-90d3-2883ab439610",
+  "Api": "1.0",
   "Name": "Standalone Logitech PowerPlay Device Provider",
   "Icon": "Logitech.svg",
   "Author": "Cheerpipe",

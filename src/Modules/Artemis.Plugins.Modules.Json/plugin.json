@@ -1,8 +1,11 @@
 {
-    "Guid": "19ada390-8abc-11ea-8dc5-0242ac411001",
-    "Name": "Json",
-    "Icon": "WallSconceRound",
-    "Description": "A RESTful API for store JSON objects as a data model",
-    "Version": "1.0.0.2",
-    "Main": "Artemis.Plugins.Modules.Json.dll"
+  "Guid": "19ada390-8abc-11ea-8dc5-0242ac411001",
+  "Api": "1.0",
+  "Name": "Json",
+  "Icon": "WallSconceRound",
+  "Description": "A RESTful API for store JSON objects as a data model",
+  "Author": "Cheerpipe",
+  "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",
+  "Version": "1.0.0.2",
+  "Main": "Artemis.Plugins.Modules.Json.dll"
 }            

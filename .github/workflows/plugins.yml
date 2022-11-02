@@ -68,11 +68,11 @@ jobs:
           name: Artemis.Plugins.Devices.YeeLight
           path: .\Plugins\src\Device\YeeLight\Artemis.Plugins.Devices.YeeLight\bin\x64\Release\net6.0\publish
           
-      - name: Upload Artemis.Plugins.Devices.Adalight
-        uses: actions/upload-artifact@v2
-        with:
-          name: Artemis.Plugins.Devices.Adalight
-          path: .\Plugins\src\Device\Adalight\Artemis.Plugins.Devices.Adalight\bin\x64\Release\net6.0\publish                 
+#      - name: Upload Artemis.Plugins.Devices.Adalight
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: Artemis.Plugins.Devices.Adalight
+#          path: .\Plugins\src\Device\Adalight\Artemis.Plugins.Devices.Adalight\bin\x64\Release\net6.0\publish                 
           
       - name: Upload Artemis.Plugins.LayerBrushes.ConnectingDotss
         uses: actions/upload-artifact@v2

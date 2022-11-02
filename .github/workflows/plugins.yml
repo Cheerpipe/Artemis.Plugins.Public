@@ -24,6 +24,9 @@ jobs:
       - name: Build Artemis UI Shared
         run: dotnet build .\Artemis\src\Artemis.UI.Shared\Artemis.UI.Shared.csproj
 
+      - name: Build Artemis UI Shared
+        run: dotnet build .\Artemis\src\Artemis.UI.Shared\Artemis.UI.csproj
+
       - name: Clone Plugins
         uses: actions/checkout@v2
         with:

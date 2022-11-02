@@ -1,14 +1,10 @@
 ﻿using Artemis.Core.Services;
-using Artemis.UI;
-using Artemis.UI.Screens.Root;
 using Artemis.UI.Services.Interfaces;
 using Artemis.UI.Shared.Services.MainWindow;
 using Avalonia.Threading;
 using EmbedIO;
 using EmbedIO.Routing;
 using EmbedIO.WebApi;
-using System;
-using System.Reflection;
 
 namespace Artemis.Plugins.ExtendedWebAPI.Controllers
 {

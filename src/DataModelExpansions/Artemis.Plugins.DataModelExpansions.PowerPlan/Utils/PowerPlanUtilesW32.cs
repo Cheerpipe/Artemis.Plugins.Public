@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-namespace Artemis.Plugins.DataModelExpansions.PowerState.Utils
+namespace Artemis.Plugins.DataModelExpansions.PowerPlan.Utils
 {
     public class PowerPlanUtilesW32
     {

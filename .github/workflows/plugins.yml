@@ -24,9 +24,6 @@ jobs:
       - name: Build Artemis UI Shared
         run: dotnet build .\Artemis\src\Artemis.UI.Shared\Artemis.UI.Shared.csproj
 
-      - name: Build Artemis UI Shared
-        run: dotnet build .\Artemis\src\Artemis.UI.Shared\Artemis.UI.csproj
-
       - name: Clone Plugins
         uses: actions/checkout@v2
         with:
@@ -47,11 +44,11 @@ jobs:
           name: Artemis.Plugins.DataModelExpansions.PlaybackVolume
           path: .\Plugins\src\DataModelExpansions\Artemis.Plugins.DataModelExpansions.PlaybackVolume\bin\x64\Release\net6.0\publish
 
-      - name: Upload Artemis.Plugins.DataModelExpansions.PowerState
+      - name: Upload Artemis.Plugins.DataModelExpansions.PowerPlan
         uses: actions/upload-artifact@v2
         with:
-          name: Artemis.Plugins.DataModelExpansions.PowerState
-          path: .\Plugins\src\DataModelExpansions\Artemis.Plugins.DataModelExpansions.PowerState\bin\x64\Release\net6.0\publish
+          name: Artemis.Plugins.DataModelExpansions.PowerPlan
+          path: .\Plugins\src\DataModelExpansions\Artemis.Plugins.DataModelExpansions.PowerPlan\bin\x64\Release\net6.0\publish
           
       - name: Upload Artemis.Plugins.DataModelExpansions.YTMdesktop
         uses: actions/upload-artifact@v2

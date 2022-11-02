@@ -1,4 +1,4 @@
-﻿namespace Artemis.Plugins.DataModelExpansions.PowerState.Utils
+﻿namespace Artemis.Plugins.DataModelExpansions.PowerPlan.Utils
 {
     public class BatteryUtiles
     {

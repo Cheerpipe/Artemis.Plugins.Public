@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Management;
 
-namespace Artemis.Plugins.DataModelExpansions.PowerState.Utils
+namespace Artemis.Plugins.DataModelExpansions.PowerPlan.Utils
 {
     public class PowerPlanUtil : IDisposable
     {

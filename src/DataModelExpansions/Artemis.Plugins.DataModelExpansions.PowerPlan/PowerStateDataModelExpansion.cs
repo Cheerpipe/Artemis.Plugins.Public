@@ -1,19 +1,19 @@
 using System;
 using System.Collections.Generic;
 using Artemis.Core.Modules;
-using Artemis.Plugins.DataModelExpansions.PowerState.DataModels;
-using Artemis.Plugins.DataModelExpansions.PowerState.Utils;
+using Artemis.Plugins.DataModelExpansions.PowerPlan.DataModels;
+using Artemis.Plugins.DataModelExpansions.PowerPlan.Utils;
 using Serilog;
 
-namespace Artemis.Plugins.DataModelExpansions.PowerState
+namespace Artemis.Plugins.DataModelExpansions.PowerPlan
 {
-    public class PowerStateDataModelExpansion : Module<PowerStateDataModel>
+    public class PowerPlanDataModelExpansion : Module<PowerPlanDataModel>
     {
 
         private readonly ILogger _logger;
         private readonly PowerPlanUtil _powerPlanUtil;
 
-        public PowerStateDataModelExpansion(ILogger logger)
+        public PowerPlanDataModelExpansion(ILogger logger)
         {
             _logger = logger;
             _powerPlanUtil = new PowerPlanUtil();

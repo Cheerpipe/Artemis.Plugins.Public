@@ -2,9 +2,9 @@
 using Artemis.Core.Modules;
 using Artemis.Core;
 
-namespace Artemis.Plugins.DataModelExpansions.PowerState.DataModels
+namespace Artemis.Plugins.DataModelExpansions.PowerPlan.DataModels
 {
-    public class PowerStateDataModel : DataModel
+    public class PowerPlanDataModel : DataModel
     {
 
         // Power Plan

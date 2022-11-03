@@ -116,7 +116,7 @@ namespace RGB.NET.Devices.YeeLight.PerDevice
                         FixLowFrameRateWorkArround();
                     }
                 }
-                catch
+                catch (Exception E)
                 {
                     // do nothing.
                 }

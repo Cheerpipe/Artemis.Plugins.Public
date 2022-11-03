@@ -1,5 +1,6 @@
 ﻿{
   "Guid": "b7f01896-5488-4994-a729-d816de7f763c",
+  "Api": "1.0",
   "Name": "Solid Percentage layer brush",
   "Author": "Cheerpipe",
   "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",

@@ -1,5 +1,6 @@
 {
   "Guid": "76d139ad-32da-a921-1694-a8759248a53f",
+  "Api": "1.0",
   "Name": "YTMdesktop",
   "Author": "Cheerpipe",
   "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",

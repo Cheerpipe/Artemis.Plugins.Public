@@ -29,6 +29,7 @@ namespace Artemis.Plugins.DataModelExpansions.DisplaySettings
 
         public override void Enable()
         {
+            //SystemEvents.InvokeOnEventsThread(() => { SystemEvents.DisplaySettingsChanged += SystemEvents_DisplaySettingsChanged; });
             SystemEvents.DisplaySettingsChanged += SystemEvents_DisplaySettingsChanged;
             UpdateDataDataModel();
         }

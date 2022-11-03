@@ -3,7 +3,7 @@ using Artemis.Core;
 
 namespace Artemis.Plugins.LayerEffect.FlickeringLights.PropertyGroups
 {
-    public class MainPropertyGroup : LayerPropertyGroup
+    public class MainPropertyGroup : LayerEffectPropertyGroup
     {
         [PropertyDescription(Description = "Set the flickering pattern used to turn lights on and off")]
         public EnumLayerProperty<FlickeringPatterns> FlickeringPattern { get; set; }
@@ -22,7 +22,6 @@ namespace Artemis.Plugins.LayerEffect.FlickeringLights.PropertyGroups
         protected override void DisableProperties() { }
     }
 
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public enum FlickeringPatterns
     {
         mmnmmommommnonmmonqnmmo,

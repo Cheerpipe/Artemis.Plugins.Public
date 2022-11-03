@@ -2,7 +2,6 @@
 using Artemis.Core.DeviceProviders;
 using Artemis.Core.Services;
 using RGB.NET.Devices.YeeLight;
-using RGB.NET.Devices.YeeLight.Enums;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,23 +12,23 @@ namespace Artemis.Plugins.Devices.YeeLight
     {
         private readonly IRgbService _rgbService;
 
+        private readonly PluginSetting<bool> _useAutomaticScan;
         private readonly PluginSetting<bool> _useAllAvailableMulticastAddresses;
         private readonly PluginSetting<List<YeeLightDeviceDefinition>> _yeeLightDeviceDefinitions;
-        private readonly PluginSetting<ScanMode> _scanMode;
 
         public YeeLightDeviceProvider(IRgbService rgbService, PluginSettings pluginSettings) : base(RGB.NET.Devices.YeeLight.YeeLightDeviceProvider.Instance)
         {
             _rgbService = rgbService;
             _useAllAvailableMulticastAddresses = pluginSettings.GetSetting("UseAllAvailableMulticastAddresses", false);
-            _yeeLightDeviceDefinitions = pluginSettings.GetSetting("YeeLightDeviceDefinitionsSetting", new List<YeeLightDeviceDefinition>());
-            _scanMode = pluginSettings.GetSetting("ScanMode", ScanMode.Automatic);
+            _yeeLightDeviceDefinitions = pluginSettings.GetSetting("YeeLightDeviceDefinitions", new List<YeeLightDeviceDefinition>());
+            _useAutomaticScan = pluginSettings.GetSetting("UseAutomaticScan", true);
         }
 
         public override void Enable()
         {
             RGB.NET.Devices.YeeLight.YeeLightDeviceProvider.Instance.YeeLightDeviceDefinitions = _yeeLightDeviceDefinitions.Value.ToList();
             RGB.NET.Devices.YeeLight.YeeLightDeviceProvider.Instance.UseAllAvailableMulticastAddresses = _useAllAvailableMulticastAddresses.Value;
-            RGB.NET.Devices.YeeLight.YeeLightDeviceProvider.Instance.ScanMode = _scanMode.Value;
+            RGB.NET.Devices.YeeLight.YeeLightDeviceProvider.Instance.UseAutomaticScan = _useAutomaticScan.Value;
             _rgbService.AddDeviceProvider(RgbDeviceProvider);
         }
 

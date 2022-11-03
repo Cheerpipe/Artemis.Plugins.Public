@@ -6,6 +6,7 @@ using EmbedIO.WebApi;
 using System.Threading.Tasks;
 using Artemis.Plugins.Modules.Json.Services.JsonDataModelServices;
 using Artemis.Core.Services;
+using System.Diagnostics;
 
 namespace Artemis.Plugins.Modules.Json.Controllers
 {

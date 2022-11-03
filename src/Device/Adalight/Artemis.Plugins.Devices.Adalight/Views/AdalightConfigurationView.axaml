@@ -1,0 +1,84 @@
+﻿<UserControl 
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
+             xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             xmlns:viewModels1="clr-namespace:Artemis.Plugins.Devices.Adalight.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Artemis.Plugins.Devices.Adalight.Views.AdalightConfigurationView"
+             x:DataType="viewModels1:AdalightConfigurationViewModel">
+	<Grid Margin="15" RowDefinitions="Auto,Auto,300,Auto,Auto,*">
+		<TextBlock Grid.Row="0" Classes="h4">Manual device configuration</TextBlock>
+		<StackPanel Grid.Row="1">
+			<TextBlock Classes="h5">Introduction</TextBlock>
+			<TextBlock TextWrapping="Wrap">
+				This plugin supports connecting to Adalight supported USB devices.
+			</TextBlock>
+			<TextBlock TextWrapping="Wrap">
+				To get started add one or more devices.
+			</TextBlock>
+		</StackPanel>
+		<Border Grid.Row="2" Classes="card" Margin="0 10" ClipToBounds="True">
+			<DataGrid Items="{CompiledBinding Definitions}"
+                      AutoGenerateColumns="False"
+                      CanUserSortColumns="False"
+                      SelectionMode="Single"
+                      IsReadOnly="True"
+                      HeadersVisibility="Column"
+                      MaxHeight="300">
+				<DataGrid.Columns>
+					<DataGridTextColumn Width="*"
+                                        Binding="{Binding Name}"
+                                        Header="Device name"
+                                        IsReadOnly="True" />
+					<DataGridTextColumn Width="*"
+                                        Binding="{Binding Port}"
+                                        Header="Port number"
+                                        IsReadOnly="True" />
+					<DataGridTextColumn Width="*"
+                                        Binding="{Binding BaudRate}"
+                                        Header="Baud rate"
+                                        IsReadOnly="True" />
+					<DataGridTextColumn Width="*"
+                                        Binding="{Binding LedCount}"
+                                        Header="Led count"
+                                        IsReadOnly="True" />
+					<DataGridTemplateColumn Width="Auto" IsReadOnly="True">
+						<DataGridTemplateColumn.CellTemplate>
+							<DataTemplate>
+								<Button Command="{Binding $parent[UserControl].DataContext.EditDevice}"
+                                        CommandParameter="{Binding}"
+                                        Classes="icon-button"
+                                        ToolTip.Tip="Edit device"
+                                        HorizontalAlignment="Center">
+									<avalonia:MaterialIcon Kind="Edit" />
+								</Button>
+							</DataTemplate>
+						</DataGridTemplateColumn.CellTemplate>
+					</DataGridTemplateColumn>
+				</DataGrid.Columns>
+			</DataGrid>
+		</Border>
+
+		<TextBlock Grid.Row="3" Classes="h4">General</TextBlock>
+		<Border Grid.Row="4" Classes="card">
+			<Grid RowDefinitions="*,*" ColumnDefinitions="*,Auto">
+				<StackPanel Grid.Column="0">
+					<TextBlock>
+						Turn off LEDs on shutdown
+					</TextBlock>
+					<TextBlock Classes="subtitle" TextWrapping="Wrap">
+						If enabled, all LEDs are turned off before the plugin is disabled (which happens on Artemis shutdown).
+					</TextBlock>
+				</StackPanel>
+				<StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
+					<ToggleSwitch IsChecked="{CompiledBinding TurnOffLedsOnShutdown.Value}" MinWidth="0" />
+				</StackPanel>
+			</Grid>
+		</Border>
+
+		
+	</Grid>
+</UserControl>

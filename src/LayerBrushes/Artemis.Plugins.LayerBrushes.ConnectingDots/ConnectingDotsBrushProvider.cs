@@ -6,7 +6,7 @@ namespace Artemis.Plugins.LayerBrushes.ConnectingDots
     {
         public override void Enable()
         {
-            RegisterLayerBrushDescriptor<ConnectingDotsBrush>("Connecting Dots", "Animated random path circles connected by lines", "ConnectingDots.svg");
+            RegisterLayerBrushDescriptor<ConnectingDotsBrush>("Connecting Dots", "Animated random path circles connected by lines", "ConnectingDots.png");
         }
 
         public override void Disable()

@@ -8,7 +8,7 @@ namespace Artemis.Plugins.Devices.YeeLight
     {
         public override void OnPluginLoaded(Plugin plugin)
         {
-            plugin.ConfigurationDialog = new PluginConfigurationDialog<YeeLightConfigurationDialogViewModel>();
+            plugin.ConfigurationDialog = new PluginConfigurationDialog<YeeLightConfigurationViewModel>();
         }
     }
 }

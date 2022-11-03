@@ -1,38 +1,31 @@
-﻿using System.Runtime.CompilerServices;
-using System.Threading;
-using Artemis.Core.Services;
-using Artemis.UI.Events;
-using Artemis.UI.Services;
-using Artemis.UI.Shared.Services;
+﻿using Artemis.Core.Services;
+using Artemis.UI.Services.Interfaces;
+using Artemis.UI.Shared.Services.MainWindow;
+using Avalonia.Threading;
 using EmbedIO;
 using EmbedIO.Routing;
 using EmbedIO.WebApi;
-using Stylet;
 
 namespace Artemis.Plugins.ExtendedWebAPI.Controllers
 {
     internal class WindowsController : WebApiController
     {
-
-        private readonly IWindowService _windowService;
         private readonly IDebugService _debugService;
-        private readonly IEventAggregator _eventAggregator;
+        private readonly IMainWindowService _mainWindowService;
+
         private readonly IPluginManagementService _pluginManagementService;
 
         public WindowsController(
-            IWindowService windowService,
-            IWebServerService webServerService,
             IDebugService debugService,
-            IEventAggregator eventAggregator,
-            IPluginManagementService pluginManagementService)
+            IPluginManagementService pluginManagementService,
+            IMainWindowService mainWindowService)
         {
-            _windowService = windowService;
             _debugService = debugService;
-            _eventAggregator = eventAggregator;
             _pluginManagementService = pluginManagementService;
+            _mainWindowService = mainWindowService;
         }
 
-        [Route(HttpVerbs.Get, "/extended-rest-api/version")]
+        [Route(HttpVerbs.Any, "/extended-rest-api/version")]
         public string GetVersion()
         {
             HttpContext.Response.ContentType = " text/plain";
@@ -41,32 +34,44 @@ namespace Artemis.Plugins.ExtendedWebAPI.Controllers
         }
 
 
-        [Route(HttpVerbs.Post, "/windows/show-debugger")]
+        [Route(HttpVerbs.Any, "/windows/show-debugger")]
         public void PostShowDebugger()
         {
-            Execute.PostToUIThread(() => _debugService.ShowDebugger());
+            Dispatcher.UIThread.InvokeAsync(() => _debugService.ShowDebugger());
         }
 
-        [Route(HttpVerbs.Post, "/windows/show-workshop")]
+        [Route(HttpVerbs.Any, "/windows/show-workshop")]
         public void PostShowWorkshop()
         {
-            _windowService.OpenMainWindow();
-            Execute.PostToUIThread(() => _eventAggregator.Publish(new RequestSelectSidebarItemEvent("Workshop")));
+
+            //_mainWindowService.OpenMainWindow();
+            // RootViewModel rootViewModel = _kernel.Get<RootViewModel>();
+            // rootViewModel.OpenScreen("Workshop");
+            //_windowService.OpenMainWindow();
+            //Dispatcher.UIThread.InvokeAsync(() =>
+            //{
+            //    Type type = typeof(ArtemisBootstrapper);
+             //   FieldInfo info = type.GetField("_kernel", BindingFlags.NonPublic | BindingFlags.Static);
+            //    StandardKernel standardKernel = (StandardKernel)info.GetValue(null);
+            //    var rm = standardKernel.Get<RootViewModel>();
+            //    rm.OpenScreen("Workshop");
+            //});
         }
 
-        [Route(HttpVerbs.Post, "/windows/show-surface-editor")]
+        [Route(HttpVerbs.Any, "/windows/show-surface-editor")]
         public void PostShowSurfaceEditor()
         {
-            _windowService.OpenMainWindow();
-            Execute.PostToUIThread(() => _eventAggregator.Publish(new RequestSelectSidebarItemEvent("Surface Editor")));
+            //_windowService.OpenMainWindow();
+            //Execute.PostToUIThread(() => _eventAggregator.Publish(new RequestSelectSidebarItemEvent("Surface Editor")));
+            //_windowService.ShowWindow();
 
         }
 
-        [Route(HttpVerbs.Post, "/windows/show-settings")]
+        [Route(HttpVerbs.Any, "/windows/show-settings")]
         public void PostShowSettings()
         {
-            _windowService.OpenMainWindow();
-            Execute.PostToUIThread(() => _eventAggregator.Publish(new RequestSelectSidebarItemEvent("Settings")));
+            //_windowService.OpenMainWindow();
+            //Execute.PostToUIThread(() => _eventAggregator.Publish(new RequestSelectSidebarItemEvent("Settings")));
         }
     }
 }

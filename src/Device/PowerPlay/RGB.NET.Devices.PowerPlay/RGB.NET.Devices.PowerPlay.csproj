@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>net5.0-windows</TargetFramework>
+		<TargetFramework>net6.0</TargetFramework>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
 		<Authors></Authors>
@@ -58,11 +58,7 @@
 
 	<ItemGroup>
 	  <PackageReference Include="Hid.Net" Version="4.2.1" />
+	  <PackageReference Include="RGB.NET.Core" Version="1.0.0-prerelease.58" />
 	  <PackageReference Include="Usb.Net" Version="4.2.1" />
-	</ItemGroup>
-	<ItemGroup>
-		<Reference Include="RGB.NET.Core">
-			<HintPath>..\..\..\..\..\RGB.NET\bin\net5.0\RGB.NET.Core.dll</HintPath>
-		</Reference>
 	</ItemGroup>
 </Project>

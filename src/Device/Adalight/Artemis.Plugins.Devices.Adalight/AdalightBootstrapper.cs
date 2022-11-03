@@ -1,4 +1,5 @@
 ﻿using Artemis.Core;
+using Artemis.Plugins.Devices.Adalight.ViewModels;
 using Artemis.UI.Shared;
 
 namespace Artemis.Plugins.Devices.Adalight
@@ -7,7 +8,7 @@ namespace Artemis.Plugins.Devices.Adalight
     {
         public override void OnPluginLoaded(Plugin plugin)
         {
-            plugin.ConfigurationDialog = new PluginConfigurationDialog<AdalightConfigurationDialogViewModel>();
+            plugin.ConfigurationDialog = new PluginConfigurationDialog<AdalightConfigurationViewModel>();
         }
     }
 }

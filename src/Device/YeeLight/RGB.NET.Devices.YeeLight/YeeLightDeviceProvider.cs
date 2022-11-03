@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using RGB.NET.Core;
-using RGB.NET.Devices.YeeLight.Enums;
 using RGB.NET.Devices.YeeLight.Generic;
 using RGB.NET.Devices.YeeLight.PerDevice;
 using YeelightAPI;
@@ -19,7 +18,7 @@ namespace RGB.NET.Devices.YeeLight
         private static YeeLightDeviceProvider? _instance;
         private List<Device>? _discoveredYeeLightDevices;
         public bool UseAllAvailableMulticastAddresses { get; set; }
-        public ScanMode ScanMode { get; set; }
+        public bool UseAutomaticScan  { get; set; }
         public List<YeeLightDeviceDefinition>? YeeLightDeviceDefinitions { get; set; }
 
         public static YeeLightDeviceProvider Instance => _instance ?? new YeeLightDeviceProvider();
@@ -39,7 +38,7 @@ namespace RGB.NET.Devices.YeeLight
             DeviceLocator.UseAllAvailableMulticastAddresses = UseAllAvailableMulticastAddresses;
             List<IRGBDevice> _IRGBDevices = new List<IRGBDevice>();
 
-            if (ScanMode == ScanMode.Automatic)
+            if (UseAutomaticScan)
             {
                 _discoveredYeeLightDevices = DeviceLocator.DiscoverAsync().GetAwaiter().GetResult().ToList();
 
@@ -89,7 +88,7 @@ namespace RGB.NET.Devices.YeeLight
                     _initializedDevices.Add(device);
                     _IRGBDevices.Add(new YeeLightRGBRGBDevice(new YeeLightRGBDeviceInfo(RGBDeviceType.LedStripe,
                         $"YeeLight {def.Model} ({device.Hostname})", device.Hostname),
-                        def.Mode == OperationModes.Music ? new YeeLightMusicModeUpdateQueue(GetUpdateTrigger(), device) : new YeeLightUpdateQueue(GetUpdateTrigger(), device)
+                        def.UseMusicMode ? new YeeLightMusicModeUpdateQueue(GetUpdateTrigger(), device) : new YeeLightUpdateQueue(GetUpdateTrigger(), device)
                         ));
                 });
             }

@@ -7,8 +7,8 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
     // ReSharper disable once InconsistentNaming
     public class YTMDesktopClient
     {
-        RestClient _client;
-        RestRequest _queryRootInfoRequest;
+        readonly RestClient _client;
+        readonly RestRequest _queryRootInfoRequest;
 
         RootInfo _rootInfo;
 
@@ -22,16 +22,8 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
 
         public void Update()
         {
-
-            try
-            {
-                var response = _client.Execute(_queryRootInfoRequest);
-                _rootInfo = JsonConvert.DeserializeObject<RootInfo>(response.Content);
-            }
-            catch
-            {
-                _rootInfo = null;
-            }
+            var response = _client.Execute(_queryRootInfoRequest);
+            _rootInfo = JsonConvert.DeserializeObject<RootInfo>(response.Content);
         }
     }
 
@@ -39,7 +31,7 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
     {
         public bool HasSong { get; set; }
         public bool IsPaused { get; set; }
-        public int VolumePercent { get; set; }
+        public float VolumePercent { get; set; }
         public int SeekbarCurrentPosition { get; set; }
         public string SeekbarCurrentPositionHuman { get; set; }
         public double StatePercent { get; set; }

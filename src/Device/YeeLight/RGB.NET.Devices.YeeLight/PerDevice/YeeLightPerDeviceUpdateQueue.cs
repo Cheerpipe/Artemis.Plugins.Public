@@ -4,7 +4,7 @@ using System.Timers;
 using RGB.NET.Core;
 using YeelightAPI;
 
-namespace RGB.NET.Devices.YeeLight.PerDevice
+namespace RGB.NET.Devices.YeeLight.Devices
 {
     public class YeeLightUpdateQueue : UpdateQueue
     {
@@ -44,7 +44,6 @@ namespace RGB.NET.Devices.YeeLight.PerDevice
             var g = color.GetG();
             var b = color.GetB();
             var l = (int)color.GetLabL();
-
 
             if (l == 0)
             {

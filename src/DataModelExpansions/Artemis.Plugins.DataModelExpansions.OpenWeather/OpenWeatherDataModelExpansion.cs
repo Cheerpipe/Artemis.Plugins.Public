@@ -10,14 +10,14 @@ using Serilog;
 
 namespace Artemis.Plugins.DataModelExpansions.OpenWeather
 {
-    public class OpenWeatherDataModelExpansion : Module<OpenWeatherDataModel>
+    public class OpenWeather : Module<OpenWeatherDataModel>
     {
         private readonly PluginSetting<string> _apiKeySetting;
         private readonly PluginSetting<string> _citySetting;
         private readonly PluginSetting<string> _unitOfMeasurementSetting;
         private readonly ILogger _logger;
 
-        public OpenWeatherDataModelExpansion(PluginSettings pluginSettings, ILogger logger)
+        public OpenWeather(PluginSettings pluginSettings, ILogger logger)
         {
             _logger = logger;
             _apiKeySetting = pluginSettings.GetSetting("ApiKey", string.Empty);

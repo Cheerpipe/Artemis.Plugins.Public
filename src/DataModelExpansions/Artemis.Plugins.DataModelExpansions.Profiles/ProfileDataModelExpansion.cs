@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace Artemis.Plugins.DataModelExpansions.Profiles
 {
-    public class ProfilesDataModelExpansion : Module<ProfilesDataModel>
+    public class Profiles : Module<ProfilesDataModel>
     {
         #region Properties
 
@@ -19,7 +19,7 @@ namespace Artemis.Plugins.DataModelExpansions.Profiles
 
         #region Constructor
 
-        public ProfilesDataModelExpansion(IProfileService profileService)
+        public Profiles(IProfileService profileService)
         {
             _profileService = profileService;
         }

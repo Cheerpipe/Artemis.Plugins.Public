@@ -7,7 +7,7 @@ using Artemis.Plugins.DataModelExpansions.Teams.TeamsPresence;
 namespace Artemis.Plugins.DataModelExpansions.Teams
 {
     [PluginFeature(Name = "Teams")]
-    public class TeamsDataModelExpansion : Module<TeamsDataModel>
+    public class Teams : Module<TeamsDataModel>
     {
         #region Variables declarations
 
@@ -18,7 +18,7 @@ namespace Artemis.Plugins.DataModelExpansions.Teams
 
         #region Constructor
 
-        public TeamsDataModelExpansion() { }
+        public Teams() { }
 
         public override List<IModuleActivationRequirement> ActivationRequirements => new() { new ProcessActivationRequirement("Teams") };
 

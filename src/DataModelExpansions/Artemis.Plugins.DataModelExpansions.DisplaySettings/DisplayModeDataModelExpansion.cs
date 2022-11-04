@@ -10,11 +10,11 @@ using System.Collections.Generic;
 
 namespace Artemis.Plugins.DataModelExpansions.DisplaySettings
 {
-    public class DisplayModeDataModelExpansion : Module<DisplaySettingsDataModel>
+    public class DisplayMode : Module<DisplaySettingsDataModel>
     {
         private readonly ILogger _logger;
 
-        public DisplayModeDataModelExpansion(ILogger logger)
+        public DisplayMode(ILogger logger)
         {
             _logger = logger;
         }

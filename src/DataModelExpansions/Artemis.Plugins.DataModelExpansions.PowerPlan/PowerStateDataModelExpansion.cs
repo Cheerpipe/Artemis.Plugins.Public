@@ -7,13 +7,13 @@ using Serilog;
 
 namespace Artemis.Plugins.DataModelExpansions.PowerPlan
 {
-    public class PowerPlanDataModelExpansion : Module<PowerPlanDataModel>
+    public class PowerPlan : Module<PowerPlanDataModel>
     {
 
         private readonly ILogger _logger;
         private readonly PowerPlanUtil _powerPlanUtil;
 
-        public PowerPlanDataModelExpansion(ILogger logger)
+        public PowerPlan(ILogger logger)
         {
             _logger = logger;
             _powerPlanUtil = new PowerPlanUtil();

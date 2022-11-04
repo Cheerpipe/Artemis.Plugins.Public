@@ -6,11 +6,11 @@ using RGB.NET.Devices.YeeLight.Generic;
 // ReSharper disable IdentifierTypo
 // ReSharper disable InconsistentNaming
 
-namespace RGB.NET.Devices.YeeLight.Devices
+namespace RGB.NET.Devices.YeeLight.PerDevice
 {
-    public class YeeLightDevice : YeeLightRGBDevice<YeeLightRGBDeviceInfo>, IUnknownDevice
+    public class YeeLightRGBRGBDevice : YeeLightRGBDevice<YeeLightRGBDeviceInfo>, IUnknownDevice
     {
-        internal YeeLightDevice(YeeLightRGBDeviceInfo info, IUpdateQueue updateQueue)
+        internal YeeLightRGBRGBDevice(YeeLightRGBDeviceInfo info, IUpdateQueue updateQueue)
             : base(info, updateQueue)
         {
             InitializeLayout();

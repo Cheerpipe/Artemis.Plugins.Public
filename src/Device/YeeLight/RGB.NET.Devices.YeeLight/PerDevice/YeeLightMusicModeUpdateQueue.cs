@@ -4,7 +4,7 @@ using System.Timers;
 using RGB.NET.Core;
 using YeelightAPI;
 
-namespace RGB.NET.Devices.YeeLight.Devices
+namespace RGB.NET.Devices.YeeLight.PerDevice
 {
     public class YeeLightMusicModeUpdateQueue : UpdateQueue
     {
@@ -23,11 +23,10 @@ namespace RGB.NET.Devices.YeeLight.Devices
 
         private void _light_OnError(object sender, UnhandledExceptionEventArgs e)
         {
-            StopLightStream();
-            StartLightStream();
+
         }
 
-        private void _connectTimer_Elapsed(object? sender, ElapsedEventArgs e)
+        private void _connectTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             if (!_light.IsConnected)
             {
@@ -51,33 +50,24 @@ namespace RGB.NET.Devices.YeeLight.Devices
             var L = (int)color.GetLabL();
             bool powerControlResult;
 
-            try
+            if (L == 0)
             {
-                // Turn off on black color
-                if (L == 0)
-                {
-                    powerControlResult = StopLightStream();
-                    return;
-                }
-                else
-                {
-                    powerControlResult = StartLightStream();
-                }
-                if (!powerControlResult)
-                    return;
+                powerControlResult = StopLightStream();
+                return;
+            }
+            else
+            {
+                powerControlResult = StartLightStream();
+            }
+            if (!powerControlResult)
+                return;
 
-                var R = color.GetR();
-                var G = color.GetG();
-                var B = color.GetB();
-                await _light.SetBrightness(L);
-                await _light.SetRGBColor(R, G, B);
-            }
-            catch 
-            {
-                // do nothing. 
-                // Avoid crash if light socket talking fails
-                _light.Disconnect();
-            }
+            var R = color.GetR();
+            var G = color.GetG();
+            var B = color.GetB();
+
+            await _light.SetBrightness(L);
+            await _light.SetRGBColor(R, G, B);
         }
 
         private void FixLowFrameRateWorkArround()
@@ -126,7 +116,7 @@ namespace RGB.NET.Devices.YeeLight.Devices
                         FixLowFrameRateWorkArround();
                     }
                 }
-                catch
+                catch (Exception E)
                 {
                     // do nothing.
                 }

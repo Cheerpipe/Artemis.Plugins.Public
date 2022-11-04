@@ -1,0 +1,13 @@
+{
+  "Guid": "c2f2d952-8b0c-4453-b9b9-6d781e378fe0",
+  "Api": "1.0",
+  "Name": "Teams",
+  "Author": "Cheerpipe",
+  "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",
+  "Icon": "Teams",
+  "Description": "Provides Microsoft steam status data",
+  "Version": "1.0.0.0",
+  "Main": "Artemis.Plugins.DataModelExpansions.Teams.dll",
+  "AutoEnableFeatures": true,
+  "Platforms": "Windows"
+}

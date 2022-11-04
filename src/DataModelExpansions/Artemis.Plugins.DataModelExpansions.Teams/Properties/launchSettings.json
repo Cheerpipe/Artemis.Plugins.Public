@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Launch Artemis": {
+      "commandName": "Executable",
+      "executablePath": ".\\Artemis.UI.Windows.exe",
+      "workingDirectory": "D:\\Repos\\Artemis\\src\\Artemis.UI.Windows\\bin"
+    }
+  }
+}

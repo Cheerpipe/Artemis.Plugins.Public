@@ -47,6 +47,12 @@ jobs:
           name: Artemis.Plugins.DataModelExpansions.DisplaySettings
           path: .\Plugins\src\DataModelExpansions\Artemis.Plugins.DataModelExpansions.DisplaySettings\bin\x64\Release\net6.0-windows\publish
 
+      - name: Upload Artemis.Plugins.DataModelExpansions.Teams
+        uses: actions/upload-artifact@v2
+        with:
+          name: Artemis.Plugins.DataModelExpansions.Teams
+          path: .\Plugins\src\DataModelExpansions\Artemis.Plugins.DataModelExpansions.Teams\bin\x64\Release\net6.0-windows\publish
+
       - name: Upload Artemis.Plugins.DataModelExpansions.OpenWeather
         uses: actions/upload-artifact@v2
         with:

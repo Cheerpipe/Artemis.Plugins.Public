@@ -16,7 +16,7 @@ using System.Collections.Generic;
 namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
 {
 
-    [PluginFeature(Name = "Youtube Music Desktop Player", Icon = "Play", AlwaysEnabled = true)]
+    [PluginFeature(Name = "Youtube Music Desktop Player", AlwaysEnabled = true)]
     public class YTMdesktopDataModelExpansion : Module<YTMdesktopDataModel>
     {
         #region Variables declarations
@@ -52,7 +52,7 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
 
         public override List<IModuleActivationRequirement> ActivationRequirements { get; } = new()
         {
-            new ProcessActivationRequirement("YouTube Music Desktop App")
+           // new ProcessActivationRequirement("YouTube Music Desktop App")
         };
 
         #endregion
@@ -65,7 +65,7 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
             _YTMDesktopClient = new YTMDesktopClient();
 
         }
-     
+
         private bool YoutubeIsRunning()
         {
             return _processMonitorService.GetRunningProcesses().Any(p => p.ProcessName == YTMD_PROCESS_NAME);
@@ -115,7 +115,7 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
 
                 if (_rootInfo != null)
                 {
-                   await UpdateInfo(_rootInfo);
+                    await UpdateInfo(_rootInfo);
                 }
                 else
                 {

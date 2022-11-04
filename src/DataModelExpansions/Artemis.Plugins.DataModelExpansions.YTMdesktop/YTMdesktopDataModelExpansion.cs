@@ -47,13 +47,8 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
                 Timeout = TimeSpan.FromSeconds(1)
             };
             _albumArtColorCache = new ConcurrentDictionary<string, ColorSwatch>();
-            UpdateDuringActivationOverride = false;
         }
-
-        public override List<IModuleActivationRequirement> ActivationRequirements { get; } = new()
-        {
-           // new ProcessActivationRequirement("YouTube Music Desktop App")
-        };
+        public override List<IModuleActivationRequirement> ActivationRequirements => new() { new ProcessActivationRequirement("YouTube Music Desktop App") };
 
         #endregion
 
@@ -63,7 +58,6 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
             AddTimedUpdate(TimeSpan.FromSeconds(1), UpdateData);
 
             _YTMDesktopClient = new YTMDesktopClient();
-
         }
 
         private bool YoutubeIsRunning()

@@ -1,6 +1,9 @@
-﻿using Artemis.Plugins.DataModelExpansions.Teams.Enums;
+﻿// Based on https://github.com/pathartl/TeamsPresence
+
+using Artemis.Plugins.DataModelExpansions.Teams.Enums;
 using Microsoft.Win32;
 using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
 
@@ -12,19 +15,25 @@ namespace Artemis.Plugins.DataModelExpansions.Teams.TeamsPresence
         public string AppName { get; set; }
     }
 
-    public class CameraDetectionService
+    public class CameraOwnerChangedEventArgs : EventArgs
     {
-        private const string SubKey = @"SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\webcam";
+        public string ProcessName { get; set; }
+    }
+
+    public class CameraStateReader
+    {
+        private const string SubKey = @"SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\webcam\NonPackaged";
         private const string AppNamePattern = @"_[\d|\w]{13}$";
 
         public event EventHandler<CameraStatusChangedEventArgs> StatusChanged;
+        public event EventHandler<CameraOwnerChangedEventArgs> CameraOwnerChanged;
 
         private int PollingRate;
         private string ActiveAppName = "";
 
         private bool Stopped = false;
 
-        public CameraDetectionService(int pollingRate)
+        public CameraStateReader(int pollingRate)
         {
             PollingRate = pollingRate;
         }
@@ -33,13 +42,11 @@ namespace Artemis.Plugins.DataModelExpansions.Teams.TeamsPresence
         {
             Thread thread = new Thread(new ThreadStart(ThreadedWork));
             thread.IsBackground = true;
-            thread.Name = "My Worker.";
             thread.Start();
         }
 
         private void ThreadedWork()
         {
-
             Stopped = false;
             var appNameRegex = new Regex(AppNamePattern);
 
@@ -53,6 +60,12 @@ namespace Artemis.Plugins.DataModelExpansions.Teams.TeamsPresence
                 if (activeCameraApp != ActiveAppName)
                 {
                     ActiveAppName = activeCameraApp;
+
+                    CameraOwnerChanged?.Invoke(this, new CameraOwnerChangedEventArgs()
+                    {
+                        ProcessName = System.IO.Path.GetFileNameWithoutExtension(ActiveAppName.Split('#').Last())
+
+                    }); ;
 
                     StatusChanged?.Invoke(this, new CameraStatusChangedEventArgs()
                     {

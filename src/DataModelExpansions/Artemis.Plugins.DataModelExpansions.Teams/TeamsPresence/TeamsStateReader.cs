@@ -1,4 +1,6 @@
-﻿using Artemis.Plugins.DataModelExpansions.Teams.Enums;
+﻿// Based on https://github.com/pathartl/TeamsPresence
+
+using Artemis.Plugins.DataModelExpansions.Teams.Enums;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -8,7 +10,7 @@ using System.Threading;
 
 namespace Artemis.Plugins.DataModelExpansions.Teams.TeamsPresence
 {
-    public class TeamsLogService
+    public class TeamsStateReader
     {
         public event EventHandler<TeamsStatus> StatusChanged;
         public event EventHandler<TeamsActivity> ActivityChanged;
@@ -21,13 +23,13 @@ namespace Artemis.Plugins.DataModelExpansions.Teams.TeamsPresence
         private Stopwatch Stopwatch { get; set; }
         private string LogPath { get; set; }
 
-        public TeamsLogService()
+        public TeamsStateReader()
         {
             LogPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Microsoft", "Teams");
             Stopwatch = new Stopwatch();
         }
 
-        public TeamsLogService(string logPath)
+        public TeamsStateReader(string logPath)
         {
             LogPath = logPath;
             Stopwatch = new Stopwatch();
@@ -37,7 +39,6 @@ namespace Artemis.Plugins.DataModelExpansions.Teams.TeamsPresence
         {
             Thread thread = new Thread(new ThreadStart(ThreadedWork));
             thread.IsBackground = true;
-            thread.Name = "My Worker.";
             thread.Start();
         }
 

@@ -1,5 +1,3 @@
-using Serilog;
-using System.Threading.Tasks;
 using Artemis.Core.Modules;
 using Artemis.Core;
 using System.Collections.Generic;
@@ -8,44 +6,40 @@ using Artemis.Plugins.DataModelExpansions.Teams.TeamsPresence;
 
 namespace Artemis.Plugins.DataModelExpansions.Teams
 {
-
-    [PluginFeature(Name = "Teams", AlwaysEnabled = true)]
+    [PluginFeature(Name = "Teams")]
     public class TeamsDataModelExpansion : Module<TeamsDataModel>
     {
         #region Variables declarations
 
-        private readonly ILogger _logger;
-        private static TeamsLogService TeamsLogService;
-        private static CameraDetectionService CameraDetectionService;
+        private static TeamsStateReader _teamsStateReader;
+        private static CameraStateReader _cameraStateReader;
 
         #endregion
 
         #region Constructor
 
-        public TeamsDataModelExpansion(ILogger logger)
-        {
-            _logger = logger;
-        }
+        public TeamsDataModelExpansion() { }
 
-        public override List<IModuleActivationRequirement> ActivationRequirements { get; } = new()
-        {
-            // new ProcessActivationRequirement("Teams PROCESS NAME")
-        };
+        public override List<IModuleActivationRequirement> ActivationRequirements => new() { new ProcessActivationRequirement("Teams") };
 
         #endregion
 
         #region Plugin Methods
         public override void Enable()
         {
-            //AddTimedUpdate(TimeSpan.FromSeconds(1), UpdateData);
+            _teamsStateReader = new TeamsStateReader();
+            _teamsStateReader.StatusChanged += TeamsLogService_StatusChanged;
+            _teamsStateReader.ActivityChanged += TeamsLogService_ActivityChanged;
+            _teamsStateReader.Start();
+            _cameraStateReader = new CameraStateReader(1000);
+            _cameraStateReader.StatusChanged += CameraDetectionService_StatusChanged;
+            _cameraStateReader.CameraOwnerChanged += _cameraStateReader_CameraOwnerChanged;
+            _cameraStateReader.Start();
+        }
 
-            TeamsLogService = new TeamsLogService();
-            TeamsLogService.StatusChanged += TeamsLogService_StatusChanged;
-            TeamsLogService.ActivityChanged += TeamsLogService_ActivityChanged;
-            TeamsLogService.Start();
-            CameraDetectionService = new CameraDetectionService(1000);
-            CameraDetectionService.StatusChanged += CameraDetectionService_StatusChanged;
-            CameraDetectionService.Start();
+        private void _cameraStateReader_CameraOwnerChanged(object sender, CameraOwnerChangedEventArgs e)
+        {
+            DataModel.CameraProcessOwner = e.ProcessName;
         }
 
         private void CameraDetectionService_StatusChanged(object sender, CameraStatusChangedEventArgs e)
@@ -65,10 +59,10 @@ namespace Artemis.Plugins.DataModelExpansions.Teams
 
         public override void Disable()
         {
-            TeamsLogService.Stop();
-            TeamsLogService = null;
-            CameraDetectionService.Stop();
-            CameraDetectionService = null;
+            _teamsStateReader.Stop();
+            _teamsStateReader = null;
+            _cameraStateReader.Stop();
+            _cameraStateReader = null;
         }
 
         public override void Update(double deltaTime)
@@ -76,14 +70,5 @@ namespace Artemis.Plugins.DataModelExpansions.Teams
         }
         #endregion
 
-        #region DataModel update methods
-
-        private async Task UpdateData(double deltaTime)
-        {
-
-        }
-
-
-        #endregion
     }
 }

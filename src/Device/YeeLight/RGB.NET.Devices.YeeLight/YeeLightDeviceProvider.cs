@@ -60,7 +60,7 @@ namespace RGB.NET.Devices.YeeLight
                     if (add)
                     {
                         _initializedDevices.Add(device);
-                        _IRGBDevices.Add(new YeeLightRGBRGBDevice(new YeeLightRGBDeviceInfo(RGBDeviceType.LedStripe,
+                        _IRGBDevices.Add(new YeeLightDevice(new YeeLightRGBDeviceInfo(RGBDeviceType.LedStripe,
                             $"YeeLight {device.Model} ({device.Hostname})", device.Hostname), new YeeLightUpdateQueue(GetUpdateTrigger(), device)));
                     }
 
@@ -86,7 +86,7 @@ namespace RGB.NET.Devices.YeeLight
                         // LOG
                     }
                     _initializedDevices.Add(device);
-                    _IRGBDevices.Add(new YeeLightRGBRGBDevice(new YeeLightRGBDeviceInfo(RGBDeviceType.LedStripe,
+                    _IRGBDevices.Add(new YeeLightDevice(new YeeLightRGBDeviceInfo(RGBDeviceType.LedStripe,
                         $"YeeLight {def.Model} ({device.Hostname})", device.Hostname),
                         def.UseMusicMode ? new YeeLightMusicModeUpdateQueue(GetUpdateTrigger(), device) : new YeeLightUpdateQueue(GetUpdateTrigger(), device)
                         ));

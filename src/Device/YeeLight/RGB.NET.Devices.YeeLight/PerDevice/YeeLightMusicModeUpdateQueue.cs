@@ -23,7 +23,8 @@ namespace RGB.NET.Devices.YeeLight.PerDevice
 
         private void _light_OnError(object sender, UnhandledExceptionEventArgs e)
         {
-
+            StopLightStream();
+            StartLightStream();
         }
 
         private void _connectTimer_Elapsed(object sender, ElapsedEventArgs e)
@@ -50,24 +51,31 @@ namespace RGB.NET.Devices.YeeLight.PerDevice
             var L = (int)color.GetLabL();
             bool powerControlResult;
 
-            if (L == 0)
+            try
             {
-                powerControlResult = StopLightStream();
-                return;
+                if (L == 0)
+                {
+                    powerControlResult = StopLightStream();
+                    return;
+                }
+                else
+                {
+                    powerControlResult = StartLightStream();
+                }
+                if (!powerControlResult)
+                    return;
+
+                var R = color.GetR();
+                var G = color.GetG();
+                var B = color.GetB();
+
+                await _light.SetBrightness(L);
+                await _light.SetRGBColor(R, G, B);
             }
-            else
+            catch
             {
-                powerControlResult = StartLightStream();
+                _light.Disconnect();
             }
-            if (!powerControlResult)
-                return;
-
-            var R = color.GetR();
-            var G = color.GetG();
-            var B = color.GetB();
-
-            await _light.SetBrightness(L);
-            await _light.SetRGBColor(R, G, B);
         }
 
         private void FixLowFrameRateWorkArround()

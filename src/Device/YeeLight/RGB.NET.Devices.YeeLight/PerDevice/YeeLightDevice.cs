@@ -8,9 +8,9 @@ using RGB.NET.Devices.YeeLight.Generic;
 
 namespace RGB.NET.Devices.YeeLight.PerDevice
 {
-    public class YeeLightRGBRGBDevice : YeeLightRGBDevice<YeeLightRGBDeviceInfo>, IUnknownDevice
+    public class YeeLightDevice : YeeLightRGBDevice<YeeLightRGBDeviceInfo>, IUnknownDevice
     {
-        internal YeeLightRGBRGBDevice(YeeLightRGBDeviceInfo info, IUpdateQueue updateQueue)
+        internal YeeLightDevice(YeeLightRGBDeviceInfo info, IUpdateQueue updateQueue)
             : base(info, updateQueue)
         {
             InitializeLayout();

@@ -39,7 +39,7 @@ namespace Artemis.Plugins.DataModelExpansions.Teams
 
         private void _cameraStateReader_CameraOwnerChanged(object sender, CameraOwnerChangedEventArgs e)
         {
-            DataModel.CameraProcessOwner = e.ProcessName;
+            DataModel.CameraProcessOwner = string.IsNullOrEmpty(e.ProcessName) ? "None" : e.ProcessName;
         }
 
         private void CameraDetectionService_StatusChanged(object sender, CameraStatusChangedEventArgs e)

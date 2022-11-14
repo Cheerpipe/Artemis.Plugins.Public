@@ -8,6 +8,6 @@ namespace Artemis.Plugins.DataModelExpansions.Teams.DataModels
         public TeamsStatus TeamsStatus { get; set; }
         public TeamsActivity TeamsActivity { get; set; }
         public CameraStatus CameraStatus { get; set; }
-        public string CameraProcessOwner { get; set; }
+        public string CameraProcessOwner { get; set; } = "None";
     }
 }

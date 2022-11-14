@@ -74,7 +74,7 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
 
         public override void Update(double deltaTime)
         {
-            if (DataModel.Player.IsPaused)
+            if (DataModel.Player.State != State.Closed)
                 return;
 
             if (DataModel.Track.Duration == 0)
@@ -99,6 +99,7 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
             {
                 // Don't query server if YTMD proccess is down.
                 DataModel.Empty();
+
                 return;
             }
             try
@@ -156,9 +157,15 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
 
         private void UpdatePlayerInfo(PlayerInfo player)
         {
-            DataModel.Player.IsRunning = true;
-            DataModel.Player.HasSong = player.HasSong;
-            DataModel.Player.IsPaused = player.IsPaused;
+            if (player.HasSong && !player.IsPaused)
+                DataModel.Player.State = State.Playing;
+            else if (player.HasSong && player.IsPaused)
+                DataModel.Player.State = State.Paused;
+            else if (!player.HasSong)
+                DataModel.Player.State = State.Stopped;
+            else
+                DataModel.Player.State = State.Closed;
+
             DataModel.Player.VolumePercent = player.VolumePercent;
             DataModel.Player.SeekbarCurrentPosition = player.SeekbarCurrentPosition;
             DataModel.Player.SeekbarCurrentPositionHuman = TimeSpan.FromSeconds(player.SeekbarCurrentPosition);

@@ -19,9 +19,7 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop.DataModels
 
     public class YTMdesktopPlayerDataModel : DataModel
     {
-        public bool IsRunning { get; set; }
-        public bool HasSong { get; set; }
-        public bool IsPaused { get; set; }
+        public State State { get; set; } = State.Closed;
         public float VolumePercent { get; set; }
         public double SeekbarCurrentPosition { get; set; }
         public TimeSpan SeekbarCurrentPositionHuman { get; set; }
@@ -31,15 +29,13 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop.DataModels
 
         public void Empty()
         {
-            IsRunning = false;
-            HasSong = false;
-            IsPaused = true;
             VolumePercent = 0;
             SeekbarCurrentPosition = 0;
             SeekbarCurrentPositionHuman = TimeSpan.Zero;
             StatePercent = 0;
             LikeStatus = string.Empty;
             RepeatType = RepeatState.None;
+            State = State.Closed;
         }
     }
 
@@ -75,7 +71,7 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop.DataModels
         }
     }
 
-       public enum Mode
+    public enum Mode
     {
         Minor = 0,
         Major = 1
@@ -86,5 +82,13 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop.DataModels
         None,
         All,
         One
+    }
+
+    public enum State
+    {
+        Closed,
+        Stopped,
+        Paused,
+        Playing
     }
 }

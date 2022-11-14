@@ -57,8 +57,8 @@ namespace Artemis.Plugins.LayerBrushes.Ripples.LayerBrush
                     (
                         Position,
                         _brush.Properties.RippleWidth,
-                        _brush.Properties.Colors.BaseValue.GetColorsArray(),
-                        _brush.Properties.Colors.BaseValue.GetPositionsArray(),
+                        _brush.Properties.Colors.BaseValue.Colors,
+                        _brush.Properties.Colors.BaseValue.Positions,
                         SKShaderTileMode.Repeat
                     );
             }

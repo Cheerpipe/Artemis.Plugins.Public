@@ -293,8 +293,8 @@ namespace Artemis.Plugins.LayerBrushes.Nexus.LayerBrush
                                     new SKPoint(rect.Left, inverted ? rect.Top : rect.Bottom),
 
                                     // Get from gradient
-                                    colors.GetColorsArray(),
-                                    colors.GetPositionsArray(),
+                                    colors.Colors,
+                                    colors.Positions,
                                     SKShaderTileMode.Clamp
                                 );
         }
@@ -307,8 +307,8 @@ namespace Artemis.Plugins.LayerBrushes.Nexus.LayerBrush
                                     new SKPoint(inverted ? rect.Left : rect.Right, rect.Top),
 
                                     // Get from gradient
-                                    colors.GetColorsArray(),
-                                    colors.GetPositionsArray(),
+                                    colors.Colors,
+                                    colors.Positions,
                                     SKShaderTileMode.Clamp
                                 );
         }

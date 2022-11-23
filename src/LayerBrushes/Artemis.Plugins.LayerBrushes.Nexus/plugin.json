@@ -4,7 +4,7 @@
   "Name": "Nexus",
   "Author": "Cheerpipe",
   "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",
-  "Icon": "Nexus.svg",
+  "Icon": "nexus.png",
   "Description": "Provides a Google Nexus Wallpaper like animation effects than can be customized to create new effects like Matrix Rain.",
   "Version": "1.0.0.0",
   "Main": "Artemis.Plugins.LayerBrushes.Nexus.dll",

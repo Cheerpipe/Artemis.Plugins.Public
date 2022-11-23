@@ -4,7 +4,7 @@
   "Name": "DrippingPaint",
   "Author": "Cheerpipe",
   "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",
-  "Icon": "DrippingPaint.svg",
+  "Icon": "drippingpaint.png",
   "Description": "Provides a wall dripping effect.",
   "Version": "1.0.0.0",
   "Main": "Artemis.Plugins.LayerBrushes.DrippingPaint.dll",

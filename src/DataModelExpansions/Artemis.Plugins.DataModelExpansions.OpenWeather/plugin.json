@@ -4,7 +4,7 @@
   "Name": "OpenWeather Data Model",
   "Author": "Cheerpipe",
   "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",
-  "Icon": "WeatherPouring",
+  "Icon": "openweather.png",
   "Description": "Provides information regarding weather using Open Weather free API. Must have a valid API Key in order use this plugin.",
   "Version": "1.0.0.0",
   "Main": "Artemis.Plugins.DataModelExpansions.OpenWeather.dll",

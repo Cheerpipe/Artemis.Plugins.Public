@@ -4,7 +4,7 @@
   "Name": "Teams",
   "Author": "Cheerpipe",
   "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",
-  "Icon": "Teams",
+  "Icon": "teams.png",
   "Description": "Provides Microsoft steam status data",
   "Version": "1.0.0.0",
   "Main": "Artemis.Plugins.DataModelExpansions.Teams.dll",

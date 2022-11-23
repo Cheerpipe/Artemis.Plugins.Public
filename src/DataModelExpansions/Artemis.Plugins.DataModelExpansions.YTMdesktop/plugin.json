@@ -4,7 +4,7 @@
   "Name": "YTMdesktop",
   "Author": "Cheerpipe",
   "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",
-  "Icon": "play",
+  "Icon": "ytmdesktop.png",
   "Description": "Provides track and player data about your current YTMdesktop listening session. Based on https://github.com/diogotr7/Artemis.Plugins Spotify Plugin. All credits to him, i just changed de track info source",
   "Version": "1.0.0.0",
   "Main": "Artemis.Plugins.DataModelExpansions.YTMdesktop.dll",

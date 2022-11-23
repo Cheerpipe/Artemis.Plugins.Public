@@ -47,8 +47,10 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
             };
             _albumArtColorCache = new ConcurrentDictionary<string, ColorSwatch>();
         }
-        public override List<IModuleActivationRequirement> ActivationRequirements => new() { new ProcessActivationRequirement("YouTube Music Desktop App") };
 
+        // Allow Datamodel availabable to all profiles
+        //public override List<IModuleActivationRequirement> ActivationRequirements => new() { new ProcessActivationRequirement("YouTube Music Desktop App") };
+        public override List<IModuleActivationRequirement> ActivationRequirements => null;
         #endregion
 
         #region Plugin Methods

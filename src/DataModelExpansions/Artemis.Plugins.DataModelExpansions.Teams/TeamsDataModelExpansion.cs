@@ -3,6 +3,8 @@ using Artemis.Core;
 using System.Collections.Generic;
 using Artemis.Plugins.DataModelExpansions.Teams.DataModels;
 using Artemis.Plugins.DataModelExpansions.Teams.TeamsPresence;
+using Artemis.Core.Services;
+using System.Linq;
 
 namespace Artemis.Plugins.DataModelExpansions.Teams
 {
@@ -11,16 +13,24 @@ namespace Artemis.Plugins.DataModelExpansions.Teams
     {
         #region Variables declarations
 
+        private readonly IProcessMonitorService _processMonitorService;
         private static TeamsStateReader _teamsStateReader;
         private static CameraStateReader _cameraStateReader;
+        private const string TEAMS_PROCESS_NAME = "Teams";
 
         #endregion
 
         #region Constructor
 
-        public Teams() { }
+        public Teams(IProcessMonitorService processMonitorService)
+        {
+            _processMonitorService = processMonitorService;
+        }
 
-        public override List<IModuleActivationRequirement> ActivationRequirements => new() { new ProcessActivationRequirement("Teams") };
+        // Allow Datamodel availabable to all profiles
+        //public override List<IModuleActivationRequirement> ActivationRequirements => new() { new ProcessActivationRequirement("Teams") };
+
+        public override List<IModuleActivationRequirement> ActivationRequirements => null;
 
         #endregion
 
@@ -37,6 +47,11 @@ namespace Artemis.Plugins.DataModelExpansions.Teams
             _cameraStateReader.Start();
         }
 
+        private bool TeamsIsRunning()
+        {
+            return _processMonitorService.GetRunningProcesses().Any(p => p.ProcessName == TEAMS_PROCESS_NAME);
+        }
+
         private void _cameraStateReader_CameraOwnerChanged(object sender, CameraOwnerChangedEventArgs e)
         {
             DataModel.CameraProcessOwner = string.IsNullOrEmpty(e.ProcessName) ? "None" : e.ProcessName;
@@ -49,12 +64,24 @@ namespace Artemis.Plugins.DataModelExpansions.Teams
 
         private void TeamsLogService_ActivityChanged(object sender, Enums.TeamsActivity e)
         {
-            DataModel.TeamsActivity = e;
+            if (TeamsIsRunning())
+                DataModel.TeamsActivity = e;
+            else
+            {
+                DataModel.TeamsStatus = Enums.TeamsStatus.NotRunning;
+                DataModel.TeamsActivity = Enums.TeamsActivity.NotRunning;
+            }
         }
 
         private void TeamsLogService_StatusChanged(object sender, Enums.TeamsStatus e)
         {
-            DataModel.TeamsStatus = e;
+            if (TeamsIsRunning())
+                DataModel.TeamsStatus = e;
+            else
+            {
+                DataModel.TeamsStatus = Enums.TeamsStatus.NotRunning;
+                DataModel.TeamsActivity = Enums.TeamsActivity.NotRunning;
+            }
         }
 
         public override void Disable()
@@ -65,9 +92,8 @@ namespace Artemis.Plugins.DataModelExpansions.Teams
             _cameraStateReader = null;
         }
 
-        public override void Update(double deltaTime)
-        {
-        }
+        public override void Update(double deltaTime) { }
+
         #endregion
 
     }

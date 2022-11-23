@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Artemis.Plugins.DataModelExpansions.Teams.Enums
+﻿namespace Artemis.Plugins.DataModelExpansions.Teams.Enums
 {
     public enum TeamsStatus
     {
@@ -18,6 +12,7 @@ namespace Artemis.Plugins.DataModelExpansions.Teams.Enums
         Presenting,
         Focusing,
         InAMeeting,
-        Offline
+        Offline,
+        NotRunning
     }
 }

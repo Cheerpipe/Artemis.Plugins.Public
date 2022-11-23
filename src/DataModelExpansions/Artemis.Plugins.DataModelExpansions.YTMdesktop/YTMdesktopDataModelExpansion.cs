@@ -11,6 +11,7 @@ using System.Linq;
 using Artemis.Core.Modules;
 using Artemis.Core;
 using System.Collections.Generic;
+using Artemis.Core.ColorScience;
 // ReSharper disable InconsistentNaming
 
 namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
@@ -22,7 +23,6 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
         #region Variables declarations
 
         private readonly ILogger _logger;
-        private readonly IColorQuantizerService _colorQuantizer;
         private readonly IProcessMonitorService _processMonitorService;
         private readonly HttpClient _httpClient;
         private readonly ConcurrentDictionary<string, ColorSwatch> _albumArtColorCache;
@@ -36,11 +36,10 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
 
         #region Constructor
 
-        public YTMdesktopDataModelExpansion(ILogger logger, IColorQuantizerService colorQuantizer, IProcessMonitorService processMonitorService)
+        public YTMdesktopDataModelExpansion(ILogger logger, IProcessMonitorService processMonitorService)
         {
             _processMonitorService = processMonitorService;
             _logger = logger;
-            _colorQuantizer = colorQuantizer;
 
             _httpClient = new HttpClient
             {
@@ -182,8 +181,8 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
                 {
                     using Stream stream = await _httpClient.GetStreamAsync(albumArtUrl);
                     using SKBitmap skbm = SKBitmap.Decode(stream);
-                    SKColor[] skClrs = _colorQuantizer.Quantize(skbm.Pixels, 256);
-                    _albumArtColorCache[albumArtUrl] = _colorQuantizer.FindAllColorVariations(skClrs, true);
+                    SKColor[] skClrs = ColorQuantizer.Quantize(skbm.Pixels, 256);
+                    _albumArtColorCache[albumArtUrl] = ColorQuantizer.FindAllColorVariations(skClrs, true);
                 }
                 catch (Exception e)
                 {

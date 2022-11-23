@@ -147,3 +147,9 @@ jobs:
         with:
           name: Artemis.Plugins.LayerBrushes.ConnectingDots
           path: .\Plugins\src\LayerBrushes\Artemis.Plugins.LayerBrushes.ConnectingDots\bin\x64\Release\net6.0\publish
+
+      - name: Artemis.Plugins.LayerBrushes.ConnectingDots
+        uses: actions/upload-artifact@v2
+        with:
+          name: Artemis.Plugins.Nodes.Extra
+          path: .\Plugins\src\Nodes\Artemis.Plugins.Nodes.Extra\bin\x64\Release\net6.0\publish

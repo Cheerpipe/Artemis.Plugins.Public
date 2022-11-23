@@ -62,6 +62,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.ExtendedWeb
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.DataModelExpansions.Teams", "DataModelExpansions\Artemis.Plugins.DataModelExpansions.Teams\Artemis.Plugins.DataModelExpansions.Teams.csproj", "{CA3D6647-BF98-42A6-B0E2-111EFF26CA66}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nodes", "Nodes", "{4F01E7F6-6136-487B-92AC-98C3E57C81A9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artemis.Plugins.Nodes.Extra", "Nodes\Artemis.Plugins.Nodes.Extra\Artemis.Plugins.Nodes.Extra.csproj", "{14F0F6FE-C5BE-47F9-9F67-062D677D456F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -222,6 +226,14 @@ Global
 		{CA3D6647-BF98-42A6-B0E2-111EFF26CA66}.Release|Any CPU.Build.0 = Release|x64
 		{CA3D6647-BF98-42A6-B0E2-111EFF26CA66}.Release|x64.ActiveCfg = Release|x64
 		{CA3D6647-BF98-42A6-B0E2-111EFF26CA66}.Release|x64.Build.0 = Release|x64
+		{14F0F6FE-C5BE-47F9-9F67-062D677D456F}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{14F0F6FE-C5BE-47F9-9F67-062D677D456F}.Debug|Any CPU.Build.0 = Debug|x64
+		{14F0F6FE-C5BE-47F9-9F67-062D677D456F}.Debug|x64.ActiveCfg = Debug|x64
+		{14F0F6FE-C5BE-47F9-9F67-062D677D456F}.Debug|x64.Build.0 = Debug|x64
+		{14F0F6FE-C5BE-47F9-9F67-062D677D456F}.Release|Any CPU.ActiveCfg = Release|x64
+		{14F0F6FE-C5BE-47F9-9F67-062D677D456F}.Release|Any CPU.Build.0 = Release|x64
+		{14F0F6FE-C5BE-47F9-9F67-062D677D456F}.Release|x64.ActiveCfg = Release|x64
+		{14F0F6FE-C5BE-47F9-9F67-062D677D456F}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -248,6 +260,7 @@ Global
 		{209EC808-1791-4DD5-B869-496B156DDF47} = {0F036E0A-8F42-4105-BA27-BB2F6EE213A8}
 		{727EB962-73FB-4F05-AA68-35A13077C6D3} = {494FD6B9-10FE-41F9-B349-E7CC44C0078D}
 		{CA3D6647-BF98-42A6-B0E2-111EFF26CA66} = {0F036E0A-8F42-4105-BA27-BB2F6EE213A8}
+		{14F0F6FE-C5BE-47F9-9F67-062D677D456F} = {4F01E7F6-6136-487B-92AC-98C3E57C81A9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {11371D22-FDA3-41EA-8116-69E48DD68579}

@@ -17,6 +17,7 @@ jobs:
         with:
           repository: Artemis-RGB/Artemis
           path: Artemis
+          ref: 'developement'
           
       - name: Build Artemis Core
         run: dotnet build .\Artemis\src\Artemis.Core\Artemis.Core.csproj

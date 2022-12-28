@@ -1,4 +1,5 @@
 ﻿using Artemis.Core;
+using System.Linq;
 
 namespace Artemis.Plugins.Nodes.Extra.MathNodes;
 
@@ -17,7 +18,7 @@ public class MultiplyNode : Node
     public MultiplyNode()
     {
         Values = CreateInputPinCollection<Numeric>("Values", 2);
-        Multiply = CreateOutputPin<Numeric>("Multiply");
+        Multiply = CreateOutputPin<Numeric>("Output");
     }
 
     #endregion
@@ -27,8 +28,11 @@ public class MultiplyNode : Node
     /// <inheritdoc />
     public override void Evaluate()
     {
+        Multiply.Value = Values.Values.Count() > 0 ? 1 : 0;
         foreach (var value in Values.Values)
-            Multiply.Value*=(float)value;
+        {
+            Multiply.Value *= (float)value;
+        }
     }
 
     #endregion

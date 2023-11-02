@@ -58,7 +58,7 @@
 
 	<ItemGroup>
 	  <PackageReference Include="Hid.Net" Version="4.2.1" />
-	  <PackageReference Include="RGB.NET.Core" Version="1.0.0-prerelease.58" />
+	  <PackageReference Include="RGB.NET.Core" Version="2.0.0-prerelease.125" />
 	  <PackageReference Include="Usb.Net" Version="4.2.1" />
 	</ItemGroup>
 </Project>

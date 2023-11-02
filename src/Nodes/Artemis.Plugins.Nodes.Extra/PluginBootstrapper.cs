@@ -8,7 +8,7 @@ namespace Artemis.Plugins.Nodes.MathExtra
     {
         public override void OnPluginEnabled(Plugin plugin)
         {
-            INodeService _nodeService = plugin.Get<INodeService>();
+            INodeService _nodeService = plugin.Resolve<INodeService>();
             _nodeService.RegisterNodeType(plugin, typeof(DivideNumericsNode));
             _nodeService.RegisterNodeType(plugin, typeof(FullLerpNode));
             _nodeService.RegisterNodeType(plugin, typeof(MultiplyNode));

@@ -6,28 +6,13 @@
 		<ProduceReferenceAssembly>false</ProduceReferenceAssembly>
 	</PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="SkiaSharp" Version="2.88.1-preview.1" />
-
-		<!--All packages Artemis already references are compile-only dependencies-->
-		<PackageReference Update="@(PackageReference)" IncludeAssets="compile;build" />
-	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="ArtemisRGB.UI.Shared" IncludeAssets="compile;build;buildTransitive" Version="1.2023.203.1" />
+  </ItemGroup>
 
 	<ItemGroup>
-		<Reference Include="Artemis.Core">
-			<HintPath>..\..\..\..\Artemis\src\Artemis.Core\bin\net6.0\Artemis.Core.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-	</ItemGroup>
-
-	<ItemGroup>
+		<Content Include="ConnectingDots.png" CopyToOutputDirectory="PreserveNewest" />
 		<Content Include="plugin.json" CopyToOutputDirectory="PreserveNewest" />
 		<PackageReference Include="ArtemisRGB.Plugins.BuildTask" Version="1.1.0" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Update="ConnectingDots.png">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
 	</ItemGroup>
 </Project>

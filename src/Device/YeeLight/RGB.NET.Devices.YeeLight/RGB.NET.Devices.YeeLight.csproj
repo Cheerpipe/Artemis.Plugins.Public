@@ -54,7 +54,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="RGB.NET.Core" Version="1.0.0-prerelease.58" />
+    <PackageReference Include="RGB.NET.Core" Version="2.0.0-prerelease.125" />
     <PackageReference Include="YeelightAPI" Version="1.10.2" />
   </ItemGroup>
 </Project>

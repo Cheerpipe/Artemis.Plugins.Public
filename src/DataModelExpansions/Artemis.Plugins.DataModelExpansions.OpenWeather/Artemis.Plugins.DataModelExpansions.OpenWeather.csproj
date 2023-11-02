@@ -6,55 +6,19 @@
 		<ProduceReferenceAssembly>false</ProduceReferenceAssembly>
 	</PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Avalonia" Version="0.10.15" />
-		<PackageReference Include="Avalonia.ReactiveUI" Version="0.10.15" />
-		<PackageReference Include="FluentAvaloniaUI" Version="1.4.1" />
-		<PackageReference Include="Material.Icons.Avalonia" Version="1.0.2" />
-		<PackageReference Include="ReactiveUI" Version="17.1.50" />
-		<PackageReference Include="ReactiveUI.Validation" Version="2.2.1" />
-		<PackageReference Include="Serilog" Version="2.11.0" PrivateAssets="All" />
-
-		<!--All packages Artemis already references are compile-only dependencies-->
-		<PackageReference Update="@(PackageReference)" IncludeAssets="compile;build" />
-	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="ArtemisRGB.UI.Shared" IncludeAssets="compile;build;buildTransitive" Version="1.2023.203.1" />
+  </ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageReference Include="RestSharp" Version="106.12.0" />
 		<PackageReference Include="Awesomio.Weather" Version="1.1.1" />
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageReference Include="Microsoft.Win32.SystemEvents" Version="6.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Reference Include="Artemis.Core">
-			<HintPath>..\..\..\..\Artemis\src\Artemis.Core\bin\net6.0\Artemis.Core.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-		<Reference Include="Artemis.UI.Shared">
-			<HintPath>..\..\..\..\Artemis\src\Artemis.UI.Shared\bin\net6.0\Artemis.UI.Shared.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-	</ItemGroup>
-
-	<ItemGroup>
 		<Content Include="plugin.json" CopyToOutputDirectory="PreserveNewest" />
+		<Content Include="openweather.png" CopyToOutputDirectory="PreserveNewest" />
 		<PackageReference Include="ArtemisRGB.Plugins.BuildTask" Version="1.1.0" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Compile Update="Views\OpenWeatherPluginConfigurationView.axaml.cs">
-	    <DependentUpon>OpenWeatherPluginConfigurationView.axaml</DependentUpon>
-	  </Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-		<None Update="ConnectingDots.png">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="openweather.png">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
 	</ItemGroup>
 </Project>

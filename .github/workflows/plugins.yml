@@ -12,22 +12,6 @@ jobs:
         with:
           dotnet-version: '7.0.x'
 
-      - name: Clone Artemis
-        uses: actions/checkout@v3
-        with:
-          repository: Artemis-RGB/Artemis
-          ref: development
-          path: Artemis
-
-      - name: Build Artemis Core
-        run: dotnet build .\Artemis\src\Artemis.Core\Artemis.Core.csproj
-        
-      - name: Build Artemis UI Shared
-        run: dotnet build .\Artemis\src\Artemis.UI.Shared\Artemis.UI.Shared.csproj
-
-      - name: Build Artemis UI Shared
-        run: dotnet build .\Artemis\src\Artemis.UI\Artemis.UI.csproj
-
       - name: Clone Plugins
         uses: actions/checkout@v2
         with:

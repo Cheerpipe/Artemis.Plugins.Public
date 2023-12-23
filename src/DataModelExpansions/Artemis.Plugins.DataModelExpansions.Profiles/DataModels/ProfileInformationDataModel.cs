@@ -11,7 +11,6 @@ namespace Artemis.Plugins.DataModelExpansions.Profiles.DataModels
         public int Order { get; set; }
         public bool IsActive { get; set; }
         public bool IsSuspended { get; set; }
-        public bool IsBeingEdited { get; set; }
         public bool IsMissingModule { get; set; }
         public bool HasActivationCondition { get; set; }
         public bool ActivationConditionMet { get; set; }
@@ -23,7 +22,6 @@ namespace Artemis.Plugins.DataModelExpansions.Profiles.DataModels
             Order = profileConfiguration.Order;
             IsActive = profileConfiguration.Profile != null;
             IsSuspended = profileConfiguration.IsSuspended;
-            IsBeingEdited = profileConfiguration.IsBeingEdited;
             IsMissingModule = profileConfiguration.IsMissingModule;
             HasActivationCondition = profileConfiguration.ActivationCondition != null;
             ActivationConditionMet = profileConfiguration.ActivationConditionMet;

@@ -1,24 +1,27 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net7.0</TargetFramework>
 		<Platforms>x64</Platforms>
 		<EnableDynamicLoading>true</EnableDynamicLoading>
 		<ProduceReferenceAssembly>false</ProduceReferenceAssembly>
 	</PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ArtemisRGB.UI.Shared" IncludeAssets="compile;build;buildTransitive" Version="1.2023.203.1" />
+    <PackageReference Include="ArtemisRGB.UI.Shared" IncludeAssets="compile;build;buildTransitive" Version="1.2023.1017.2" />
   </ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="RestSharp" Version="106.12.0" />
+		<PackageReference Include="RestSharp" Version="110.2.0" />
 		<PackageReference Include="Awesomio.Weather" Version="1.1.1" />
-		<PackageReference Include="Microsoft.Win32.SystemEvents" Version="6.0.1" />
+		<PackageReference Include="Microsoft.Win32.SystemEvents" Version="8.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<Content Include="plugin.json" CopyToOutputDirectory="PreserveNewest" />
 		<Content Include="openweather.png" CopyToOutputDirectory="PreserveNewest" />
-		<PackageReference Include="ArtemisRGB.Plugins.BuildTask" Version="1.1.0" />
+		<PackageReference Include="ArtemisRGB.Plugins.BuildTask" Version="2.0.0">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 	</ItemGroup>
 </Project>

@@ -15,7 +15,7 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
         public YTMDesktopClient()
         {
             _client = new RestClient("http://127.0.0.1:9863");
-            _queryRootInfoRequest = new RestRequest("query", Method.GET);
+            _queryRootInfoRequest = new RestRequest("query");
         }
 
         public RootInfo Data => _rootInfo;

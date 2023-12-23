@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net7.0</TargetFramework>
 		<Platforms>x64</Platforms>
 		<EnableDynamicLoading>true</EnableDynamicLoading>
 		<ProduceReferenceAssembly>false</ProduceReferenceAssembly>
@@ -11,7 +11,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="ArtemisRGB.UI.Shared" IncludeAssets="compile;build;buildTransitive" Version="1.2023.203.1" />
+    <PackageReference Include="ArtemisRGB.UI.Shared" IncludeAssets="compile;build;buildTransitive" Version="1.2023.1017.2" />
   </ItemGroup>
 
 	<ItemGroup>
@@ -20,7 +20,10 @@
 
 	<ItemGroup>
 		<Content Include="plugin.json" CopyToOutputDirectory="PreserveNewest" />
-		<PackageReference Include="ArtemisRGB.Plugins.BuildTask" Version="1.1.0" />
+		<PackageReference Include="ArtemisRGB.Plugins.BuildTask" Version="2.0.0">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 	</ItemGroup>
   
 

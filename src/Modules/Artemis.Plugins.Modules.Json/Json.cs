@@ -11,6 +11,7 @@ namespace Artemis.Plugins.Modules.Json
     {
         private readonly IWebServerService _webServerService;
         private readonly JsonDataModelServices _jsonDataModelServices;
+        private WebApiControllerRegistration _webApiControllerRegistration;
 
         public Json(JsonDataModelServices jsonDataModelServices, IWebServerService webServerService)
         {
@@ -24,12 +25,12 @@ namespace Artemis.Plugins.Modules.Json
         {
             _jsonDataModelServices.Initialize(DataModel);
             _jsonDataModelServices.LoadFromRepository();
-            _webServerService.AddController<JsonController>(this);
+            _webApiControllerRegistration = _webServerService.AddController<JsonController>(this);
         }
 
         public override void Disable()
         {
-            _webServerService.RemoveController<JsonController>();
+            _webServerService.RemoveController(_webApiControllerRegistration);
         }
         public override void Update(double deltaTime) { }
     }

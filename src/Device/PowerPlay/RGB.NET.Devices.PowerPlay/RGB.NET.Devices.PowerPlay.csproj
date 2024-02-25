@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
 		<Authors></Authors>
@@ -58,7 +58,7 @@
 
 	<ItemGroup>
 	  <PackageReference Include="Hid.Net" Version="4.2.1" />
-	  <PackageReference Include="RGB.NET.Core" Version="2.0.0-prerelease.101" />
+	  <PackageReference Include="RGB.NET.Core" Version="2.0.4-prerelease.16" />
 	  <PackageReference Include="Usb.Net" Version="4.2.1" />
 	</ItemGroup>
 </Project>

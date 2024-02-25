@@ -1,50 +1,30 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<Platforms>x64</Platforms>
 		<EnableDynamicLoading>true</EnableDynamicLoading>
 		<ProduceReferenceAssembly>false</ProduceReferenceAssembly>
 	</PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Avalonia" Version="0.10.15" />
-		<PackageReference Include="Avalonia.ReactiveUI" Version="0.10.15" />
-		<PackageReference Include="FluentAvaloniaUI" Version="1.4.1" />
-		<PackageReference Include="Material.Icons.Avalonia" Version="1.0.2" />
-		<PackageReference Include="ReactiveUI" Version="17.1.50" />
-		<PackageReference Include="ReactiveUI.Validation" Version="2.2.1" />
-		<PackageReference Include="RGB.NET.Core" />
-		<PackageReference Include="Serilog" Version="2.10.0" />
-		<PackageReference Include="SkiaSharp" Version="2.88.1-preview.1" />
-
-		<!--All packages Artemis already references are compile-only dependencies-->
-		<PackageReference Update="@(PackageReference)" IncludeAssets="compile;build" />
-		<PackageReference Update="Avalonia" Version="0.10.18" />
-		<PackageReference Update="Avalonia.ReactiveUI" Version="0.10.18" />
-		<PackageReference Update="RGB.NET.Core" Version="1.0.0-prerelease.58" />
-		<PackageReference Update="Serilog" Version="2.12.0" />
-		<PackageReference Update="SkiaSharp" Version="2.88.3" />
-	</ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RGB.NET.Devices.YeeLight\RGB.NET.Devices.YeeLight.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="ArtemisRGB.UI.Shared" IncludeAssets="compile;build;buildTransitive" Version="1.2024.225.4" />
+  </ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="YeelightAPI" Version="1.10.2" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Reference Include="Artemis.Core">
-			<HintPath>..\..\..\..\..\Artemis\src\Artemis.Core\bin\net6.0\Artemis.Core.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-		<Reference Include="Artemis.UI.Shared">
-			<HintPath>..\..\..\..\..\Artemis\src\Artemis.UI.Shared\bin\net6.0\Artemis.UI.Shared.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-	</ItemGroup>
-	<ItemGroup>
 		<Content Include="plugin.json" CopyToOutputDirectory="PreserveNewest" />
-		<PackageReference Include="ArtemisRGB.Plugins.BuildTask" Version="1.1.0" />
+		<PackageReference Include="ArtemisRGB.Plugins.BuildTask" Version="2.0.0">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 	</ItemGroup>
-	<ItemGroup>
-		<ProjectReference Include="..\RGB.NET.Devices.YeeLight\RGB.NET.Devices.YeeLight.csproj" />
-	</ItemGroup>
+  
+
 </Project>

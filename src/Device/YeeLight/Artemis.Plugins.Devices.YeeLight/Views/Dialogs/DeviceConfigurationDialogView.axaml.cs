@@ -4,7 +4,7 @@ using Avalonia.Markup.Xaml;
 
 namespace Artemis.Plugins.Devices.YeeLight.Views.Dialogs;
 
-public partial class DeviceConfigurationDialogView : ReactiveCoreWindow<DeviceConfigurationDialogViewModel>
+public partial class DeviceConfigurationDialogView : ReactiveAppWindow<DeviceConfigurationDialogViewModel>
 {
     public DeviceConfigurationDialogView()
     {

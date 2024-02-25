@@ -14,7 +14,7 @@ namespace RGB.NET.Devices.PowerPlay.Device
             if (powerPlayController != null) _powerPlayController = powerPlayController;
         }
 
-        protected override void Update(in ReadOnlySpan<(object key, Color color)> dataSet)
+        protected override bool Update(in ReadOnlySpan<(object key, Color color)> dataSet)
         {
             foreach (var d in dataSet)
             {
@@ -24,6 +24,8 @@ namespace RGB.NET.Devices.PowerPlay.Device
                 var b = d.color.GetB();
                 _powerPlayController?.SetColor(System.Drawing.Color.FromArgb(a, r, g, b), (byte)(int)d.key);
             }
+
+            return true;
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
 
@@ -54,7 +54,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="RGB.NET.Core" Version="1.0.0-prerelease.58" />
+    <PackageReference Include="RGB.NET.Core" Version="2.0.4-prerelease.16" />
     <PackageReference Include="YeelightAPI" Version="1.10.2" />
   </ItemGroup>
 </Project>

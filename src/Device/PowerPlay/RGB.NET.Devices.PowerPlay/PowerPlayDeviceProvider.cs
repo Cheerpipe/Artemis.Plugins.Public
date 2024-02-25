@@ -37,9 +37,9 @@ namespace RGB.NET.Devices.PowerPlay
             }
         }
 
-        public override void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            base.Dispose();
+            base.Dispose(disposing);
             PowerPlayLoader.FreeDevices();
         }
         protected override void InitializeSDK() { }

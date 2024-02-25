@@ -27,7 +27,7 @@ namespace Artemis.Plugins.LayerEffect.FlickeringLights
         {
             position = Math.Clamp(position, 0, 1);
             var charIndex = (int)Math.Round(position * (Properties.FlickeringPattern.CurrentValue.ToString().Length - 1), 0);
-            return ((Properties.FlickeringPattern.CurrentValue.ToString()[charIndex] - 'a') / 25f) * 2;
+            return ((Properties.FlickeringPattern.CurrentValue[charIndex] - 'a') / 25f) * 2;
         }
 
 

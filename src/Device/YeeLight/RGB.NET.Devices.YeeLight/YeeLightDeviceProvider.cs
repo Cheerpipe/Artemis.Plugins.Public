@@ -98,9 +98,9 @@ namespace RGB.NET.Devices.YeeLight
 
         protected override void InitializeSDK() { }
 
-        public override void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            base.Dispose();
+            base.Dispose(disposing);
 
             foreach (Device device in _initializedDevices)
             {

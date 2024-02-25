@@ -19,8 +19,5 @@ namespace RGB.NET.Devices.PowerPlay.Device
 
         /// <inheritdoc />
         protected override object GetLedCustomData(LedId ledId) => ((int)ledId - (int)LedId.LedStripe1);
-
-        /// <inheritdoc />
-        protected override void UpdateLeds(IEnumerable<Led> ledsToUpdate) => UpdateQueue.SetData(GetUpdateData(ledsToUpdate));
     }
 }

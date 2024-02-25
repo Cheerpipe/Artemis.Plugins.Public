@@ -13,26 +13,16 @@ namespace Artemis.Plugins.DataModelExpansions.Teams
     {
         #region Variables declarations
 
-        private readonly IProcessMonitorService _processMonitorService;
         private static TeamsStateReader _teamsStateReader;
         private static CameraStateReader _cameraStateReader;
         private const string TEAMS_PROCESS_NAME = "Teams";
 
         #endregion
 
-        #region Constructor
-
-        public Teams(IProcessMonitorService processMonitorService)
-        {
-            _processMonitorService = processMonitorService;
-        }
-
         // Allow Datamodel availabable to all profiles
         //public override List<IModuleActivationRequirement> ActivationRequirements => new() { new ProcessActivationRequirement("Teams") };
 
         public override List<IModuleActivationRequirement> ActivationRequirements => null;
-
-        #endregion
 
         #region Plugin Methods
         public override void Enable()
@@ -49,7 +39,7 @@ namespace Artemis.Plugins.DataModelExpansions.Teams
 
         private bool TeamsIsRunning()
         {
-            return _processMonitorService.GetRunningProcesses().Any(p => p.ProcessName == TEAMS_PROCESS_NAME);
+            return ProcessMonitor.IsProcessRunning(TEAMS_PROCESS_NAME);
         }
 
         private void _cameraStateReader_CameraOwnerChanged(object sender, CameraOwnerChangedEventArgs e)

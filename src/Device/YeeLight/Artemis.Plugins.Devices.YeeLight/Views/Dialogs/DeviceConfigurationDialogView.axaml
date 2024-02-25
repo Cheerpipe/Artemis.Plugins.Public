@@ -1,4 +1,4 @@
-<controls:CoreWindow xmlns="https://github.com/avaloniaui"
+<windowing:AppWindow xmlns="https://github.com/avaloniaui"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -6,18 +6,19 @@
                      xmlns:dialogs="clr-namespace:Artemis.Plugins.Devices.YeeLight.ViewModels.Dialogs"
                      xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
 					 xmlns:system="clr-namespace:System;assembly=System.Runtime"
-                     mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+					 xmlns:windowing="clr-namespace:FluentAvalonia.UI.Windowing;assembly=FluentAvalonia"
+					 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
                      x:Class="Artemis.Plugins.Devices.YeeLight.Views.Dialogs.DeviceConfigurationDialogView"
                      x:DataType="dialogs:DeviceConfigurationDialogViewModel"
                      Title="YeeLight Device Settings | Artemis"
                      WindowStartupLocation="CenterOwner"
                      Width="700"
                      Height="750">
-	<controls:CoreWindow.Styles>
+	<windowing:AppWindow.Styles>
 		<Style Selector="Label">
 			<Setter Property="Margin" Value="0 5 0 0" />
 		</Style>
-	</controls:CoreWindow.Styles>
+	</windowing:AppWindow.Styles>
 
 	<Grid Margin="15" ColumnDefinitions="*" RowDefinitions="*,Auto">
 		<StackPanel>
@@ -32,7 +33,7 @@
 					<Label>Model</Label>
 					<ComboBox
 						HorizontalAlignment="Stretch"
-						Items="{Binding Modelos}"
+						ItemsSource="{Binding Modelos}"
 						SelectedItem="{Binding Model}">
 						<ComboBox.ItemTemplate>
 							<DataTemplate DataType="system:String">
@@ -70,4 +71,4 @@
 			</Button>
 		</StackPanel>
 	</Grid>
-</controls:CoreWindow>
+</windowing:AppWindow>

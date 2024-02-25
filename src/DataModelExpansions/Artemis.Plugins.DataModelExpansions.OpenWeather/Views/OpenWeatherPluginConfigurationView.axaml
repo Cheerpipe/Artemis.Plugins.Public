@@ -40,7 +40,7 @@
 							<TextBlock Text="Unit of measurement" Width="125"/>
 							<ComboBox
 								HorizontalAlignment="Stretch"
-								Items="{Binding Units}"
+								ItemsSource="{Binding Units}"
 								SelectedItem="{Binding Unit.Value}">
 								<ComboBox.ItemTemplate>
 									<DataTemplate DataType="system:String">

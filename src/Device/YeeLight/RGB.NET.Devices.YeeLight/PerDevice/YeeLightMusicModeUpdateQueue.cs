@@ -35,15 +35,16 @@ namespace RGB.NET.Devices.YeeLight.PerDevice
             }
         }
 
-        protected override void Update(in ReadOnlySpan<(object key, Color color)> dataSet)
+        protected override bool Update(in ReadOnlySpan<(object key, Color color)> dataSet)
         {
             if (!_light.IsConnected)
             {
-                return;
+                return false;
             }
 
             var color = dataSet[0].color;
             SetColor(color);
+            return true;
         }
 
         public async void SetColor(Color color)

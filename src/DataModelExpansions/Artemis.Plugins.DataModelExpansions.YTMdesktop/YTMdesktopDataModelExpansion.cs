@@ -23,7 +23,6 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
         #region Variables declarations
 
         private readonly ILogger _logger;
-        private readonly IProcessMonitorService _processMonitorService;
         private readonly HttpClient _httpClient;
         private readonly ConcurrentDictionary<string, ColorSwatch> _albumArtColorCache;
         private const string YTMD_PROCESS_NAME = "YouTube Music Desktop App";
@@ -36,9 +35,8 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
 
         #region Constructor
 
-        public YTMdesktopDataModelExpansion(ILogger logger, IProcessMonitorService processMonitorService)
+        public YTMdesktopDataModelExpansion(ILogger logger)
         {
-            _processMonitorService = processMonitorService;
             _logger = logger;
 
             _httpClient = new HttpClient
@@ -63,7 +61,7 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
 
         private bool YoutubeIsRunning()
         {
-            return _processMonitorService.GetRunningProcesses().Any(p => p.ProcessName == YTMD_PROCESS_NAME);
+            return ProcessMonitor.IsProcessRunning(YTMD_PROCESS_NAME);
         }
 
         public override void Disable()

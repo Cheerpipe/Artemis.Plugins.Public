@@ -4,11 +4,11 @@ using Artemis.Plugins.ExtendedWebAPI.Controllers;
 
 namespace Artemis.Plugins.ExtendedWebAPI.Features
 {
-    [PluginFeature(Name = "Artemis Windows caller Web Api", Description = "Offers a web API to show specific Artemis Windows or UIs", Icon = "Application")]
+    [PluginFeature(Name = "Artemis Windows caller Web Api", Description = "Offers a web API to show specific Artemis Windows or UIs")]
     public class WindowsWebApi : PluginFeature
     {
         private readonly IWebServerService _webServerService;
-
+        
         public WindowsWebApi(IWebServerService webServerService)
         {
             _webServerService = webServerService;

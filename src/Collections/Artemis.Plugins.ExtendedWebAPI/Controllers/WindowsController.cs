@@ -1,6 +1,6 @@
 ﻿using Artemis.Core.Services;
-using Artemis.UI.Services.Interfaces;
 using Artemis.UI.Shared.Services.MainWindow;
+using Artemis.UI.Shared.Services;
 using Avalonia.Threading;
 using EmbedIO;
 using EmbedIO.Routing;
@@ -10,17 +10,17 @@ namespace Artemis.Plugins.ExtendedWebAPI.Controllers
 {
     internal class WindowsController : WebApiController
     {
-        private readonly IDebugService _debugService;
+        //private readonly IDebugService _debugService;
         private readonly IMainWindowService _mainWindowService;
 
         private readonly IPluginManagementService _pluginManagementService;
 
         public WindowsController(
-            IDebugService debugService,
+            //IDebugService debugService,
             IPluginManagementService pluginManagementService,
             IMainWindowService mainWindowService)
         {
-            _debugService = debugService;
+            //_debugService = debugService;
             _pluginManagementService = pluginManagementService;
             _mainWindowService = mainWindowService;
         }
@@ -37,7 +37,7 @@ namespace Artemis.Plugins.ExtendedWebAPI.Controllers
         [Route(HttpVerbs.Any, "/windows/show-debugger")]
         public void PostShowDebugger()
         {
-            Dispatcher.UIThread.InvokeAsync(() => _debugService.ShowDebugger());
+            //Dispatcher.UIThread.InvokeAsync(() => _debugService.ShowDebugger());
         }
 
         [Route(HttpVerbs.Any, "/windows/show-workshop")]
